@@ -1,5 +1,5 @@
 {
-  "name": "my-monorepo-cra-app",
+  "name": "trello-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,8 +14,7 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
     "typescript": "^4.1.3",
-    "web-vitals": "^1.0.1",
-    "my-monorepo-ui-lib": "*"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
