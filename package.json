@@ -11,12 +11,15 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "husky": "^7.0.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^12.1.5"
   },
   "resolutions": {
     "babel-loader": "8.1.0"
   },
   "scripts": {
-    "start": "lerna run start --stream"
+    "start": "lerna run start --stream",
+    "prepare": "husky install"
   }
 }
