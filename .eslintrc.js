@@ -46,6 +46,7 @@ module.exports = {
     'no-underscore-dangle': ['warn'],
     'implicit-arrow-linebreak': 'off',
     'semi': 'off',
+    'quote-props': 'off',
     'comma-dangle': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',

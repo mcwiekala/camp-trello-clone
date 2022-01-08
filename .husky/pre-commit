@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
 
-echo '$ Running pre-commit hook' 
-# yarn lint-staged   
+echo '$ Husky: run lint-staged' 
+yarn lint-staged    
