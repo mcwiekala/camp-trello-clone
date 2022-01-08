@@ -1,0 +1,58 @@
+name: Pull request workflow
+
+on:
+  pull_request:
+    types: [closed, opened]
+  pull_request_review:
+    types: [edited, dismissed, approve]
+
+jobs:
+  pull_request_opened:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event =='pull_request' && github.event.action == 'opened'
+        with:
+          project: trello-clone
+          column: Waiting for review
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  pull_request_closed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event =='pull_request' && github.event.action == 'closed'
+        with:
+          project: trello-clone
+          column: Done
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  pull_request_review_dismissed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event =='pull_request_review' && github.event.action == 'dismissed'
+        with:
+          project: trello-clone
+          column: In progress
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  pull_request_review_approved:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event =='pull_request_review' && github.event.action == 'approve'
+        with:
+          project: trello-clone
+          column: Review approved
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  pull_request_review_edited:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event =='pull_request_review' && github.event.action == 'edited'
+        with:
+          project: trello-clone
+          column: Review in progress
+          repo-token: ${{ secrets.PROJECT_TOKEN }}

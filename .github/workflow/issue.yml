@@ -1,0 +1,36 @@
+name: Issue workflow
+
+on:
+  issues:
+    types: [opened, assigned, closed]
+
+jobs:
+  issue_opened:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event.action == 'opened'
+        with:
+          project: trello-clone
+          column: To do
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  issue_assigned:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        if: github.event.action == 'assigned'
+        with:
+          project: trello-clone
+          column: In progress
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
+
+  issue_closed:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: trello-clone
+          column: Done
+          repo-token: ${{ secrets.PROJECT_TOKEN }}
