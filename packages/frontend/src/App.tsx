@@ -1,5 +1,8 @@
-function App() {
-  return <div>hello world</div>;
-}
+import { FC } from 'react'
+import { ThemeProvider } from './contexts/ThemeContext'
 
-export default App;
+export const App: FC = () => (
+  <ThemeProvider>
+    <div>hello world</div>
+  </ThemeProvider>
+)
