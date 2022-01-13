@@ -31,3 +31,5 @@ Start development with `yarn start`.
 - ci - changes for CI purposes (configs, scripts),
 - build - changes affecting the build process,
 - revert - revert the last changes
+
+test
