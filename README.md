@@ -20,6 +20,8 @@ Start development with `yarn start`.
 
 ### Conventional commits
 
+[documentation](https://www.npmjs.com/package/@commitlint/config-conventional)
+
 - feat - new functionality
 - fix - amendment to existing functionality
 - docs - changes only in documentation
