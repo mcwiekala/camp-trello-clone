@@ -1,4 +1,4 @@
-import { Container, Image, Textarea } from '@mantine/core'
+import { Avatar, Container, Textarea } from '@mantine/core'
 import useStyles from './Style'
 import ButtonComment from './ButtonComment'
 
@@ -19,7 +19,7 @@ const Comment = ({
     <div>
       <Container>
         <div className={classes.DivTop}>
-          <Image width={32} height={32} radius="md" alt="profile" src={userData.profilePicture} />
+          <Avatar radius="md" src={userData.profilePicture} />
 
           <div>
             <div className={classes.Name}>{userData.name}</div>
@@ -41,9 +41,9 @@ const Comment = ({
           )}
         </div>
         {!isEditable ? (
-          <div>{textContent}</div>
+          <div className={classes.DivBottom}>{textContent}</div>
         ) : (
-          <div>
+          <div className={classes.DivBottom}>
             <Textarea defaultValue={textContent} onChange={onValueChange} />
           </div>
         )}
