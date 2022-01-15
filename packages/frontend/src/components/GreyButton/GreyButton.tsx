@@ -4,7 +4,7 @@ import useStyles from './style'
 type GreyButtonProps = {
   leftIcon?: React.ReactNode
   children: string
-  onClick: (e?: React.MouseEvent<HTMLElement>) => void
+  onClick?: (e?: React.MouseEvent<HTMLElement>) => void
   className?: string
 }
 

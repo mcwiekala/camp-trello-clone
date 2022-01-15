@@ -3,27 +3,20 @@ import GreyButton from '../GreyButton/GreyButton'
 import useStyles from './style'
 
 type AttachmentProps = {
-  imageUrl?: string
+  itemUrl?: string
   date: string | number
   title: string
   onDeleteHandler: (e?: React.MouseEvent<HTMLElement>) => void
-  onDownloadHandler: (e?: React.MouseEvent<HTMLElement>) => void
 }
 
-const Attachment = ({
-  imageUrl,
-  date,
-  title,
-  onDeleteHandler,
-  onDownloadHandler
-}: AttachmentProps) => {
+const Attachment = ({ itemUrl, date, title, onDeleteHandler }: AttachmentProps) => {
   const { classes } = useStyles()
   return (
     <div className={classes.divBody}>
       <div>
         <Image
           classNames={{ placeholder: classes.imagePlaceholder }}
-          src={imageUrl}
+          src={itemUrl}
           alt="Date"
           width={80}
           height={55}
@@ -36,13 +29,12 @@ const Attachment = ({
       <div className={classes.divInfo}>
         <Text className={classes.date}>{`Added ${date}`}</Text>
         <Text className={classes.title}>{title}</Text>
-        <GreyButton className={classes.buttonDownload} onClick={onDownloadHandler}>
-          Download
-        </GreyButton>
+        <a href={itemUrl} download>
+          <GreyButton className={classes.buttonDownload}>Download</GreyButton>
+        </a>
         <GreyButton onClick={onDeleteHandler}>Delete</GreyButton>
       </div>
     </div>
   )
 }
-
 export default Attachment
