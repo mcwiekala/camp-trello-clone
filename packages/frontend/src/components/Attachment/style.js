@@ -1,0 +1,33 @@
+import { createStyles } from '@mantine/core'
+
+const useStyles = createStyles((theme) => ({
+  divBody: {
+    display: 'flex'
+  },
+  imagePlaceholder: {
+    backgroundColor: theme.colors.gray[2]
+  },
+  divInfo: {
+    marginLeft: '15px',
+    fontWeight: '500',
+    fontSize: '12px',
+    lineHeight: '15px'
+  },
+  date: {
+    fontSize: '10px',
+    lineHeight: '12px',
+    fontFamily: 'Poppins',
+    color: theme.colors.gray[4]
+  },
+  title: {
+    fontFamily: 'Poppins',
+    fontSize: '12px',
+    marginBottom: '5px',
+    fontWeight: '500'
+  },
+  buttonDownload: {
+    marginRight: '10px'
+  }
+}))
+
+export default useStyles
