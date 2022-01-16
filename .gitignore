@@ -70,3 +70,6 @@ lib-esm
 
 # v4 version upgrade additions:
 storybook-static
+
+# Editor settings
+.vscode/
