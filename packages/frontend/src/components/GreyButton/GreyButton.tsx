@@ -1,14 +1,8 @@
 import { Button } from '@mantine/core'
+import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
-type GreyButtonProps = {
-  leftIcon?: React.ReactNode
-  children: string
-  onClick?: (e?: React.MouseEvent<HTMLElement>) => void
-  className?: string
-}
-
-const GreyButton = ({ className, leftIcon, children, onClick }: GreyButtonProps) => {
+const GreyButton = ({ className, leftIcon, children, onClick, ...rest }: ButtonProps<'button'>) => {
   const { classes } = useStyles()
   return (
     <Button
@@ -19,6 +13,7 @@ const GreyButton = ({ className, leftIcon, children, onClick }: GreyButtonProps)
       variant="outline"
       radius={8}
       onClick={onClick}
+      {...rest}
     >
       {children}
     </Button>
