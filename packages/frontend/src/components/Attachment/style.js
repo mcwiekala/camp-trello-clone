@@ -25,8 +25,18 @@ const useStyles = createStyles((theme) => ({
     marginBottom: '5px',
     fontWeight: '500'
   },
+  buttonDelete: {
+    '&:hover': {
+      backgroundColor: theme.colors.red[8],
+      color: theme.colors.red[0]
+    }
+  },
   buttonDownload: {
-    marginRight: '10px'
+    'marginRight': '10px',
+    '&:hover': {
+      backgroundColor: theme.colors.green[7],
+      color: theme.colors.green[0]
+    }
   }
 }))
 

@@ -32,7 +32,9 @@ const Attachment = ({ itemUrl, date, title, onDeleteHandler }: AttachmentProps) 
         <a href={itemUrl} download>
           <GreyButton className={classes.buttonDownload}>Download</GreyButton>
         </a>
-        <GreyButton onClick={onDeleteHandler}>Delete</GreyButton>
+        <GreyButton className={classes.buttonDelete} onClick={onDeleteHandler}>
+          Delete
+        </GreyButton>
       </div>
     </div>
   )
