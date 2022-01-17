@@ -8,7 +8,7 @@ export const ThemeProvider: FC = ({ children }) => (
     theme={{
       fontFamily: 'Open Sans',
       colors: {
-        customGray: [
+        gray: [
           '#F2F2F2',
           '#E0E0E0',
           '#BDBDBD',
@@ -20,6 +20,12 @@ export const ThemeProvider: FC = ({ children }) => (
           '#8D8D8D',
           '#828282'
         ]
+      },
+      headings: {
+        fontFamily: 'Poppins'
+      },
+      other: {
+        secondaryFont: 'Poppins'
       }
     }}
   >

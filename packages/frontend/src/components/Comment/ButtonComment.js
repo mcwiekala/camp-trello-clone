@@ -1,17 +1,17 @@
 import { Button } from '@mantine/core'
-import useStyles from './Style'
+import useStyles from './style'
 
-const ButtonComment = ({ onClickEvent, text }) => {
+const ButtonComment = ({ onClickEvent, children }) => {
   const { classes } = useStyles()
   return (
     <Button
       onClick={onClickEvent}
-      classNames={{ root: classes.ButtonOutline }}
-      variant="outline"
+      classNames={{ subtle: classes.buttonSubtle }}
+      variant="subtle"
       size="xs"
       compact
     >
-      {text}
+      {children}
     </Button>
   )
 }
