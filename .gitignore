@@ -73,3 +73,6 @@ storybook-static
 
 # webstorm
 .idea/
+
+# Editor settings
+.vscode/
