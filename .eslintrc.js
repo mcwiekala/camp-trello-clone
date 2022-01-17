@@ -52,8 +52,7 @@ module.exports = {
     'react/prop-types': ['off'],
     'no-underscore-dangle': ['warn'],
     'implicit-arrow-linebreak': 'off',
-    'semi': 'off',
-    'quote-props': 'off',
+    semi: 'off',
     'comma-dangle': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
@@ -63,7 +62,7 @@ module.exports = {
   },
   ignorePatterns: ['packages/**/lib'],
   settings: {
-    'react': {
+    react: {
       version: 'detect'
     },
     'import/parsers': {
