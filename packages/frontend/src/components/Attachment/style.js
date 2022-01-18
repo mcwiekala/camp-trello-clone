@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex'
   },
   imagePlaceholder: {
-    backgroundColor: theme.colors.gray[2]
+    backgroundColor: theme.colors.lightgrey[1]
   },
   divInfo: {
     marginLeft: '15px',
@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: '10px',
     lineHeight: '12px',
     fontFamily: 'Poppins',
-    color: theme.colors.gray[4]
+    color: theme.colors.lightgrey[0]
   },
   title: {
     fontFamily: 'Poppins',
