@@ -71,5 +71,8 @@ lib-esm
 # v4 version upgrade additions:
 storybook-static
 
+# webstorm
+.idea/
+
 # Editor settings
 .vscode/
