@@ -29,9 +29,11 @@ const Attachment = ({ itemUrl, date, title, onDeleteHandler }: AttachmentProps) 
       <div className={classes.divInfo}>
         <Text className={classes.date}>{`Added ${date}`}</Text>
         <Text className={classes.title}>{title}</Text>
-        <a href={itemUrl} download>
-          <GreyButton className={classes.buttonDownload}>Download</GreyButton>
-        </a>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
+        <GreyButton component="a" href={itemUrl} download className={classes.buttonDownload}>
+          Download
+        </GreyButton>
         <GreyButton className={classes.buttonDelete} onClick={onDeleteHandler}>
           Delete
         </GreyButton>
