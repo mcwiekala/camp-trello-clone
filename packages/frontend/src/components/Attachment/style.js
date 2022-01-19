@@ -5,7 +5,10 @@ const useStyles = createStyles((theme) => ({
     display: 'flex'
   },
   imagePlaceholder: {
-    backgroundColor: theme.colors.lightgrey[1]
+    backgroundColor: theme.colors.gray[1],
+    fontFamily: 'Poppins',
+    fontWeight: '500',
+    textTransform: 'uppercase'
   },
   divInfo: {
     marginLeft: '15px',
@@ -17,7 +20,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: '10px',
     lineHeight: '12px',
     fontFamily: 'Poppins',
-    color: theme.colors.lightgrey[0]
+    color: theme.colors.gray[4]
   },
   title: {
     fontFamily: 'Poppins',
@@ -26,13 +29,15 @@ const useStyles = createStyles((theme) => ({
     fontWeight: '500'
   },
   buttonDelete: {
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
       backgroundColor: theme.colors.red[8],
       color: theme.colors.red[0]
     }
   },
   buttonDownload: {
-    'marginRight': '10px',
+    marginRight: '10px',
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
       backgroundColor: theme.colors.green[7],
       color: theme.colors.green[0]

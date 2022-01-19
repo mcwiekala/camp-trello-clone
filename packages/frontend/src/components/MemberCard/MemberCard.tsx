@@ -1,11 +1,10 @@
-/* eslint-disable indent */
-/* eslint-disable react/jsx-wrap-multilines */
 import { useState } from 'react'
 import { Button, Input, Text, ActionIcon, Center, UnstyledButton } from '@mantine/core'
+import { AiOutlineSearch } from 'react-icons/ai'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
 
-type AddMemberCardProps = {
+type MemberCardProps = {
   membersList: {
     username: string
     id: string
@@ -14,7 +13,7 @@ type AddMemberCardProps = {
   addUserHandler: (selectedUsers: string[]) => void
 }
 
-const MemberCard = ({ membersList, addUserHandler }: AddMemberCardProps) => {
+const MemberCard = ({ membersList, addUserHandler }: MemberCardProps) => {
   const { classes } = useStyles()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
@@ -23,9 +22,8 @@ const MemberCard = ({ membersList, addUserHandler }: AddMemberCardProps) => {
   }
   const results = !searchTerm
     ? membersList
-    : membersList.filter(
-        ({ username }) => username.toLowerCase().includes(searchTerm.toLowerCase())
-        // eslint-disable-next-line function-paren-newline
+    : membersList.filter(({ username }) =>
+        username.toLowerCase().includes(searchTerm.toLowerCase())
       )
   return (
     <div className={classes.memberCard}>
@@ -40,7 +38,7 @@ const MemberCard = ({ membersList, addUserHandler }: AddMemberCardProps) => {
         onChange={handleChange}
         rightSection={
           <ActionIcon radius="md" variant="filled" color="blue" className={classes.icon}>
-            S
+            <AiOutlineSearch />
           </ActionIcon>
         }
       />
@@ -60,10 +58,8 @@ const MemberCard = ({ membersList, addUserHandler }: AddMemberCardProps) => {
               if (typeof userId === 'string') {
                 const index = selectedUsers.indexOf(userId)
                 if (index > -1) {
-                  setSelectedUsers(
-                    (prevSelectedUsers) =>
-                      prevSelectedUsers.filter((prevUserId) => prevUserId !== userId)
-                    // eslint-disable-next-line function-paren-newline
+                  setSelectedUsers((prevSelectedUsers) =>
+                    prevSelectedUsers.filter((prevUserId) => prevUserId !== userId)
                   )
                 } else {
                   setSelectedUsers((prevSelectedUsers) => [...prevSelectedUsers, userId])

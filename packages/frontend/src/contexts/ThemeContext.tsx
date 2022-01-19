@@ -8,8 +8,24 @@ export const ThemeProvider: FC = ({ children }) => (
     theme={{
       fontFamily: 'Open Sans',
       colors: {
-        lightgrey: ['#BDBDBD', '#E0E0E0'],
-        darkgrey: ['#333333', '#4F4F4F']
+        gray: [
+          '#F2F2F2',
+          '#E0E0E0',
+          '#BDBDBD',
+          '#AFAFAF',
+          '#A0A0A0',
+          '#919191',
+          '#828282',
+          '#696969',
+          '#4F4F4F',
+          '#333333'
+        ]
+      },
+      headings: {
+        fontFamily: 'Poppins'
+      },
+      other: {
+        secondaryFont: 'Poppins'
       }
     }}
   >

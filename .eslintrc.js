@@ -29,6 +29,7 @@ module.exports = {
     'import/extensions': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': 'off',
+    'react/jsx-wrap-multilines': [1, { assignment: 'parens-new-line' }],
     'react/function-component-definition': [
       2,
       {
@@ -52,18 +53,20 @@ module.exports = {
     'react/prop-types': ['off'],
     'no-underscore-dangle': ['warn'],
     'implicit-arrow-linebreak': 'off',
-    'semi': 'off',
-    'quote-props': 'off',
+    semi: 'off',
+    'quote-props': [2, 'as-needed'],
     'comma-dangle': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 'off',
+    'function-paren-newline': 'off',
+    indent: 'off',
     'no-undef': 'off',
     'import/no-extraneous-dependencies': 'off'
   },
   ignorePatterns: ['packages/**/lib'],
   settings: {
-    'react': {
+    react: {
       version: 'detect'
     },
     'import/parsers': {

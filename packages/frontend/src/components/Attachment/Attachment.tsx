@@ -1,5 +1,5 @@
 import { Image, Text } from '@mantine/core'
-import GreyButton from '../GreyButton/GreyButton'
+import GrayButton from '../GrayButton/GrayButton'
 import useStyles from './style'
 
 type AttachmentProps = {
@@ -29,12 +29,14 @@ const Attachment = ({ itemUrl, date, title, onDeleteHandler }: AttachmentProps) 
       <div className={classes.divInfo}>
         <Text className={classes.date}>{`Added ${date}`}</Text>
         <Text className={classes.title}>{title}</Text>
-        <a href={itemUrl} download>
-          <GreyButton className={classes.buttonDownload}>Download</GreyButton>
-        </a>
-        <GreyButton className={classes.buttonDelete} onClick={onDeleteHandler}>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
+        <GrayButton component="a" href={itemUrl} download className={classes.buttonDownload}>
+          Download
+        </GrayButton>
+        <GrayButton className={classes.buttonDelete} onClick={onDeleteHandler}>
           Delete
-        </GreyButton>
+        </GrayButton>
       </div>
     </div>
   )
