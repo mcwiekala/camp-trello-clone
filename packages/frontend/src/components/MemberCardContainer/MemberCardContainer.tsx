@@ -4,7 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
 
-type MemberCardProps = {
+type MemberCardContainerProps = {
   membersList: {
     username: string
     id: string
@@ -13,7 +13,7 @@ type MemberCardProps = {
   addUserHandler: (selectedUsers: string[]) => void
 }
 
-const MemberCard = ({ membersList, addUserHandler }: MemberCardProps) => {
+const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContainerProps) => {
   const { classes } = useStyles()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
@@ -25,6 +25,16 @@ const MemberCard = ({ membersList, addUserHandler }: MemberCardProps) => {
     : membersList.filter(({ username }) =>
         username.toLowerCase().includes(searchTerm.toLowerCase())
       )
+  function handleMemberClick(id: string) {
+    const index = selectedUsers.indexOf(id)
+    if (index > -1) {
+      setSelectedUsers((prevSelectedUsers) =>
+        prevSelectedUsers.filter((prevUserId) => prevUserId !== id)
+      )
+    } else {
+      setSelectedUsers((prevSelectedUsers) => [...prevSelectedUsers, id])
+    }
+  }
   return (
     <div className={classes.memberCard}>
       <Text className={classes.memberCardTitle}>Members</Text>
@@ -51,21 +61,7 @@ const MemberCard = ({ membersList, addUserHandler }: MemberCardProps) => {
                 : classes.memberContainer
             }
             key={id}
-            data-userid={id}
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              const target = e.currentTarget as Element
-              const userId = target.getAttribute('data-userid')
-              if (typeof userId === 'string') {
-                const index = selectedUsers.indexOf(userId)
-                if (index > -1) {
-                  setSelectedUsers((prevSelectedUsers) =>
-                    prevSelectedUsers.filter((prevUserId) => prevUserId !== userId)
-                  )
-                } else {
-                  setSelectedUsers((prevSelectedUsers) => [...prevSelectedUsers, userId])
-                }
-              }
-            }}
+            onClick={() => handleMemberClick(id)}
           >
             <UserIcon imgUrl={imgUrl}>{username}</UserIcon>
             <Text className={classes.user} weight={600}>
@@ -82,4 +78,4 @@ const MemberCard = ({ membersList, addUserHandler }: MemberCardProps) => {
     </div>
   )
 }
-export default MemberCard
+export default MemberCardContainer
