@@ -24,7 +24,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
       .then((res) => res.json())
       .then((json) => setImages(json.results))
   }
-  const optimazedVersion = debounce(getPhotos)
+  const onKeywordChangeHandler = debounce(getPhotos)
 
   return (
     <div className={classes.outline}>
@@ -38,7 +38,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
         size="xs"
         placeholder="Keywords..."
         rightSection={<ActionIconSearch />}
-        onChange={optimazedVersion}
+        onChange={onKeywordChangeHandler}
       />
       <div className={classes.imageResults}>
         {images.map((imageLink) => (
