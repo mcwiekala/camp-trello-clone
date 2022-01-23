@@ -2,17 +2,19 @@ import { Avatar } from '@mantine/core'
 import useStyles from './style'
 
 type UserIconProps = {
-  children: string
+  username: string
   imgUrl?: string
 }
 
-const UserIcon = ({ children, imgUrl }: UserIconProps) => {
+const UserIcon = ({ username, imgUrl }: UserIconProps) => {
   const { classes } = useStyles()
+  function getUserNameInitials(name: string) {
+    const firstLetters = name.match(/\b(\w)/g) // ['j','D']
+    return firstLetters?.join('')
+  }
   return (
     <Avatar classNames={{ placeholder: classes.placeholder }} src={imgUrl} radius="md">
-      {`${children.split(' ')[0][0].toUpperCase()}${
-        children.split(' ')[1][0] ? children.split(' ')[1][0].toUpperCase() : ''
-      }`}
+      {!imgUrl && getUserNameInitials(username)}
     </Avatar>
   )
 }

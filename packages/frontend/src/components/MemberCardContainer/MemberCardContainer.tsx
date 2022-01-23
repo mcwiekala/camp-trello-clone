@@ -63,7 +63,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
             key={id}
             onClick={() => handleMemberClick(id)}
           >
-            <UserIcon imgUrl={imgUrl}>{username}</UserIcon>
+            <UserIcon imgUrl={imgUrl} username={username} />
             <Text className={classes.user} weight={600}>
               {username}
             </Text>
