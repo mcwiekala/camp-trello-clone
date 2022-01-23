@@ -3,23 +3,17 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import useStyles from './style'
 import ActionIconSearch from './ActionIconSearch'
+import { IMAGE_API_PROVIDER_URL, IMAGE_API_IMAGES_PER_PAGE } from '../../config'
+import { debounce } from '../../utils/functions'
 
 const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
   const { classes } = useStyles()
   const [images, setImages] = useState([])
 
-  const debounce = (func) => {
-    let timer
-    return (args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => func(args), 300)
-    }
-  }
-
   const getPhotos = (event) => {
     const { value } = event.target
     fetch(
-      `https://api.unsplash.com/search/photos/?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&query=${value}&per_page=12`
+      `${IMAGE_API_PROVIDER_URL}?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&query=${value}&per_page=${IMAGE_API_IMAGES_PER_PAGE}`
     )
       .then((res) => res.json())
       .then((json) => setImages(json.results))
@@ -56,6 +50,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
 }
 
 ImagePicker.propTypes = {
-  imageSize: PropTypes.oneOf(['full', 'raw', 'regular', 'small', 'thumb'])
+  imageSize: PropTypes.oneOf(['full', 'raw', 'regular', 'small', 'thumb']),
+  onImageSelectedHandler: PropTypes.func
 }
 export default ImagePicker
