@@ -12,9 +12,9 @@ class GenerateTask {
 
   getAssigneeList() {
     const randomList = faker.helpers.shuffle(this.listOfUsers)
-    const numerOfAssignee = Math.floor(Math.random() * (this.listOfUsers.length - 1)) + 1
+    const numberOfAssignee = Math.floor(Math.random() * (this.listOfUsers.length - 1)) + 1
     const assigneeList = []
-    for (let i = 0; i < numerOfAssignee; i += 1) {
+    for (let i = 0; i < numberOfAssignee; i += 1) {
       this.assigneeListt.push(randomList[i])
     }
     return assigneeList
