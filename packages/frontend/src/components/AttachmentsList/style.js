@@ -6,16 +6,16 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center'
   },
   title: {
-    color: theme.colors.gray[5],
+    color: theme.colors.gray[2],
     fontFamily: 'Poppins',
     fontWeight: 600,
     fontSize: '16px',
     lineHeight: '15px',
     margin: '0 10px'
   },
-  garyBtn: {
-    'color': '#828282',
-    'transition': 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+  grayBtn: {
+    color: theme.colors.gray[6],
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
       color: theme.colors.cyan[0],
       backgroundColor: theme.colors.cyan[5]

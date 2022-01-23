@@ -1,8 +1,8 @@
-import { Button, Text } from '@mantine/core'
 import { useState, useRef } from 'react'
-import { CgNotes, FaPen } from 'react-icons/all'
+import { Button, Text } from '@mantine/core'
 import { RichTextEditor } from '@mantine/rte'
-import GreyButton from '../GreyButton/GreyButton'
+import { CgNotes, FaPen } from 'react-icons/all'
+import GrayButton from '../GrayButton/GrayButton'
 import useStyles from './style'
 
 const Description = ({ initialText, onTextSavedHandler }) => {
@@ -33,9 +33,9 @@ const Description = ({ initialText, onTextSavedHandler }) => {
           Description
         </Text>
         {isEditing ? null : (
-          <GreyButton radius="lg" leftIcon={<FaPen />} onClick={triggerEdit}>
+          <GrayButton radius="lg" leftIcon={<FaPen />} onClick={triggerEdit}>
             Edit
-          </GreyButton>
+          </GrayButton>
         )}
       </div>
       {isEditing ? (

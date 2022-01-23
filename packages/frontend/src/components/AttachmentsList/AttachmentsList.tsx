@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { IoDocumentText } from 'react-icons/io5'
 import { MdAdd } from 'react-icons/md'
 import Attachment from '../Attachment/Attachment'
-import GreyButton from '../GreyButton/GreyButton'
+import GrayButton from '../GrayButton/GrayButton'
 import useStyles from './style'
 
 type AttachmentsListProps = {
@@ -23,13 +23,13 @@ const AttachmentsList: FC<AttachmentsListProps> = ({
       <header className={classes.attachmentHeader}>
         <IoDocumentText className={classes.title} />
         <Text className={classes.title}>Attachments</Text>
-        <GreyButton
+        <GrayButton
           leftIcon={<MdAdd size={22} />}
           onClick={onAddHandler}
-          className={classes.garyBtn}
+          className={classes.grayBtn}
         >
           Add
-        </GreyButton>
+        </GrayButton>
       </header>
       {attachments.map(({ title, date, itemUrl, id }) => (
         <section className={classes.attachmentSection} key={id}>

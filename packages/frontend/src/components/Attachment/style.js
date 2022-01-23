@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex'
   },
   imagePlaceholder: {
-    backgroundColor: theme.colors.gray[2],
+    backgroundColor: theme.colors.gray[1],
     fontFamily: 'Poppins',
     fontWeight: '500',
     textTransform: 'uppercase'
@@ -29,15 +29,15 @@ const useStyles = createStyles((theme) => ({
     fontWeight: '500'
   },
   buttonDelete: {
-    'transition': 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
       backgroundColor: theme.colors.red[8],
       color: theme.colors.red[0]
     }
   },
   buttonDownload: {
-    'marginRight': '10px',
-    'transition': 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+    marginRight: '10px',
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
       backgroundColor: theme.colors.green[7],
       color: theme.colors.green[0]

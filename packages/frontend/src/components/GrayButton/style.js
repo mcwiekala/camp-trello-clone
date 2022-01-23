@@ -1,9 +1,9 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
-  greyButton: {
-    borderColor: theme.colors.gray[4],
-    color: theme.colors.dark[3]
+  grayButton: {
+    borderColor: theme.colors.gray[2],
+    color: theme.colors.gray[6]
   }
 }))
 

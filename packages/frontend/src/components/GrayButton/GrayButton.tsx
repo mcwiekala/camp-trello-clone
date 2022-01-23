@@ -2,11 +2,11 @@ import { Button } from '@mantine/core'
 import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
-const GreyButton = ({ className, leftIcon, children, onClick, ...rest }: ButtonProps<'button'>) => {
+const GrayButton = ({ className, leftIcon, children, onClick, ...rest }: ButtonProps<'button'>) => {
   const { classes } = useStyles()
   return (
     <Button
-      classNames={{ outline: classes.greyButton }}
+      classNames={{ outline: classes.grayButton }}
       className={className}
       leftIcon={leftIcon}
       color="gray"
@@ -20,4 +20,4 @@ const GreyButton = ({ className, leftIcon, children, onClick, ...rest }: ButtonP
   )
 }
 
-export default GreyButton
+export default GrayButton
