@@ -3,7 +3,7 @@ import faker from '@faker-js/faker'
 class RandomUser {
   constructor() {
     this.firstName = faker.name.firstName()
-    this.surname = faker.name.lastName()
+    this.lastName = faker.name.lastName()
     this.uuid = faker.datatype.uuid()
     this.role = this.generateRole()
     this.profilePictureURL = `https://avatars.dicebear.com/api/human/${this.uuid}.svg`
@@ -11,10 +11,9 @@ class RandomUser {
 
   getUser = () => ({
     firstName: this.firstName,
-    surname: this.surname,
+    lastName: this.lastName,
     uuid: this.uuid,
     role: this.role,
-    num: this.num,
     profilePictureURL: this.profilePictureURL
   })
 
