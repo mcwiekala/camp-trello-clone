@@ -16,6 +16,7 @@ const BlueBtn = ({ children, onClick, rightIcon }: BlueBtnProps) => {
       variant="outline"
       rightIcon={rightIcon}
       className={classes.BlueBtn}
+      classNames={{ root: classes.root, inner: classes.inner }}
     >
       {children}
     </Button>
