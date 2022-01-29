@@ -1,7 +1,8 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
-  BlueBtn: {
+  root: {
+    width: '100%',
     backgroundColor: '#DAE4FD',
     color: '#2F80ED',
     maxWidth: '100%',
@@ -10,9 +11,6 @@ const useStyles = createStyles((theme) => ({
       color: '#FFF',
       backgroundColor: theme.fn.darken('#00acee', 0.1)
     }
-  },
-  root: {
-    width: '100%'
   },
   inner: {
     width: '100%',
