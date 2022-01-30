@@ -17,12 +17,14 @@ type MembersListProps = {
 
 const MembersList = ({ membersList, onDeleteHandler, isDeletable }: MembersListProps) => {
   const { classes } = useStyles()
-  // eslint-disable-next-line consistent-return
   function showButtons(role: string | undefined) {
     if (isDeletable) {
-      if (role === 'admin') return <Text className={classes.admin}>Admin</Text>
+      if (role === 'admin') {
+        return <Text className={classes.admin}>Admin</Text>
+      }
       return <RedButton onClick={onDeleteHandler}>Remove</RedButton>
     }
+    return undefined
   }
   return (
     <div>
