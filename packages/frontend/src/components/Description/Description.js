@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { Button, Text } from '@mantine/core'
 import { RichTextEditor } from '@mantine/rte'
-import { CgNotes, FaPen } from 'react-icons/all'
+import { IoDocumentText, FaPen } from 'react-icons/all'
 import GrayButton from '../GrayButton/GrayButton'
 import useStyles from './style'
 
@@ -27,17 +27,20 @@ const Description = ({ initialText, onTextSavedHandler }) => {
 
   return (
     <div>
-      <div className={classes.title}>
-        <Text classNames={{ root: classes.rootText }}>
-          <CgNotes />
-          Description
-        </Text>
+      <header className={classes.descriptionHeader}>
+        <IoDocumentText className={classes.title} />
+        <Text className={classes.title}>Description</Text>
         {isEditing ? null : (
-          <GrayButton radius="lg" leftIcon={<FaPen />} onClick={triggerEdit}>
+          <GrayButton
+            className={classes.button}
+            radius={8}
+            leftIcon={<FaPen />}
+            onClick={triggerEdit}
+          >
             Edit
           </GrayButton>
         )}
-      </div>
+      </header>
       {isEditing ? (
         <div className={classes.textEditorArea}>
           <RichTextEditor

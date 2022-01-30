@@ -3,13 +3,25 @@ import { createStyles } from '@mantine/core'
 const padding = '7px'
 
 const useStyles = createStyles((theme) => ({
-  title: {
+  descriptionHeader: {
     display: 'flex',
-    paddingTop: padding,
-    paddingBottom: padding,
-    '& > *': {
-      alignSelf: 'center',
-      marginRight: '10px'
+    alignItems: 'center'
+  },
+  title: {
+    color: theme.colors.gray[2],
+    fontFamily: theme.headings.fontFamily,
+    fontWeight: 600,
+    fontSize: '14px',
+    lineHeight: '15px',
+    margin: '0 6px'
+  },
+  button: {
+    marginLeft: '10px',
+    color: theme.colors.gray[6],
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+    '&:hover': {
+      color: theme.colors.gray[0],
+      backgroundColor: theme.colors.gray[3]
     }
   },
   textEditorArea: {
@@ -30,10 +42,6 @@ const useStyles = createStyles((theme) => ({
   toolbarInner: {
     borderRadius: 'inherit',
     margin: '0px'
-  },
-  rootText: {
-    color: theme.colors.gray[2],
-    fontWeight: '600'
   }
 }))
 
