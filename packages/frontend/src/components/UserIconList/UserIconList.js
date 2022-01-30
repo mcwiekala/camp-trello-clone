@@ -17,9 +17,9 @@ const UserIconList = ({ listOfUsers, isAppendable, onAppendHandler, iconLimit })
           imgUrl={user.profilePictureURL}
         />
       ))}
-      {isAboveLimit ? <Text>{`+ ${numberAboveLimit} others`}</Text> : null}
+      {isAboveLimit ? <Text size="sm" color="gray">{`+ ${numberAboveLimit} others`}</Text> : null}
       {isAppendable ? (
-        <ActionIcon variant="filled" size={38} color="blue" radius="md" onClick={onAppendHandler}>
+        <ActionIcon variant="filled" size={28} color="blue" radius="md" onClick={onAppendHandler}>
           <MdAdd size={30} />
         </ActionIcon>
       ) : null}

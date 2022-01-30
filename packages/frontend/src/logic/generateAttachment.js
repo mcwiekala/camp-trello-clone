@@ -16,7 +16,7 @@ class GenerateAttachment {
     const isAttachmentWithImage = Math.random() > 0.5
     if (isAttachmentWithImage) {
       this.fileName = faker.system.commonFileName('jpg')
-      this.itemURL = 'https://picsum.photos/200/300'
+      this.itemURL = `https://picsum.photos/seed/${this.fileName}/300/200`
     } else {
       this.fileName = faker.system.fileName()
       this.url = faker.internet.url()

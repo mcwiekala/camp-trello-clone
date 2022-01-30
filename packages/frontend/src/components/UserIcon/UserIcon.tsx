@@ -13,7 +13,7 @@ const UserIcon = ({ username, imgUrl }: UserIconProps) => {
     return firstLetters?.join('')
   }
   return (
-    <Avatar classNames={{ placeholder: classes.placeholder }} src={imgUrl} radius="md">
+    <Avatar classNames={{ placeholder: classes.placeholder }} src={imgUrl} radius="md" size={28}>
       {!imgUrl && getUserNameInitials(username)}
     </Avatar>
   )
