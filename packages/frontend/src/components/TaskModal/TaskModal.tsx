@@ -8,8 +8,9 @@ import AttachmentsList from '../AttachmentsList/AttachmentsList'
 import { AttachmentType } from '../Attachment/Attachment'
 import useStyles from './style'
 import GenerateAttachment from '../../logic/generateAttachment'
-
-// packages/frontend/src/logic/generateAttachment.js
+import CommentInput from '../CommentInput/CommentInput'
+import Comment from '../Comment/Comment'
+import RandomUser from '../../logic/randomUser.js'
 
 // TODO Should receive: task object on close handler (on close handler receives updated task object).
 // TODO Should store task data as state
@@ -20,23 +21,18 @@ type TaskModalProps = {
   description: string
   coverImageURL?: string
   attachments: AttachmentType[]
-  onCloseHandler: (task: { description: string; attachments: AttachmentType[] }) => void
+  comments: {
+    textContent: string
+    date: Date
+    id: string
+    userData: { profilePicture?: string; username: string; uuid: string; role: string }
+  }[]
+  // onCloseHandler: (task: { description: string; attachments: AttachmentType[] }) => void
   // isOpened: boolean
   // members: {
   //   username: string
   //   id: string
   //   imgUrl?: string
-  // }[]
-  // comments: {
-  //   textContent: string
-  //   date: string
-  //   isEditable: boolean
-  //   userData: { name: string; id: string; profilePicture: string }
-  // TODO toggleEditStateHandler
-  // TODO onDeleteHandler
-  // TODO onValueChangeHandler -> input
-  // TODO onSubmitHandler -> input
-  // TODO onCancelHandler
   // }[]
 }
 
@@ -45,13 +41,14 @@ const TaskModal = ({
   description,
   coverImageURL,
   attachments,
-  onCloseHandler
-}: // comments
+  comments
+}: // onCloseHandlers
 TaskModalProps) => {
   const { classes } = useStyles()
   const [opened, setOpened] = useState(false)
   const [currentDescription, setCurrentDescription] = useState(description)
   const [currentAttachments, setCurrentAttachments] = useState(attachments)
+  const [currentComments, setCurrentComments] = useState(comments)
   const updateAttachments = (newAttachment: AttachmentType) => {
     console.log('Attachment Add')
     setCurrentAttachments((prevCurrentAttachments: TaskModalProps['attachments']) => [
@@ -68,9 +65,34 @@ TaskModalProps) => {
       prevCurrentAttachments.filter(({ id }) => id !== deleteId)
     )
   }
-  const onClose = () => {
-    onCloseHandler({ description: currentDescription, attachments: currentAttachments })
+  const commentOnDeleteHandler = (deleteId: string) => {
+    setCurrentComments((prevCurrentComments) =>
+      prevCurrentComments.filter(({ id }) => id !== deleteId)
+    )
   }
+  const onClose = () => {
+    // onCloseHandler({ description: currentDescription, attachments: currentAttachments })
+    setOpened(false)
+  }
+  const handleCommentEdit = (editedId: string, editedText: string) => {
+    const editedCommentIndex = currentComments.findIndex(({ id }) => id === editedId)
+    if (editedCommentIndex !== -1) {
+      const newComments = [...currentComments]
+      newComments[editedCommentIndex] = {
+        ...newComments[editedCommentIndex],
+        textContent: editedText
+      }
+      setCurrentComments(newComments)
+      console.log(currentComments)
+    }
+  }
+  // const handleCommentAdd = (commentContent: string) => {
+  //   const generatedUser = new RandomUser().generateRole()
+  //   setCurrentComments((prevCurrentComments) => [
+  //     ...prevCurrentComments,
+  //     { userData: generatedUser }
+  //   ])
+  // }
   return (
     <>
       <Modal
@@ -103,6 +125,18 @@ TaskModalProps) => {
               onAddHandler={attachmentOnAddHandler}
               onDeleteHandler={attachmentOnDeleteHandler}
             />
+            {/* <CommentInput onSubmitHandler={handleCommentAdd} /> */}
+            {currentComments.map(({ textContent, date, userData, id }) => (
+              <Comment
+                textContent={textContent}
+                date={date}
+                userData={userData}
+                id={id}
+                key={id}
+                onDeleteHandler={commentOnDeleteHandler}
+                onEditHandler={handleCommentEdit}
+              />
+            ))}
           </div>
           <div className={classes.sidebar}>Margin between columns</div>
         </section>

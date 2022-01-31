@@ -37,6 +37,31 @@ After creation, you can move your card to the todo list.`}
                   id: 'DBEB51E8-7B32-49DF-A31B-E1CB60BB29D8'
                 }
               ]}
+              comments={[
+                {
+                  textContent:
+                    'The gladdest moment in human life, methinks, is a departure into unknown lands. - Sir Richard Burton',
+                  date: new Date('2021-06-05T23:29:35.000Z'),
+                  id: 'DBEB71E8-7B32-49DF-A31B-E1CB60BB29D8',
+                  userData: {
+                    profilePicture: 'string',
+                    username: 'string',
+                    uuid: 'DBEB51E8-7B32-49DF-A31B-E1CB60AB29D9',
+                    role: 'user'
+                  }
+                },
+                {
+                  textContent:
+                    'The gladdest moment in human life, methinks, is a departure into unknown lands. - Sir Richard Burton',
+                  date: new Date('2091-07-05T23:29:35.000Z'),
+                  id: 'DBEB71E8-8B32-49AF-A31B-E1CB60BB29D8',
+                  userData: {
+                    username: 'cos',
+                    uuid: 'DBEB51E8-7B32-49DF-A31B-E1CB60AB29D9',
+                    role: 'user'
+                  }
+                }
+              ]}
             />
           }
         />
