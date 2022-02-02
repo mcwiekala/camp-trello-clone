@@ -3,26 +3,22 @@ import { HiUsers } from 'react-icons/hi'
 import UserIcon from '../UserIcon/UserIcon'
 import RedButton from '../RedButton/RedButton'
 import useStyles from './style'
+import { RandomUserType } from '../../logic/randomUser'
 
 type MembersListProps = {
-  membersList: {
-    username: string
-    role?: string
-    id: string
-    imgUrl?: string
-  }[]
-  onDeleteHandler: (e?: React.MouseEvent<HTMLElement>) => void
+  membersList: RandomUserType[]
+  onDeleteHandler: (id: string) => void
   isDeletable?: boolean
 }
 
 const MembersList = ({ membersList, onDeleteHandler, isDeletable }: MembersListProps) => {
   const { classes } = useStyles()
-  function showButtons(role: string | undefined) {
+  function showButtons(role: string | undefined, id: string) {
     if (isDeletable) {
       if (role === 'admin') {
         return <Text className={classes.admin}>Admin</Text>
       }
-      return <RedButton onClick={onDeleteHandler}>Remove</RedButton>
+      return <RedButton onClick={() => onDeleteHandler(id)}>Remove</RedButton>
     }
     return undefined
   }
@@ -33,11 +29,11 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable }: MembersListP
         <Text className={classes.title}>Members</Text>
       </header>
       <section>
-        {membersList.map(({ imgUrl, username, id, role }) => (
+        {membersList.map(({ firstName, id, lastName, profilePictureURL, role }) => (
           <section className={classes.memberSection} key={id}>
-            <UserIcon imgUrl={imgUrl} username={username} />
-            <Text className={classes.username}>{username}</Text>
-            {showButtons(role)}
+            <UserIcon imgUrl={profilePictureURL} username={`${firstName} ${lastName}`} />
+            <Text className={classes.username}>{`${firstName} ${lastName}`}</Text>
+            {showButtons(role, id)}
           </section>
         ))}
       </section>

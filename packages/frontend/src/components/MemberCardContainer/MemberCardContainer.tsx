@@ -3,13 +3,10 @@ import { Button, Input, Text, ActionIcon, Center, UnstyledButton } from '@mantin
 import { AiOutlineSearch } from 'react-icons/ai'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
+import { RandomUserType } from '../../logic/randomUser'
 
 type MemberCardContainerProps = {
-  membersList: {
-    username: string
-    id: string
-    imgUrl?: string
-  }[]
+  membersList: RandomUserType[]
   addUserHandler: (selectedUsers: string[]) => void
 }
 
@@ -22,8 +19,8 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
   }
   const results = !searchTerm
     ? membersList
-    : membersList.filter(({ username }) =>
-        username.toLowerCase().includes(searchTerm.toLowerCase())
+    : membersList.filter(({ firstName }) =>
+        firstName.toLowerCase().includes(searchTerm.toLowerCase())
       )
   function handleMemberClick(id: string) {
     const index = selectedUsers.indexOf(id)
@@ -53,7 +50,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         }
       />
       <section className={classes.usersContainer}>
-        {results.slice(0, 4).map(({ username, imgUrl, id }) => (
+        {results.slice(0, 4).map(({ firstName, lastName, profilePictureURL, id }) => (
           <UnstyledButton
             className={
               selectedUsers.indexOf(id) + 1
@@ -63,9 +60,9 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
             key={id}
             onClick={() => handleMemberClick(id)}
           >
-            <UserIcon imgUrl={imgUrl} username={username} />
+            <UserIcon imgUrl={profilePictureURL} username={`${firstName} ${lastName}`} />
             <Text className={classes.user} weight={600}>
-              {username}
+              {`${firstName} ${lastName}`}
             </Text>
           </UnstyledButton>
         ))}

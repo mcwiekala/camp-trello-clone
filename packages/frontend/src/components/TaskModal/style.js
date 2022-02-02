@@ -6,7 +6,7 @@ const useStyles = createStyles((theme) => ({
   },
   container: {
     display: 'grid',
-    gridTemplateColumns: '8fr 2fr'
+    gridTemplateColumns: '7fr 3fr'
   },
   closeButton: {
     position: 'absolute',
@@ -14,7 +14,9 @@ const useStyles = createStyles((theme) => ({
     right: 10,
     width: 32,
     height: 32,
-    padding: 0
+    padding: 0,
+    color: 'white',
+    backgroundColor: '#1a64db'
   },
   column: {
     width: '100%'

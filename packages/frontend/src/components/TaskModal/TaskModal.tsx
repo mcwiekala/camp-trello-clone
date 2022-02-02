@@ -1,64 +1,55 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
 import { useState } from 'react'
-import { Modal, Text, Button } from '@mantine/core'
-import { IoMdClose } from 'react-icons/io'
+import { Button, Modal, Text } from '@mantine/core'
+import { AiOutlinePlus, IoMdContact } from 'react-icons/all'
 import Description from '../Description/Description'
 import AttachmentsList from '../AttachmentsList/AttachmentsList'
-import { AttachmentType } from '../Attachment/Attachment'
 import useStyles from './style'
-import GenerateAttachment from '../../logic/generateAttachment'
-import CommentInput from '../CommentInput/CommentInput'
+import GenerateAttachment, { GenerateAttachmentType } from '../../logic/generateAttachment'
 import Comment from '../Comment/Comment'
-import RandomUser from '../../logic/randomUser.js'
-
-// TODO Should receive: task object on close handler (on close handler receives updated task object).
-// TODO Should store task data as state
-// TODO Should implement logic for handling values change (example: onDescriptionSaved, onCommentAdded etc.)
+import CommentInput from '../CommentInput/commentInput'
+import GenerateComment, { GenerateCommentType } from '../../logic/generateComment'
+import ImagePicker from '../ImagePicker/ImagePicker'
+import MembersList from '../MembersList/MembersList'
+import { RandomUserType } from '../../logic/randomUser'
+import BlueBtn from '../BlueBtn/BlueBtn'
+import MemberCardContainer from '../MemberCardContainer/MemberCardContainer'
+import { GenerateTaskType } from '../../logic/generateTask'
 
 type TaskModalProps = {
-  title: string
-  description: string
-  coverImageURL?: string
-  attachments: AttachmentType[]
-  comments: {
-    textContent: string
-    date: Date
-    id: string
-    userData: { profilePicture?: string; username: string; uuid: string; role: string }
-  }[]
-  // onCloseHandler: (task: { description: string; attachments: AttachmentType[] }) => void
-  // isOpened: boolean
-  // members: {
-  //   username: string
-  //   id: string
-  //   imgUrl?: string
-  // }[]
+  isOpen: boolean
+  setIsOpen: () => void
+  membersList: RandomUserType[]
+  task: GenerateTaskType
+  commentsList: GenerateCommentType[]
+  onCloseHandler: (tasks: {
+    membersList: RandomUserType[]
+    task: GenerateTaskType
+    commentsList: GenerateCommentType[]
+  }) => void
 }
 
 const TaskModal = ({
-  title,
-  description,
-  coverImageURL,
-  attachments,
-  comments
-}: // onCloseHandlers
-TaskModalProps) => {
+  setIsOpen,
+  isOpen,
+  task,
+  commentsList,
+  membersList,
+  onCloseHandler
+}: TaskModalProps) => {
   const { classes } = useStyles()
-  const [opened, setOpened] = useState(false)
-  const [currentDescription, setCurrentDescription] = useState(description)
-  const [currentAttachments, setCurrentAttachments] = useState(attachments)
-  const [currentComments, setCurrentComments] = useState(comments)
-  const updateAttachments = (newAttachment: AttachmentType) => {
-    console.log('Attachment Add')
-    setCurrentAttachments((prevCurrentAttachments: TaskModalProps['attachments']) => [
-      ...prevCurrentAttachments,
-      newAttachment
-    ])
-  }
+  const [currentDescription, setCurrentDescription] = useState(task.description)
+  const [currentAttachments, setCurrentAttachments] = useState(task.attachment)
+  const [currentCoverImageURL, setCurrentCoverImageURL] = useState(task.imageCoverURL)
+  const [currentAssigneesList, setCurrentAssigneesList] = useState(task.assigneeList)
+  const [currentComments, setCurrentComments] = useState(commentsList)
+  const [currentInputComment, setCurrentInputComment] = useState('')
+  const [visibleImagePicker, setVisibleImagePicker] = useState(false)
+  const [visibleMemberList, setVisibleMemberList] = useState(false)
+  const [currentMemberList, setCurrentMemberList] = useState(membersList)
+
   const attachmentOnAddHandler = () => {
-    const newAttachment = new GenerateAttachment().getAttachment()
-    updateAttachments(newAttachment)
+    const newAttachment: GenerateAttachmentType = new GenerateAttachment().getAttachment
+    setCurrentAttachments((prevState: GenerateAttachmentType[]) => [...prevState, newAttachment])
   }
   const attachmentOnDeleteHandler = (deleteId: string) => {
     setCurrentAttachments((prevCurrentAttachments) =>
@@ -70,9 +61,20 @@ TaskModalProps) => {
       prevCurrentComments.filter(({ id }) => id !== deleteId)
     )
   }
-  const onClose = () => {
-    // onCloseHandler({ description: currentDescription, attachments: currentAttachments })
-    setOpened(false)
+  const onCloseModalWindowHandler = () => {
+    onCloseHandler({
+      membersList: currentMemberList,
+      commentsList: currentComments,
+      task: {
+        id: task.id,
+        imageCoverURL: currentCoverImageURL,
+        title: task.title,
+        description: currentDescription,
+        attachment: currentAttachments,
+        assigneeList: currentAssigneesList
+      }
+    })
+    setIsOpen()
   }
   const handleCommentEdit = (editedId: string, editedText: string) => {
     const editedCommentIndex = currentComments.findIndex(({ id }) => id === editedId)
@@ -83,68 +85,107 @@ TaskModalProps) => {
         textContent: editedText
       }
       setCurrentComments(newComments)
-      console.log(currentComments)
     }
   }
-  // const handleCommentAdd = (commentContent: string) => {
-  //   const generatedUser = new RandomUser().generateRole()
-  //   setCurrentComments((prevCurrentComments) => [
-  //     ...prevCurrentComments,
-  //     { userData: generatedUser }
-  //   ])
-  // }
+
+  const onSubmitCommentInputHandler = () => {
+    const fakeComment = new GenerateComment().getComment
+    fakeComment.textContent = currentInputComment
+    fakeComment.date = new Date()
+    setCurrentComments((prevState) => [...prevState, fakeComment])
+  }
+
+  const onImagePickerHandler = (val: string) => {
+    setCurrentCoverImageURL(val)
+  }
+  const addUserHandler = (selectedUsersID: string[]) => {
+    selectedUsersID.forEach((idd: string) => {
+      const newAssigneeIndex = currentMemberList.findIndex(({ id }) => id === idd)
+      const newAssignee = currentMemberList[newAssigneeIndex]
+      setCurrentAssigneesList((prevState: RandomUserType[]) => [...prevState, newAssignee])
+    })
+  }
+  const onAssigneesListDeleteHandler = (deletedID: string) => {
+    const editedCommentIndex = currentAssigneesList.findIndex(({ id }) => id === deletedID)
+    if (editedCommentIndex !== -1) {
+      const newAssigneesList = [...currentAssigneesList]
+      newAssigneesList.splice(editedCommentIndex, 1)
+      setCurrentAssigneesList(newAssigneesList)
+    }
+  }
+
   return (
-    <>
-      <Modal
-        className={classes.modal}
-        opened={opened}
-        onClose={onClose}
-        centered
-        hideCloseButton
-        overflow="inside"
-        size="70%"
-      >
-        <Button className={classes.closeButton} onClick={onClose}>
-          <IoMdClose />
-        </Button>
-        {coverImageURL ? (
-          <img src={coverImageURL} className={classes.coverImage} alt="Cover" />
-        ) : null}
-        <section className={classes.container}>
-          <div className={classes.column}>
-            <Text className={classes.title}>{title}</Text>
-            <Description
-              initialText={currentDescription}
-              onTextSavedHandler={
-                (descriptionText: string) => setCurrentDescription(descriptionText)
-                // eslint-disable-next-line react/jsx-curly-newline
-              }
+    <Modal
+      className={classes.modal}
+      classNames={{ close: classes.closeButton }}
+      opened={isOpen}
+      onClose={onCloseModalWindowHandler}
+      centered
+      overflow="inside"
+      size="70%"
+    >
+      {currentCoverImageURL ? (
+        <img src={currentCoverImageURL} className={classes.coverImage} alt="Cover" />
+      ) : null}
+      <section className={classes.container}>
+        <div className={classes.column}>
+          <Text className={classes.title}>{task.title}</Text>
+          <Description
+            initialText={currentDescription}
+            onTextSavedHandler={
+              (descriptionText: string) => setCurrentDescription(descriptionText)
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
+          />
+          <AttachmentsList
+            attachments={currentAttachments}
+            onAddHandler={attachmentOnAddHandler}
+            onDeleteHandler={attachmentOnDeleteHandler}
+          />
+          <CommentInput
+            onValueChangedHandler={setCurrentInputComment}
+            onSubmitHandler={onSubmitCommentInputHandler}
+          />
+          {currentComments.map(({ textContent, date, userData, id }) => (
+            <Comment
+              textContent={textContent}
+              date={date}
+              userData={userData}
+              id={id}
+              key={id}
+              onDeleteHandler={commentOnDeleteHandler}
+              onEditHandler={handleCommentEdit}
             />
-            <AttachmentsList
-              attachments={currentAttachments}
-              onAddHandler={attachmentOnAddHandler}
-              onDeleteHandler={attachmentOnDeleteHandler}
-            />
-            {/* <CommentInput onSubmitHandler={handleCommentAdd} /> */}
-            {currentComments.map(({ textContent, date, userData, id }) => (
-              <Comment
-                textContent={textContent}
-                date={date}
-                userData={userData}
-                id={id}
-                key={id}
-                onDeleteHandler={commentOnDeleteHandler}
-                onEditHandler={handleCommentEdit}
-              />
-            ))}
-          </div>
-          <div className={classes.sidebar}>Margin between columns</div>
-        </section>
-      </Modal>
-      <div className={classes.cont}>
-        <Button onClick={() => setOpened(true)}>Open Modal</Button>
-      </div>
-    </>
+          ))}
+        </div>
+        <div className={classes.sidebar}>
+          <header>
+            <IoMdContact className={classes.title} />
+            <Text className={classes.title}>Description</Text>
+          </header>
+          <Button onClick={() => setVisibleImagePicker((prevState: boolean) => !prevState)}>
+            Change Image
+          </Button>
+          {visibleImagePicker ? (
+            <ImagePicker imageSize="small" onImageSelectedHandler={onImagePickerHandler} />
+          ) : null}
+          <MembersList
+            membersList={currentAssigneesList}
+            onDeleteHandler={onAssigneesListDeleteHandler}
+            isDeletable
+          />
+          <BlueBtn
+            onClick={() => setVisibleMemberList((prevState: boolean) => !prevState)}
+            rightIcon={<AiOutlinePlus />}
+          >
+            Member list
+          </BlueBtn>
+          {visibleMemberList ? (
+            <MemberCardContainer membersList={currentMemberList} addUserHandler={addUserHandler} />
+          ) : null}
+        </div>
+      </section>
+    </Modal>
   )
 }
 

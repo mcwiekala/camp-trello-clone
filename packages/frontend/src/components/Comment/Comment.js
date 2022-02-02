@@ -3,7 +3,7 @@ import { Avatar, Container, Textarea } from '@mantine/core'
 import useStyles from './style'
 import ButtonComment from './ButtonComment'
 
-const Comment = ({ textContent, date, onDeleteHandler, userData, id, onEditHandler }) => {
+const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandler }) => {
   const { classes } = useStyles()
   const [editability, setEditability] = useState(true)
   const [currentContent, setCurrentContent] = useState(textContent)
@@ -21,10 +21,10 @@ const Comment = ({ textContent, date, onDeleteHandler, userData, id, onEditHandl
   return (
     <Container>
       <div className={classes.divUserInfo}>
-        <Avatar radius="md" src={userData.profilePicture} />
+        <Avatar radius="md" src={userData.profilePictureURL} />
 
         <div>
-          <div className={classes.name}>{userData.username}</div>
+          <div className={classes.name}>{userData.firstName}</div>
           <div className={classes.date}>{newDate}</div>
         </div>
 
