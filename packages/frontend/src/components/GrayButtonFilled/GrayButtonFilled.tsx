@@ -13,7 +13,6 @@ const GrayButtonFilled = ({ children, onClick, rightIcon }: GrayButtonFilledProp
     <Button
       radius="md"
       onClick={onClick}
-      variant="outline"
       leftIcon={rightIcon}
       classNames={{ root: classes.root, inner: classes.inner }}
     >

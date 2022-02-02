@@ -8,9 +8,9 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[2],
     fontFamily: theme.headings.fontFamily,
     fontWeight: 600,
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '15px',
-    margin: '0 10px'
+    margin: '0 6px'
   },
   memberSection: {
     display: 'grid',

@@ -68,7 +68,13 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         ))}
       </section>
       <Center>
-        <Button radius="md" onClick={() => addUserHandler(selectedUsers)}>
+        <Button
+          radius="md"
+          onClick={() => {
+            addUserHandler(selectedUsers)
+            setSelectedUsers([])
+          }}
+        >
           Invite
         </Button>
       </Center>

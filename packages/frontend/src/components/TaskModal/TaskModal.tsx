@@ -1,25 +1,31 @@
 import { useState } from 'react'
-import { Button, Modal, Text } from '@mantine/core'
-import { AiOutlinePlus, IoMdContact } from 'react-icons/all'
+import { Popover, Modal, Text } from '@mantine/core'
+import { AiOutlinePlus, IoMdContact, MdImage } from 'react-icons/all'
+
+// Components
 import Description from '../Description/Description'
 import AttachmentsList from '../AttachmentsList/AttachmentsList'
-import useStyles from './style'
 import GenerateAttachment, { GenerateAttachmentType } from '../../logic/generateAttachment'
 import Comment from '../Comment/Comment'
-import CommentInput from '../CommentInput/commentInput'
-import GenerateComment, { GenerateCommentType } from '../../logic/generateComment'
+import CommentInput from '../CommentInput/CommentInput'
 import ImagePicker from '../ImagePicker/ImagePicker'
 import MembersList from '../MembersList/MembersList'
-import { RandomUserType } from '../../logic/randomUser'
-import BlueBtn from '../BlueBtn/BlueBtn'
 import MemberCardContainer from '../MemberCardContainer/MemberCardContainer'
+import BlueBtn from '../BlueBtn/BlueBtn'
+import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
+
+// Logic
+import GenerateComment, { GenerateCommentType } from '../../logic/generateComment'
+import { RandomUserType } from '../../logic/randomUser'
 import { GenerateTaskType } from '../../logic/generateTask'
+
+import useStyles from './style'
 
 type TaskModalProps = {
   isOpen: boolean
   setIsOpen: () => void
-  membersList: RandomUserType[]
   task: GenerateTaskType
+  membersList: RandomUserType[]
   commentsList: GenerateCommentType[]
   onCloseHandler: (tasks: {
     membersList: RandomUserType[]
@@ -29,8 +35,8 @@ type TaskModalProps = {
 }
 
 const TaskModal = ({
-  setIsOpen,
   isOpen,
+  setIsOpen,
   task,
   commentsList,
   membersList,
@@ -51,16 +57,19 @@ const TaskModal = ({
     const newAttachment: GenerateAttachmentType = new GenerateAttachment().getAttachment
     setCurrentAttachments((prevState: GenerateAttachmentType[]) => [...prevState, newAttachment])
   }
+
   const attachmentOnDeleteHandler = (deleteId: string) => {
     setCurrentAttachments((prevCurrentAttachments) =>
       prevCurrentAttachments.filter(({ id }) => id !== deleteId)
     )
   }
+
   const commentOnDeleteHandler = (deleteId: string) => {
     setCurrentComments((prevCurrentComments) =>
       prevCurrentComments.filter(({ id }) => id !== deleteId)
     )
   }
+
   const onCloseModalWindowHandler = () => {
     onCloseHandler({
       membersList: currentMemberList,
@@ -76,6 +85,7 @@ const TaskModal = ({
     })
     setIsOpen()
   }
+
   const handleCommentEdit = (editedId: string, editedText: string) => {
     const editedCommentIndex = currentComments.findIndex(({ id }) => id === editedId)
     if (editedCommentIndex !== -1) {
@@ -89,22 +99,30 @@ const TaskModal = ({
   }
 
   const onSubmitCommentInputHandler = () => {
-    const fakeComment = new GenerateComment().getComment
-    fakeComment.textContent = currentInputComment
-    fakeComment.date = new Date()
-    setCurrentComments((prevState) => [...prevState, fakeComment])
+    if (currentInputComment !== '') {
+      const fakeComment = new GenerateComment().getComment
+      fakeComment.textContent = currentInputComment
+      fakeComment.date = new Date()
+      setCurrentComments((prevState) => [...prevState, fakeComment])
+      setCurrentInputComment('')
+    }
   }
 
   const onImagePickerHandler = (val: string) => {
     setCurrentCoverImageURL(val)
   }
+
   const addUserHandler = (selectedUsersID: string[]) => {
     selectedUsersID.forEach((idd: string) => {
       const newAssigneeIndex = currentMemberList.findIndex(({ id }) => id === idd)
       const newAssignee = currentMemberList[newAssigneeIndex]
       setCurrentAssigneesList((prevState: RandomUserType[]) => [...prevState, newAssignee])
     })
+    setCurrentMemberList((prevState) =>
+      prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))
+    )
   }
+
   const onAssigneesListDeleteHandler = (deletedID: string) => {
     const editedCommentIndex = currentAssigneesList.findIndex(({ id }) => id === deletedID)
     if (editedCommentIndex !== -1) {
@@ -122,7 +140,7 @@ const TaskModal = ({
       onClose={onCloseModalWindowHandler}
       centered
       overflow="inside"
-      size="70%"
+      size="clamp(1000px, 70%, 2000px)"
     >
       {currentCoverImageURL ? (
         <img src={currentCoverImageURL} className={classes.coverImage} alt="Cover" />
@@ -145,6 +163,7 @@ const TaskModal = ({
           <CommentInput
             onValueChangedHandler={setCurrentInputComment}
             onSubmitHandler={onSubmitCommentInputHandler}
+            value={currentInputComment}
           />
           {currentComments.map(({ textContent, date, userData, id }) => (
             <Comment
@@ -159,30 +178,56 @@ const TaskModal = ({
           ))}
         </div>
         <div className={classes.sidebar}>
-          <header>
-            <IoMdContact className={classes.title} />
-            <Text className={classes.title}>Description</Text>
-          </header>
-          <Button onClick={() => setVisibleImagePicker((prevState: boolean) => !prevState)}>
-            Change Image
-          </Button>
-          {visibleImagePicker ? (
-            <ImagePicker imageSize="small" onImageSelectedHandler={onImagePickerHandler} />
-          ) : null}
+          <section className={classes.actionSection}>
+            <header className={classes.sidebarHeader}>
+              <IoMdContact className={classes.sectionTitle} />
+              <Text className={classes.sectionTitle}>Actions</Text>
+            </header>
+            <Popover
+              opened={visibleImagePicker}
+              onClose={() => setVisibleImagePicker(false)}
+              target={
+                <GrayButtonFilled
+                  onClick={() => setVisibleImagePicker((prevState: boolean) => !prevState)}
+                  rightIcon={<MdImage />}
+                >
+                  Cover
+                </GrayButtonFilled>
+              }
+              position="bottom"
+              placement="start"
+              width={300}
+              spacing={0}
+              radius="md"
+              classNames={{ target: classes.popTarget }}
+            >
+              <ImagePicker imageSize="small" onImageSelectedHandler={onImagePickerHandler} />
+            </Popover>
+          </section>
           <MembersList
             membersList={currentAssigneesList}
             onDeleteHandler={onAssigneesListDeleteHandler}
             isDeletable
           />
-          <BlueBtn
-            onClick={() => setVisibleMemberList((prevState: boolean) => !prevState)}
-            rightIcon={<AiOutlinePlus />}
+          <Popover
+            opened={visibleMemberList}
+            onClose={() => setVisibleMemberList(false)}
+            target={
+              <BlueBtn
+                onClick={() => setVisibleMemberList((prevState: boolean) => !prevState)}
+                rightIcon={<AiOutlinePlus />}
+              >
+                Assign a member
+              </BlueBtn>
+            }
+            position="bottom"
+            placement="start"
+            width={300}
+            spacing={0}
+            radius="md"
           >
-            Member list
-          </BlueBtn>
-          {visibleMemberList ? (
             <MemberCardContainer membersList={currentMemberList} addUserHandler={addUserHandler} />
-          ) : null}
+          </Popover>
         </div>
       </section>
     </Modal>

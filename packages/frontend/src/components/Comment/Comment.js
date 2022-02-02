@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Avatar, Container, Textarea } from '@mantine/core'
+import { getHotkeyHandler } from '@mantine/hooks'
 import useStyles from './style'
 import ButtonComment from './ButtonComment'
 
@@ -58,6 +59,15 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
             onChange={(e) => {
               setCurrentContent(e.target.value)
             }}
+            onKeyDown={getHotkeyHandler([
+              [
+                'shift+Enter',
+                () => {
+                  setEditability(true)
+                  onEditHandler(id, currentContent)
+                }
+              ]
+            ])}
           />
         </div>
       )}

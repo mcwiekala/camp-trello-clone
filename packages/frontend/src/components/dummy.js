@@ -8,25 +8,41 @@ import RandomUser from '../logic/randomUser'
 import TaskModal from './TaskModal/TaskModal'
 import GenerateTask from '../logic/generateTask'
 
+const attachmentList = []
+for (let i = 0; i < 3; i += 1) {
+  attachmentList.push(new GenerateAttachment().getAttachment)
+}
+const CommentList = [new GenerateComment().getComment, new GenerateComment().getComment]
+const assigneeList = [
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser
+]
+
+const memberList = [
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser,
+  new RandomUser().getUser
+]
+
+const taskList = new GenerateTask(assigneeList).getTask
+
 export const Dummy = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const attachmentList = []
-  for (let i = 0; i < 3; i += 1) {
-    attachmentList.push(new GenerateAttachment().getAttachment)
-  }
-  const CommentList = [new GenerateComment().getComment, new GenerateComment().getComment]
-  const memberList = [
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser,
-    new RandomUser().getUser
-  ]
 
   const onCloseHandler = (newObj) => {
     console.log(newObj)
@@ -34,7 +50,7 @@ export const Dummy = () => {
   const funcOpen = () => {
     setIsOpen((prevStateIsOpen) => !prevStateIsOpen)
   }
-  const taskList = new GenerateTask(memberList).getTask
+
   return (
     <div>
       <Button onClick={funcOpen}>otwórz Modal</Button>

@@ -5,12 +5,13 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.colors.gray[0],
     color: theme.colors.gray[6],
-    border: 'none',
+    fontSize: '14px',
+    lineHeight: '18px',
     maxWidth: '100%',
     transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
-      color: '#000',
-      backgroundColor: theme.fn.darken(theme.colors.gray[0], 0.1)
+      color: '#FFF',
+      backgroundColor: theme.fn.darken(theme.colors.gray[0], 0.2)
     }
   },
   inner: {

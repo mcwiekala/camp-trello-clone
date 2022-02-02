@@ -17,6 +17,8 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
     )
       .then((res) => res.json())
       .then((json) => setImages(json.results))
+      // eslint-disable-next-line no-console
+      .catch((err) => console.error(err))
   }
   const onKeywordChangeHandler = debounce(getPhotos)
 
