@@ -17,8 +17,6 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
     hour: 'numeric',
     minute: 'numeric'
   })
-  // const sp = newDate.split(' ')
-  // const commentDate = `${sp[1]} ${sp[0]}, ${sp[2]}`
   return (
     <Container>
       <div className={classes.divUserInfo}>

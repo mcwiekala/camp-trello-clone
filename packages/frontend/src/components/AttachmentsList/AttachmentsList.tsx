@@ -12,8 +12,6 @@ export type AttachmentsListProps = {
   onDeleteHandler: (id: string) => void
 }
 
-// type test = Pick<AttachmentsListProps, 'attachments'>
-
 const AttachmentsList: FC<AttachmentsListProps> = ({
   attachments,
   onAddHandler,

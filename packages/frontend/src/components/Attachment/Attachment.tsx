@@ -42,8 +42,6 @@ const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: Attachment
       <div className={classes.divInfo}>
         <Text className={classes.date}>{`Added ${attachmentDate}`}</Text>
         <Text className={classes.title}>{fileName}</Text>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-ignore */}
         <GrayButton component="a" href={itemUrl} download className={classes.buttonDownload}>
           Download
         </GrayButton>

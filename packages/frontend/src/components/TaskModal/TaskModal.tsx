@@ -113,11 +113,10 @@ const TaskModal = ({
   }
 
   const addUserHandler = (selectedUsersID: string[]) => {
-    selectedUsersID.forEach((idd: string) => {
-      const newAssigneeIndex = currentMemberList.findIndex(({ id }) => id === idd)
-      const newAssignee = currentMemberList[newAssigneeIndex]
-      setCurrentAssigneesList((prevState: RandomUserType[]) => [...prevState, newAssignee])
-    })
+    const newAssignees = selectedUsersID
+      .map((selectedUserID) => currentMemberList.find(({ id }) => id === selectedUserID))
+      .filter((assignee) => assignee) as RandomUserType[]
+    setCurrentAssigneesList((prevState) => [...prevState, ...newAssignees])
     setCurrentMemberList((prevState) =>
       prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))
     )
