@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
     border: 'solid 1px',
     borderColor: theme.colors.gray[1],
     borderRadius: 12,
-    padding: 3
+    padding: '5px'
   },
   searchBar: {
     border: 'solid black 1px'

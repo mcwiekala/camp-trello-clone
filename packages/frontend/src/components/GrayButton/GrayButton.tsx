@@ -2,7 +2,13 @@ import { Button } from '@mantine/core'
 import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
-const GrayButton = ({ className, leftIcon, children, onClick, ...rest }: ButtonProps<'button'>) => {
+const GrayButton = ({
+  className,
+  leftIcon,
+  children,
+  onClick,
+  ...rest
+}: ButtonProps<'button'> | ButtonProps<'a'>) => {
   const { classes } = useStyles()
   return (
     <Button

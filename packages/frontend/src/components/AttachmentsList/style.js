@@ -7,18 +7,19 @@ const useStyles = createStyles((theme) => ({
   },
   title: {
     color: theme.colors.gray[2],
-    fontFamily: 'Poppins',
+    fontFamily: theme.headings.fontFamily,
     fontWeight: 600,
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '15px',
-    margin: '0 10px'
+    margin: '0 6px'
   },
   grayBtn: {
+    marginLeft: '10px',
     color: theme.colors.gray[6],
     transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
     '&:hover': {
-      color: theme.colors.cyan[0],
-      backgroundColor: theme.colors.cyan[5]
+      color: theme.colors.gray[0],
+      backgroundColor: theme.colors.gray[3]
     }
   },
   attachmentSection: {
