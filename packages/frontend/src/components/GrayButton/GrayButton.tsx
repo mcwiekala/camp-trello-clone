@@ -3,7 +3,6 @@ import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
 const GrayButton = ({
-  className,
   leftIcon,
   children,
   onClick,
@@ -13,7 +12,6 @@ const GrayButton = ({
   return (
     <Button
       classNames={{ outline: classes.grayButton }}
-      className={className}
       leftIcon={leftIcon}
       color="gray"
       variant="outline"

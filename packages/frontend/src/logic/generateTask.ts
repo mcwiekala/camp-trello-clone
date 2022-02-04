@@ -1,7 +1,8 @@
 import faker from '@faker-js/faker'
 import GenerateAttachment, { GenerateAttachmentType } from './generateAttachment'
 import { RandomUserType } from './randomUser'
-import { GenerateCommentType } from './generateComment'
+import GenerateId from './generateId'
+import GenerateImage from './generateImage'
 
 export type GenerateTaskType = {
   id: string
@@ -28,7 +29,7 @@ class GenerateTask {
   private assigneeList: RandomUserType[]
 
   constructor(ListOfUsers: RandomUserType[]) {
-    this.id = faker.datatype.uuid()
+    this.id = new GenerateId().getId
     this.listOfUsers = ListOfUsers
     this.title = faker.lorem.sentence()
     this.description = faker.lorem.paragraph()
@@ -50,7 +51,7 @@ class GenerateTask {
   private getImageCover() {
     const isImageCover = Math.random() > 0.5
     if (isImageCover) {
-      return `https://picsum.photos/seed/${this.id}/300/200`
+      return new GenerateImage(this.id).getImage
     }
     return null
   }

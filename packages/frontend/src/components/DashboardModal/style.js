@@ -2,15 +2,7 @@ import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   modal: {
-    padding: 20
-  },
-  modalTitle: {
-    margin: 0
-  },
-  container: {
-    display: 'grid',
-    gridTemplateColumns: '7fr 3fr',
-    gridGap: '2em'
+    padding: 0
   },
   closeButton: {
     position: 'absolute',
@@ -25,34 +17,34 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: theme.colors.red[6]
     }
   },
-  column: {
-    width: '100%'
+  cancelButton: {
+    transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+    '&:hover': {
+      color: '#FFF',
+      backgroundColor: theme.colors.red[6]
+    }
   },
-  sidebar: {
+  modalTitle: {
+    margin: 0
+  },
+  column: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: '1em',
-    width: '100%'
+    gap: 10
   },
-  sidebarHeader: {
+  row: {
     display: 'flex',
-    alignItems: 'center',
-    marginBottom: '5px'
+    width: '100%',
+    gap: 10
   },
-  sectionTitle: {
-    color: theme.colors.gray[2],
-    fontFamily: theme.headings.fontFamily,
-    fontWeight: 600,
-    fontSize: '14px',
-    lineHeight: '15px',
-    margin: '0 6px'
-  },
-  actionSection: {
+  footer: {
     display: 'flex',
-    flexDirection: 'column'
+    width: '100%',
+    gap: 10
   },
-  title: {
-    fontSize: '18px'
+  titleInput: {
+    border: `1px solid ${theme.colors.gray[1]}`
   },
   coverImage: {
     height: 130,
@@ -64,8 +56,12 @@ const useStyles = createStyles((theme) => ({
   popTarget: {
     width: '100%'
   },
-  cont: {
-    height: '100vh'
+  tooltip: {
+    color: '#FFF',
+    backgroundColor: theme.colors.red[6]
+  },
+  spanner: {
+    width: '100%'
   }
 }))
 

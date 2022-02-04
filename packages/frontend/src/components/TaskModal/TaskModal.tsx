@@ -5,7 +5,6 @@ import { AiOutlinePlus, IoMdContact, MdImage } from 'react-icons/all'
 // Components
 import Description from '../Description/Description'
 import AttachmentsList from '../AttachmentsList/AttachmentsList'
-import GenerateAttachment, { GenerateAttachmentType } from '../../logic/generateAttachment'
 import Comment from '../Comment/Comment'
 import CommentInput from '../CommentInput/CommentInput'
 import ImagePicker from '../ImagePicker/ImagePicker'
@@ -15,6 +14,7 @@ import BlueBtn from '../BlueBtn/BlueBtn'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 
 // Logic
+import GenerateAttachment, { GenerateAttachmentType } from '../../logic/generateAttachment'
 import GenerateComment, { GenerateCommentType } from '../../logic/generateComment'
 import { RandomUserType } from '../../logic/randomUser'
 import { GenerateTaskType } from '../../logic/generateTask'
@@ -134,7 +134,7 @@ const TaskModal = ({
   return (
     <Modal
       className={classes.modal}
-      classNames={{ close: classes.closeButton }}
+      classNames={{ close: classes.closeButton, header: classes.modalTitle }}
       opened={isOpen}
       onClose={onCloseModalWindowHandler}
       centered
