@@ -6,6 +6,14 @@ import ActionIconSearch from './ActionIconSearch'
 import { IMAGE_API_PROVIDER_URL, IMAGE_API_IMAGES_PER_PAGE } from '../../config'
 import { debounce } from '../../utils/functions'
 
+export const pickerImagesSizes = {
+  full: 'full',
+  raw: 'raw',
+  regular: 'regular',
+  small: 'small',
+  thumb: 'thumb'
+}
+
 const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
   const { classes } = useStyles()
   const [images, setImages] = useState([])
@@ -52,7 +60,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
 }
 
 ImagePicker.propTypes = {
-  imageSize: PropTypes.oneOf(['full', 'raw', 'regular', 'small', 'thumb']),
+  imageSize: PropTypes.oneOf(Object.values(pickerImagesSizes)),
   onImageSelectedHandler: PropTypes.func
 }
 export default ImagePicker

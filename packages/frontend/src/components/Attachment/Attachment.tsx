@@ -42,7 +42,13 @@ const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: Attachment
       <div className={classes.divInfo}>
         <Text className={classes.date}>{`Added ${attachmentDate}`}</Text>
         <Text className={classes.title}>{fileName}</Text>
-        <GrayButton component="a" href={itemUrl} download className={classes.buttonDownload}>
+        <GrayButton
+          component="a"
+          href={itemUrl}
+          download
+          target="_blank"
+          className={classes.buttonDownload}
+        >
           Download
         </GrayButton>
         <GrayButton className={classes.buttonDelete} onClick={() => onDeleteHandler(id)}>

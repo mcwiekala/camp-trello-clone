@@ -7,7 +7,7 @@ import Description from '../Description/Description'
 import AttachmentsList from '../AttachmentsList/AttachmentsList'
 import Comment from '../Comment/Comment'
 import CommentInput from '../CommentInput/CommentInput'
-import ImagePicker from '../ImagePicker/ImagePicker'
+import ImagePicker, { pickerImagesSizes } from '../ImagePicker/ImagePicker'
 import MembersList from '../MembersList/MembersList'
 import MemberCardContainer from '../MemberCardContainer/MemberCardContainer'
 import BlueBtn from '../BlueBtn/BlueBtn'
@@ -149,10 +149,7 @@ const TaskModal = ({
           <Text className={classes.title}>{task.title}</Text>
           <Description
             initialText={currentDescription}
-            onTextSavedHandler={
-              (descriptionText: string) => setCurrentDescription(descriptionText)
-              // eslint-disable-next-line react/jsx-curly-newline
-            }
+            onTextSavedHandler={(descriptionText: string) => setCurrentDescription(descriptionText)}
           />
           <AttachmentsList
             attachments={currentAttachments}
@@ -200,7 +197,10 @@ const TaskModal = ({
               radius="md"
               classNames={{ target: classes.popTarget }}
             >
-              <ImagePicker imageSize="small" onImageSelectedHandler={onImagePickerHandler} />
+              <ImagePicker
+                imageSize={pickerImagesSizes.regular}
+                onImageSelectedHandler={onImagePickerHandler}
+              />
             </Popover>
           </section>
           <MembersList

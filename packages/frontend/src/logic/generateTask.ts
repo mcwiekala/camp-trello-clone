@@ -6,7 +6,7 @@ import GenerateImage from './generateImage'
 
 export type GenerateTaskType = {
   id: string
-  imageCoverURL: string
+  imageCoverURL: string | null
   title: string
   description: string
   attachment: GenerateAttachmentType[]
@@ -56,7 +56,7 @@ class GenerateTask {
     return null
   }
 
-  get getTask() {
+  get taskData() {
     return {
       id: this.id,
       title: this.title,
