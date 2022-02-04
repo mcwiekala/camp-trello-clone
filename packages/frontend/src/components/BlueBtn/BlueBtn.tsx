@@ -5,9 +5,10 @@ type BlueBtnProps = {
   children?: string
   onClick: (e?: React.MouseEvent<HTMLElement>) => void
   rightIcon?: React.ReactNode
+  leftIcon?: React.ReactNode
 }
 
-const BlueBtn = ({ children, onClick, rightIcon }: BlueBtnProps) => {
+const BlueBtn = ({ children, onClick, rightIcon, leftIcon }: BlueBtnProps) => {
   const { classes } = useStyles()
   return (
     <Button
@@ -15,6 +16,7 @@ const BlueBtn = ({ children, onClick, rightIcon }: BlueBtnProps) => {
       onClick={onClick}
       variant="outline"
       rightIcon={rightIcon}
+      leftIcon={leftIcon}
       classNames={{ root: classes.root, inner: classes.inner }}
     >
       {children}
