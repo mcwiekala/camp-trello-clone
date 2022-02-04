@@ -1,10 +1,10 @@
-import { datatype } from '@faker-js/faker'
+import faker from '@faker-js/faker'
 
 class GenerateId {
   private id: string
 
   constructor() {
-    this.id = datatype.uuid()
+    this.id = faker.datatype.uuid()
   }
 
   get getId() {
