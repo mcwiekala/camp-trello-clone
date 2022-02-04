@@ -6,16 +6,17 @@ import useStyles from './style'
 import { RandomUserType } from '../../logic/randomUser'
 
 type MembersListProps = {
+  title?: string
   membersList: RandomUserType[]
   onDeleteHandler: (id: string) => void
   isDeletable?: boolean
 }
 
-const MembersList = ({ membersList, onDeleteHandler, isDeletable }: MembersListProps) => {
+const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: MembersListProps) => {
   const { classes } = useStyles()
   function showButtons(role: string | undefined, id: string) {
     if (isDeletable) {
-      if (role === 'admin') {
+      if (role === 'Admin') {
         return <Text className={classes.admin}>Admin</Text>
       }
       return <RedButton onClick={() => onDeleteHandler(id)}>Remove</RedButton>
@@ -26,13 +27,13 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable }: MembersListP
     <div>
       <header className={classes.membersListHeader}>
         <HiUsers className={classes.title} />
-        <Text className={classes.title}>Members</Text>
+        <Text className={classes.title}>{title || 'Members'}</Text>
       </header>
       <section>
-        {membersList.map(({ firstName, id, lastName, profilePictureURL, role }) => (
+        {membersList.map(({ username, id, profilePictureURL, role }) => (
           <section className={classes.memberSection} key={id}>
-            <UserIcon imgUrl={profilePictureURL} username={`${firstName} ${lastName}`} />
-            <Text className={classes.username}>{`${firstName} ${lastName}`}</Text>
+            <UserIcon imgUrl={profilePictureURL} username={username} />
+            <Text className={classes.username}>{username}</Text>
             {showButtons(role, id)}
           </section>
         ))}

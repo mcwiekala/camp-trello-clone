@@ -1,5 +1,6 @@
 import { Image, Text } from '@mantine/core'
 import GrayButton from '../GrayButton/GrayButton'
+import convertDate from '../../utils/convertDate'
 import useStyles from './style'
 
 export type AttachmentType = {
@@ -16,14 +17,7 @@ type AttachmentProps = AttachmentType & {
 const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: AttachmentProps) => {
   const { classes } = useStyles()
 
-  const newDate = date.toLocaleDateString('pl-PL', {
-    timeZone: 'CET',
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric'
-  })
-  const sp = newDate.split(' ')
-  const attachmentDate = `${sp[1]} ${sp[0]}, ${sp[2]}`
+  const attachmentDate = convertDate(date)
   return (
     <div className={classes.divBody}>
       <div>

@@ -3,9 +3,7 @@ import faker from '@faker-js/faker'
 export type RandomUserType = {
   id: string
 
-  firstName: string
-
-  lastName: string
+  username: string
 
   role: string
 
@@ -15,17 +13,14 @@ export type RandomUserType = {
 class RandomUser {
   private readonly id: string
 
-  private readonly firstName: string
-
-  private readonly lastName: string
+  private readonly username: string
 
   private readonly role: string
 
   private readonly profilePictureURL: string
 
   constructor() {
-    this.firstName = faker.name.firstName()
-    this.lastName = faker.name.lastName()
+    this.username = `${faker.name.firstName()} ${faker.name.lastName()}`
     this.id = faker.datatype.uuid()
     this.role = RandomUser.generateRole()
     this.profilePictureURL = `https://avatars.dicebear.com/api/human/${this.id}.svg`
@@ -33,8 +28,7 @@ class RandomUser {
 
   get getUser() {
     return {
-      firstName: this.firstName,
-      lastName: this.lastName,
+      username: this.username,
       id: this.id,
       role: this.role,
       profilePictureURL: this.profilePictureURL

@@ -23,7 +23,7 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
         <Avatar radius="md" src={userData.profilePictureURL} />
 
         <div>
-          <div className={classes.name}>{userData.firstName}</div>
+          <div className={classes.name}>{userData.username}</div>
           <div className={classes.date}>{newDate}</div>
         </div>
 
