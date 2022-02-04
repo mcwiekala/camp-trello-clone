@@ -134,7 +134,7 @@ const TaskModal = ({
   return (
     <Modal
       className={classes.modal}
-      classNames={{ close: classes.closeButton }}
+      classNames={{ close: classes.closeButton, header: classes.modalTitle }}
       opened={isOpen}
       onClose={onCloseModalWindowHandler}
       centered

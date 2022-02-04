@@ -4,6 +4,9 @@ const useStyles = createStyles((theme) => ({
   modal: {
     padding: 20
   },
+  modalTitle: {
+    margin: 0
+  },
   container: {
     display: 'grid',
     gridTemplateColumns: '7fr 3fr',
