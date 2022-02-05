@@ -1,6 +1,9 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
+  drawer: {
+    padding: '20px 5px 20px 20px'
+  },
   drawerHeader: {
     marginBottom: 4
   },
@@ -40,6 +43,9 @@ const useStyles = createStyles((theme) => ({
   },
   divider: {
     marginBottom: 10
+  },
+  scrollArea: {
+    paddingRight: 15
   }
 }))
 

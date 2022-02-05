@@ -1,4 +1,4 @@
-import { Drawer, Divider, Text } from '@mantine/core'
+import { Drawer, Divider, Text, ScrollArea } from '@mantine/core'
 import { FaUser } from 'react-icons/all'
 
 // Components
@@ -49,37 +49,41 @@ const DashboardDrawer = ({
       size="xl"
       padding="xl"
       title={title}
-      classNames={{ header: classes.drawerHeader }}
+      classNames={{ drawer: classes.drawer, header: classes.drawerHeader }}
     >
       <Divider className={classes.divider} />
+      <ScrollArea style={{ height: 'calc(100vh - 70px)' }} className={classes.scrollArea}>
+        <header className={classes.authorHeader}>
+          <FaUser className={classes.title} />
+          <Text className={classes.title}>Made by</Text>
+        </header>
 
-      <header className={classes.authorHeader}>
-        <FaUser className={classes.title} />
-        <Text className={classes.title}>Made by</Text>
-      </header>
+        <section className={classes.authorSection}>
+          <UserIcon
+            username={dashboardAuthor.username}
+            imgUrl={dashboardAuthor.profilePictureURL}
+          />
+          <div className={classes.authorInfo}>
+            {dashboardAuthor.username}
+            <p className={classes.date}>{`on ${parsedDate}`}</p>
+          </div>
+        </section>
 
-      <section className={classes.authorSection}>
-        <UserIcon username={dashboardAuthor.username} imgUrl={dashboardAuthor.profilePictureURL} />
-        <div className={classes.authorInfo}>
-          {dashboardAuthor.username}
-          <p className={classes.date}>{`on ${parsedDate}`}</p>
-        </div>
-      </section>
+        <Description
+          initialText={description}
+          onTextSavedHandler={
+            (descriptionText: string) => onDescriptionSaveHandler(descriptionText)
+            // eslint-disable-next-line react/jsx-curly-newline
+          }
+        />
 
-      <Description
-        initialText={description}
-        onTextSavedHandler={
-          (descriptionText: string) => onDescriptionSaveHandler(descriptionText)
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-      />
-
-      <MembersList
-        title="Teams"
-        membersList={membersList}
-        onDeleteHandler={onUserRemoveHandler}
-        isDeletable={isAdmin}
-      />
+        <MembersList
+          title="Teams"
+          membersList={membersList}
+          onDeleteHandler={onUserRemoveHandler}
+          isDeletable={isAdmin}
+        />
+      </ScrollArea>
     </Drawer>
   )
 }
