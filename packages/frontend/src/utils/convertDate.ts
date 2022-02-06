@@ -5,8 +5,8 @@ const convertDate = (date: Date) => {
     day: 'numeric',
     year: 'numeric'
   })
-  const sp = newDate.split(' ')
-  const parsedDate = `${sp[0]} ${sp[1]}, ${sp[2]}`
+  const dateSplitArray = newDate.split(' ')
+  const parsedDate = `${dateSplitArray[0]} ${dateSplitArray[1]}, ${dateSplitArray[2]}`
   return parsedDate
 }
 
