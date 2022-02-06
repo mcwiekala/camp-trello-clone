@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { Button, Text } from '@mantine/core'
+import { getHotkeyHandler } from '@mantine/hooks'
 import { RichTextEditor } from '@mantine/rte'
 import { IoDocumentText, FaPen } from 'react-icons/all'
 import GrayButton from '../GrayButton/GrayButton'
@@ -58,6 +59,7 @@ const Description = ({ initialText, onTextSavedHandler }) => {
             ]}
             value={text}
             onChange={setText}
+            onKeyDown={getHotkeyHandler([['shift+Enter', onSaveText]])}
           />
           <div className={classes.buttonsArea}>
             <Button radius="md" color="green" onClick={onSaveText}>

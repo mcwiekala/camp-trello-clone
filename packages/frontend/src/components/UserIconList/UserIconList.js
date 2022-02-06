@@ -11,11 +11,7 @@ const UserIconList = ({ listOfUsers, isAppendable, onAppendHandler, iconLimit })
   return (
     <div className={classes.userIconList}>
       {listOfUsers.slice(0, iconLimit).map((user) => (
-        <UserIcon
-          key={user.uuid}
-          username={`${user.firstName} ${user.lastName}`}
-          imgUrl={user.profilePictureURL}
-        />
+        <UserIcon key={user.uuid} username={username} imgUrl={user.profilePictureURL} />
       ))}
       {isAboveLimit ? <Text size="sm" color="gray">{`+ ${numberAboveLimit} others`}</Text> : null}
       {isAppendable ? (

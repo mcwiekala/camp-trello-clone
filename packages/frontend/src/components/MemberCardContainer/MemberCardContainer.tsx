@@ -19,8 +19,8 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
   }
   const results = !searchTerm
     ? membersList
-    : membersList.filter(({ firstName }) =>
-        firstName.toLowerCase().includes(searchTerm.toLowerCase())
+    : membersList.filter(({ username }) =>
+        username.toLowerCase().includes(searchTerm.toLowerCase())
       )
   function handleMemberClick(id: string) {
     const index = selectedUsers.indexOf(id)
@@ -50,7 +50,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         }
       />
       <section className={classes.usersContainer}>
-        {results.slice(0, 4).map(({ firstName, lastName, profilePictureURL, id }) => (
+        {results.slice(0, 4).map(({ username, profilePictureURL, id }) => (
           <UnstyledButton
             className={
               selectedUsers.indexOf(id) + 1
@@ -60,9 +60,9 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
             key={id}
             onClick={() => handleMemberClick(id)}
           >
-            <UserIcon imgUrl={profilePictureURL} username={`${firstName} ${lastName}`} />
+            <UserIcon imgUrl={profilePictureURL} username={username} />
             <Text className={classes.user} weight={600}>
-              {`${firstName} ${lastName}`}
+              {username}
             </Text>
           </UnstyledButton>
         ))}
