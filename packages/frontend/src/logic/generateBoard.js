@@ -2,21 +2,7 @@ import faker from '@faker-js/faker'
 import GenerateTask from './generateTask'
 import RandomUser from './randomUser'
 
-// board object(columns (which contains tasks), users, status (private or public), title, createdOn)
-let listOfUsers = [
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData,
-  new RandomUser().userData
-]
+let listOfUsers = new Array(10).fill(0).map(() => new RandomUser().userData)
 
 const normalUsers = listOfUsers.filter((user) => user.role !== 'Admin')
 const admins = listOfUsers.filter((user) => user.role === 'Admin')
