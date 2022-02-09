@@ -169,7 +169,7 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
               target={
                 <GrayButtonFilled
                   onClick={() => setVisibleImagePicker((prevState: boolean) => !prevState)}
-                  rightIcon={<MdImage />}
+                  leftIcon={<MdImage />}
                 >
                   Cover
                 </GrayButtonFilled>
