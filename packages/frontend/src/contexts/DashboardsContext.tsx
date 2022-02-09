@@ -38,7 +38,7 @@ export const dashboardsDefaultValue = [
       {
         id: '1',
         title: '1',
-        issues: [
+        tasks: [
           {
             id: '1',
             title: '1',

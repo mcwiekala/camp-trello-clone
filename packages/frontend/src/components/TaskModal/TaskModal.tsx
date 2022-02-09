@@ -26,11 +26,7 @@ type TaskModalProps = {
   task: GenerateTaskType
   membersList: RandomUserType[]
   commentsList: GenerateCommentType[]
-  onCloseHandler: (tasks: {
-    membersList: RandomUserType[]
-    task: GenerateTaskType
-    commentsList: GenerateCommentType[]
-  }) => void
+  onCloseHandler: (task: GenerateTaskType & { comments: GenerateCommentType[] }) => void
 }
 
 const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: TaskModalProps) => {
@@ -64,16 +60,13 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
 
   const onCloseModalWindowHandler = () => {
     onCloseHandler({
-      membersList: currentMemberList,
-      commentsList: currentComments,
-      task: {
-        id: task.id,
-        imageCoverURL: currentCoverImageURL,
-        title: task.title,
-        description: currentDescription,
-        attachment: currentAttachments,
-        assigneeList: currentAssigneesList
-      }
+      id: task.id,
+      imageCoverURL: currentCoverImageURL,
+      title: task.title,
+      description: currentDescription,
+      attachment: currentAttachments,
+      assigneeList: currentAssigneesList,
+      comments: currentComments
     })
   }
 

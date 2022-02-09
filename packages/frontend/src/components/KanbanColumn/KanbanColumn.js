@@ -11,11 +11,13 @@ const KanbanColumn = ({
   title,
   tasks,
   onAddHandler,
+  onTaskInitializeHandler,
   onTaskClickHandler,
   onCreateTaskHandler
 }) => {
   const { classes } = useStyles()
-  return title === undefined && tasks === undefined ? (
+
+  return title === undefined && tasks.length === 0 ? (
     <div className={classes.column}>
       <BlueBtn onClick={onAddHandler} rightIcon={<BsPlusLg />}>
         Add another list
@@ -50,12 +52,13 @@ const KanbanColumn = ({
           )}
         </Draggable>
       ))}
-      <BlueBtn onClick={onAddHandler} rightIcon={<BsPlusLg />}>
+      <BlueBtn onClick={() => onTaskInitializeHandler(columnId)} rightIcon={<BsPlusLg />}>
         Add another card
       </BlueBtn>
     </div>
   )
 }
+
 KanbanColumn.propTypes = {
   title: PropTypes.string
 }

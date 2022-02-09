@@ -51,7 +51,11 @@ const Task = ({
         radius="md"
         onChange={(e) => setNewTitle(e.target.value)}
       />
-      <Button leftIcon={<MdAdd />} className={classes.buttonSave} onClick={onCreateTaskHandler}>
+      <Button
+        leftIcon={<MdAdd />}
+        className={classes.buttonSave}
+        onClick={() => onCreateTaskHandler(id, newTitle)}
+      >
         Save
       </Button>
     </div>

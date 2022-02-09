@@ -3,7 +3,7 @@ import DashboardPage from '../pages/DashboardPage/DashboardPage'
 
 export const routes = {
   dashboards: 'dashboards',
-  dashboard: 'dashboard/:id'
+  dashboard: 'dashboards/:id'
 }
 
 const RoutesDashboards = () => (

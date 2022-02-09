@@ -4,18 +4,18 @@ import RandomUser from './randomUser'
 
 // board object(columns (which contains tasks), users, status (private or public), title, createdOn)
 let listOfUsers = [
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser,
-  new RandomUser().getUser
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData,
+  new RandomUser().userData
 ]
 
 const normalUsers = listOfUsers.filter((user) => user.role !== 'Admin')
@@ -39,17 +39,17 @@ const GenerateBoard = {
     {
       id: '11',
       title: 'Backlog',
-      issues: [new GenerateTask(listOfUsers).taskData, new GenerateTask(listOfUsers).taskData]
+      tasks: [new GenerateTask(listOfUsers).taskData, new GenerateTask(listOfUsers).taskData]
     },
     {
       id: '2',
       title: 'To do',
-      issues: [new GenerateTask(listOfUsers).taskData]
+      tasks: [new GenerateTask(listOfUsers).taskData]
     },
     {
       id: '3',
       title: 'In progress',
-      issues: [
+      tasks: [
         new GenerateTask(listOfUsers).taskData,
         new GenerateTask(listOfUsers).taskData,
         new GenerateTask(listOfUsers).taskData
@@ -59,10 +59,11 @@ const GenerateBoard = {
     {
       id: '4',
       title: 'Done',
-      issues: [new GenerateTask(listOfUsers).taskData]
+      tasks: [new GenerateTask(listOfUsers).taskData]
     },
     {
-      id: '5'
+      id: '5',
+      tasks: []
     }
   ],
   users: listOfUsers,
