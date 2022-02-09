@@ -7,6 +7,8 @@ import useStyles from './style'
 import UserIconList from '../UserIconList/UserIconList'
 
 const Task = ({
+  id,
+  columnId,
   title,
   imageCover,
   assignedUsers,
@@ -20,7 +22,7 @@ const Task = ({
   return title ? (
     <div
       className={classes.taskMain}
-      onClick={clickEventHandler}
+      onClick={() => clickEventHandler(id, columnId)}
       onKeyUp={(e) => {
         if (e.which === 13) {
           clickEventHandler()

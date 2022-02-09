@@ -23,7 +23,6 @@ import useStyles from './style'
 
 type TaskModalProps = {
   isOpen: boolean
-  setIsOpen: () => void
   task: GenerateTaskType
   membersList: RandomUserType[]
   commentsList: GenerateCommentType[]
@@ -34,14 +33,7 @@ type TaskModalProps = {
   }) => void
 }
 
-const TaskModal = ({
-  isOpen,
-  setIsOpen,
-  task,
-  commentsList,
-  membersList,
-  onCloseHandler
-}: TaskModalProps) => {
+const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: TaskModalProps) => {
   const { classes } = useStyles()
   const [currentDescription, setCurrentDescription] = useState(task.description)
   const [currentAttachments, setCurrentAttachments] = useState(task.attachment)
@@ -83,7 +75,6 @@ const TaskModal = ({
         assigneeList: currentAssigneesList
       }
     })
-    setIsOpen()
   }
 
   const handleCommentEdit = (editedId: string, editedText: string) => {
