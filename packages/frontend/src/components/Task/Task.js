@@ -7,6 +7,8 @@ import useStyles from './style'
 import UserIconList from '../UserIconList/UserIconList'
 
 const Task = ({
+  id,
+  columnId,
   title,
   imageCover,
   assignedUsers,
@@ -20,7 +22,7 @@ const Task = ({
   return title ? (
     <div
       className={classes.taskMain}
-      onClick={clickEventHandler}
+      onClick={() => clickEventHandler(id, columnId)}
       onKeyUp={(e) => {
         if (e.which === 13) {
           clickEventHandler()
@@ -49,7 +51,11 @@ const Task = ({
         radius="md"
         onChange={(e) => setNewTitle(e.target.value)}
       />
-      <Button leftIcon={<MdAdd />} className={classes.buttonSave} onClick={onCreateTaskHandler}>
+      <Button
+        leftIcon={<MdAdd />}
+        className={classes.buttonSave}
+        onClick={() => onCreateTaskHandler(id, newTitle)}
+      >
         Save
       </Button>
     </div>

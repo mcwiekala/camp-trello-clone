@@ -22,7 +22,7 @@ class GenerateComment {
 
   constructor() {
     this.id = faker.datatype.uuid()
-    this.userData = new RandomUser().getUser
+    this.userData = new RandomUser().userData
     this.textContent = faker.lorem.lines(3)
     this.date = faker.date.past()
   }

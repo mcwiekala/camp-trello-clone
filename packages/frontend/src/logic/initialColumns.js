@@ -1,19 +1,19 @@
 const InitialColumns = [
   {
     title: 'Backlog',
-    issues: []
+    tasks: []
   },
   {
     title: 'To do',
-    issues: []
+    tasks: []
   },
   {
     title: 'In progress',
-    issues: []
+    tasks: []
   },
   {
     title: 'Done',
-    issues: []
+    tasks: []
   }
 ]
 

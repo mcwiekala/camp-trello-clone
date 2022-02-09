@@ -2,9 +2,9 @@ import { Avatar, Input, Text } from '@mantine/core'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import useStyles from './style'
-import ActionIconSearch from './ActionIconSearch'
 import { IMAGE_API_PROVIDER_URL, IMAGE_API_IMAGES_PER_PAGE } from '../../config'
 import { debounce } from '../../utils/functions'
+import SearchBar from '../SearchBar/SearchBar'
 
 export const pickerImagesSizes = {
   full: 'full',
@@ -36,14 +36,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
       <Text className={classes.photoUnsplashText} size="sm">
         Search unsplash for photos
       </Text>
-      <Input
-        className={classes.searchInput}
-        radius="md"
-        size="xs"
-        placeholder="Keywords..."
-        rightSection={<ActionIconSearch />}
-        onChange={onKeywordChangeHandler}
-      />
+      <SearchBar onKeywordChangeHandler={onKeywordChangeHandler} actionType="button" />
       <div className={classes.imageResults}>
         {images.map((imageLink) => (
           <Avatar

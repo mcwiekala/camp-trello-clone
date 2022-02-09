@@ -26,7 +26,7 @@ class RandomUser {
     this.profilePictureURL = `https://avatars.dicebear.com/api/human/${this.id}.svg`
   }
 
-  get getUser() {
+  get userData() {
     return {
       username: this.username,
       id: this.id,
