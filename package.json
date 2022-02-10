@@ -4,7 +4,6 @@
   "description": "CodersCamp module 2-3 project",
   "main": "index.js",
   "repository": "https://github.com/shnydercom/lerna-typescript-cra-uilib-starter.git",
-  "homepage": "https://EmilMalanczak.github.io/camp-trello-clone",
   "author": "EmilMalanczak",
   "license": "MIT",
   "private": true,

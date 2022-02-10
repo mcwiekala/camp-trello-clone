@@ -3,7 +3,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import useStyles from './style'
 import { IMAGE_API_PROVIDER_URL, IMAGE_API_IMAGES_PER_PAGE } from '../../config'
-import { debounce } from '../../utils/functions'
+import { debounce } from '../../utils/debounce'
 import SearchBar from '../SearchBar/SearchBar'
 
 export const pickerImagesSizes = {

@@ -9,6 +9,7 @@ import { routes } from '../../routes/RoutesDashboards'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 import SearchBar from '../SearchBar/SearchBar'
 import useStyles from './styles'
+import thulloLogo from '../../images/thullo_logo.png'
 
 export type NavbarProps = {
   loggedUser: RandomUserType
@@ -22,7 +23,7 @@ const Navbar = ({ boardTitle, loggedUser }: NavbarProps) => {
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbar__logo}>
-        <img src="/thullo_logo.png" width="32px" height="29px" alt="Thullo logo" />
+        <img src={thulloLogo} width="32px" height="29px" alt="Thullo logo" />
         <h1>Thullo</h1>
       </div>
       {boardTitle && (
