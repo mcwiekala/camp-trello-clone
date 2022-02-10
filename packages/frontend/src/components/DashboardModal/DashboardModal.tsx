@@ -19,7 +19,7 @@ type DashboardModalProps = {
   setIsOpen: () => void
   onCloseHandler: (dashboard: {
     id: string
-    imageCoverURL: string
+    imageCoverUrl: string
     title: string
     status: boolean
   }) => void
@@ -29,7 +29,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
   const { classes } = useStyles()
   const boardId = new GenerateId().getId
   const generatedImage = new GenerateImage(boardId).getImage
-  const [currentCoverImageURL, setCurrentCoverImageURL] = useState(generatedImage)
+  const [currentCoverImageUrl, setCurrentCoverImageUrl] = useState(generatedImage)
   const [currentTitle, setCurrentTitle] = useState('')
   const [visibleImagePicker, setVisibleImagePicker] = useState(false)
   const [isPrivate, setIsPrivate] = useState(false)
@@ -39,7 +39,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
     if (currentTitle) {
       onCloseHandler({
         id: boardId,
-        imageCoverURL: currentCoverImageURL,
+        imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,
         status: isPrivate
       })
@@ -50,7 +50,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
   }
 
   const onImagePickerHandler = (val: string) => {
-    setCurrentCoverImageURL(val)
+    setCurrentCoverImageUrl(val)
   }
 
   return (
@@ -62,8 +62,8 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
       overflow="inside"
       size="340px"
     >
-      {currentCoverImageURL ? (
-        <img src={currentCoverImageURL} className={classes.coverImage} alt="Cover" />
+      {currentCoverImageUrl ? (
+        <img src={currentCoverImageUrl} className={classes.coverImage} alt="Cover" />
       ) : null}
       <section className={classes.column}>
         <Tooltip

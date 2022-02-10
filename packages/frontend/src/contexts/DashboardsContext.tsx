@@ -1,14 +1,17 @@
 import React from 'react'
 import GenerateBoard from '../logic/generateBoard'
+import GenerateImage from '../logic/generateImage'
 
-export type IDashboardsContext = [any[], () => void]
+export type IDashboardsContext = [any[], (dashboards: any[]) => void]
 
 const board1 = GenerateBoard
 const board2 = GenerateBoard
+const board3 = GenerateBoard
 
 export const dashboardsDefaultValue = [
   {
     id: '1',
+    imageCoverUrl: new GenerateImage('1').getImage,
     description: board1.description,
     status: board1.status,
     title: board1.title,
@@ -19,6 +22,7 @@ export const dashboardsDefaultValue = [
   },
   {
     id: '2',
+    imageCoverUrl: new GenerateImage('2').getImage,
     description: board2.description,
     status: board2.status,
     title: board2.title,
@@ -29,44 +33,14 @@ export const dashboardsDefaultValue = [
   },
   {
     id: '3',
-    description: 'desac1',
-    status: 'private',
-    title: 'title',
-    createdAt: '',
+    imageCoverUrl: new GenerateImage('3').getImage,
+    description: board3.description,
+    status: board3.status,
+    title: board3.title,
+    createdAt: board3.createdOn,
     admin: 'userId',
-    columns: [
-      {
-        id: '1',
-        title: '1',
-        tasks: [
-          {
-            id: '1',
-            title: '1',
-            description: '1',
-            imageCoverUrl: '',
-            attachments: [{}],
-            assignees: [{}],
-            comments: [{}]
-          }
-        ]
-      },
-      {
-        id: '2',
-        title: 'title2',
-        tasks: [
-          {
-            id: '3',
-            title: 'title task 3',
-            description: 'desc',
-            imageCoverUrl: '',
-            attachments: [{}],
-            assignees: [{}],
-            comments: [{}]
-          }
-        ]
-      }
-    ],
-    users: []
+    columns: board3.columns,
+    users: board3.users
   }
 ]
 

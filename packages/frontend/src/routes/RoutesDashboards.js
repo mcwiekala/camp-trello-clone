@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import DashboardPage from '../pages/DashboardPage/DashboardPage'
+import DashboardsPage from '../pages/DashboardsPage/DashboardsPage'
 
 export const routes = {
   dashboards: 'dashboards',
@@ -8,7 +9,7 @@ export const routes = {
 
 const RoutesDashboards = () => (
   <Routes>
-    <Route path={routes.dashboards} element={<div>dashboards</div>} />
+    <Route path={routes.dashboards} element={<DashboardsPage />} />
     <Route path={routes.dashboard} element={<DashboardPage />} />
   </Routes>
 )
