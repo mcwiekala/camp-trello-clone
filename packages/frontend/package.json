@@ -2,6 +2,7 @@
   "name": "trello-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@faker-js/faker": "^6.0.0-alpha.3",
     "@mantine/core": "3.6.5",

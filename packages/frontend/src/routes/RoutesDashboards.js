@@ -13,4 +13,5 @@ const RoutesDashboards = () => (
     <Route path={routes.dashboard} element={<DashboardPage />} />
   </Routes>
 )
+
 export default RoutesDashboards

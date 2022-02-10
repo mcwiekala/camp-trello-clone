@@ -7,6 +7,7 @@ const convertDate = (date: Date) => {
   })
   const dateSplitArray = newDate.split(' ')
   const parsedDate = `${dateSplitArray[0]} ${dateSplitArray[1]}, ${dateSplitArray[2]}`
+
   return parsedDate
 }
 
