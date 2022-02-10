@@ -4,7 +4,8 @@ const useStyles = createStyles((theme) => ({
   columns: {
     display: 'flex',
     padding: 10,
-    margin: 10
+    margin: 10,
+    overflowX: 'scroll'
   },
   buttonGrayRoot: {
     backgroundColor: theme.colors.gray[0],

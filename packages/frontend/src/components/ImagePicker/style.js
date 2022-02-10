@@ -2,7 +2,6 @@ import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   outline: {
-    border: 'solid 1px',
     borderColor: theme.colors.gray[1],
     borderRadius: 12,
     padding: '5px'

@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '12px',
     padding: '10px',
     width: '300px',
-    border: `1px solid ${theme.colors.gray[1]}`,
+    borderColor: theme.colors.gray[1],
     boxShadow: '0px 2px 4px #0000000F'
   },
   memberCardTitle: {
