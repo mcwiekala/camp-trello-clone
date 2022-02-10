@@ -48,6 +48,7 @@ const useStyles = createStyles((theme) => ({
     margin: '0 6px'
   },
   actionSection: {
+    marginTop: 2,
     display: 'flex',
     flexDirection: 'column'
   },
