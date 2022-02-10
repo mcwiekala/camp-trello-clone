@@ -93,7 +93,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
             target={
               <GrayButtonFilled
                 onClick={() => setVisibleImagePicker((prevState: boolean) => !prevState)}
-                rightIcon={<MdImage />}
+                leftIcon={<MdImage />}
               >
                 Cover
               </GrayButtonFilled>
@@ -109,7 +109,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
           </Popover>
           <GrayButtonFilled
             onClick={() => setIsPrivate((prevState: boolean) => !prevState)}
-            rightIcon={isPrivate ? <IoMdLock /> : <BsGlobe />}
+            leftIcon={isPrivate ? <IoMdLock /> : <BsGlobe />}
           >
             {isPrivate ? 'Private' : 'Public'}
           </GrayButtonFilled>
