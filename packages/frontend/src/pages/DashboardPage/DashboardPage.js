@@ -157,7 +157,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <div style={{ overflowX: 'scroll' }}>
+    <div>
       <div style={{ display: 'flex' }}>
         <Button classNames={{ root: classes.buttonGrayRoot }}>{currentDashboard.status}</Button>
 

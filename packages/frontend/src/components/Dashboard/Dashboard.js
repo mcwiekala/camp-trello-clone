@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import UserIconList from '../UserIconList/UserIconList'
 import useStyles from './style'
 
-export const Dashboard = ({ title, coverImageURL, users, onClickHandler }) => {
+export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }) => {
   const { classes } = useStyles()
   return (
     <div
@@ -17,7 +17,7 @@ export const Dashboard = ({ title, coverImageURL, users, onClickHandler }) => {
       role="button"
       tabIndex={0}
     >
-      <Image src={coverImageURL} alt="cover" fit="cover" radius="md" />
+      <Image src={imageCoverUrl} alt="cover" fit="cover" radius="md" />
       <Text className={classes.title}>{title}</Text>
       <div className={classes.userList}>
         <UserIconList listOfUsers={users} isAppendable={false} iconLimit={3} />
@@ -27,7 +27,7 @@ export const Dashboard = ({ title, coverImageURL, users, onClickHandler }) => {
 }
 Dashboard.propTypes = {
   title: PropTypes.string,
-  coverImageURL: PropTypes.string,
+  imageCoverUrl: PropTypes.string,
   users: PropTypes.instanceOf(Array),
   onClickHandler: PropTypes.func
 }

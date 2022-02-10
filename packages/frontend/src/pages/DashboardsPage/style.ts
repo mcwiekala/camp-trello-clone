@@ -1,11 +1,29 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
+  container: {
+    padding: '80px 60px'
+  },
+  boardsHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '10px 0'
+  },
+  title: {
+    fontFamily: theme.headings.fontFamily,
+    fontSize: 18
+  },
+  dashboards: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateRows: 'repeat(2, 300px)',
+    gridGap: 20
+  },
   columns: {
     display: 'flex',
     padding: 10,
-    margin: 10,
-    overflowX: 'scroll'
+    margin: 10
   },
   buttonGrayRoot: {
     backgroundColor: theme.colors.gray[0],

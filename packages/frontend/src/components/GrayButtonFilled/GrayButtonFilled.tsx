@@ -5,16 +5,18 @@ type GrayButtonFilledProps = {
   children?: string
   onClick: (e?: React.MouseEvent<HTMLElement>) => void
   rightIcon?: React.ReactNode
+  leftIcon?: React.ReactNode
 }
 
-const GrayButtonFilled = ({ children, onClick, rightIcon }: GrayButtonFilledProps) => {
+const GrayButtonFilled = ({ children, onClick, rightIcon, leftIcon }: GrayButtonFilledProps) => {
   const { classes } = useStyles()
   return (
     <Button
       radius="md"
       onClick={onClick}
-      leftIcon={rightIcon}
+      leftIcon={leftIcon}
       classNames={{ root: classes.root, inner: classes.inner }}
+      rightIcon={rightIcon}
     >
       {children}
     </Button>
