@@ -4,6 +4,7 @@
   "description": "CodersCamp module 2-3 project",
   "main": "index.js",
   "repository": "https://github.com/shnydercom/lerna-typescript-cra-uilib-starter.git",
+  "homepage": "https://EmilMalanczak.github.io/camp-trello-clone",
   "author": "EmilMalanczak",
   "license": "MIT",
   "private": true,
@@ -35,6 +36,9 @@
   },
   "scripts": {
     "start": "lerna run start --stream",
-    "prepare": "husky install"
+    "build": "lerna run build --stream",
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d packages/frontend/build"
   }
 }
