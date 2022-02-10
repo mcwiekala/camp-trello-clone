@@ -39,6 +39,6 @@
     "build": "lerna run build --stream",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d packages/frontend/build"
   }
 }
