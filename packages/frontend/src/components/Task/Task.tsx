@@ -2,9 +2,24 @@ import { Button, Image, Input, Text } from '@mantine/core'
 import { BsPaperclip, MdMessage } from 'react-icons/all'
 import { MdAdd } from 'react-icons/md'
 import { useState } from 'react'
-import PropTypes from 'prop-types'
+import { RandomUserType } from '../../logic/randomUser'
 import useStyles from './style'
 import UserIconList from '../UserIconList/UserIconList'
+
+export type TaskType = {
+  columnId: string
+  title: string
+  onTaskClickHandler: (taskId: string, columnId: string) => void
+  onCreateTaskHandler: (taskId: string, columnId: string) => void
+}
+
+type TaskProps = TaskType & {
+  id: string
+  imageCover: string | null
+  assignedUsers: RandomUserType[]
+  numberOfComments: number
+  numberOfAttachments: number
+}
 
 const Task = ({
   id,
@@ -12,21 +27,21 @@ const Task = ({
   title,
   imageCover,
   assignedUsers,
-  clickEventHandler,
+  onTaskClickHandler,
   numberOfComments,
   numberOfAttachments,
   onCreateTaskHandler
-}) => {
+}: TaskProps) => {
   const { classes } = useStyles()
-  const [newTitle, setNewTitle] = useState()
+  const [newTitle, setNewTitle] = useState('')
 
   return title ? (
     <div
       className={classes.taskMain}
-      onClick={() => clickEventHandler(id, columnId)}
+      onClick={() => onTaskClickHandler(id, columnId)}
       onKeyUp={(e) => {
-        if (e.which === 13) {
-          clickEventHandler()
+        if (e.code === 'Enter') {
+          onTaskClickHandler(id, columnId)
         }
       }}
       role="button"
@@ -37,7 +52,12 @@ const Task = ({
       ) : null}
       <Text className={classes.title}>{title}</Text>
       <div className={classes.attachment}>
-        <UserIconList listOfUsers={assignedUsers} isAppendable iconLimit={3} />
+        <UserIconList
+          listOfUsers={assignedUsers}
+          isAppendable
+          iconLimit={3}
+          displayNumberOfUsers={false}
+        />
         <Text className={classes.iconsAlignRight} size="sm">
           <div>
             <MdMessage />
@@ -56,7 +76,7 @@ const Task = ({
         className={classes.input}
         placeholder="Add title"
         radius="md"
-        onChange={(e) => setNewTitle(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
       />
       <Button
         leftIcon={<MdAdd />}
@@ -67,15 +87,6 @@ const Task = ({
       </Button>
     </div>
   )
-}
-Task.propTypes = {
-  title: PropTypes.string,
-  imageCover: PropTypes.string,
-  assignedUsers: PropTypes.instanceOf(Array),
-  clickEventHandler: PropTypes.func,
-  numberOfComments: PropTypes.number,
-  numberOfAttachments: PropTypes.number,
-  onCreateTaskHandler: PropTypes.func
 }
 
 export default Task

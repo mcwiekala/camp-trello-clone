@@ -3,7 +3,7 @@ import { createStyles } from '@mantine/core'
 const useStyles = createStyles((theme) => ({
   taskMain: {
     borderRadius: theme.radius.md,
-    boxShadow: '0px 4px 12px 0px #0000000D',
+    boxShadow: '0px 4px 12px #0000003F',
     padding: '7px 12px',
     display: 'flex',
     flexDirection: 'column',

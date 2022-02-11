@@ -21,7 +21,7 @@ type DashboardModalProps = {
     id: string
     imageCoverUrl: string
     title: string
-    status: boolean
+    status: string
   }) => void
 }
 
@@ -41,7 +41,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
         id: boardId,
         imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,
-        status: isPrivate
+        status: isPrivate ? 'Private' : 'Public'
       })
       setIsOpen()
     } else {

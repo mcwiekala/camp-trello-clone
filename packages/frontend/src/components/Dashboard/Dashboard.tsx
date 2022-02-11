@@ -1,9 +1,16 @@
 import { Image, Text } from '@mantine/core'
-import PropTypes from 'prop-types'
 import UserIconList from '../UserIconList/UserIconList'
+import { RandomUserType } from '../../logic/randomUser'
 import useStyles from './style'
 
-export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }) => {
+type DashboardProps = {
+  title: string
+  imageCoverUrl: string
+  users: RandomUserType[]
+  onClickHandler: () => void
+}
+
+export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }: DashboardProps) => {
   const { classes } = useStyles()
 
   return (
@@ -25,10 +32,4 @@ export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }) => {
       </div>
     </div>
   )
-}
-Dashboard.propTypes = {
-  title: PropTypes.string,
-  imageCoverUrl: PropTypes.string,
-  users: PropTypes.instanceOf(Array),
-  onClickHandler: PropTypes.func
 }

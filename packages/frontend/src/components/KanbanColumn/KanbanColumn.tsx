@@ -1,10 +1,16 @@
-import PropTypes from 'prop-types'
 import { BsPlusLg } from 'react-icons/all'
 import { Text } from '@mantine/core'
 import { Draggable } from 'react-beautiful-dnd'
 import useStyles from './style'
-import Task from '../Task/Task'
+import Task, { TaskType } from '../Task/Task'
 import BlueBtn from '../BlueBtn/BlueBtn'
+import { GenerateTaskType } from '../../logic/generateTask'
+
+type KanbanColumnProps = TaskType & {
+  tasks: GenerateTaskType[]
+  onAddHandler: () => void
+  onTaskInitializeHandler: (columnId: string) => void
+}
 
 const KanbanColumn = ({
   columnId,
@@ -14,7 +20,7 @@ const KanbanColumn = ({
   onTaskInitializeHandler,
   onTaskClickHandler,
   onCreateTaskHandler
-}) => {
+}: KanbanColumnProps) => {
   const { classes } = useStyles()
   const isInitialColumn = title === undefined && tasks.length === 0
 
@@ -45,7 +51,7 @@ const KanbanColumn = ({
                 assignedUsers={task.assigneeList}
                 numberOfAttachments={task.attachment.length}
                 numberOfComments={1}
-                clickEventHandler={onTaskClickHandler}
+                onTaskClickHandler={onTaskClickHandler}
                 onCreateTaskHandler={onCreateTaskHandler}
               />
             </div>
@@ -57,10 +63,6 @@ const KanbanColumn = ({
       </BlueBtn>
     </div>
   )
-}
-
-KanbanColumn.propTypes = {
-  title: PropTypes.string
 }
 
 export default KanbanColumn

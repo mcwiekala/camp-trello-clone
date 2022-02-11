@@ -22,7 +22,7 @@ type DashboardProps = {
   id: string
   imageCoverUrl: string
   title: string
-  status: boolean
+  status: string
 }
 
 const DashboardsPage = () => {

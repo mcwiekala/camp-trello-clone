@@ -1,15 +1,12 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
-  pageContainer: {
-    '& > div:first-child': {
-      padding: '24px 24px 0 24px'
-    },
-    '& > div:nth-child(2)': {
-      padding: '24px'
-    }
+  usersHeader: {
+    display: 'flex',
+    padding: '24px 24px 0 24px'
   },
   columns: {
+    padding: '0 24px 12px',
     overflowX: 'scroll',
     display: 'flex'
   },

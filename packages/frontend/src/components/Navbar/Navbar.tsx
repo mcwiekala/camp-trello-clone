@@ -31,7 +31,7 @@ const Navbar = ({ boardTitle, loggedUser }: NavbarProps) => {
           <h2>{boardTitle}</h2>
           <div />
           <GrayButtonFilled onClick={() => navigate(routes.dashboards)} leftIcon={<IoApps />}>
-            All board
+            All boards
           </GrayButtonFilled>
         </div>
       )}
