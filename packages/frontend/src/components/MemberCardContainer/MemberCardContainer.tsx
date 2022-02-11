@@ -17,14 +17,16 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
   }
-  const results = !searchTerm
+  const usersSearchResult = !searchTerm
     ? membersList
     : membersList.filter(({ username }) =>
         username.toLowerCase().includes(searchTerm.toLowerCase())
       )
+
   function handleMemberClick(id: string) {
-    const index = selectedUsers.indexOf(id)
-    if (index > -1) {
+    const userIndex = selectedUsers.indexOf(id)
+
+    if (userIndex > -1) {
       setSelectedUsers((prevSelectedUsers) =>
         prevSelectedUsers.filter((prevUserId) => prevUserId !== id)
       )
@@ -32,6 +34,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
       setSelectedUsers((prevSelectedUsers) => [...prevSelectedUsers, id])
     }
   }
+
   return (
     <div className={classes.memberCard}>
       <Text className={classes.memberCardTitle}>Members</Text>
@@ -50,7 +53,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         }
       />
       <section className={classes.usersContainer}>
-        {results.slice(0, 4).map(({ username, profilePictureURL, id }) => (
+        {usersSearchResult.slice(0, 4).map(({ username, profilePictureURL, id }) => (
           <UnstyledButton
             className={
               selectedUsers.indexOf(id) + 1

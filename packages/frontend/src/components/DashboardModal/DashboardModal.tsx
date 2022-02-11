@@ -77,13 +77,10 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
             radius="md"
             placeholder="Add board title"
             invalid={tooltipOpened}
-            onChange={
-              (event: React.ChangeEvent<HTMLInputElement>) => {
-                setCurrentTitle(event.target.value)
-                setTooltipOpened(false)
-              }
-              // eslint-disable-next-line react/jsx-curly-newline
-            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setCurrentTitle(event.target.value)
+              setTooltipOpened(false)
+            }}
           />
         </Tooltip>
         <section className={classes.row}>

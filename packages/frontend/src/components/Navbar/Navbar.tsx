@@ -51,8 +51,8 @@ const Navbar = ({ boardTitle, loggedUser }: NavbarProps) => {
           }}
           placeholder={loggedUser.username}
           data={[
-            { value: 'react', label: 'React' },
-            { value: 'vue', label: 'Vue' }
+            { value: 'react', label: 'Option1' },
+            { value: 'vue', label: 'Option2' }
           ]}
           icon={<img src={loggedUser.profilePictureURL} alt="user avatar" />}
           rightSection={<AiFillCaretDown />}

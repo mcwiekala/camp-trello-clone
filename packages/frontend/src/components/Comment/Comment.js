@@ -3,20 +3,14 @@ import { Avatar, Container, Textarea } from '@mantine/core'
 import { getHotkeyHandler } from '@mantine/hooks'
 import useStyles from './style'
 import ButtonComment from './ButtonComment'
+import { localeDateStringFormat } from '../../constants/localeDateStringFormat'
 
 const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandler }) => {
   const { classes } = useStyles()
-  const [editability, setEditability] = useState(true)
+  const [isInEditionMode, setIsInEditionMode] = useState(true)
   const [currentContent, setCurrentContent] = useState(textContent)
+  const newDate = date.toLocaleDateString('pl-PL', localeDateStringFormat)
 
-  const newDate = date.toLocaleDateString('pl-PL', {
-    timeZone: 'CET',
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  })
   return (
     <Container>
       <div className={classes.divUserInfo}>
@@ -27,9 +21,9 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
           <div className={classes.date}>{newDate}</div>
         </div>
 
-        {editability ? (
+        {isInEditionMode ? (
           <div className={classes.divButtons}>
-            <ButtonComment onClickEvent={() => setEditability(false)}>Edit</ButtonComment>
+            <ButtonComment onClickEvent={() => setIsInEditionMode(false)}>Edit</ButtonComment>
             <span>-</span>
             <ButtonComment onClickEvent={() => onDeleteHandler(id)}>Delete</ButtonComment>
           </div>
@@ -37,18 +31,18 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
           <div className={classes.divButtons}>
             <ButtonComment
               onClickEvent={() => {
-                setEditability(true)
+                setIsInEditionMode(true)
                 onEditHandler(id, currentContent)
               }}
             >
               Save
             </ButtonComment>
             <span>-</span>
-            <ButtonComment onClickEvent={() => setEditability(true)}>Cancel</ButtonComment>
+            <ButtonComment onClickEvent={() => setIsInEditionMode(true)}>Cancel</ButtonComment>
           </div>
         )}
       </div>
-      {editability ? (
+      {isInEditionMode ? (
         <div className={classes.divComment}>{currentContent}</div>
       ) : (
         <div className={classes.divComment}>
@@ -61,7 +55,7 @@ const Comment = ({ id, userData, textContent, date, onDeleteHandler, onEditHandl
               [
                 'shift+Enter',
                 () => {
-                  setEditability(true)
+                  setIsInEditionMode(true)
                   onEditHandler(id, currentContent)
                 }
               ]

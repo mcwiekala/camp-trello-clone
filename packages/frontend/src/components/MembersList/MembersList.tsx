@@ -14,7 +14,8 @@ type MembersListProps = {
 
 const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: MembersListProps) => {
   const { classes } = useStyles()
-  function showButtons(role: string | undefined, id: string) {
+
+  const getRemoveButton = (role: string | undefined, id: string) => {
     if (isDeletable) {
       if (role === 'Admin') {
         return <Text className={classes.admin}>Admin</Text>
@@ -23,6 +24,7 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: Membe
     }
     return undefined
   }
+
   return (
     <div>
       <header className={classes.membersListHeader}>
@@ -34,7 +36,7 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: Membe
           <section className={classes.memberSection} key={id}>
             <UserIcon imgUrl={profilePictureURL} username={username} />
             <Text className={classes.username}>{username}</Text>
-            {showButtons(role, id)}
+            {getRemoveButton(role, id)}
           </section>
         ))}
       </section>

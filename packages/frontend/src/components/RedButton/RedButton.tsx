@@ -9,6 +9,7 @@ type RedButtonProps = {
 
 const RedButton = ({ children, onClick, rightIcon }: RedButtonProps) => {
   const { classes } = useStyles()
+
   return (
     <Button
       radius="md"

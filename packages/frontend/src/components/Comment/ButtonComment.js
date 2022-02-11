@@ -3,6 +3,7 @@ import useStyles from './style'
 
 const ButtonComment = ({ onClickEvent, children }) => {
   const { classes } = useStyles()
+
   return (
     <Button
       onClick={onClickEvent}

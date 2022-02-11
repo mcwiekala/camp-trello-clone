@@ -16,8 +16,9 @@ const KanbanColumn = ({
   onCreateTaskHandler
 }) => {
   const { classes } = useStyles()
+  const isInitialColumn = title === undefined && tasks.length === 0
 
-  return title === undefined && tasks.length === 0 ? (
+  return isInitialColumn ? (
     <div className={classes.column}>
       <BlueBtn onClick={onAddHandler} rightIcon={<BsPlusLg />}>
         Add another list
@@ -26,7 +27,6 @@ const KanbanColumn = ({
   ) : (
     <div className={classes.column}>
       <Text className={classes.title}>{title}</Text>
-
       {tasks.map((task, index) => (
         <Draggable draggableId={task.id} key={task.id} index={index}>
           {(provided) => (

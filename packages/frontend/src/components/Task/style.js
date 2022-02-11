@@ -2,18 +2,15 @@ import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   taskMain: {
-    border: '1px solid',
-    borderColor: theme.colors.gray[2],
     borderRadius: theme.radius.md,
-    padding: 4,
+    boxShadow: '0px 4px 12px 0px #0000000D',
+    padding: '7px 12px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    '& > *': {
-      margin: 5
-    }
+    backgroundColor: '#FFFFFF'
   },
-  title: { fontFamily: theme.other.secondaryFont },
+  title: { fontWeight: 400, width: '100%', margin: '12px 0' },
   attachment: {
     display: 'flex',
     alignItems: 'center',
@@ -21,9 +18,12 @@ const useStyles = createStyles((theme) => ({
     fontSize: 10
   },
   iconsAlignRight: {
+    display: 'flex',
     marginLeft: 'auto',
     color: theme.colors.gray[3],
-    marginRight: 9
+    marginRight: 9,
+    minWidth: '55px',
+    justifyContent: 'space-between'
   },
   input: {
     color: theme.colors.gray[3],
