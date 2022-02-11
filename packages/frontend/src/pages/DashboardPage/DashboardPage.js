@@ -165,7 +165,7 @@ const DashboardPage = () => {
           listOfUsers={currentDashboard.users}
           isAppendable={false}
           iconLimit={4}
-          displayNumber1OfUsers
+          displayNumberOfUsers
         />
         <Button
           style={{ marginLeft: 'auto' }}
