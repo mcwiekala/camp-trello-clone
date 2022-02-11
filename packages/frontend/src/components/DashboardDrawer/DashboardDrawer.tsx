@@ -36,9 +36,7 @@ const DashboardDrawer = ({
   onUserRemoveHandler
 }: DashboardDrawerProps) => {
   const { classes } = useStyles()
-
   const dashboardAuthor = membersList.filter((member) => member.role === 'Admin')[0]
-
   const parsedDate = convertDate(creationDate)
 
   return (

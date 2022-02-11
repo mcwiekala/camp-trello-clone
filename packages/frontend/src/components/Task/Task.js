@@ -19,6 +19,7 @@ const Task = ({
 }) => {
   const { classes } = useStyles()
   const [newTitle, setNewTitle] = useState()
+
   return title ? (
     <div
       className={classes.taskMain}
@@ -31,15 +32,21 @@ const Task = ({
       role="button"
       tabIndex={0}
     >
-      {imageCover ? <Image src={imageCover} alt="cover" fit="cover" radius="md" /> : null}
+      {imageCover ? (
+        <Image src={imageCover} alt="cover" fit="cover" radius="md" height="170px" />
+      ) : null}
       <Text className={classes.title}>{title}</Text>
       <div className={classes.attachment}>
         <UserIconList listOfUsers={assignedUsers} isAppendable iconLimit={3} />
         <Text className={classes.iconsAlignRight} size="sm">
-          <MdMessage />
-          {numberOfComments}
-          <BsPaperclip />
-          {numberOfAttachments}
+          <div>
+            <MdMessage />
+            {numberOfComments}
+          </div>
+          <div>
+            <BsPaperclip />
+            {numberOfAttachments}
+          </div>
         </Text>
       </div>
     </div>

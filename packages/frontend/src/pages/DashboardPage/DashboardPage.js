@@ -157,11 +157,16 @@ const DashboardPage = () => {
   }
 
   return (
-    <div>
+    <div className={classes.pageContainer}>
       <div style={{ display: 'flex' }}>
         <Button classNames={{ root: classes.buttonGrayRoot }}>{currentDashboard.status}</Button>
 
-        <UserIconList listOfUsers={currentDashboard.users} isAppendable={false} iconLimit={4} />
+        <UserIconList
+          listOfUsers={currentDashboard.users}
+          isAppendable={false}
+          iconLimit={4}
+          displayNumberOfUsers
+        />
         <Button
           style={{ marginLeft: 'auto' }}
           classNames={{ root: classes.buttonGrayRoot }}

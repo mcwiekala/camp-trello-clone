@@ -16,8 +16,8 @@ type AttachmentProps = AttachmentType & {
 
 const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: AttachmentProps) => {
   const { classes } = useStyles()
-
   const attachmentDate = convertDate(date)
+
   return (
     <div className={classes.divBody}>
       <div>

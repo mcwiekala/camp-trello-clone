@@ -18,6 +18,7 @@ const AttachmentsList: FC<AttachmentsListProps> = ({
   onDeleteHandler
 }) => {
   const { classes } = useStyles()
+
   return (
     <>
       <header className={classes.attachmentHeader}>

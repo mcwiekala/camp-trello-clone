@@ -20,6 +20,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
 
   const getPhotos = (event) => {
     const { value } = event.target
+
     fetch(
       `${IMAGE_API_PROVIDER_URL}?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&query=${value}&per_page=${IMAGE_API_IMAGES_PER_PAGE}`
     )

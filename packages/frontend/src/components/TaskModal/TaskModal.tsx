@@ -21,6 +21,8 @@ import { GenerateTaskType } from '../../logic/generateTask'
 
 import useStyles from './style'
 
+const MODAL_SIZE = 'clamp(1000px, 70%, 2000px)'
+
 type TaskModalProps = {
   isOpen: boolean
   task: GenerateTaskType
@@ -123,7 +125,7 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
       onClose={onCloseModalWindowHandler}
       centered
       overflow="inside"
-      size="clamp(1000px, 70%, 2000px)"
+      size={MODAL_SIZE}
     >
       {currentCoverImageURL ? (
         <img src={currentCoverImageURL} className={classes.coverImage} alt="Cover" />

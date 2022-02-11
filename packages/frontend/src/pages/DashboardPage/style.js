@@ -1,11 +1,17 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
+  pageContainer: {
+    '& > div:first-child': {
+      padding: '24px 24px 0 24px'
+    },
+    '& > div:nth-child(2)': {
+      padding: '24px'
+    }
+  },
   columns: {
-    display: 'flex',
-    padding: 10,
-    margin: 10,
-    overflowX: 'scroll'
+    overflowX: 'scroll',
+    display: 'flex'
   },
   buttonGrayRoot: {
     backgroundColor: theme.colors.gray[0],

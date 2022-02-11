@@ -10,6 +10,7 @@ type BlueBtnProps = {
 
 const BlueBtn = ({ children, onClick, rightIcon, leftIcon }: BlueBtnProps) => {
   const { classes } = useStyles()
+
   return (
     <Button
       radius="md"

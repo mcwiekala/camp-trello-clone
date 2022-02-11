@@ -8,10 +8,10 @@ const useStyles = createStyles((theme) => ({
     fontFamily: theme.other.secondaryFont
   },
   column: {
-    width: 350,
+    width: 300,
     padding: 12,
     '& > *': {
-      marginTop: 5
+      marginTop: 24
     }
   }
 }))
