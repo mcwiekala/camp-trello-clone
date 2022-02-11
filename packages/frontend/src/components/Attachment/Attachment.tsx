@@ -1,14 +1,8 @@
 import { Image, Text } from '@mantine/core'
 import GrayButton from '../GrayButton/GrayButton'
 import convertDate from '../../utils/convertDate'
+import AttachmentType from '../../types/attachment'
 import useStyles from './style'
-
-export type AttachmentType = {
-  itemUrl?: string
-  date: Date
-  fileName: string
-  id: string
-}
 
 type AttachmentProps = AttachmentType & {
   onDeleteHandler: (id: string) => void

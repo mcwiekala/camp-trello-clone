@@ -1,14 +1,14 @@
 import { Button } from '@mantine/core'
 import useStyles from './style'
 
-type BlueBtnProps = {
+type BlueButtonProps = {
   children?: string
   onClick: (e?: React.MouseEvent<HTMLElement>) => void
   rightIcon?: React.ReactNode
   leftIcon?: React.ReactNode
 }
 
-const BlueBtn = ({ children, onClick, rightIcon, leftIcon }: BlueBtnProps) => {
+const BlueButton = ({ children, onClick, rightIcon, leftIcon }: BlueButtonProps) => {
   const { classes } = useStyles()
 
   return (
@@ -24,4 +24,4 @@ const BlueBtn = ({ children, onClick, rightIcon, leftIcon }: BlueBtnProps) => {
     </Button>
   )
 }
-export default BlueBtn
+export default BlueButton

@@ -1,15 +1,5 @@
 import faker from '@faker-js/faker'
 
-export type RandomUserType = {
-  id: string
-
-  username: string
-
-  role: string
-
-  profilePictureURL: string
-}
-
 class RandomUser {
   private readonly id: string
 

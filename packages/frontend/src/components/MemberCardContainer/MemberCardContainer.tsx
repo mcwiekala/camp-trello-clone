@@ -3,10 +3,10 @@ import { Button, Input, Text, ActionIcon, Center, UnstyledButton } from '@mantin
 import { AiOutlineSearch } from 'react-icons/ai'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
-import { RandomUserType } from '../../logic/randomUser'
+import UserType from '../../types/user'
 
 type MemberCardContainerProps = {
-  membersList: RandomUserType[]
+  membersList: UserType[]
   addUserHandler: (selectedUsers: string[]) => void
 }
 

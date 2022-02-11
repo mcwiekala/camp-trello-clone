@@ -4,7 +4,7 @@ import { Select } from '@mantine/core'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { IoApps } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
-import { RandomUserType } from '../../logic/randomUser'
+import UserType from '../../types/user'
 import { routes } from '../../routes/RoutesDashboards'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 import SearchBar from '../SearchBar/SearchBar'
@@ -12,7 +12,7 @@ import useStyles from './styles'
 import thulloLogo from '../../images/thullo_logo.png'
 
 export type NavbarProps = {
-  loggedUser: RandomUserType
+  loggedUser: UserType
   boardTitle?: string
 }
 

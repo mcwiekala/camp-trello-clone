@@ -2,21 +2,18 @@ import { Button, Image, Input, Text } from '@mantine/core'
 import { BsPaperclip, MdMessage } from 'react-icons/all'
 import { MdAdd } from 'react-icons/md'
 import { useState } from 'react'
-import { RandomUserType } from '../../logic/randomUser'
-import useStyles from './style'
+import UserType from '../../types/user'
 import UserIconList from '../UserIconList/UserIconList'
+import useStyles from './style'
 
-export type TaskType = {
+type TaskProps = {
   columnId: string
   title: string
   onTaskClickHandler: (taskId: string, columnId: string) => void
   onCreateTaskHandler: (taskId: string, columnId: string) => void
-}
-
-type TaskProps = TaskType & {
   id: string
   imageCover: string | null
-  assignedUsers: RandomUserType[]
+  assignedUsers: UserType[]
   numberOfComments: number
   numberOfAttachments: number
 }

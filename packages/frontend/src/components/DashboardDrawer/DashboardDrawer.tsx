@@ -6,9 +6,10 @@ import Description from '../Description/Description'
 import MembersList from '../MembersList/MembersList'
 
 // Logic
-import { RandomUserType } from '../../logic/randomUser'
 import convertDate from '../../utils/convertDate'
 
+// Misc
+import UserType from '../../types/user'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
 
@@ -16,7 +17,7 @@ type DashboardDrawerProps = {
   title: string
   description: string
   creationDate: Date
-  membersList: RandomUserType[]
+  membersList: UserType[]
   isAdmin: boolean
   isOpen: boolean
   setIsOpen: () => void

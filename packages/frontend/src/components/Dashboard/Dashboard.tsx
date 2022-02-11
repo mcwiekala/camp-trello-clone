@@ -1,12 +1,12 @@
 import { Image, Text } from '@mantine/core'
 import UserIconList from '../UserIconList/UserIconList'
-import { RandomUserType } from '../../logic/randomUser'
+import UserType from '../../types/user'
 import useStyles from './style'
 
 type DashboardProps = {
   title: string
   imageCoverUrl: string
-  users: RandomUserType[]
+  users: UserType[]
   onClickHandler: () => void
 }
 

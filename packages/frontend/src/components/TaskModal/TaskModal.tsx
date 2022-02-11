@@ -10,25 +10,28 @@ import CommentInput from '../CommentInput/CommentInput'
 import ImagePicker, { pickerImagesSizes } from '../ImagePicker/ImagePicker'
 import MembersList from '../MembersList/MembersList'
 import MemberCardContainer from '../MemberCardContainer/MemberCardContainer'
-import BlueBtn from '../BlueBtn/BlueBtn'
+import BlueButton from '../BlueButton/BlueButton'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 
 // Logic
-import GenerateAttachment, { GenerateAttachmentType } from '../../logic/generateAttachment'
-import GenerateComment, { GenerateCommentType } from '../../logic/generateComment'
-import { RandomUserType } from '../../logic/randomUser'
-import { GenerateTaskType } from '../../logic/generateTask'
+import GenerateAttachment from '../../logic/generateAttachment'
+import GenerateComment from '../../logic/generateComment'
 
+// Misc
+import AttachmentType from '../../types/attachment'
+import CommentType from '../../types/comment'
+import TaskType from '../../types/task'
+import UserType from '../../types/user'
 import useStyles from './style'
 
 const MODAL_SIZE = 'clamp(1000px, 70%, 2000px)'
 
 type TaskModalProps = {
   isOpen: boolean
-  task: GenerateTaskType
-  membersList: RandomUserType[]
-  commentsList: GenerateCommentType[]
-  onCloseHandler: (task: GenerateTaskType & { comments: GenerateCommentType[] }) => void
+  task: TaskType
+  membersList: UserType[]
+  commentsList: CommentType[]
+  onCloseHandler: (task: TaskType & { comments: CommentType[] }) => void
 }
 
 const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: TaskModalProps) => {
@@ -44,8 +47,8 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
   const [currentMemberList, setCurrentMemberList] = useState(membersList)
 
   const attachmentOnAddHandler = () => {
-    const newAttachment: GenerateAttachmentType = new GenerateAttachment().getAttachment
-    setCurrentAttachments((prevState: GenerateAttachmentType[]) => [...prevState, newAttachment])
+    const newAttachment: AttachmentType = new GenerateAttachment().getAttachment
+    setCurrentAttachments((prevState: AttachmentType[]) => [...prevState, newAttachment])
   }
 
   const attachmentOnDeleteHandler = (deleteId: string) => {
@@ -101,7 +104,7 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
   const addUserHandler = (selectedUsersID: string[]) => {
     const newAssignees = selectedUsersID
       .map((selectedUserID) => currentMemberList.find(({ id }) => id === selectedUserID))
-      .filter((assignee) => assignee) as RandomUserType[]
+      .filter((assignee) => assignee) as UserType[]
     setCurrentAssigneesList((prevState) => [...prevState, ...newAssignees])
     setCurrentMemberList((prevState) =>
       prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))
@@ -198,12 +201,12 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
             opened={visibleMemberList}
             onClose={() => setVisibleMemberList(false)}
             target={
-              <BlueBtn
+              <BlueButton
                 onClick={() => setVisibleMemberList((prevState: boolean) => !prevState)}
                 rightIcon={<AiOutlinePlus />}
               >
                 Assign a member
-              </BlueBtn>
+              </BlueButton>
             }
             position="bottom"
             placement="start"

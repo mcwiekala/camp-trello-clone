@@ -1,20 +1,11 @@
 import faker from '@faker-js/faker'
-import RandomUser, { RandomUserType } from './randomUser'
-
-export type GenerateCommentType = {
-  id: string
-
-  userData: RandomUserType
-
-  textContent: string
-
-  date: Date
-}
+import RandomUser from './randomUser'
+import UserType from '../types/user'
 
 class GenerateComment {
   private readonly id: string
 
-  private readonly userData: RandomUserType
+  private readonly userData: UserType
 
   private readonly textContent: string
 
