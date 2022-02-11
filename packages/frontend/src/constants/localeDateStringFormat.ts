@@ -1,4 +1,4 @@
-export const localeDateStringFormat = {
+export const localeDateStringFormat: Intl.DateTimeFormatOptions = {
   timeZone: 'CET',
   month: 'long',
   day: '2-digit',

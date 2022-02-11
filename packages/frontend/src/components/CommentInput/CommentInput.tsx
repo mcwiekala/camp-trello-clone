@@ -2,7 +2,13 @@ import { Button, Textarea } from '@mantine/core'
 import { getHotkeyHandler } from '@mantine/hooks'
 import useStyles from './style'
 
-const CommentInput = ({ onValueChangedHandler, onSubmitHandler, value }) => {
+type CommentInput = {
+  value: string
+  onSubmitHandler: () => void
+  onValueChangedHandler: (value: string) => void
+}
+
+const CommentInput = ({ onValueChangedHandler, onSubmitHandler, value }: CommentInput) => {
   const { classes } = useStyles()
 
   return (
@@ -11,7 +17,10 @@ const CommentInput = ({ onValueChangedHandler, onSubmitHandler, value }) => {
         placeholder="Write a comment ..."
         variant="unstyled"
         size="md"
-        onChange={(event) => onValueChangedHandler(event.target.value)}
+        onChange={
+          (e: React.ChangeEvent<HTMLTextAreaElement>) => onValueChangedHandler(e.target.value)
+          // eslint-disable-next-line react/jsx-curly-newline
+        }
         value={value}
         onKeyDown={getHotkeyHandler([['shift+Enter', onSubmitHandler]])}
       />
