@@ -11,10 +11,10 @@ export const pickerImagesSizes = {
   regular: 'regular',
   small: 'small',
   thumb: 'thumb'
-}
+} as const
 
 type ImagePickerProps = {
-  imageSize: string
+  imageSize: typeof pickerImagesSizes[keyof typeof pickerImagesSizes]
   onImageSelectedHandler: (val: string) => void
 }
 
