@@ -1,34 +1,26 @@
 import faker from '@faker-js/faker'
-import GenerateAttachment, { GenerateAttachmentType } from './generateAttachment'
-import { RandomUserType } from './randomUser'
+import GenerateAttachment from './generateAttachment'
 import GenerateId from './generateId'
 import GenerateImage from './generateImage'
-
-export type GenerateTaskType = {
-  id: string
-  imageCoverURL: string | null
-  title: string
-  description: string
-  attachment: GenerateAttachmentType[]
-  assigneeList: RandomUserType[]
-}
+import AttachmentType from '../types/attachment'
+import UserType from '../types/user'
 
 class GenerateTask {
   private id: string
 
   private imageCoverURL: string | null
 
-  private listOfUsers: RandomUserType[]
+  private listOfUsers: UserType[]
 
   private title: string
 
   private description: string
 
-  private attachment: GenerateAttachmentType[]
+  private attachment: AttachmentType[]
 
-  private assigneeList: RandomUserType[]
+  private assigneeList: UserType[]
 
-  constructor(ListOfUsers: RandomUserType[]) {
+  constructor(ListOfUsers: UserType[]) {
     this.id = new GenerateId().getId
     this.listOfUsers = ListOfUsers
     this.title = faker.lorem.sentence()

@@ -12,17 +12,18 @@ import { Dashboard } from '../../components/Dashboard/Dashboard'
 import { DashboardsContext } from '../../contexts/DashboardsContext'
 
 // Logic
-import RandomUser, { RandomUserType } from '../../logic/randomUser'
+import RandomUser from '../../logic/randomUser'
 import GenerateTask from '../../logic/generateTask'
 
-// Styles
+// Misc
+import UserType from '../../types/user'
 import useStyles from './style'
 
 type DashboardProps = {
   id: string
   imageCoverUrl: string
   title: string
-  status: boolean
+  status: string
 }
 
 const DashboardsPage = () => {
@@ -41,7 +42,7 @@ const DashboardsPage = () => {
     const currentUser = new RandomUser().userData
     currentUser.role = 'Admin'
     const createdAt = new Date()
-    const users: RandomUserType[] = []
+    const users: UserType[] = []
     users.push(currentUser)
     const newDashboard = {
       id,

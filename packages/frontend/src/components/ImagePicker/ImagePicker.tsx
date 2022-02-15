@@ -1,6 +1,5 @@
-import { Avatar, Input, Text } from '@mantine/core'
+import { Avatar, Text } from '@mantine/core'
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 import useStyles from './style'
 import { IMAGE_API_PROVIDER_URL, IMAGE_API_IMAGES_PER_PAGE } from '../../config'
 import { debounce } from '../../utils/debounce'
@@ -12,14 +11,26 @@ export const pickerImagesSizes = {
   regular: 'regular',
   small: 'small',
   thumb: 'thumb'
+} as const
+
+type ImagePickerProps = {
+  imageSize: typeof pickerImagesSizes[keyof typeof pickerImagesSizes]
+  onImageSelectedHandler: (val: string) => void
 }
 
-const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
+type UnsplashImage = {
+  id: string
+  urls: {
+    [key: string]: string
+  }
+}
+
+const ImagePicker = ({ imageSize, onImageSelectedHandler }: ImagePickerProps) => {
   const { classes } = useStyles()
   const [images, setImages] = useState([])
 
-  const getPhotos = (event) => {
-    const { value } = event.target
+  const getPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
 
     fetch(
       `${IMAGE_API_PROVIDER_URL}?client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}&query=${value}&per_page=${IMAGE_API_IMAGES_PER_PAGE}`
@@ -39,7 +50,7 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
       </Text>
       <SearchBar onKeywordChangeHandler={onKeywordChangeHandler} actionType="button" />
       <div className={classes.imageResults}>
-        {images.map((imageLink) => (
+        {images.map((imageLink: UnsplashImage) => (
           <Avatar
             key={imageLink.id}
             radius="md"
@@ -53,8 +64,4 @@ const ImagePicker = ({ imageSize, onImageSelectedHandler }) => {
   )
 }
 
-ImagePicker.propTypes = {
-  imageSize: PropTypes.oneOf(Object.values(pickerImagesSizes)),
-  onImageSelectedHandler: PropTypes.func
-}
 export default ImagePicker

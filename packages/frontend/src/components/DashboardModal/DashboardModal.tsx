@@ -4,7 +4,7 @@ import { BsGlobe, IoMdLock, MdImage, AiOutlinePlus } from 'react-icons/all'
 
 // Components
 import ImagePicker from '../ImagePicker/ImagePicker'
-import BlueBtn from '../BlueBtn/BlueBtn'
+import BlueButton from '../BlueButton/BlueButton'
 import GrayButton from '../GrayButton/GrayButton'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 
@@ -21,7 +21,7 @@ type DashboardModalProps = {
     id: string
     imageCoverUrl: string
     title: string
-    status: boolean
+    status: string
   }) => void
 }
 
@@ -41,7 +41,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
         id: boardId,
         imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,
-        status: isPrivate
+        status: isPrivate ? 'Private' : 'Public'
       })
       setIsOpen()
     } else {
@@ -116,9 +116,9 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
           <GrayButton className={classes.cancelButton} onClick={setIsOpen}>
             Cancel
           </GrayButton>
-          <BlueBtn leftIcon={<AiOutlinePlus />} onClick={onCreateBoardHandler}>
+          <BlueButton leftIcon={<AiOutlinePlus />} onClick={onCreateBoardHandler}>
             Create
-          </BlueBtn>
+          </BlueButton>
         </section>
       </section>
     </Modal>

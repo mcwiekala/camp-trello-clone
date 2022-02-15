@@ -1,15 +1,5 @@
 import faker from '@faker-js/faker'
 
-export type GenerateAttachmentType = {
-  fileName: string
-
-  itemUrl: string
-
-  date: Date
-
-  id: string
-}
-
 class GenerateAttachment {
   private fileName!: string
 

@@ -2,12 +2,12 @@ import { Text } from '@mantine/core'
 import { HiUsers } from 'react-icons/hi'
 import UserIcon from '../UserIcon/UserIcon'
 import RedButton from '../RedButton/RedButton'
+import UserType from '../../types/user'
 import useStyles from './style'
-import { RandomUserType } from '../../logic/randomUser'
 
 type MembersListProps = {
   title?: string
-  membersList: RandomUserType[]
+  membersList: UserType[]
   onDeleteHandler: (id: string) => void
   isDeletable?: boolean
 }

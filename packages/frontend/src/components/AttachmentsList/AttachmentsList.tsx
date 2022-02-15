@@ -2,8 +2,9 @@ import { Text } from '@mantine/core'
 import { FC } from 'react'
 import { IoDocumentText } from 'react-icons/io5'
 import { MdAdd } from 'react-icons/md'
-import Attachment, { AttachmentType } from '../Attachment/Attachment'
+import Attachment from '../Attachment/Attachment'
 import GrayButton from '../GrayButton/GrayButton'
+import AttachmentType from '../../types/attachment'
 import useStyles from './style'
 
 export type AttachmentsListProps = {

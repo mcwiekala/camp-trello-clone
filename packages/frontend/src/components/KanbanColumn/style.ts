@@ -2,7 +2,7 @@ import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   task: {
-    margin: 0
+    margin: '12px 0 0'
   },
   title: {
     fontFamily: theme.other.secondaryFont
@@ -10,8 +10,8 @@ const useStyles = createStyles((theme) => ({
   column: {
     width: 300,
     padding: 12,
-    '& > *': {
-      marginTop: 24
+    '& > button': {
+      marginTop: '12px'
     }
   }
 }))

@@ -157,8 +157,8 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className={classes.pageContainer}>
-      <div style={{ display: 'flex' }}>
+    <div className={classes.root}>
+      <div className={classes.usersHeader}>
         <Button classNames={{ root: classes.buttonGrayRoot }}>{currentDashboard.status}</Button>
 
         <UserIconList

@@ -1,10 +1,20 @@
-import PropTypes from 'prop-types'
 import { BsPlusLg } from 'react-icons/all'
 import { Text } from '@mantine/core'
 import { Draggable } from 'react-beautiful-dnd'
 import useStyles from './style'
 import Task from '../Task/Task'
-import BlueBtn from '../BlueBtn/BlueBtn'
+import BlueButton from '../BlueButton/BlueButton'
+import TaskType from '../../types/task'
+
+type KanbanColumnProps = {
+  columnId: string
+  title: string
+  onTaskClickHandler: (taskId: string, columnId: string) => void
+  onCreateTaskHandler: (taskId: string, columnId: string) => void
+  tasks: TaskType[]
+  onAddHandler: () => void
+  onTaskInitializeHandler: (columnId: string) => void
+}
 
 const KanbanColumn = ({
   columnId,
@@ -14,15 +24,15 @@ const KanbanColumn = ({
   onTaskInitializeHandler,
   onTaskClickHandler,
   onCreateTaskHandler
-}) => {
+}: KanbanColumnProps) => {
   const { classes } = useStyles()
   const isInitialColumn = title === undefined && tasks.length === 0
 
   return isInitialColumn ? (
     <div className={classes.column}>
-      <BlueBtn onClick={onAddHandler} rightIcon={<BsPlusLg />}>
+      <BlueButton onClick={onAddHandler} rightIcon={<BsPlusLg />}>
         Add another list
-      </BlueBtn>
+      </BlueButton>
     </div>
   ) : (
     <div className={classes.column}>
@@ -45,22 +55,18 @@ const KanbanColumn = ({
                 assignedUsers={task.assigneeList}
                 numberOfAttachments={task.attachment.length}
                 numberOfComments={1}
-                clickEventHandler={onTaskClickHandler}
+                onTaskClickHandler={onTaskClickHandler}
                 onCreateTaskHandler={onCreateTaskHandler}
               />
             </div>
           )}
         </Draggable>
       ))}
-      <BlueBtn onClick={() => onTaskInitializeHandler(columnId)} rightIcon={<BsPlusLg />}>
+      <BlueButton onClick={() => onTaskInitializeHandler(columnId)} rightIcon={<BsPlusLg />}>
         Add another card
-      </BlueBtn>
+      </BlueButton>
     </div>
   )
-}
-
-KanbanColumn.propTypes = {
-  title: PropTypes.string
 }
 
 export default KanbanColumn

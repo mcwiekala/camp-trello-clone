@@ -10,6 +10,8 @@ import {
 } from './contexts/DashboardsContext'
 import RoutesDashboards from './routes/RoutesDashboards'
 
+const randomUser = new RandomUser().userData
+
 export const App: FC = () => {
   const [dashboards, setDashboards] = useState(dashboardsDefaultValue)
   const memoizedDashboardsContext = useMemo(
@@ -21,7 +23,7 @@ export const App: FC = () => {
     <ThemeProvider>
       <DashboardsContext.Provider value={memoizedDashboardsContext}>
         <BrowserRouter>
-          <Navbar loggedUser={new RandomUser().userData} boardTitle="test" />
+          <Navbar loggedUser={randomUser} boardTitle="test" />
           <RoutesDashboards />
         </BrowserRouter>
       </DashboardsContext.Provider>

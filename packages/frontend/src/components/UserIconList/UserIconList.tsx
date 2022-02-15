@@ -1,8 +1,16 @@
 import { ActionIcon, Text } from '@mantine/core'
 import { MdAdd } from 'react-icons/md'
-import PropTypes from 'prop-types'
 import UserIcon from '../UserIcon/UserIcon'
+import UserType from '../../types/user'
 import useStyles from './style'
+
+type UserIconListProps = {
+  listOfUsers: UserType[]
+  isAppendable: boolean
+  onAppendHandler?: () => void
+  iconLimit: number
+  displayNumberOfUsers: boolean
+}
 
 const UserIconList = ({
   listOfUsers,
@@ -10,7 +18,7 @@ const UserIconList = ({
   onAppendHandler,
   iconLimit,
   displayNumberOfUsers
-}) => {
+}: UserIconListProps) => {
   const { classes } = useStyles()
   const isAboveLimit = listOfUsers.length > iconLimit
   const numberAboveLimit = listOfUsers.length - iconLimit
@@ -30,12 +38,6 @@ const UserIconList = ({
       ) : null}
     </div>
   )
-}
-UserIconList.propTypes = {
-  listOfUsers: PropTypes.instanceOf(Array),
-  isAppendable: PropTypes.bool,
-  onAppendHandler: PropTypes.func,
-  iconLimit: PropTypes.number
 }
 
 export default UserIconList
