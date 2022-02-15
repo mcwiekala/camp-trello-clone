@@ -157,7 +157,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <div className={classes.usersHeader}>
         <Button classNames={{ root: classes.buttonGrayRoot }}>{currentDashboard.status}</Button>
 

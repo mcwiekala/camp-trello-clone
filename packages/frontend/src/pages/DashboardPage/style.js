@@ -1,6 +1,9 @@
 import { createStyles } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
+  root: {
+    backgroundColor: '#F8F9FD'
+  },
   usersHeader: {
     display: 'flex',
     padding: '24px 24px 0 24px'
