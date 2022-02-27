@@ -1,3 +1,5 @@
+import { TASK } from '@shared/paths/task'
+
 import Fetch from './fetchInstance'
 
 export interface BaseHttpService {
@@ -15,7 +17,7 @@ class HttpService {
   }
 
   // TODO change from any to Task type
-  getTask = (taskId: string): Promise<any> => this.http.get(`/tasks/${taskId}`)
+  getTask = (taskId: string): Promise<any> => this.http.get(`/${TASK}/${taskId}`)
 }
 
 export default new HttpService()
