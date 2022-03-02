@@ -74,3 +74,5 @@ storybook-static
 # Editor settings
 .vscode/
 .idea/
+
+camp-trello-clone.iml
