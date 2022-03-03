@@ -4,12 +4,7 @@ const boardSchema = new mongoose.Schema({
   id: String,
   title: String,
   description: String,
-  createdAt: String,
-  admin: {
-    id: String,
-    username: String,
-    avatarUrl: String
-  },
+  createdAt: Date,
   status: String,
   users: [
     {
