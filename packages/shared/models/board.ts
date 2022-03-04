@@ -10,7 +10,7 @@ const boardSchema = new mongoose.Schema({
     {
       id: String,
       username: String,
-      avatarUrl: String
+      avatarId: String
     }
   ],
   columns: [
