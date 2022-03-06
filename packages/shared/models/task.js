@@ -4,28 +4,25 @@ const taskSchema = new mongoose.Schema({
   id: String,
   title: String,
   description: String,
-  captionURL: String,
+  imageCoverUrl: String,
   attachments: [
     {
-      id: String,
-      URL: String,
-      fileName: String,
-      createdAt: String
+      id: String
     }
   ],
 
   comments: [
     {
       id: String,
-      createdAt: String,
+      createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
         id: String,
-        avatarURL: String,
+        avatarId: Number,
         username: String
       }
     }
   ]
 })
-const Task = mongoose.model('User', taskSchema)
+const Task = mongoose.model('Task', taskSchema)
 export default Task
