@@ -1,21 +1,22 @@
+import mongoose from 'mongoose'
 import User from '../models/user'
 
+const { ObjectId } = mongoose.Schema
+
 const user = new User({
-  id: '123',
+  _id: ObjectId('622524b42dbfa0665c71fe8c'),
   username: 'Marek Kowalski',
   passwordHash: 'pass123hash',
   avatarId: 23,
   dashboards: [
     {
-      id: '1',
-      imageCoverUrl:
-        'https://images.unsplash.com/photo-1640622842924-fb0017b9d786?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80',
+      _id: ObjectId('622524b42dbfa0665c71fe9z'),
+      imageCoverId: 'photo-1640622842924-fb0017b9d786',
       title: 'New board 1'
     },
     {
-      id: '2',
-      imageCoverUrl:
-        'https://images.unsplash.com/photo-1640622842924-fb0017b9d786?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80',
+      _id: ObjectId('62252cb42dbfa0665c71fe3c'),
+      imageCoverId: 'photo-1640622842924-fb0017b9d788',
       title: 'New board 2'
     }
   ],

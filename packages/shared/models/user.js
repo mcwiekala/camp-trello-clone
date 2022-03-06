@@ -1,21 +1,23 @@
 import mongoose from 'mongoose'
 
+const { ObjectId } = mongoose.Schema
+
 const userSchema = new mongoose.Schema({
-  id: String,
+  _id: ObjectId,
   username: String,
   passwordHash: String,
   avatarId: Number,
   dashboards: [
     {
-      id: String,
-      imageCoverUrl: String,
+      _id: ObjectId,
+      imageCoverId: String,
       title: String
     }
   ],
 
   users: [
     {
-      id: String,
+      _id: ObjectId,
       avatarId: Number
     }
   ]
