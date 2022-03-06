@@ -1,23 +1,25 @@
 import mongoose from 'mongoose'
 
+const { ObjectId } = mongoose.Schema
+
 const taskSchema = new mongoose.Schema({
-  id: String,
+  _id: ObjectId,
   title: String,
   description: String,
   imageCoverUrl: String,
   attachments: [
     {
-      id: String
+      _id: ObjectId
     }
   ],
 
   comments: [
     {
-      id: String,
+      _id: ObjectId,
       createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
-        id: String,
+        _id: ObjectId,
         avatarId: Number,
         username: String
       }

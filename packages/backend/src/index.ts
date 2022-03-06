@@ -24,7 +24,7 @@ const startServer = async () => {
 
   await printData()
 
-  server = app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
   })
 }
