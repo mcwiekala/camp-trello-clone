@@ -4,11 +4,11 @@ const userSchema = new mongoose.Schema({
   id: String,
   username: String,
   passwordHash: String,
-  avatarURL: String,
+  avatarId: Number,
   dashboards: [
     {
       id: String,
-      captionURL: String,
+      imageCoverUrl: String,
       title: String
     }
   ],
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   users: [
     {
       id: String,
-      avatarURL: String
+      avatarId: Number
     }
   ]
 })
