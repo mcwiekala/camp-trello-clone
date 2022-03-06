@@ -1,6 +1,10 @@
-import Task from '../models/task'
+const rootUser = 'admin'
+const rootPassword = 'pass'
 
-const task = new Task({
+const tasks = db.getSiblingDB('trello-clone')
+tasks.auth(rootUser, rootPassword)
+
+const task1 = {
   id: 123,
   title: 'Tytuł 1',
   description: 'Opis ',
@@ -23,6 +27,6 @@ const task = new Task({
       }
     }
   ]
-})
+}
 
-export default task
+db.tasks.insert(task1)
