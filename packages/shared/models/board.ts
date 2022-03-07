@@ -1,29 +1,31 @@
 import mongoose from 'mongoose'
 
+const { ObjectId } = mongoose.Schema
+
 const boardSchema = new mongoose.Schema({
-  id: String,
+  _id: ObjectId,
   title: String,
   description: String,
   createdAt: Date,
   status: String,
   users: [
     {
-      id: String,
+      _id: ObjectId,
       username: String,
       avatarId: Number
     }
   ],
   columns: [
     {
-      id: String,
+      _id: ObjectId,
       title: String,
       tasks: [
         {
-          id: String,
+          _id: ObjectId,
           title: String,
           imageCoverId: Number,
-          comments: [{ id: String }],
-          attachments: [{ id: String }],
+          comments: [{ _id: ObjectId }],
+          attachments: [{ _id: ObjectId }],
           users: [{ id: String }]
         }
       ]
