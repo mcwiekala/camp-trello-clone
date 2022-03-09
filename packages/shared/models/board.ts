@@ -26,7 +26,7 @@ const boardSchema = new mongoose.Schema({
           imageCoverId: Number,
           comments: [{ _id: ObjectId }],
           attachments: [{ _id: ObjectId }],
-          users: [{ id: String }]
+          users: [{ _id: ObjectId }]
         }
       ]
     }
