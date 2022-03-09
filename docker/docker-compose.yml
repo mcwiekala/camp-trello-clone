@@ -13,6 +13,7 @@ services:
       - MONGO_INITDB_DATABASE=trello-clone
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - TC_mongo_data:/data/db
     networks:
       - mongo-compose-network
 
@@ -39,3 +40,7 @@ services:
 networks:
   mongo-compose-network:
     driver: bridge
+
+volumes:
+  TC_mongo_data:
+    external: false

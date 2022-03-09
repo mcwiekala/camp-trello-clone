@@ -44,6 +44,10 @@ to stop docker container use:
 
 `docker-compose down` 
 
-If you have some problems with restarting DB remove the old containers with:
+To restart the data to init state use:
+
+`docker volume rm docker_TC_mongo_data`
+
+If you have some problems with removing old containers use:
 
 `yes | docker-compose rm`
