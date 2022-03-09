@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
   description: String,
-  imageCoverUrl: String,
+  imageCoverId: String,
   attachments: [
     {
       _id: ObjectId
