@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const { ObjectId } = mongoose.Schema
+const { ObjectId } = mongoose.Types
 
 const boardSchema = new mongoose.Schema({
   _id: ObjectId,
