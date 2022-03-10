@@ -12,7 +12,7 @@
     "mongoose": "^6.2.1"
   },
   "scripts": {
-    "dev": "nodemon src/index.ts --config ./nodemon.json"
+    "start": "nodemon src/index.ts --config ./nodemon.json"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
