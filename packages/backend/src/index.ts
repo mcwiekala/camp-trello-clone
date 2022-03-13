@@ -1,10 +1,8 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
+import Task from './modules/task/Task'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
-// TODO: use lerna with shared lib
-// eslint-disable-next-line import/no-relative-packages
-import Task from '../../shared/models/task'
 
 dotenv.config()
 
