@@ -32,5 +32,5 @@ const boardSchema = new mongoose.Schema({
     }
   ]
 })
-const Board = mongoose.model('User', boardSchema)
+const Board = mongoose.model('Board', boardSchema)
 export default Board
