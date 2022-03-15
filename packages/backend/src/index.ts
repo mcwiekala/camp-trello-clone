@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
 import Task from './modules/task/Task'
-import Board from './modules/dashboard/Board'
+import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 
