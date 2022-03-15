@@ -4,6 +4,7 @@ import Task from './modules/task/Task'
 import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
+import User from './modules/user/User'
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ const startServer = async () => {
 
   async function printData() {
     console.log('Print data in DB')
+
     const tasks = await Task.find()
     const boards = await Board.find()
     console.log(`Founded: ${tasks.length} tasks!`)
@@ -23,6 +25,12 @@ const startServer = async () => {
     console.log(`Founded: ${boards.length} boards!`)
     boards.forEach((t) => {
       console.log(`${t.toString()}`)
+    })
+
+    const users = await User.find()
+    console.log(`Founded: ${users.length} users!`)
+    users.forEach((u) => {
+      console.log(`${u.toString()}`)
     })
   }
 
