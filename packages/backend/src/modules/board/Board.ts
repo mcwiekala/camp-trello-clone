@@ -24,7 +24,7 @@ const boardSchema = new mongoose.Schema({
   createdAt: Date,
   status: {
     type: String,
-    enum: ['public', 'private']
+    enum: ['PUBLIC', 'PRIVATE']
   },
   users: [
     {
