@@ -62,7 +62,9 @@ module.exports = {
     'function-paren-newline': 'off',
     indent: 'off',
     'no-undef': 'off',
-    'import/no-extraneous-dependencies': 'off'
+    'import/no-extraneous-dependencies': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error'
   },
   ignorePatterns: ['packages/**/lib'],
   settings: {
