@@ -7,7 +7,10 @@ const boardSchema = new mongoose.Schema({
   title: String,
   description: String,
   createdAt: Date,
-  status: String,
+  status: {
+    type: String,
+    enum: ['public', 'private']
+  },
   users: [
     {
       _id: ObjectId,
