@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { Status } from './Status'
 
 const { ObjectId } = mongoose.Types
 
@@ -24,7 +25,7 @@ const boardSchema = new mongoose.Schema({
   createdAt: Date,
   status: {
     type: String,
-    enum: ['PUBLIC', 'PRIVATE']
+    enum: Status
   },
   users: [
     {
