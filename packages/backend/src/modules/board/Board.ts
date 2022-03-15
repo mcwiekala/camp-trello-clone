@@ -2,12 +2,30 @@ import mongoose from 'mongoose'
 
 const { ObjectId } = mongoose.Types
 
+const columnSchema = new mongoose.Schema({
+  _id: ObjectId,
+  title: String,
+  tasks: [
+    {
+      _id: ObjectId,
+      title: String,
+      imageCoverId: Number,
+      comments: [{ _id: ObjectId }],
+      attachments: [{ _id: ObjectId }],
+      users: [{ _id: ObjectId }]
+    }
+  ]
+})
+
 const boardSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
   description: String,
   createdAt: Date,
-  status: String,
+  status: {
+    type: String,
+    enum: ['public', 'private']
+  },
   users: [
     {
       _id: ObjectId,
@@ -15,22 +33,7 @@ const boardSchema = new mongoose.Schema({
       avatarId: Number
     }
   ],
-  columns: [
-    {
-      _id: ObjectId,
-      title: String,
-      tasks: [
-        {
-          _id: ObjectId,
-          title: String,
-          imageCoverId: Number,
-          comments: [{ _id: ObjectId }],
-          attachments: [{ _id: ObjectId }],
-          users: [{ _id: ObjectId }]
-        }
-      ]
-    }
-  ]
+  columns: [columnSchema]
 })
 const Board = mongoose.model('Board', boardSchema)
 export default Board
