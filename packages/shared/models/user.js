@@ -11,14 +11,17 @@ const userSchema = new mongoose.Schema({
     {
       _id: ObjectId,
       imageCoverId: String,
-      title: String
-    }
-  ],
-
-  users: [
-    {
-      _id: ObjectId,
-      avatarId: Number
+      title: String,
+      role: {
+        type: String,
+        enum: ['ADMIN', 'MEMBER', 'VIEWER', 'NO_ACCESS']
+      },
+      users: [
+        {
+          _id: ObjectId,
+          avatarId: Number
+        }
+      ]
     }
   ]
 })

@@ -12,18 +12,19 @@ const user = new User({
     {
       _id: ObjectId('622524b42dbfa0665c71fe12'),
       imageCoverId: 'photo-1640622842924-fb0017b9d786',
-      title: 'New board 1'
+      title: 'New board 1',
+      role: 'ADMIN',
+      users: [
+        {
+          _id: ObjectId('622524b42dbfa0665c71fe9z'),
+          avatarId: 23
+        }
+      ]
     },
     {
       _id: ObjectId('62252cb42dbfa0665c71fe3c'),
       imageCoverId: 'photo-1640622842924-fb0017b9d788',
       title: 'New board 2'
-    }
-  ],
-  users: [
-    {
-      _id: ObjectId('622524b42dbfa0665c71fe9z'),
-      avatarId: 23
     }
   ]
 })
@@ -37,13 +38,14 @@ const user2 = new User({
     {
       _id: ObjectId('622524b42dbfa0665c71fe9z'),
       imageCoverId: 'photo-1640622842924-fb0017b9d786',
-      title: 'New board 1'
-    }
-  ],
-  users: [
-    {
-      _id: ObjectId('622524b42dbfa0665c71fe8c'),
-      avatarId: 414
+      title: 'New board 1',
+      role: 'MEMBER',
+      users: [
+        {
+          _id: ObjectId('622524b42dbfa0665c71fe8c'),
+          avatarId: 414
+        }
+      ]
     }
   ]
 })
@@ -57,17 +59,18 @@ const user3 = new User({
     {
       _id: ObjectId('622524b42dbfa0665c71feab'),
       imageCoverId: 'photo-1640622842924-fb0017b9d723',
-      title: 'New board 4'
-    }
-  ],
-  users: [
-    {
-      _id: ObjectId('622524b42dbfa0665c71fe9z'),
-      avatarId: 23
-    },
-    {
-      _id: ObjectId('622524b42dbfa0665c71fe8c'),
-      avatarId: 2
+      title: 'New board 4',
+      role: 'VIEWER',
+      users: [
+        {
+          _id: ObjectId('622524b42dbfa0665c71fe9z'),
+          avatarId: 23
+        },
+        {
+          _id: ObjectId('622524b42dbfa0665c71fe8c'),
+          avatarId: 2
+        }
+      ]
     }
   ]
 })
