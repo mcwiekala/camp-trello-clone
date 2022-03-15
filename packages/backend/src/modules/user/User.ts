@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import { Role } from './Role'
 
-const { ObjectId } = mongoose.Schema
+const { ObjectId } = mongoose.Types
 
 const userSchema = new mongoose.Schema({
   _id: ObjectId,
@@ -14,7 +15,8 @@ const userSchema = new mongoose.Schema({
       title: String,
       role: {
         type: String,
-        enum: ['ADMIN', 'MEMBER', 'VIEWER', 'NO_ACCESS']
+        enum: Role,
+        default: Role.NO_ACCESS
       },
       users: [
         {
@@ -25,5 +27,6 @@ const userSchema = new mongoose.Schema({
     }
   ]
 })
+
 const User = mongoose.model('User', userSchema)
 export default User
