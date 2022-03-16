@@ -16,8 +16,6 @@ services:
       - TC_mongo_data:/data/db
     networks:
       - mongo-compose-network
-    env_file:
-      - .env
 
   # Database Manager
   mongo-express:
@@ -38,8 +36,6 @@ services:
     links:
       - mongo
     restart: always
-    env_file:
-      - .env
 
 networks:
   mongo-compose-network:
