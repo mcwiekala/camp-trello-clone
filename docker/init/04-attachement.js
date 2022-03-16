@@ -1,18 +1,18 @@
-const attachements = db.getSiblingDB('trello-clone')
+const attachments = db.getSiblingDB('trello-clone')
 
-const attachement1 = {
+const attachment1 = {
   id: 1,
   filename: 'name',
   addedDate: new Date(),
   content: 'content'
 }
 
-const attachement2 = {
+const attachment2 = {
   id: 2,
   filename: 'name',
   addedDate: new Date(),
   content: 'content'
 }
 
-db.attachements.insert(attachement1)
-db.attachements.insert(attachement2)
+db.attachements.insert(attachment1)
+db.attachements.insert(attachment2)
