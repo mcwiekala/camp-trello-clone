@@ -8,11 +8,11 @@ services:
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_INITDB_ROOT_USERNAME=${ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=trello-clone
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./init/:/docker-entrypoint-initdb.d/
       - TC_mongo_data:/data/db
     networks:
       - mongo-compose-network
@@ -25,12 +25,12 @@ services:
     depends_on:
       - mongo
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://root:pass@mongo:27017
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: pass
+      ME_CONFIG_MONGODB_URL: mongodb://${ROOT_USERNAME}:${ROOT_PASSWORD}@mongo:27017
+      ME_CONFIG_BASICAUTH_USERNAME: ${ADMIN_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ADMIN_PASSWORD}
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ROOT_PASSWORD}
     networks:
       - mongo-compose-network
     links:

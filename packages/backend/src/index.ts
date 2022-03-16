@@ -1,35 +1,42 @@
+/* eslint-disable no-console */
 import dotenv from 'dotenv'
-
-import mongoose from 'mongoose'
+import Task from './modules/task/Task'
+import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
+import User from './modules/user/User'
 
 dotenv.config()
 
 const { PORT } = process.env
 
-let server
-
-const userSchema = new mongoose.Schema({
-  name: String
-})
-
 const startServer = async () => {
   await connectToDatabase()
 
-  console.log('init test data')
-  const User = mongoose.model('User', userSchema)
-  const mark = new User({ name: 'Mark' })
-  const adam = new User({ name: 'Adam' })
+  async function printData() {
+    console.log('Print data in DB')
 
-  console.log(mark.name)
-  mark.save()
-  adam.save()
+    const tasks = await Task.find()
+    const boards = await Board.find()
+    console.log(`Founded: ${tasks.length} tasks!`)
+    tasks.forEach((t) => {
+      console.log(`${t.toString()}`)
+    })
+    console.log(`Founded: ${boards.length} boards!`)
+    boards.forEach((t) => {
+      console.log(`${t.toString()}`)
+    })
 
-  const docs = await User.find()
-  console.log(`Founded: ${docs.length} users with name Mark!`)
+    const users = await User.find()
+    console.log(`Founded: ${users.length} users!`)
+    users.forEach((u) => {
+      console.log(`${u.toString()}`)
+    })
+  }
 
-  server = app.listen(PORT, () => {
+  await printData()
+
+  const server = app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
   })
 }
