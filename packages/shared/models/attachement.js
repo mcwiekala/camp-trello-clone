@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const attachementSchema = new mongoose.Schema({
   id: String,
-  filname: String,
+  filename: String,
   addedDate: Date,
   content: String
 })
