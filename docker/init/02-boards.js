@@ -9,7 +9,7 @@ const board1 = {
   title: 'Tablica 1',
   description: 'Opis tablicy pierwszej',
   createdAt: Date(2020, 11, 17),
-  status: 'public',
+  status: 'PUBLIC',
   users: [
     {
       _id: ObjectId('622e5dffa63863cfc5f812f5'),
@@ -40,7 +40,7 @@ const board2 = {
   title: 'Tablica 2',
   description: 'Opis tablicy drugiej',
   createdAt: Date(2021, 5, 3),
-  status: 'private',
+  status: 'PRIVATE',
   users: [
     {
       _id: ObjectId('622e5e29374b7eba8ad3e3b1'),
