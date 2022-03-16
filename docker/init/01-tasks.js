@@ -1,8 +1,4 @@
-const rootUser = 'admin'
-const rootPassword = 'pass'
-
 const tasks = db.getSiblingDB('trello-clone')
-tasks.auth(rootUser, rootPassword)
 
 const task1 = {
   _id: ObjectId('6225239aa76ad13dd37178b6'),
