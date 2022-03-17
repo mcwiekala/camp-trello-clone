@@ -9,17 +9,17 @@ const taskSchema = new mongoose.Schema({
   imageCoverId: String,
   attachments: [
     {
-      _id: ObjectId
+      attachments_id: ObjectId
     }
   ],
 
   comments: [
     {
-      _id: ObjectId,
+      comments_id: ObjectId,
       createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
-        _id: ObjectId,
+        user_id: ObjectId,
         avatarId: Number,
         username: String
       }
