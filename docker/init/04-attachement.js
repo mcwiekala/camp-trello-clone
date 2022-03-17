@@ -2,14 +2,14 @@ const attachments = db.getSiblingDB('trello-clone')
 
 const attachment1 = {
   id: 1,
-  filename: 'name',
+  filename: 'mysummercar.jpg',
   addedDate: new Date(),
   content: 'content'
 }
 
 const attachment2 = {
   id: 2,
-  filename: 'name',
+  filename: 'myprettyphoto.png',
   addedDate: new Date(),
   content: 'content'
 }
