@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
 const attachmentSchema = new mongoose.Schema({
-  id: Number,
-  filename: String,
+  _id: ObjectId,
+  fileHash: String,
   addedDate: Date,
   content: String
 })
