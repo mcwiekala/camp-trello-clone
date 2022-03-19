@@ -5,6 +5,7 @@ import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
+import Attachment from './modules/attachment/Attachment'
 
 dotenv.config()
 
@@ -31,6 +32,12 @@ const startServer = async () => {
     console.log(`Founded: ${users.length} users!`)
     users.forEach((u) => {
       console.log(`${u.toString()}`)
+    })
+
+    const attachments = await Attachment.find()
+    console.log(`Founded: ${attachments.length} attachments!`)
+    attachments.forEach((a) => {
+      console.log(`${a.toString()}`)
     })
   }
 
