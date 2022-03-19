@@ -1,11 +1,13 @@
 import mongoose from 'mongoose'
 
+const { ObjectId } = mongoose.Schema
+
 const attachmentSchema = new mongoose.Schema({
   _id: ObjectId,
-  fileHash: String,
+  filename: String,
   addedDate: Date,
   filenameHash: String
 })
 
-const Attachment = mongoose.model('Attachement', attachmentSchema)
+const Attachment = mongoose.model('Attachment', attachmentSchema)
 export default Attachment
