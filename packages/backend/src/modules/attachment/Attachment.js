@@ -4,7 +4,7 @@ const attachmentSchema = new mongoose.Schema({
   _id: ObjectId,
   fileHash: String,
   addedDate: Date,
-  content: String
+  filenameHash: String
 })
 
 const Attachment = mongoose.model('Attachement', attachmentSchema)
