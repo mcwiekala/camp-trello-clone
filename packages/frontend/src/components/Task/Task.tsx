@@ -5,6 +5,7 @@ import { useState } from 'react'
 import UserType from '../../types/user'
 import UserIconList from '../UserIconList/UserIconList'
 import useStyles from './style'
+// import HttpService from '../../infrastructure/HttpService/HttpService'
 
 type TaskProps = {
   columnId: string
@@ -31,7 +32,35 @@ const Task = ({
 }: TaskProps) => {
   const { classes } = useStyles()
   const [newTitle, setNewTitle] = useState('')
-
+  async function onCreatePost() {
+    // const response = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     title: `${newTitle}`
+    //   })
+    // }
+    // HttpService.submitTask(response)
+    try {
+      const response = await fetch('http://localhost:8085/v1/tasks/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: `${newTitle}`
+        })
+      })
+      const data = await response.json()
+      console.log(data)
+      onCreateTaskHandler(data._id, newTitle)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  console.log(id, columnId)
   return title ? (
     <div
       className={classes.taskMain}
@@ -75,11 +104,7 @@ const Task = ({
         radius="md"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewTitle(e.target.value)}
       />
-      <Button
-        leftIcon={<MdAdd />}
-        className={classes.buttonSave}
-        onClick={() => onCreateTaskHandler(id, newTitle)}
-      >
+      <Button leftIcon={<MdAdd />} className={classes.buttonSave} onClick={() => onCreatePost()}>
         Save
       </Button>
     </div>

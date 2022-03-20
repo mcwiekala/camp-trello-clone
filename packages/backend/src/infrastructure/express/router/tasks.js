@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
 // SUBMITS A TASK
 router.post('/', async (req, res) => {
   const tasks = new Task({
-    title: req.body.title,
-    description: req.body.description,
-    imageCoverId: req.body.imageCoverId
+    title: req.body.title
+    // description: req.body.description,
+    // imageCoverId: req.body.imageCoverId
   })
 
   try {

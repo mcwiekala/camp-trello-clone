@@ -15,7 +15,6 @@ import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 
 // Logic
 import GenerateAttachment from '../../logic/generateAttachment'
-import GenerateComment from '../../logic/generateComment'
 
 // Misc
 import AttachmentType from '../../types/attachment'
@@ -87,13 +86,22 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
     }
   }
 
-  const onSubmitCommentInputHandler = () => {
-    if (currentInputComment !== '') {
-      const fakeComment = new GenerateComment().getComment
-      fakeComment.textContent = currentInputComment
-      fakeComment.date = new Date()
-      setCurrentComments((prevState) => [...prevState, fakeComment])
-      setCurrentInputComment('')
+  const onSubmitCommentInputHandler = async () => {
+    console.log(task)
+    try {
+      const response = await fetch(`http://localhost:8085/v1/tasks/${task.id}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: currentInputComment
+        })
+      })
+      const data = await response.json()
+      console.log(data)
+    } catch (error) {
+      console.log(error)
     }
   }
 

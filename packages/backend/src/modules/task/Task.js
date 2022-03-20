@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const { ObjectId } = mongoose.Schema
 
 const taskSchema = new mongoose.Schema({
-  _id: ObjectId,
+  // _id: ObjectId,
   title: String,
   description: String,
   imageCoverId: String,
@@ -15,7 +15,6 @@ const taskSchema = new mongoose.Schema({
 
   comments: [
     {
-      comments_id: ObjectId,
       createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
