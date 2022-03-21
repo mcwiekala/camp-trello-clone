@@ -76,3 +76,5 @@ storybook-static
 .idea/
 
 camp-trello-clone.iml
+
+docker/docker-compose.override.yml

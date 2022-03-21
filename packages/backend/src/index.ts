@@ -1,11 +1,14 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
-import TaskModel from './modules/task/Task.model'
+import http from 'http'
+import TaskModel from './modules/task/task.model'
 import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
+import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
+import { TaskRoutes } from './infrastructure/express/router/task.routes'
 
 dotenv.config()
 
@@ -43,8 +46,16 @@ const startServer = async () => {
 
   await printData()
 
-  const server = app.listen(PORT, () => {
-    console.log(`Listening to port ${PORT}`)
+  const server: http.Server = http.createServer(app)
+  const routes: Array<CommonRoutesConfig> = []
+
+  routes.push(new TaskRoutes(app))
+
+  console.log(`Listening to port: ${PORT}`)
+  server.listen(PORT, () => {
+    routes.forEach((route: CommonRoutesConfig) => {
+      console.log(`Routes configured for: ${route.getName()}`)
+    })
   })
 }
 

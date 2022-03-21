@@ -1,11 +1,11 @@
 import { CreateTaskCommand } from '@shared/api/task/CreateTaskCommand'
-import _taskRepository from './Task.repository'
+import _taskRepository from './task.repository'
 
 class TaskService {
   // eslint-disable-next-line class-methods-use-this
-  async createTask(createTaskCommand: CreateTaskCommand) {
+  createTask(createTaskCommand: CreateTaskCommand) {
     console.log('Handling new task')
-    _taskRepository.createTask(createTaskCommand)
+    return _taskRepository.createTask(createTaskCommand)
   }
 }
 
