@@ -36,13 +36,13 @@ Start development with `yarn start`.
 
 ### Docker
 
-To run MongoDB on docker container go to `./docker` path and use: 
+To run MongoDB on docker container go to `./docker` path and use:
 
-`docker-compose up -d` 
+`docker-compose up -d`
 
 to stop docker container use:
 
-`docker-compose down` 
+`docker-compose down`
 
 To restart the data to init state use:
 

@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import Task from './modules/task/Task'
 import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
-
-dotenv.config()
 
 const { PORT } = process.env
 
@@ -19,23 +17,23 @@ const startServer = async () => {
 
     const tasks = await Task.find()
     const boards = await Board.find()
-    console.log(`Founded: ${tasks.length} tasks!`)
+    console.log(`Found: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${boards.length} boards!`)
+    console.log(`Found: ${boards.length} boards!`)
     boards.forEach((t) => {
       console.log(`${t.toString()}`)
     })
 
     const users = await User.find()
-    console.log(`Founded: ${users.length} users!`)
+    console.log(`Found: ${users.length} users!`)
     users.forEach((u) => {
       console.log(`${u.toString()}`)
     })
 
     const attachments = await Attachment.find()
-    console.log(`Founded: ${attachments.length} attachments!`)
+    console.log(`Found: ${attachments.length} attachments!`)
     attachments.forEach((a) => {
       console.log(`${a.toString()}`)
     })
@@ -44,7 +42,7 @@ const startServer = async () => {
   await printData()
 
   const server = app.listen(PORT, () => {
-    console.log(`Listening to port ${PORT}`)
+    console.log(`Listening on port ${PORT}`)
   })
 }
 
