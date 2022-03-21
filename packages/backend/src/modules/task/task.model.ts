@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const { ObjectId } = mongoose.Types
 
 const taskSchema = new mongoose.Schema({
-  // _id: ObjectId,
   title: String,
   description: String,
   imageCoverId: String,
