@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
-import Task from './modules/task/Task'
+import TaskModel from './modules/task/Task.model'
 import Board from './modules/board/Board'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
@@ -17,7 +17,7 @@ const startServer = async () => {
   async function printData() {
     console.log('Print data in DB')
 
-    const tasks = await Task.find()
+    const tasks = await TaskModel.find()
     const boards = await Board.find()
     console.log(`Found: ${tasks.length} tasks!`)
     tasks.forEach((t) => {

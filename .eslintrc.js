@@ -56,6 +56,7 @@ module.exports = {
     semi: 'off',
     'quote-props': [2, 'as-needed'],
     'comma-dangle': 'off',
+    'lines-between-class-members': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 'off',

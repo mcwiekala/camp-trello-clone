@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const { ObjectId } = mongoose.Schema
+const { ObjectId } = mongoose.Types
 
 const taskSchema = new mongoose.Schema({
   // _id: ObjectId,
@@ -25,5 +25,5 @@ const taskSchema = new mongoose.Schema({
     }
   ]
 })
-const Task = mongoose.model('Task', taskSchema)
-export default Task
+const TaskModel = mongoose.model('Task', taskSchema)
+export default TaskModel

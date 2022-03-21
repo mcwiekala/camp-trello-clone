@@ -1,12 +1,12 @@
 import express from 'express'
-import Task from '../../../modules/task/Task'
+import TaskModel from '../../../modules/task/Task.model'
 
 const router = express.Router()
 
 // GET BACK ALL TASKS
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.find()
+    const tasks = await TaskModel.find()
     res.json(tasks)
   } catch (err) {
     res.status(500).json({ massage: err.massage })
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 // SUBMITS A TASK
 router.post('/', async (req, res) => {
-  const tasks = new Task({
+  const tasks = new TaskModel({
     title: req.body.title
     // description: req.body.description,
     // imageCoverId: req.body.imageCoverId
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
 // SPECIFIC TASK
 router.get('/:taskId', async (req, res) => {
   try {
-    const task = await Task.findById(req.params.taskId)
+    const task = await TaskModel.findById(req.params.taskId)
     res.json(task)
   } catch (err) {
     res.status(500).json({ massage: err.massage })
@@ -42,7 +42,7 @@ router.get('/:taskId', async (req, res) => {
 // UPDATE A TASK
 router.patch('/:taskId', async (req, res) => {
   try {
-    const updatedTask = await Task.updateOne(
+    const updatedTask = await TaskModel.updateOne(
       { _id: req.params.taskId },
       {
         $set: {
@@ -61,7 +61,7 @@ router.patch('/:taskId', async (req, res) => {
 // DELETE TASK
 router.delete('/:taskId', async (req, res) => {
   try {
-    const removedTask = await Task.remove({ _id: req.params.taskId })
+    const removedTask = await TaskModel.remove({ _id: req.params.taskId })
     res.json(removedTask)
   } catch (err) {
     res.status(500).json({ massage: err.massage })
@@ -71,7 +71,7 @@ router.delete('/:taskId', async (req, res) => {
 // SUBMITS A COMENTS
 router.post('/:taskId/comments', async (req, res) => {
   try {
-    const task = await Task.findById(req.params.taskId)
+    const task = await TaskModel.findById(req.params.taskId)
     task.comments.push(req.body)
     if (Object.keys(req.body).length === 0 || req.body.content === '') {
       res.send('Comment with no content')
@@ -87,7 +87,7 @@ router.post('/:taskId/comments', async (req, res) => {
 // SUBMITS A ATTACHEMENT
 router.post('/:taskId/attachments', async (req, res) => {
   try {
-    const task = await Task.findById(req.params.taskId)
+    const task = await TaskModel.findById(req.params.taskId)
     task.attachments.push(req.body)
     if (!Object.keys(req.body).length === 0 || !req.body.content === '') {
       res.send('Attachment with content')
