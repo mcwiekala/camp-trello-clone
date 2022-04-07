@@ -36,6 +36,7 @@
     "start": "lerna run start --stream",
     "build": "lerna run build --stream",
     "start:api": "lerna run dev --stream",
+    "lint": "eslint ./packages",
     "prepare": "husky install",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d packages/frontend/build"
