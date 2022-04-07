@@ -22,10 +22,10 @@ jobs:
           node-version: 16
       - name: 📦 Install dependencies
         run: yarn
-      - name: 🔧 Build package
-        run: yarn build
       - name: 💄 Run lint
         run: yarn lint
+      - name: 🔧 Build package
+        run: yarn build
       # - name: 📊 Check typescript code coverage
       #   run: yarn ts-coverage
   analyze:
