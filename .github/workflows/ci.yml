@@ -17,6 +17,7 @@ jobs:
       - name: 📚 Checkout
         uses: actions/checkout@v2
         with:
+          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
           clean: true
       - name: 🟢 Setup Node.js
