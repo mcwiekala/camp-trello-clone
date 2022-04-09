@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
           clean: true
+        run: |
+          git log -1
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -27,7 +29,7 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn
       - name: 💄 Run lint
-        run: yarn lint
+        run: yarn lintz
       - name: 🔧 Build app
         run: yarn build
       # - name: 📊 Check typescript code coverage
