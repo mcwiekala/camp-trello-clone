@@ -20,6 +20,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
           clean: true
+      - name: 📝 Show latest commit
         run: |
           git log -1
       - name: 🟢 Setup Node.js
