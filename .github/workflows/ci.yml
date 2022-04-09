@@ -18,7 +18,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-          # ref: ${{ github.ref }}
           clean: true
       - name: 📝 Show latest commit
         run: |
@@ -33,8 +32,6 @@ jobs:
         run: yarn lint
       - name: 🔧 Build app
         run: yarn build
-      # - name: 📊 Check typescript code coverage
-      #   run: yarn ts-coverage
   analyze:
     name: '📊 CodeQL: Code analysis'
     runs-on: ubuntu-latest
@@ -65,20 +62,8 @@ jobs:
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
       # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-      # If this step fails, then you should remove it and run the build manually (see below)
       - name: 🔧 Autobuild
         uses: github/codeql-action/autobuild@v1
-
-      # ℹ️ Command-line programs to run using the OS shell.
-      # 📚 https://git.io/JvXDl
-
-      # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-      #    and modify them (or add more) to build your code if your project
-      #    uses a compiled language
-
-      #- run: |
-      #   make bootstrap
-      #   make release
 
       - name: 📊 Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
