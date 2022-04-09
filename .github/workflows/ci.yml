@@ -17,8 +17,8 @@ jobs:
       - name: 📚 Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
+          fetch-depth: 1
+          ref: ${{ github.ref }}
           clean: true
       - name: 📝 Show latest commit
         run: |
@@ -30,7 +30,7 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn
       - name: 💄 Run lint
-        run: yarn lintz
+        run: yarn lint
       - name: 🔧 Build app
         run: yarn build
       # - name: 📊 Check typescript code coverage
