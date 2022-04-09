@@ -1,14 +1,8 @@
 import { Button } from '@mantine/core'
+import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
-type GrayButtonFilledProps = {
-  children?: string
-  onClick: (e?: React.MouseEvent<HTMLElement>) => void
-  rightIcon?: React.ReactNode
-  leftIcon?: React.ReactNode
-}
-
-const GrayButtonFilled = ({ children, onClick, rightIcon, leftIcon }: GrayButtonFilledProps) => {
+const GrayButtonFilled = ({ children, onClick, rightIcon, leftIcon }: ButtonProps<'button'>) => {
   const { classes } = useStyles()
   return (
     <Button
