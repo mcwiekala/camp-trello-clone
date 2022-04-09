@@ -24,7 +24,7 @@ jobs:
         run: yarn
       - name: 💄 Run lint
         run: yarn lint
-      - name: 🔧 Build package
+      - name: 🔧 Build app
         run: yarn build
       # - name: 📊 Check typescript code coverage
       #   run: yarn ts-coverage
