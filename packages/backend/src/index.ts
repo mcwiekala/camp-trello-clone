@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
 import Task from './modules/task/Task'
-import Board from './modules/board/Board'
+import Dashboard from './modules/board/Dashboard'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
@@ -18,13 +18,13 @@ const startServer = async () => {
     console.log('Print data in DB')
 
     const tasks = await Task.find()
-    const boards = await Board.find()
+    const dashboard = await Dashboard.find()
     console.log(`Founded: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${boards.length} boards!`)
-    boards.forEach((t) => {
+    console.log(`Founded: ${dashboard.length} boards!`)
+    dashboard.forEach((t) => {
       console.log(`${t.toString()}`)
     })
 
