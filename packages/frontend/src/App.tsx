@@ -9,6 +9,7 @@ import {
   IDashboardsContext
 } from './contexts/DashboardsContext'
 import RoutesDashboards from './routes/RoutesDashboards'
+import HttpService from './infrastructure/HttpService/HttpService'
 
 const randomUser = new RandomUser().userData
 

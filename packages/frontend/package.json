@@ -1,7 +1,7 @@
 {
   "name": "trello-frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": ".",
   "dependencies": {
     "@faker-js/faker": "^6.0.0-alpha.3",

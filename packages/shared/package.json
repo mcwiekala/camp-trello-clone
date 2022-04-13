@@ -1,0 +1,12 @@
+{
+  "name": "shared",
+  "version": "0.1.0",
+  "private": false,
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./lib-esm/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "libbuild": "tsc && tsc --build tsconfig.esm.json"
+  }
+}

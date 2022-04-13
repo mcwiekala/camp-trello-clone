@@ -1,7 +1,10 @@
-import { TASK } from '@shared/paths/task'
+import { TASK } from 'shared'
 
 import Fetch from './fetchInstance'
 
+console.log('task', TASK)
+
+// const TASK = 'task'
 export interface BaseHttpService {
   get<Response>(path: string, options?: RequestInit): Promise<Response>
   post<Response>(path: string, options?: RequestInit): Promise<Response>
