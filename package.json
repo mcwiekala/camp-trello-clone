@@ -33,7 +33,7 @@
     "babel-loader": "8.1.0"
   },
   "scripts": {
-    "start": "lerna run start --stream",
+    "start": "yarn libbuild && lerna run start --stream",
     "build": "lerna run build --stream",
     "start:api": "lerna run dev --stream",
     "prepare": "husky install",

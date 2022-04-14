@@ -1,5 +1,0 @@
-export { CreateTaskCommand } from './command/create.task.command'
-export { default as AttachmentDTO } from './dto/attachment.dto'
-export { default as CommentTypeDTO } from './dto/comment.dto'
-export { default as TaskDTO } from './dto/task.dto'
-export { default as UserTypeDTO } from './dto/user.dto'

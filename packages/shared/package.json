@@ -8,5 +8,8 @@
   "types": "./lib/index.d.ts",
   "scripts": {
     "libbuild": "tsc && tsc --build tsconfig.esm.json"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
   }
 }
