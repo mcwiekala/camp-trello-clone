@@ -2,16 +2,10 @@ import { Button } from '@mantine/core'
 import type { ButtonProps } from '@mantine/core'
 import useStyles from './style'
 
-const GrayButtonFilled = ({ children, onClick, rightIcon, leftIcon }: ButtonProps<'button'>) => {
+const GrayButtonFilled = ({ children, ...rest }: ButtonProps<'button'>) => {
   const { classes } = useStyles()
   return (
-    <Button
-      radius="md"
-      onClick={onClick}
-      leftIcon={leftIcon}
-      classNames={{ root: classes.root, inner: classes.inner }}
-      rightIcon={rightIcon}
-    >
+    <Button radius="md" classNames={{ root: classes.root, inner: classes.inner }} {...rest}>
       {children}
     </Button>
   )
