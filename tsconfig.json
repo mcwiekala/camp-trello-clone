@@ -4,10 +4,6 @@
     "baseUrl": "./",
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@shared/*": ["./packages/shared/*"]
-    }
+    "skipLibCheck": true
   }
 }
