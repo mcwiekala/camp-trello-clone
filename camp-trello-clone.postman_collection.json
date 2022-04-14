@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "bf761399-9d18-4046-ad7f-40539fd50fde",
+		"name": "camp-trello-clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello world",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8800/v1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
