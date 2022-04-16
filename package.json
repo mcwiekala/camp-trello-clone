@@ -36,6 +36,8 @@
     "start": "yarn libbuild && lerna run start --stream",
     "build": "yarn libbuild && lerna run build --stream",
     "start:api": "lerna run dev --stream",
+    "lint": "eslint ./packages",
+    "fix": "eslint ./packages --fix",
     "prepare": "husky install",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d packages/frontend/build",
