@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Popover, Modal, Text } from '@mantine/core'
-import { AiOutlinePlus, IoMdContact, MdImage } from 'react-icons/all'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { IoMdContact } from 'react-icons/io'
+import { MdImage } from 'react-icons/md'
 
 // Components
 import Description from '../Description/Description'
