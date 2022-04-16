@@ -4,7 +4,7 @@ import { Text, Button } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
 
 // Components
-import { AiOutlinePlus } from 'react-icons/all'
+import { AiOutlinePlus } from 'react-icons/ai'
 import DashboardModal from '../../components/DashboardModal/DashboardModal'
 import { Dashboard } from '../../components/Dashboard/Dashboard'
 
