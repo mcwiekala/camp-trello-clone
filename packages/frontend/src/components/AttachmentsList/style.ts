@@ -3,7 +3,8 @@ import { createStyles } from '@mantine/core'
 const useStyles = createStyles((theme) => ({
   attachmentHeader: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '10px 0'
   },
   title: {
     color: theme.colors.gray[2],
