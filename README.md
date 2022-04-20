@@ -57,7 +57,7 @@ If you have some problems with removing old containers use:
 #### Import files
 
 - From menu bar choose: File -> import.. or `ctrl + o`
-- import 2 files: 
+- import 2 files from directory /postman : 
 	- camp-trello-clone.postman_collection.json
 	- camp-trello-clone.postman_environment.json
  
