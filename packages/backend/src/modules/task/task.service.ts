@@ -1,4 +1,4 @@
-import { CreateTaskCommand } from '@shared/api/task/CreateTaskCommand'
+import { CreateTaskCommand } from 'shared'
 import _taskRepository from './task.repository'
 
 class TaskService {

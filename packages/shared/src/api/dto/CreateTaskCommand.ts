@@ -3,3 +3,5 @@ export interface CreateTaskCommand {
   idBoard: string
   idColumn: string
 }
+
+export default CreateTaskCommand

@@ -1,4 +1,4 @@
-import { CreateTaskCommand } from '@shared/api/task/CreateTaskCommand'
+import { CreateTaskCommand } from 'shared'
 import express from 'express'
 import _taskService from './task.service'
 

@@ -1,4 +1,4 @@
-import { CreateTaskCommand } from '@shared/api/task/CreateTaskCommand'
+import { CreateTaskCommand } from 'shared'
 import TaskModel from './task.model'
 import BoardModel from '../board/Board'
 
