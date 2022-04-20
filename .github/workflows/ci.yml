@@ -25,6 +25,8 @@ jobs:
         run: yarn
       - name: 🛠️ Build lib
         run: yarn libbuild
+      - name: 🔧 Fix eslint problems
+        run: yarn fix
       - name: 💄 Run lint
         run: yarn lint
       - name: 🔧 Build app
