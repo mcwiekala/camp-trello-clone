@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8800/v1/",
+					"raw": "http://localhost:{{PORT}}/v1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8800",
+					"port": "{{PORT}}",
 					"path": [
 						"v1",
 						""
