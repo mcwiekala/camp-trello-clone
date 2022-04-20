@@ -36,13 +36,13 @@ Start development with `yarn start`.
 
 ### Docker
 
-To run MongoDB on docker container go to `./docker` path and use: 
+To run MongoDB on docker container go to `./docker` path and use:
 
-`docker-compose up -d` 
+`docker-compose up -d`
 
 to stop docker container use:
 
-`docker-compose down` 
+`docker-compose down`
 
 To restart the data to init state use:
 
@@ -51,3 +51,28 @@ To restart the data to init state use:
 If you have some problems with removing old containers use:
 
 `yes | docker-compose rm`
+
+### Postman
+
+#### Import files
+
+- From menu bar choose: File -> import.. or `ctrl + o`
+- import 2 files from directory /postman : 
+	- camp-trello-clone.postman_collection.json
+	- camp-trello-clone.postman_environment.json
+ 
+
+#### set PORT in environment variables
+- in sidebar click Environments 
+- change Initial value to port on which your backend works (default: 8800)
+- In `camp-trello-clone` envionment click on three dots(...) and set as active environment
+
+#### New request
+instead of using explicit port number use `{{PORT}}` variable, for example: `http://localhost:{{PORT}}/v1/`
+
+#### Export collection
+Click on three dots(...) in collection and Export file. Use recommending setting: Collection v2.1
+
+More info:
+[Managing environments](https://learning.postman.com/docs/sending-requests/managing-environments/)
+[Importing and exporting data](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/)
