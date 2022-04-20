@@ -18,10 +18,19 @@ export class TaskRoutes extends CommonRoutesConfig {
     );
 
     this.app
-    .route(`${V1}/tasks`)
+      .route(`${V1}/tasks`)
+      .get(
+        _usersController.getTasks
+      )
     .post(
         _usersController.createTask
     );
+
+    this.app
+      .route(`${V1}/tasks/:taskId`)
+      .get(
+        _usersController.getTask
+    )
 
     return this.app
   }

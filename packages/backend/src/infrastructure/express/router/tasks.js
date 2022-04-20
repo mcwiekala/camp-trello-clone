@@ -3,7 +3,7 @@ import TaskModel from '../../../modules/task/task.model'
 
 const router = express.Router()
 
-// GET BACK ALL TASKS
+// GET BACK ALL TASKS DONE
 router.get('/', async (req, res) => {
   try {
     const tasks = await TaskModel.find()
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-// SUBMITS A TASK
+// SUBMITS A TASK DONE
 router.post('/', async (req, res) => {
   const tasks = new TaskModel({
     title: req.body.title
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// SPECIFIC TASK
+// SPECIFIC TASK DONE
 router.get('/:taskId', async (req, res) => {
   try {
     const task = await TaskModel.findById(req.params.taskId)
