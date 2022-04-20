@@ -28,7 +28,8 @@ const useStyles = createStyles((theme) => ({
   input: {
     color: theme.colors.gray[3],
     borderRadius: theme.radius.md,
-    width: '100%'
+    width: '100%',
+    margin: '0.6rem 0'
   },
   buttonSave: {
     marginLeft: 'auto'
