@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useParams } from 'react-router-dom'
 import { Button } from '@mantine/core'
-import { FaEllipsisH } from 'react-icons/all'
+import { FaEllipsisH } from 'react-icons/fa'
 import { nanoid } from 'nanoid'
 
 import KanbanColumn from '../../components/KanbanColumn/KanbanColumn'

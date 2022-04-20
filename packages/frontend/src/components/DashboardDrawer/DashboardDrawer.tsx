@@ -1,5 +1,5 @@
 import { Drawer, Divider, Text, ScrollArea } from '@mantine/core'
-import { FaUser } from 'react-icons/all'
+import { FaUser } from 'react-icons/fa'
 
 // Components
 import Description from '../Description/Description'
