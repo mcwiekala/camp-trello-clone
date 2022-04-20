@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Popover, Modal, Input, Tooltip } from '@mantine/core'
-import { BsGlobe, IoMdLock, MdImage, AiOutlinePlus } from 'react-icons/all'
+import { BsGlobe } from 'react-icons/bs'
+import { IoMdLock } from 'react-icons/io'
+import { MdImage } from 'react-icons/md'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 // Components
 import ImagePicker from '../ImagePicker/ImagePicker'

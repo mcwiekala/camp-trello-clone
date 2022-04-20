@@ -10,7 +10,8 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-mongo-sanitize": "^2.2.0",
-    "mongoose": "^6.2.1"
+    "mongoose": "^6.2.1",
+    "shared": "*"
   },
   "scripts": {
     "start": "nodemon src/index.ts --config ./nodemon.json"
