@@ -66,7 +66,7 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error'
   },
-  ignorePatterns: ['packages/**/lib'],
+  ignorePatterns: ['packages/**/lib', 'packages/**/lib-esm', 'packages/**/build'],
   settings: {
     react: {
       version: 'detect'
