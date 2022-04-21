@@ -4,9 +4,9 @@ const { ObjectId } = mongoose.Schema
 
 const attachmentSchema = new mongoose.Schema({
   _id: ObjectId,
-  filename: String,
+  fileName: String,
   addedDate: Date,
-  filenameHash: String
+  fileNameHash: String
 })
 
 const Attachment = mongoose.model('Attachment', attachmentSchema)
