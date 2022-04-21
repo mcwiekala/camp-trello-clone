@@ -1,37 +1,25 @@
-import { CreateTaskCommand } from 'shared'
+import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import TaskModel from './task.model'
-import BoardModel from '../board/Board'
+import _boardRepository from '../board/board.repository'
 
 class TaskRepository {
   private _taskModel = TaskModel
 
-  private _boardModel = BoardModel
-
-  async createTask(createTaskCommand: CreateTaskCommand) {
+  async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<TaskDTO> {
     console.log('Create new task in DB')
     const savedTask = await this._taskModel.create({ title: createTaskCommand.title })
-    const board = await this._boardModel.findOne({
-      where: {
-        _id: { idBoard: createTaskCommand }
-      }
-    })
-    const idCol = { idColumn: createTaskCommand.idColumn }
-    const columnIndex = board.columns.findIndex(
-      (x: { _id: string }) => String(x._id) === idCol.idColumn
-    )
-
-    board.columns[columnIndex].tasks.push(savedTask)
-    await board.save()
+    _boardRepository.createTaskInBoard(createTaskCommand, savedTask)
     return savedTask
   }
 
-  async getTasks() {
+  async findAll(): Promise<TaskDTO[]> {
+    console.log('tu jestem repo')
     const tasks = await this._taskModel.find()
     console.log(tasks)
     return tasks
   }
 
-  async getTask(_id: string) {
+  async findById(_id: string): Promise<TaskDTO> {
     const tasks = await this._taskModel.findById(_id)
     console.log(tasks)
     return tasks
