@@ -60,12 +60,15 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 'off',
+    'class-methods-use-this': 'off',
+    'no-trailing-spaces': 'off',
+    'padded-blocks': 'off',
+    'typescript-eslint/no-shadow': 'off',
     'function-paren-newline': 'off',
     indent: 'off',
     'no-undef': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': 'error'
+    'no-shadow': 'off'
   },
   ignorePatterns: ['packages/**/lib'],
   settings: {

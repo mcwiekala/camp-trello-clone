@@ -1,25 +1,25 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
-import express, { Request } from 'express'
+import express from 'express'
 import _taskService from './task.service'
+import { Task } from './task'
 
 class TaskController {
-  // eslint-disable-next-line class-methods-use-this
   async createTask(req: express.Request, res: express.Response) {
-    console.log(`Received new task with title: ${req.body.title}`)
     const createTaskCommand: CreateTaskCommandDTO = req.body
-    const newTask = await _taskService.createTask(createTaskCommand)
-    return res.status(201).send(newTask._id)
+    console.log(`Received new task with title: ${createTaskCommand.title}`)
+    const newTask: Task = _taskService.createTask(createTaskCommand)
+    return res.status(201).send(newTask)
   }
-  // eslint-disable-next-line class-methods-use-this
+
   async findAll(req: express.Request, res: express.Response) {
     console.log('tu jestem contr')
-    const Tasks = await _taskService.findAll()
-    return res.status(201).json(Tasks)
+    const tasks: Promise<Task> = _taskService.findAll()
+    return res.status(201).send(tasks)
   }
-  // eslint-disable-next-line class-methods-use-this
+
   async findById(req: express.Request, res: express.Response) {
-    const Task = await _taskService.findById(req.params.taskId)
-    return res.status(201).json(Task)
+    const task: Task = _taskService.findById(req.params.taskId)
+    return res.status(201).send(task)
   }
 }
 

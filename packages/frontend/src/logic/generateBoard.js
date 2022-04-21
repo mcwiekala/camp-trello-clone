@@ -21,6 +21,7 @@ const PP = () => {
 }
 
 const GenerateBoard = {
+  id: '11',
   columns: [
     {
       id: '11',

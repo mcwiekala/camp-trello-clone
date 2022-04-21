@@ -1,21 +1,32 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
-import _taskRepository from './task.repository'
+import { Task } from './task'
+import { taskRepository, TaskRepository } from './task.repository'
+import { boardRepository, BoardRepository } from '../board/board.repository'
 
 class TaskService {
-  // eslint-disable-next-line class-methods-use-this
-  createTask(createTaskCommand: CreateTaskCommandDTO): Promise<TaskDTO> {
+  private readonly _taskRepository
+  private readonly _boardRepository
+
+  constructor(taskRepository: TaskRepository, boardRepository: BoardRepository) {
+    this._taskRepository = taskRepository
+    this._boardRepository = boardRepository
+  }
+
+  createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
     console.log('Handling new task')
-    return _taskRepository.createTask(createTaskCommand)
+    const savedTask = this._taskRepository.createTask(createTaskCommand)
+    this._boardRepository.createTaskInBoard(createTaskCommand, savedTask)
+    return savedTask
   }
-  // eslint-disable-next-line class-methods-use-this
-  findAll(): Promise<TaskDTO[]> {
+
+  findAll(): Promise<Task[]> {
     console.log('tu jestem ser')
-    return _taskRepository.findAll()
+    return this._taskRepository.findAll()
   }
-  // eslint-disable-next-line class-methods-use-this
-  findById(_id: string): Promise<TaskDTO> {
-    return _taskRepository.findById(_id)
+
+  findById(_id: string): Promise<Task> {
+    return this._taskRepository.findById(_id)
   }
 }
 
-export default new TaskService()
+export default new TaskService(taskRepository, boardRepository)

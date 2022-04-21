@@ -1,10 +1,15 @@
-import { CreateTaskCommandDTO, TaskDTO } from 'shared'
+import { CreateTaskCommandDTO } from 'shared'
 import BoardModel from './Board'
+import { Task } from '../task/task'
 
-class BoardRepository {
-  private _boardModel = BoardModel
+export class BoardRepository {
+  private readonly _boardModel = BoardModel
 
-  async createTaskInBoard(createTaskCommand: CreateTaskCommandDTO, savedTask: Promise<TaskDTO>) {
+  constructor(boardModel: any) {
+    this._boardModel = boardModel
+  }
+
+  async createTaskInBoard(createTaskCommand: CreateTaskCommandDTO, savedTask: Promise<Task>) {
     const board = await this._boardModel.findOne({
       where: {
         _id: { idBoard: createTaskCommand }
@@ -20,4 +25,5 @@ class BoardRepository {
   }
 }
 
-export default new BoardRepository()
+const boardRepository = new BoardRepository(BoardModel)
+export { boardRepository }

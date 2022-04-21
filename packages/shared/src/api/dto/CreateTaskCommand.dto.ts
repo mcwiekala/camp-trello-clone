@@ -1,4 +1,4 @@
-export interface CreateTaskCommandDTO extends Express.Request {
+export interface CreateTaskCommandDTO {
   title: string
   idBoard: string
   idColumn: string
