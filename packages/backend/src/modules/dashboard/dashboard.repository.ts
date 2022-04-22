@@ -17,6 +17,10 @@ class TaskRepository {
       description: createDashboardCommand.description,
       imageCoverUrl: createDashboardCommand.coverImageUrl,
       createdAt: new Date(),
+      status: {
+        type: createDashboardCommand.status.type,
+        enum: createDashboardCommand.status.enum
+      },
       users: [],
       columns: [dashboardColumn, dashboardColumn]
     })
