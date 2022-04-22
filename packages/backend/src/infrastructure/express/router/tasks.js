@@ -61,7 +61,7 @@ router.patch('/:taskId', async (req, res) => {
 // DELETE TASK
 router.delete('/:taskId', async (req, res) => {
   try {
-    const removedTask = await TaskModel.remove({ _id: req.params.taskId })
+    const removedTask = await TaskModel.findByIdAndRemove(req.params.taskId)
     res.json(removedTask)
   } catch (err) {
     res.status(500).json({ massage: err.massage })

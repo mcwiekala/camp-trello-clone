@@ -1,4 +1,4 @@
-import { CreateTaskCommandDTO, TaskDTO } from 'shared'
+import { CreateTaskCommandDTO } from 'shared'
 import { Task } from './task'
 import { taskRepository, TaskRepository } from './task.repository'
 import dashboardRepository, { DashboardRepository } from '../dashboard/dashboard.repository'
@@ -30,6 +30,10 @@ export class TaskService {
 
   findById(_id: string): Promise<Task> {
     return this._taskRepository.findById(_id)
+  }
+
+  findByIdAndRemove(_id: string): Promise<Task> {
+    return this._taskRepository.findByIdAndRemove(_id)
   }
 }
 

@@ -32,6 +32,14 @@ class TaskController {
     const taskDto: TaskDTO = this._taskMapper.mapToDto(task)
     return res.status(201).send(taskDto)
   }
+
+  async findByIdAndRemove(req: express.Request, res: express.Response) {
+    const task: Task = await this._taskService.findByIdAndRemove(req.params.taskId)
+    if (!task) {
+      return res.status(404).send('Task not found.')
+    }
+    return res.status(201).send('Task has been successfully removed.')
+  }
 }
 
 export default new TaskController(taskService, taskMapper)

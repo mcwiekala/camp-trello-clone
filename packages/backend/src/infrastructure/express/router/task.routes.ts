@@ -26,6 +26,7 @@ export class TaskRoutes extends CommonRoutesConfig {
     this.app
       .route(`${V1}/tasks/:taskId`)
       .get(JwtGuard, (req, res) => taskController.findById(req, res))
+      .delete((req, res) => taskController.findByIdAndRemove(req, res))
 
     return this.app
   }

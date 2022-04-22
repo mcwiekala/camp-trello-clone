@@ -27,6 +27,11 @@ export class TaskRepository {
     const task: Task = this._taskModel.findById(id)
     return task
   }
+
+  async findByIdAndRemove(id: string): Promise<Task> {
+    const task: Task = await this._taskModel.findByIdAndRemove(id)
+    return task
+  }
 }
 
 const taskRepository = new TaskRepository(TaskModel)
