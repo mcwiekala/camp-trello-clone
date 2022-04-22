@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import express from 'express'
+import 'dotenv/config'
 import session from 'express-session'
 import mongoSanitize from 'express-mongo-sanitize'
 import cors from 'cors'
@@ -9,13 +10,13 @@ import './application/authentication'
 
 const SessionStorage = ConnectMongoDBSession(session)
 
-const [DB_USERNAME, DB_PASSWORD] = ['root', 'vwZ7N2YmCwXAQ4v']
+const { DB_USERNAME, DB_PASSWORD } = process.env
 
 const app = express()
 
 const store = new SessionStorage({
-  uri: `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@trello-clone.sidk4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-  collection: 'mySessions'
+  uri: `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/trello-clone`,
+  collection: 'sessions'
 })
 
 store.on('error', (error) => {
