@@ -1,6 +1,6 @@
-const boards = db.getSiblingDB('trello-clone')
+const dashboards = db.getSiblingDB('trello-clone')
 
-const board1 = {
+const dashboard1 = {
   _id: ObjectId('622e5dd9c3cba876b8800f93'),
   title: 'Tablica 1',
   description: 'Opis tablicy pierwszej',
@@ -31,7 +31,7 @@ const board1 = {
   ]
 }
 
-const board2 = {
+const dashboard2 = {
   _id: ObjectId('622e5e25f487fec5691b5f93'),
   title: 'Tablica 2',
   description: 'Opis tablicy drugiej',
@@ -62,5 +62,5 @@ const board2 = {
   ]
 }
 
-db.boards.insert(board1)
-db.boards.insert(board2)
+db.dashboards.insert(dashboard1)
+db.dashboards.insert(dashboard2)

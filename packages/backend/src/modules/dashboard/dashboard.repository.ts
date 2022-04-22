@@ -1,5 +1,5 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
-import BoardModel from './Board'
+import BoardModel from './Dashboard'
 
 class BoardRepository {
   private _boardModel = BoardModel

@@ -1,6 +1,6 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import TaskModel from './task.model'
-import _boardRepository from '../board/board.repository'
+import _dashboardRepository from '../dashboard/dashboard.repository'
 
 class TaskRepository {
   private _taskModel = TaskModel
@@ -8,7 +8,7 @@ class TaskRepository {
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<TaskDTO> {
     console.log('Create new task in DB')
     const savedTask = await this._taskModel.create({ title: createTaskCommand.title })
-    _boardRepository.createTaskInBoard(createTaskCommand, savedTask)
+    _dashboardRepository.createTaskInBoard(createTaskCommand, savedTask)
     return savedTask
   }
 
