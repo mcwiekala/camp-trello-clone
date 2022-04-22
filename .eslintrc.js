@@ -51,7 +51,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-control-regex': 'off',
     'react/prop-types': ['off'],
-    'no-underscore-dangle': ['warn'],
     'implicit-arrow-linebreak': 'off',
     semi: 'off',
     'quote-props': [2, 'as-needed'],
@@ -67,6 +66,7 @@ module.exports = {
     'function-paren-newline': 'off',
     indent: 'off',
     'no-undef': 'off',
+    'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-shadow': 'off'
   },

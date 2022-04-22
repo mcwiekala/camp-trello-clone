@@ -4,39 +4,37 @@ import { Task } from './task'
 import { taskMapper, TaskMapper } from './task.mapper'
 import { taskService, TaskService } from './task.service'
 
-export class TaskController {
+class TaskController {
   private readonly _taskMapper: TaskMapper
   private readonly _taskService: TaskService
 
   constructor(taskService: TaskService, taskMapper: TaskMapper) {
-    console.log('constr:')
-    console.log(taskService)
     this._taskMapper = taskMapper
     this._taskService = taskService
   }
 
   async createTask(req: express.Request, res: express.Response) {
-    console.log('create:')
-    console.log(taskService)
     const createTaskCommand: CreateTaskCommandDTO = req.body
     console.log(`Received new task with title: ${createTaskCommand.title}`)
     const savedTask: Task = await this._taskService.createTask(createTaskCommand)
     const savedTaskDto: TaskDTO = this._taskMapper.mapToDto(savedTask)
-    console.log(`dto: ${savedTaskDto}`)
+    console.log(`dto: ${typeof savedTaskDto}`)
+    console.log(savedTaskDto)
     return res.status(201).send(savedTaskDto)
   }
 
   async findAll(req: express.Request, res: express.Response) {
     console.log('tu jestem contr')
-    const tasks: Promise<Task[]> = this._taskService.findAll()
-    return res.status(201).send(tasks)
+    const tasks: Task[] = await this._taskService.findAll()
+    const taskDtos: TaskDTO[] = tasks.map((task: Task) => this._taskMapper.mapToDto(task))
+    return res.status(201).send(taskDtos)
   }
 
   async findById(req: express.Request, res: express.Response) {
-    const task: Promise<Task> = this._taskService.findById(req.params.taskId)
-    return res.status(201).send(task)
+    const task: Task = await this._taskService.findById(req.params.taskId)
+    const taskDto: TaskDTO = this._taskMapper.mapToDto(task)
+    return res.status(201).send(taskDto)
   }
 }
 
-const taskController = new TaskController(taskService, taskMapper)
-export { taskController }
+export default new TaskController(taskService, taskMapper)

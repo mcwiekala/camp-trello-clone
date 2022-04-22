@@ -8,6 +8,7 @@ export class TaskService {
   private readonly _boardRepository: BoardRepository
 
   constructor(taskRepository: TaskRepository, boardRepository: BoardRepository) {
+    console.log('TaskService constructor')
     this._taskRepository = taskRepository
     this._boardRepository = boardRepository
   }

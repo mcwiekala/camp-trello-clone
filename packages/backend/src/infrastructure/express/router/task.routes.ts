@@ -1,12 +1,12 @@
 import express from 'express'
 import { CommonRoutesConfig } from './common.routes.config'
-import { taskController } from '../../../modules/task/task.controller'
+import taskController from '../../../modules/task/task.controller'
 
 const V1 = '/v1'
 
 export class TaskRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
-    super(app, 'UsersRoutes')
+    super(app, 'TaskRoutes')
   }
 
   // prettier-ignore
@@ -19,12 +19,12 @@ export class TaskRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/tasks`)
-      .get(taskController.findAll)
-      .post(taskController.createTask)
+      .get((req, res) => taskController.findAll(req, res))
+      .post((req, res) => taskController.createTask(req, res))
 
     this.app
       .route(`${V1}/tasks/:taskId`)
-      .get(taskController.findById)
+      .get((req, res) => taskController.findById(req, res))
 
     return this.app
   }
