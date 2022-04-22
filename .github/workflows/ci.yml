@@ -25,8 +25,8 @@ jobs:
         run: yarn
       - name: 🛠️ Build lib
         run: yarn libbuild
-      - name: 💄 Run lint/fix
-        run: yarn fix
+      - name: 💄 Run lint
+        run: yarn lint
       - name: 🔧 Build app
         run: yarn build
   analyze:
