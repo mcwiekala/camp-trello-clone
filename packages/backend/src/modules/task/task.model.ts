@@ -8,7 +8,7 @@ const taskSchema = new mongoose.Schema({
   imageCoverId: String,
   attachments: [
     {
-      attachments_id: ObjectId
+      _id: ObjectId
     }
   ],
 
@@ -17,7 +17,7 @@ const taskSchema = new mongoose.Schema({
       createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
-        user_id: ObjectId,
+        _id: ObjectId,
         avatarId: Number,
         username: String
       }

@@ -1,29 +1,28 @@
 import { CreateTaskCommandDTO } from 'shared'
-import BoardModel from './Dashboard'
+import DashboardModel from './Dashboard'
 import { Task } from '../task/task'
 
 export class DashboardRepository {
-  private readonly _boardModel = BoardModel
+  private readonly _dashboardModel = DashboardModel
 
   constructor(boardModel: any) {
-    this._boardModel = boardModel
+    this._dashboardModel = boardModel
   }
 
   async addNewTaskToDashboard(createTaskCommand: CreateTaskCommandDTO, savedTask: Task) {
-    const board = await this._boardModel.findOne({
-      where: {
-        _id: { idBoard: createTaskCommand }
-      }
-    })
+    const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)
     const idCol = { idColumn: createTaskCommand.idColumn }
-    const columnIndex = board.columns.findIndex(
+    const columnIndex = dashboard.columns.findIndex(
       (x: { _id: string }) => String(x._id) === idCol.idColumn
     )
 
-    board.columns[columnIndex].tasks.push(savedTask)
-    await board.save()
+    dashboard.columns[columnIndex].tasks.push(savedTask)
+    await dashboard.save()
+    console.log(
+      `Dashboard repository: task ${savedTask} added to idDashboard: ("${createTaskCommand.idDashboard}"), idColumn: ("${createTaskCommand.idColumn}")`
+    )
   }
 }
 
-const dashboardRepository = new DashboardRepository(BoardModel)
+const dashboardRepository = new DashboardRepository(DashboardModel)
 export default dashboardRepository

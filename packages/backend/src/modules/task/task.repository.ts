@@ -17,14 +17,12 @@ export class TaskRepository implements Repository<TaskDTO> {
   }
 
   async findAll(): Promise<Task[]> {
-    console.log('Get all tasks from repo')
     const tasks: Task[] = await this._taskModel.find()
     return tasks
   }
 
   async findById(id: string): Promise<Task> {
     const task: Task = this._taskModel.findById(id)
-    console.log(task)
     return task
   }
 }

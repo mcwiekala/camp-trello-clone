@@ -1,13 +1,13 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import { Task } from './task'
 import { taskRepository, TaskRepository } from './task.repository'
-import { boardRepository, BoardRepository } from '../board/board.repository'
+import dashboardRepository, { DashboardRepository } from '../dashboard/dashboard.repository'
 
 export class TaskService {
   private readonly _taskRepository: TaskRepository
-  private readonly _boardRepository: BoardRepository
+  private readonly _boardRepository: DashboardRepository
 
-  constructor(taskRepository: TaskRepository, boardRepository: BoardRepository) {
+  constructor(taskRepository: TaskRepository, boardRepository: DashboardRepository) {
     console.log('TaskService constructor')
     this._taskRepository = taskRepository
     this._boardRepository = boardRepository
@@ -22,7 +22,6 @@ export class TaskService {
   }
 
   findAll(): Promise<Task[]> {
-    console.log('tu jestem ser')
     return this._taskRepository.findAll()
   }
 
@@ -31,5 +30,5 @@ export class TaskService {
   }
 }
 
-const taskService = new TaskService(taskRepository, boardRepository)
+const taskService = new TaskService(taskRepository, dashboardRepository)
 export { taskService }

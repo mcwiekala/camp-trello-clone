@@ -1,6 +1,6 @@
 export interface CreateTaskCommandDTO {
   title: string
-  idBoard: string
+  idDashboard: string
   idColumn: string
 }
 

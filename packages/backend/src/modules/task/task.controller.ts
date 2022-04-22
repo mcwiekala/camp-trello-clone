@@ -22,7 +22,6 @@ class TaskController {
   }
 
   async findAll(req: express.Request, res: express.Response) {
-    console.log('tu jestem contr')
     const tasks: Task[] = await this._taskService.findAll()
     const taskDtos: TaskDTO[] = tasks.map((task: Task) => this._taskMapper.mapToDto(task))
     return res.status(201).send(taskDtos)
