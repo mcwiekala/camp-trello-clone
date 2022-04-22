@@ -1,40 +1,40 @@
 import CreateDashboardCommand from 'packages/shared/api/dto/CreateDashboardCommand'
 import mongoose from 'mongoose'
-import { Board, BoardColumn } from './board.model'
+import { Dashboard, DashboardColumn } from './dashboard.model'
 
 class TaskRepository {
-  private boardModel = Board
+  private dashboardModel = Dashboard
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand) {
     console.log('Creating new dashboard in DB')
-    const boardColumn = BoardColumn.create({
+    const dashboardColumn = DashboardColumn.create({
       _id: new mongoose.Types.ObjectId(),
       title: 'first column'
     })
-    const board = await this.boardModel.create({
+    const dashboard = await this.dashboardModel.create({
       _id: new mongoose.Types.ObjectId(),
       title: createDashboardCommand.title,
       description: createDashboardCommand.description,
       imageCoverUrl: createDashboardCommand.coverImageUrl,
       createdAt: new Date(),
       users: [],
-      columns: [boardColumn, boardColumn]
+      columns: [dashboardColumn, dashboardColumn]
     })
 
-    await board.save()
-    return board
+    await dashboard.save()
+    return dashboard
   }
 
   async getDashboards() {
-    const boards = await this.boardModel.find()
+    const boards = await this.dashboardModel.find()
     console.log(boards)
     return boards
   }
 
   async getDashboard(_id: string) {
-    const board = await this.boardModel.findById(_id)
-    console.log(board)
-    return board
+    const dashboard = await this.dashboardModel.findById(_id)
+    console.log(dashboard)
+    return dashboard
   }
 }
 

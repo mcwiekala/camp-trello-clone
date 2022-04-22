@@ -1,22 +1,22 @@
 import CreateDashboardCommand from 'packages/shared/api/dto/CreateDashboardCommand'
-import boardRepository from './board.repository'
+import dashboardRepository from './dashboard.repository'
 
-class BoardService {
+class DashboardService {
   // eslint-disable-next-line class-methods-use-this
   createDashboard(createDashboardCommand: CreateDashboardCommand) {
     console.log('Handling new dashboard')
-    return boardRepository.createDashboard(createDashboardCommand)
+    return dashboardRepository.createDashboard(createDashboardCommand)
   }
 
   // eslint-disable-next-line class-methods-use-this
   getDashboards() {
-    return boardRepository.getDashboards()
+    return dashboardRepository.getDashboards()
   }
 
   // eslint-disable-next-line class-methods-use-this
   getDashboard(_id: string) {
-    return boardRepository.getDashboard(_id)
+    return dashboardRepository.getDashboard(_id)
   }
 }
 
-export default new BoardService()
+export default new DashboardService()

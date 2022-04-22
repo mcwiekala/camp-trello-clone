@@ -2,13 +2,13 @@
 import dotenv from 'dotenv'
 import http from 'http'
 import Task from './modules/task/Task'
-import { Board } from './modules/board/board.model'
+import { Dashboard } from './modules/dashboard/dashboard.model'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
-import { BoardRoutes } from './infrastructure/express/router/dashboard.routes'
+import { DashboardRoutes } from './infrastructure/express/router/dashboard.routes'
 
 dotenv.config()
 
@@ -21,7 +21,7 @@ const startServer = async () => {
     console.log('Print data in DB')
 
     const tasks = await Task.find()
-    const boards = await Board.find()
+    const boards = await Dashboard.find()
     console.log(`Founded: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
@@ -49,7 +49,7 @@ const startServer = async () => {
   const server: http.Server = http.createServer(app)
   const routes: Array<CommonRoutesConfig> = []
 
-  routes.push(new BoardRoutes(app))
+  routes.push(new DashboardRoutes(app))
 
   console.log(`Listening to port: ${PORT}`)
   server.listen(PORT, () => {

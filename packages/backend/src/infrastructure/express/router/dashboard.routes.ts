@@ -1,10 +1,10 @@
 import express from 'express'
 import { CommonRoutesConfig } from './common.routes.config'
-import boardController from '../../../modules/board/board.controller'
+import dashboardController from '../../../modules/dashboard/dashboard.controller'
 
 const V1 = '/v1'
 
-export class BoardRoutes extends CommonRoutesConfig {
+export class DashboardRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'UsersRoutes')
   }
@@ -20,19 +20,19 @@ export class BoardRoutes extends CommonRoutesConfig {
     this.app
       .route(`${V1}/dashboards`)
       .get(
-          boardController.getDashboards
+        dashboardController.getDashboards
       )
 
     this.app
       .route(`${V1}/create-dashboard`)
       .post(
-        boardController.createDashboard
+        dashboardController.createDashboard
       )
 
     this.app
       .route(`${V1}/dashboard/:id`)
       .get(
-        boardController.getDashboard
+        dashboardController.getDashboard
       )
 
     return this.app
