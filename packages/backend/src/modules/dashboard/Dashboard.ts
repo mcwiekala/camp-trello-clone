@@ -18,7 +18,7 @@ const columnSchema = new mongoose.Schema({
   ]
 })
 
-const boardSchema = new mongoose.Schema({
+const dashboardSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
   description: String,
@@ -36,5 +36,5 @@ const boardSchema = new mongoose.Schema({
   ],
   columns: [columnSchema]
 })
-const Board = mongoose.model('Board', boardSchema)
-export default Board
+const Dashboard = mongoose.model('Dashboard', dashboardSchema)
+export default Dashboard
