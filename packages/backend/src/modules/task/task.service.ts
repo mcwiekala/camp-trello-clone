@@ -17,7 +17,7 @@ export class TaskService {
     console.log('Handling new task')
     const savedTask: Task = await this._taskRepository.createTask(createTaskCommand)
     console.log(`Service returns: ${savedTask}`)
-    this._boardRepository.createTaskInBoard(createTaskCommand, savedTask)
+    this._boardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
     return savedTask
   }
 

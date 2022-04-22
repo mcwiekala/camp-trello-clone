@@ -18,8 +18,6 @@ class TaskController {
     console.log(`Received new task with title: ${createTaskCommand.title}`)
     const savedTask: Task = await this._taskService.createTask(createTaskCommand)
     const savedTaskDto: TaskDTO = this._taskMapper.mapToDto(savedTask)
-    console.log(`dto: ${typeof savedTaskDto}`)
-    console.log(savedTaskDto)
     return res.status(201).send(savedTaskDto)
   }
 

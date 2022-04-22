@@ -9,19 +9,19 @@ export class BoardRepository {
     this._boardModel = boardModel
   }
 
-  async createTaskInBoard(createTaskCommand: CreateTaskCommandDTO, savedTask: Task) {
-    // const board = await this._boardModel.findOne({
-    //   where: {
-    //     _id: { idBoard: createTaskCommand }
-    //   }
-    // })
-    // const idCol = { idColumn: createTaskCommand.idColumn }
-    // const columnIndex = board.columns.findIndex(
-    //   (x: { _id: string }) => String(x._id) === idCol.idColumn
-    // )
-    //
-    // // board.columns[columnIndex].tasks.push(savedTask)
-    // await board.save()
+  async addNewTaskToDashboard(createTaskCommand: CreateTaskCommandDTO, savedTask: Task) {
+    const board = await this._boardModel.findOne({
+      where: {
+        _id: { idBoard: createTaskCommand }
+      }
+    })
+    const idCol = { idColumn: createTaskCommand.idColumn }
+    const columnIndex = board.columns.findIndex(
+      (x: { _id: string }) => String(x._id) === idCol.idColumn
+    )
+
+    board.columns[columnIndex].tasks.push(savedTask)
+    await board.save()
   }
 }
 

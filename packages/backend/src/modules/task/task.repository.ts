@@ -11,8 +11,7 @@ export class TaskRepository implements Repository<TaskDTO> {
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
-    const savedTask: Promise<Task> = this._taskModel.create({ title: createTaskCommand.title })
-    const t: Task = await savedTask
+    const savedTask: Task = await this._taskModel.create({ title: createTaskCommand.title })
     console.log(`Create new task in DB: ${savedTask}`)
     return savedTask
   }
@@ -20,7 +19,6 @@ export class TaskRepository implements Repository<TaskDTO> {
   async findAll(): Promise<Task[]> {
     console.log('Get all tasks from repo')
     const tasks: Task[] = await this._taskModel.find()
-    console.log(tasks)
     return tasks
   }
 
