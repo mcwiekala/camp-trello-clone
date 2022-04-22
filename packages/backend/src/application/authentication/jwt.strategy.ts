@@ -1,14 +1,15 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import passport from 'passport'
 import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 
 import User from '../../modules/user/User'
 
-const secret = 'secret'
+const { SESSION_SECRET = '' } = process.env
 
 const strategyConfig = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: secret
+  secretOrKey: SESSION_SECRET
 }
 
 passport.use(
@@ -37,7 +38,7 @@ export const encodeData = (userData: any) => {
       id: userData._id,
       username: userData.username
     },
-    secret
+    SESSION_SECRET
   )
 
   return token
