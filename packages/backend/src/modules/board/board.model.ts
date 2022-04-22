@@ -22,6 +22,7 @@ const boardSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
   description: String,
+  imageCoverUrl: String,
   createdAt: Date,
   status: {
     type: String,
@@ -37,4 +38,5 @@ const boardSchema = new mongoose.Schema({
   columns: [columnSchema]
 })
 const Board = mongoose.model('Board', boardSchema)
-export default Board
+const BoardColumn = mongoose.model('BoardColumn', columnSchema)
+export { Board, BoardColumn }

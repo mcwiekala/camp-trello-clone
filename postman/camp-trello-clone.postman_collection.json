@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "294b5d5b-01ba-4d97-a312-6e0dc9614904",
+		"name": "camp-trello-clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello world",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dashboards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/dashboards/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"dashboards",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific dashboard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/dashboard/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"dashboard",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post dashboard",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"dashboard\",\n\t\"description\": \"some description\",\n    \"imageCoverUrl\": \"https://picsum.photos/seed/12600cf1-c154-40db-b3af-e29d3f49944c/300/200\",\n    \"createdAt\": \"2022-04-12T19:24:41.578+00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/create-dashboard/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"create-dashboard",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
