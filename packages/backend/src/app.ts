@@ -6,7 +6,7 @@ import cors from 'cors'
 import router from './infrastructure/express/router'
 import './application/authentication'
 
-const app = express()
+const app: express.Application = express()
 
 app.use(mongoSanitize())
 app.use(express.json())

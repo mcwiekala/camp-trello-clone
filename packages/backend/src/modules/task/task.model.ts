@@ -1,9 +1,8 @@
 import mongoose from 'mongoose'
 
-const { ObjectId } = mongoose.Schema
+const { ObjectId } = mongoose.Types
 
 const taskSchema = new mongoose.Schema({
-  _id: ObjectId,
   title: String,
   description: String,
   imageCoverId: String,
@@ -15,7 +14,6 @@ const taskSchema = new mongoose.Schema({
 
   comments: [
     {
-      _id: ObjectId,
       createdAt: { type: Date, default: Date.now },
       content: String,
       user: {
@@ -26,5 +24,5 @@ const taskSchema = new mongoose.Schema({
     }
   ]
 })
-const Task = mongoose.model('Task', taskSchema)
-export default Task
+const TaskModel = mongoose.model('Task', taskSchema)
+export default TaskModel

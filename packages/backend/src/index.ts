@@ -1,11 +1,14 @@
 /* eslint-disable no-console */
 import 'dotenv/config'
-import Task from './modules/task/Task'
+import http from 'http'
+import Task from './modules/task/task.model'
 import Dashboard from './modules/dashboard/Dashboard'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
+import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
+import { TaskRoutes } from './infrastructure/express/router/task.routes'
 
 const { PORT } = process.env
 
@@ -41,9 +44,16 @@ const startServer = async () => {
 
   await printData()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const server = app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+  const server: http.Server = http.createServer(app)
+  const routes: Array<CommonRoutesConfig> = []
+
+  routes.push(new TaskRoutes(app))
+
+  console.log(`Listening to port: ${PORT}`)
+  server.listen(PORT, () => {
+    routes.forEach((route: CommonRoutesConfig) => {
+      console.log(`Routes configured for: ${route.getName()}`)
+    })
   })
 }
 
