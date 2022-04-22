@@ -41,6 +41,7 @@ const startServer = async () => {
 
   await printData()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
   })
