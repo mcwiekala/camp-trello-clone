@@ -20,6 +20,14 @@ type verifyFuncParams = [
 export const strat = async (...[req, accessToken, refreshToken, profile, cb]: verifyFuncParams) => {
   console.log('req', req, 'access', accessToken, 'refresh', refreshToken)
   console.log('User:', profile)
+  const userFromDatabase = await User.findOne({ googleId: profile.id }).exec()
+
+  if (userFromDatabase) {
+    cb(null, JSON.stringify(userFromDatabase))
+
+    return
+  }
+
   const usr = new User({
     username: profile.displayName,
     googleId: profile.id,

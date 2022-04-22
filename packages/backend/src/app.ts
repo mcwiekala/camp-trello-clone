@@ -10,7 +10,7 @@ import './application/authentication'
 
 const SessionStorage = ConnectMongoDBSession(session)
 
-const { DB_USERNAME, DB_PASSWORD, DB_PORT } = process.env
+const { DB_USERNAME, DB_PASSWORD, DB_PORT, SESSION_SECRET = '' } = process.env
 
 const app = express()
 
@@ -27,7 +27,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(
   session({
-    secret: 'keyboard cat',
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store
