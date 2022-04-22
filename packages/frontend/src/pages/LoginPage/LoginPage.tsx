@@ -1,25 +1,19 @@
-// Components
-import { Image, Button } from '@mantine/core'
-
-// Misc
-import googleLogo from '../../images/btn_google_light_normal_ios.svg'
+// import { useNavigate } from 'react-router-dom'
 import useStyles from './style'
+import LoginGoogleButton from '../../components/LoginGoogleButton/LoginGoogleButton'
 
 const LoginPage = () => {
   const { classes } = useStyles()
+  // const navigate = useNavigate()
 
   return (
     <main className={classes.container}>
       <article className={classes.box}>
-        <Button
-          component="a"
-          href="localhost:3000/v1/auth/google"
-          target="_blank"
-          className={classes.btn}
-          leftIcon={<Image src={googleLogo} fit="cover" />}
+        <LoginGoogleButton
+          onClick={() => window.location.assign('https://localhost:3000/v1/auth/google')}
         >
-          Sign in with Google
-        </Button>
+          Login with Google
+        </LoginGoogleButton>
       </article>
     </main>
   )

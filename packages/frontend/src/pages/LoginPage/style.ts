@@ -19,13 +19,6 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     filter: 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1))'
-  },
-  btn: {
-    height: 50,
-    padding: 0,
-    paddingRight: '6px',
-    paddingLeft: '2px',
-    border: 0
   }
 }))
 
