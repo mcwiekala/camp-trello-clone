@@ -1,7 +1,6 @@
-import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import express from 'express'
 import { CommonRoutesConfig } from './common.routes.config'
-import _usersController from '../../../modules/task/task.controller'
+import { taskController } from '../../../modules/task/task.controller'
 
 const V1 = '/v1'
 
@@ -20,12 +19,12 @@ export class TaskRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/tasks`)
-      .get(_usersController.findAll)
-      .post(_usersController.createTask)
+      .get(taskController.findAll)
+      .post(taskController.createTask)
 
     this.app
       .route(`${V1}/tasks/:taskId`)
-      .get(_usersController.findById)
+      .get(taskController.findById)
 
     return this.app
   }

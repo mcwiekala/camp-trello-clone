@@ -3,18 +3,19 @@ import { Task } from './task'
 import { taskRepository, TaskRepository } from './task.repository'
 import { boardRepository, BoardRepository } from '../board/board.repository'
 
-class TaskService {
-  private readonly _taskRepository
-  private readonly _boardRepository
+export class TaskService {
+  private readonly _taskRepository: TaskRepository
+  private readonly _boardRepository: BoardRepository
 
   constructor(taskRepository: TaskRepository, boardRepository: BoardRepository) {
     this._taskRepository = taskRepository
     this._boardRepository = boardRepository
   }
 
-  createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
+  async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
     console.log('Handling new task')
-    const savedTask = this._taskRepository.createTask(createTaskCommand)
+    const savedTask: Task = await this._taskRepository.createTask(createTaskCommand)
+    console.log(`Service returns: ${savedTask}`)
     this._boardRepository.createTaskInBoard(createTaskCommand, savedTask)
     return savedTask
   }
@@ -29,4 +30,5 @@ class TaskService {
   }
 }
 
-export default new TaskService(taskRepository, boardRepository)
+const taskService = new TaskService(taskRepository, boardRepository)
+export { taskService }

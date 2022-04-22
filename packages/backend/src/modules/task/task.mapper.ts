@@ -2,22 +2,19 @@ import { TaskDTO } from 'shared'
 import { Task } from './task'
 import { Mapper } from '../../application/Mapper'
 
-class TaskMapper implements Mapper<Task, TaskDTO> {
-
+export class TaskMapper implements Mapper<Task, TaskDTO> {
   public mapToDomain(raw: any): Task {
-    return {
-      title: raw.title,
-      id: raw.id
-    }
+    return new Task(raw._id, raw.title)
   }
 
-  public mapToPersistance(raw: Task): any {
-    return { _id: '', title: '' }
+  public mapToPersistance(task: Task): any {
+    return { _id: task.id, title: task.title }
   }
 
-  public mapToDto(raw: Task): TaskDTO {
-    return { _id: '', title: '' }
+  public mapToDto(task: Task): TaskDTO {
+    return { id: task.id, title: task.title }
   }
 }
 
-export default new TaskMapper()
+const taskMapper = new TaskMapper()
+export { taskMapper }

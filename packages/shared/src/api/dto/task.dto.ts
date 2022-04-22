@@ -2,7 +2,7 @@ import AttachmentDTO from './attachment.dto'
 import UserDTO from './user.dto'
 
 interface TaskDTO {
-  _id: string
+  id: string
   imageCoverId?: string
   title: string
   description?: string

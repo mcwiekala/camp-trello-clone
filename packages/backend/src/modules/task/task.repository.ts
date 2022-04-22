@@ -11,8 +11,9 @@ export class TaskRepository implements Repository<TaskDTO> {
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
-    console.log('Create new task in DB')
-    const savedTask: Task = await this._taskModel.create({ title: createTaskCommand.title })
+    const savedTask: Promise<Task> = this._taskModel.create({ title: createTaskCommand.title })
+    const t: Task = await savedTask
+    console.log(`Create new task in DB: ${savedTask}`)
     return savedTask
   }
 
@@ -24,7 +25,7 @@ export class TaskRepository implements Repository<TaskDTO> {
   }
 
   async findById(id: string): Promise<Task> {
-    const task: Task = await this._taskModel.findById(id)
+    const task: Task = this._taskModel.findById(id)
     console.log(task)
     return task
   }
