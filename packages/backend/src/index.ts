@@ -21,13 +21,13 @@ const startServer = async () => {
     console.log('Print data in DB')
 
     const tasks = await Task.find()
-    const boards = await Dashboard.find()
+    const dashboards = await Dashboard.find()
     console.log(`Founded: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${boards.length} boards!`)
-    boards.forEach((t) => {
+    console.log(`Founded: ${dashboards.length} boards!`)
+    dashboards.forEach((t) => {
       console.log(`${t.toString()}`)
     })
 

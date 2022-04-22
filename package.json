@@ -33,11 +33,14 @@
     "babel-loader": "8.1.0"
   },
   "scripts": {
-    "start": "lerna run start --stream",
-    "build": "lerna run build --stream",
+    "start": "yarn libbuild && lerna run start --stream",
+    "build": "yarn libbuild && lerna run build --stream",
     "start:api": "lerna run dev --stream",
+    "lint": "eslint ./packages",
+    "fix": "eslint ./packages --fix",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d packages/frontend/build"
+    "deploy": "gh-pages -d packages/frontend/build",
+    "libbuild": "lerna run libbuild --stream"
   }
 }

@@ -1,4 +1,4 @@
-import { BsPlusLg } from 'react-icons/all'
+import { BsPlusLg } from 'react-icons/bs'
 import { Text } from '@mantine/core'
 import { Draggable } from 'react-beautiful-dnd'
 import useStyles from './style'

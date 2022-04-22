@@ -1,6 +1,6 @@
 import { Button, Image, Input, Text } from '@mantine/core'
-import { BsPaperclip, MdMessage } from 'react-icons/all'
-import { MdAdd } from 'react-icons/md'
+import { BsPaperclip } from 'react-icons/bs'
+import { MdAdd, MdMessage } from 'react-icons/md'
 import { useState } from 'react'
 import UserType from '../../types/user'
 import UserIconList from '../UserIconList/UserIconList'

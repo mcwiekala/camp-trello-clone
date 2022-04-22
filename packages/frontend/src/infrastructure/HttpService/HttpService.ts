@@ -1,4 +1,4 @@
-import { TASK } from '@shared/paths/task'
+import { TASK } from 'packages/shared/src/paths/task'
 
 import Fetch from './fetchInstance'
 
