@@ -10,7 +10,7 @@ const LoginPage = () => {
     <main className={classes.container}>
       <article className={classes.box}>
         <LoginGoogleButton
-          onClick={() => window.location.assign('https://localhost:3000/v1/auth/google')}
+          onClick={() => window.location.assign('http://localhost:8800/v1/auth/google')}
         >
           Login with Google
         </LoginGoogleButton>
