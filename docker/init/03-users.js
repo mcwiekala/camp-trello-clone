@@ -9,7 +9,7 @@ const user1 = {
     {
       _id: ObjectId('6230ef67edfb0cbac5e5a246'),
       imageCoverId: 'photo-1640622842924-fb0017b9d786',
-      title: 'New board 1',
+      title: 'New dashboard 1',
       role: 'ADMIN',
       users: [
         {
@@ -21,7 +21,7 @@ const user1 = {
     {
       _id: ObjectId('6230ef70b0df36f40ca5c7fa'),
       imageCoverId: 'photo-1640622842924-fb0017b9d788',
-      title: 'New board 2'
+      title: 'New dashboard 2'
     }
   ]
 }
@@ -35,7 +35,7 @@ const user2 = {
     {
       _id: ObjectId('6230ef7bdcff403b809c17ab'),
       imageCoverId: 'photo-1640622842924-fb0017b9d786',
-      title: 'New board 1',
+      title: 'New dashboard 1',
       role: 'MEMBER',
       users: [
         {
@@ -56,7 +56,7 @@ const user3 = {
     {
       _id: ObjectId('6230ef879fc21ca9b25cccd0'),
       imageCoverId: 'photo-1640622842924-fb0017b9d723',
-      title: 'New board 4',
+      title: 'New dashboard 4',
       role: 'VIEWER',
       users: [
         {

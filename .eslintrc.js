@@ -70,7 +70,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-shadow': 'off'
   },
-  ignorePatterns: ['packages/**/lib'],
+  ignorePatterns: ['packages/**/lib', 'packages/**/lib-esm', 'packages/**/build'],
   settings: {
     react: {
       version: 'detect'

@@ -1,8 +1,8 @@
 import { CreateTaskCommandDTO } from 'shared'
-import BoardModel from './Board'
+import BoardModel from './Dashboard'
 import { Task } from '../task/task'
 
-export class BoardRepository {
+export class DashboardRepository {
   private readonly _boardModel = BoardModel
 
   constructor(boardModel: any) {
@@ -25,5 +25,5 @@ export class BoardRepository {
   }
 }
 
-const boardRepository = new BoardRepository(BoardModel)
-export { boardRepository }
+const dashboardRepository = new DashboardRepository(BoardModel)
+export default dashboardRepository
