@@ -20,11 +20,11 @@ const startServer = async () => {
 
     const tasks = await Task.find()
     const dashboard = await Dashboard.find()
-    console.log(`Founded: ${tasks.length} tasks!`)
+    console.log(`Found: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${dashboard.length} boards!`)
+    console.log(`Found: ${dashboard.length} boards!`)
     dashboard.forEach((t) => {
       console.log(`${t.toString()}`)
     })
