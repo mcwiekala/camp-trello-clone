@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
 import http from 'http'
-import Task from './modules/task/Task'
 import { Dashboard } from './modules/dashboard/dashboard.model'
+import Task from './modules/task/task.model'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
@@ -32,13 +32,13 @@ const startServer = async () => {
     })
 
     const users = await User.find()
-    console.log(`Founded: ${users.length} users!`)
+    console.log(`Found: ${users.length} users!`)
     users.forEach((u) => {
       console.log(`${u.toString()}`)
     })
 
     const attachments = await Attachment.find()
-    console.log(`Founded: ${attachments.length} attachments!`)
+    console.log(`Found: ${attachments.length} attachments!`)
     attachments.forEach((a) => {
       console.log(`${a.toString()}`)
     })

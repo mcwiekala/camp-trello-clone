@@ -102,6 +102,84 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get all tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "{{PORT}}",
+					"path": ["v1", "tasks", ""]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/625fe5214c282e0ce372032f",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "{{PORT}}",
+					"path": ["v1", "tasks", "625fe5214c282e0ce372032f"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post task column 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "{{PORT}}",
+					"path": ["v1", "tasks", ""]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post task column 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "{{PORT}}",
+					"path": ["v1", "tasks", ""]
+				}
+			},
+			"response": []
 		}
 	]
 }

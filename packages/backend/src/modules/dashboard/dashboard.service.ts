@@ -1,4 +1,4 @@
-import CreateDashboardCommand from 'packages/shared/src/api/dto/CreateDashboardCommand'
+import CreateDashboardCommand from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
 import dashboardRepository from './dashboard.repository'
 
 class DashboardService {

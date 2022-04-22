@@ -1,9 +1,15 @@
-import CreateDashboardCommand from 'packages/shared/src/api/dto/CreateDashboardCommand'
+import CreateDashboardCommand from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
+import CreateTaskCommand from 'packages/shared/src/api/dto/CreateTaskCommand.dto'
 import mongoose from 'mongoose'
 import { Dashboard, DashboardColumn } from './dashboard.model'
+import { Task } from '../task/task'
 
-class TaskRepository {
-  private dashboardModel = Dashboard
+export class DashboardRepository {
+  private readonly dashboardModel = Dashboard
+
+  constructor(boardModel: any) {
+    this.dashboardModel = boardModel
+  }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand) {
     console.log('Creating new dashboard in DB')
@@ -40,6 +46,20 @@ class TaskRepository {
     console.log(dashboard)
     return dashboard
   }
+
+  async addNewTaskToDashboard(createTaskCommand: CreateTaskCommand, savedTask: Task) {
+    const dashboard = await this.dashboardModel.findById(createTaskCommand.idDashboard)
+    const idCol = { idColumn: createTaskCommand.idColumn }
+    const columnIndex = dashboard.columns.findIndex(
+      (x: { _id: string }) => String(x._id) === idCol.idColumn
+    )
+
+    dashboard.columns[columnIndex].tasks.push(savedTask)
+    await dashboard.save()
+    console.log(
+      `Dashboard repository: task ${savedTask} added to idDashboard: ("${createTaskCommand.idDashboard}"), idColumn: ("${createTaskCommand.idColumn}")`
+    )
+  }
 }
 
-export default new TaskRepository()
+export default new DashboardRepository(Dashboard)
