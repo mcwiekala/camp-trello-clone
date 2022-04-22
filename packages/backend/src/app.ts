@@ -10,12 +10,12 @@ import './application/authentication'
 
 const SessionStorage = ConnectMongoDBSession(session)
 
-const { DB_USERNAME, DB_PASSWORD } = process.env
+const { DB_USERNAME, DB_PASSWORD, DB_PORT } = process.env
 
 const app = express()
 
 const store = new SessionStorage({
-  uri: `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/trello-clone`,
+  uri: `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:${DB_PORT}/trello-clone`,
   collection: 'sessions'
 })
 
