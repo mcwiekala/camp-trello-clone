@@ -35,7 +35,7 @@ export const encodeData = (userData: any) => {
     {
       expiresIn: '12h',
       id: userData._id,
-      email: userData.email
+      username: userData.username
     },
     secret
   )
