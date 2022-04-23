@@ -12,6 +12,11 @@ const strategyConfig = {
   secretOrKey: SESSION_SECRET
 }
 
+export interface userDataType {
+  email: string
+  _id: string
+}
+
 passport.use(
   new JwtStrategy(strategyConfig, async (payload, done) => {
     let userFromDatabase
@@ -31,13 +36,7 @@ passport.use(
   })
 )
 
-// export type userDataType = {
-//   _id: string
-//   email: string
-//   expiresIn: string
-// }
-
-export const encodeData = (userData: any) => {
+export const encodeData = (userData: userDataType) => {
   const token = jwt.sign(
     {
       expiresIn: '12h',

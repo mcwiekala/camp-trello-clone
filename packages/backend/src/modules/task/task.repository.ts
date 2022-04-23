@@ -13,6 +13,7 @@ export class TaskRepository {
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
     const savedTask: Task = await this._taskModel.create({ title: createTaskCommand.title })
+    // eslint-disable-next-line no-console
     console.log(`Create new task in DB: ${savedTask}`)
     return savedTask
   }

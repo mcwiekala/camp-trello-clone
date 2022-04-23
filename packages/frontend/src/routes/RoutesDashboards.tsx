@@ -11,7 +11,6 @@ export const routes = {
 
 const RoutesDashboards = () => {
   const { token } = http.http
-  console.log('token', token)
   return (
     <Routes>
       <Route

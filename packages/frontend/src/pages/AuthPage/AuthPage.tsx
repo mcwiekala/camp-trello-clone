@@ -8,15 +8,10 @@ const AuthPage = () => {
   const navigate = useNavigate()
   const { token } = useParams()
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   useEffect(() => {
     if (token) {
       http.setToken(token)
-      console.log(http.http.token)
-      // await http.getTask('6225239aa76ad13dd37178b6')
     }
-    console.log('Auth', token)
     navigate('../dashboards', { replace: true })
   }, [token, navigate])
 
