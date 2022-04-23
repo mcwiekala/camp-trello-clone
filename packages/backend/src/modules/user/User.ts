@@ -1,32 +1,62 @@
-import mongoose from 'mongoose'
-import { Role } from './Role'
+/* eslint-disable no-underscore-dangle */
+export class User {
+  private _id: string
 
-const { ObjectId } = mongoose.Types
+  private _username: string
 
-const userSchema = new mongoose.Schema({
-  _id: ObjectId,
-  username: String,
-  passwordHash: String,
-  avatarId: Number,
-  dashboards: [
-    {
-      _id: ObjectId,
-      imageCoverId: String,
-      title: String,
-      role: {
-        type: String,
-        enum: Role,
-        default: Role.NO_ACCESS
-      },
-      users: [
-        {
-          _id: ObjectId,
-          avatarId: Number
-        }
-      ]
-    }
-  ]
-})
+  private _passwordHash: string
 
-const User = mongoose.model('User', userSchema)
-export default User
+  private _avatarId: number
+
+  private _dashboards: unknown[]
+
+  constructor(
+    id: string,
+    username: string,
+    passwordHash: string,
+    avatarId: number,
+    dashboards: unknown[]
+  ) {
+    this._id = id
+    this._username = username
+    this._passwordHash = passwordHash
+    this._avatarId = avatarId
+    this._dashboards = dashboards
+  }
+
+  public get id() {
+    return this._id
+  }
+
+  public get username() {
+    return this._username
+  }
+
+  public set username(username: string) {
+    this._username = username
+  }
+
+  public get passwordHash() {
+    return this._passwordHash
+  }
+
+  public set passwordHash(passwordHash: string) {
+    this._passwordHash = passwordHash
+  }
+
+  public get avatarId() {
+    return this._avatarId
+  }
+
+  public set avatarId(avatarId: number) {
+    this._avatarId = avatarId
+  }
+
+  public get dashboards() {
+    return this._dashboards
+  }
+
+  public set dashboards(dashboards: unknown[]) {
+    this._dashboards = dashboards
+  }
+}
