@@ -14,14 +14,12 @@ router.get('/', (req, res) => {
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    // successRedirect: `http://localhost:${FRONT_PORT}/dashboards`,
     failureRedirect: '/login'
   }),
   (req, res) => {
-    console.log('req', req)
     const token = encodeData(req.user)
     res.setHeader('Authentication', token)
-    res.redirect(`http://localhost:${FRONT_PORT}/dashboards`)
+    res.redirect(`http://localhost:${FRONT_PORT}/auth/${token}`)
   }
 )
 

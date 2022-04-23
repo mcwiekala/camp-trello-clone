@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   googleId: String,
   avatarUrl: String,
+  email: String,
   dashboards: [
     {
       imageCoverId: String,

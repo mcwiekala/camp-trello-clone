@@ -1,11 +1,7 @@
-const BASE_URL = 'wherever we host our API'
+const BASE_URL = 'http://localhost:8800/v1'
 
 class Fetch {
-  static get token(): string {
-    const token = 'token' // TODO get token from wherever it is stored
-
-    return token
-  }
+  static token: string
 
   static baseHeaders(): Headers {
     const headers = new Headers()

@@ -31,12 +31,18 @@ passport.use(
   })
 )
 
+// export type userDataType = {
+//   _id: string
+//   email: string
+//   expiresIn: string
+// }
+
 export const encodeData = (userData: any) => {
   const token = jwt.sign(
     {
       expiresIn: '12h',
       id: userData._id,
-      username: userData.username
+      email: userData.email
     },
     SESSION_SECRET
   )

@@ -1,9 +1,10 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import TaskModel from './task.model'
-import { Repository } from '../../application/Repository'
+// import { Repository } from '../../application/Repository'
 import { Task } from './task'
 
-export class TaskRepository implements Repository<TaskDTO> {
+// export class TaskRepository implements Repository<TaskDTO> {
+export class TaskRepository {
   private readonly _taskModel
 
   constructor(taskModel: any) {
