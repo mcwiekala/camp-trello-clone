@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv'
-import Task from './modules/task/Task'
+import Task from './modules/task/task.model'
 import Dashboard from './modules/dashboard/Dashboard'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
-import User from './modules/user/User'
+import User from './modules/user/user.model'
 import Attachment from './modules/attachment/Attachment'
 
 dotenv.config()
