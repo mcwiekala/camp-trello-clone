@@ -1,47 +1,39 @@
-import fsPromises from 'fs/promises'
 import express from 'express'
-import { Attachments } from './attachments.model'
-import { fileNameHash } from '../../helpers/fileNameHash'
+import { AttachmentDTO } from 'shared'
+import { Attachment } from './Attachment'
+import { AttachmentService, attachmentService } from './attachment.service'
+import { AttachmentMapper, attachmentMapper } from './attachment.mapper'
 
-export const attachmentsUpload = async (
-  req: { file: { originalname: string } },
-  res: any,
-  next: any
-) => {
-  try {
-    const file = new Attachments({
-      fileName: req.file.originalname,
-      addedDate: new Date(),
-      fileNameHash: fileNameHash(req.file.originalname)
-    })
-    await file.save()
-    res.status(201).send('File Uploaded Successfully')
-  } catch (error) {
-    res.status(400).send((error as Error).message)
+class AttachmentsController {
+  private readonly _attachmentMapper: AttachmentMapper
+  private readonly _attachmentService: AttachmentService
+
+  constructor(attachmentService: AttachmentService, attachmentMapper: AttachmentMapper) {
+    this._attachmentMapper = attachmentMapper
+    this._attachmentService = attachmentService
+  }
+
+  async create(req: any, res: express.Response) {
+    const createdAttachment: Attachment = await this._attachmentService.create(req.file)
+    const dto = this._attachmentMapper.mapToDto(createdAttachment)
+    return res.status(201).json(dto)
+  }
+
+  async getOne(req: express.Request, res: express.Response) {
+    const singleAttachment: Attachment = await this._attachmentService.getOne(
+      req.params.attachmentId
+    )
+    const dto: AttachmentDTO = this._attachmentMapper.mapToDto(singleAttachment)
+    return res.status(200).json(dto)
+  }
+
+  async delete(req: express.Request, res: express.Response): Promise<void> {
+    const deletedAttachment: Attachment = await this._attachmentService.delete(
+      req.params.attachmentId
+    )
+    const dto: AttachmentDTO = this._attachmentMapper.mapToDto(deletedAttachment)
+    res.status(200).json(dto)
   }
 }
 
-export const findByIdAndRemove = async (req: express.Request, res: express.Response) => {
-  const { id } = req.params
-  const file = await Attachments.findById(id)
-  if (!file) {
-    return res.status(404).json({ message: 'This Attachment does not exist' })
-  }
-  try {
-    await fsPromises.unlink(`uploads/${file.fileNameHash}`)
-    await Attachments.findByIdAndRemove(id)
-  } catch (err) {
-    console.log(err)
-  }
-  return res.status(200).json({ message: 'Attachment has been successfully deleted' })
-}
-
-export const findById = async (req: express.Request, res: express.Response) => {
-  const { id } = req.params
-  const file = await Attachments.findById(id)
-  const image = `uploads/${file.fileNameHash}`
-  if (!file) {
-    return res.status(404).json({ message: 'This Attachment does not exist' })
-  }
-  return res.status(200).download(image)
-}
+export default new AttachmentsController(attachmentService, attachmentMapper)

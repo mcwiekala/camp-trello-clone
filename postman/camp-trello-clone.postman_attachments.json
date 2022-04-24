@@ -1,54 +1,94 @@
 {
-  "info": {
-    "_postman_id": "c7d3e5c5-dc3b-436c-ac3f-2bc6f3525fc1",
-    "name": "camp-trello-clone",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "POST Attachment",
-      "id": "d9fdce74-0ec6-4aae-8308-95fc286c2026",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": [] }] },
-        "url": "http://localhost:8085/api/uploads"
-      },
-      "response": []
-    },
-    {
-      "name": "GET Attachment",
-      "id": "58a0caad-e96f-4373-a410-d5b4063aafeb",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8085/api/uploads/:id",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8085",
-          "path": ["api", "uploads", ":id"],
-          "variable": [{ "key": "id", "value": null }]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "DEL Attachment",
-      "id": "10672375-199e-4d3a-b392-e6a6198d8fc8",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8085/api/uploads/:id",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8085",
-          "path": ["api", "uploads", ":id"],
-          "variable": [{ "key": "id", "value": null }]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "a7527bd3-90b2-4a91-92c6-d8eef167be3c",
+		"name": "camp-trello-clone-attachments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Attachment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8085/v1/attachments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"v1",
+						"attachments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Attachment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/uploads/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"uploads",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL Attachment",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/uploads/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"uploads",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
