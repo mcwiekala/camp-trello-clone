@@ -25,7 +25,7 @@ export class TaskRoutes extends CommonRoutesConfig {
     this.app
       .route(`${V1}/tasks/:taskId`)
       .get((req, res) => taskController.findById(req, res))
-
+      .patch((req, res) => taskController.updateById(req, res))
     return this.app
   }
 }
