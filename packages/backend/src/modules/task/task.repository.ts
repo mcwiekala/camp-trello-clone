@@ -1,5 +1,4 @@
-import { CreateTaskCommandDTO } from 'packages/shared/src/api/dto/CreateTaskCommand.dto'
-import TaskDTO from 'packages/shared/src/api/dto/task.dto'
+import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import TaskModel from './task.model'
 import { Repository } from '../../application/Repository'
 import { Task } from './task'
