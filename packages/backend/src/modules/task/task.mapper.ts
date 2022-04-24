@@ -1,4 +1,4 @@
-import TaskDTO from 'packages/shared/src/api/dto/task.dto'
+import { TaskDTO } from 'shared'
 import { Task } from './task'
 import { Mapper } from '../../application/Mapper'
 

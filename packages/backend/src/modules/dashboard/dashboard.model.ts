@@ -24,7 +24,10 @@ const dashboardSchema = new mongoose.Schema({
   description: String,
   imageCoverUrl: String,
   createdAt: Date,
-  status: DashboardVisibility,
+  status: {
+    type: String,
+    enum: DashboardVisibility
+  },
   users: [
     {
       _id: ObjectId,

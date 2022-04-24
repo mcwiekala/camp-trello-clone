@@ -1,5 +1,4 @@
-import { CreateDashboardCommand } from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
-import CreateTaskCommand from 'packages/shared/src/api/dto/CreateTaskCommand.dto'
+import { CreateTaskCommandDTO, CreateDashboardCommand } from 'shared'
 import mongoose from 'mongoose'
 import { Dashboard as DashboardModel } from './dashboard.model'
 import { Task } from '../task/task'
@@ -42,7 +41,7 @@ export class DashboardRepository {
   }
 
   async addNewTaskToDashboard(
-    createTaskCommand: CreateTaskCommand,
+    createTaskCommand: CreateTaskCommandDTO,
     savedTask: Task
   ): Promise<Task> {
     const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)

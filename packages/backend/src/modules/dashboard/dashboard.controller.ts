@@ -1,4 +1,4 @@
-import { CreateDashboardCommand } from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
+import { CreateDashboardCommand } from 'shared'
 import express from 'express'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { dashboardService, DashboardService } from './dashboard.service'
