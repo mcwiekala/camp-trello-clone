@@ -9,6 +9,7 @@ import User from './modules/user/user.model'
 import Attachment from './modules/attachment/Attachment'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
 import { TaskRoutes } from './infrastructure/express/router/task.routes'
+import { UserRoutes } from './infrastructure/express/router/user.routes'
 
 dotenv.config()
 
@@ -50,6 +51,7 @@ const startServer = async () => {
   const routes: Array<CommonRoutesConfig> = []
 
   routes.push(new TaskRoutes(app))
+  routes.push(new UserRoutes(app))
 
   console.log(`Listening to port: ${PORT}`)
   server.listen(PORT, () => {

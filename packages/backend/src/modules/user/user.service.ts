@@ -8,8 +8,8 @@ class UserService {
     return userRepository.create(dto)
   }
 
-  async patch(dto: PatchUserDto): Promise<User> {
-    return userRepository.patch(dto)
+  async patch(id: string, dto: PatchUserDto): Promise<User> {
+    return userRepository.patch(id, dto)
   }
 
   async getOne(id: string): Promise<User> {

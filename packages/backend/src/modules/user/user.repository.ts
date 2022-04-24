@@ -16,8 +16,8 @@ class UserRepository {
     return UserMapper.mapToDomain(newUser)
   }
 
-  async patch(dto: PatchUserDto): Promise<User> {
-    const patchedUser = await this._model.findByIdAndUpdate(dto.id, dto)
+  async patch(id: string, dto: PatchUserDto): Promise<User> {
+    const patchedUser = await this._model.findByIdAndUpdate(id, dto, { new: true })
     return UserMapper.mapToDomain(patchedUser)
   }
 

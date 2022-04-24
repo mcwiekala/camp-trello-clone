@@ -1,5 +1,5 @@
 import AttachmentDTO from './attachment.dto'
-import UserDTO from './user.dto'
+import { UserDto } from './user/user.dto'
 
 interface TaskDTO {
   id: string
@@ -8,7 +8,7 @@ interface TaskDTO {
   description?: string
   attachments?: AttachmentDTO[]
   // TODO: add to TaskModel
-  assignees?: UserDTO[]
+  assignees?: UserDto[]
 }
 
 export default TaskDTO

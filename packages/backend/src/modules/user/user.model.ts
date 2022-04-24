@@ -4,7 +4,6 @@ import { Role } from './role'
 const { ObjectId } = mongoose.Types
 
 const userSchema = new mongoose.Schema({
-  _id: ObjectId,
   username: String,
   passwordHash: String,
   avatarId: Number,

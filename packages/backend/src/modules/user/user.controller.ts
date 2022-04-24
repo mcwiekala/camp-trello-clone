@@ -11,19 +11,19 @@ class UserController {
   }
 
   async patch(req: express.Request, res: express.Response): Promise<void> {
-    const patchedUser = await userService.patch(req.body)
+    const patchedUser = await userService.patch(req.params.userId, req.body)
     const dto = userMapper.mapToDto(patchedUser)
     res.status(200).json(dto)
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
-    const deletedUser = await userService.delete(req.body.id)
+    const deletedUser = await userService.delete(req.params.userId)
     const dto = userMapper.mapToDto(deletedUser)
     res.status(200).json(dto)
   }
 
   async getOne(req: express.Request, res: express.Response): Promise<void> {
-    const user = await userService.getOne(req.body.id)
+    const user = await userService.getOne(req.params.userId)
     const dto = userMapper.mapToDto(user)
     res.status(200).json(dto)
   }
