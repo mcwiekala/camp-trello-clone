@@ -6,34 +6,19 @@ const V1 = '/v1'
 
 export class DashboardRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
-    super(app, 'UsersRoutes')
+    super(app, 'DashboardRoutes')
   }
 
   // prettier-ignore
   configureRoutes(): express.Application {
     this.app
-      .route(`${V1}/`)
-      .get(
-          (req: express.Request, res: express.Response) => res.send('Hello World!')
-       );
-
-    this.app
       .route(`${V1}/dashboards`)
-      .get(
-        dashboardController.getDashboards
-      )
+      .get((req, res) => dashboardController.getDashboards(req, res))
+      .post((req, res) => dashboardController.createDashboard(req, res))
 
     this.app
-      .route(`${V1}/create-dashboard`)
-      .post(
-        dashboardController.createDashboard
-      )
-
-    this.app
-      .route(`${V1}/dashboard/:id`)
-      .get(
-        dashboardController.getDashboard
-      )
+      .route(`${V1}/dashboards/:id`)
+      .get((req, res) => dashboardController.getDashboard(req, res))
 
     return this.app
   }

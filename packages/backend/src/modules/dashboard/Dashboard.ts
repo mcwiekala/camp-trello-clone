@@ -1,42 +1,23 @@
-import mongoose from 'mongoose'
-import { Status } from './Status'
+export class Dashboard {
+  private _id: string
+  private _title: string
 
-const { ObjectId } = mongoose.Types
+  constructor(id: string, title: string) {
+    this._id = id
+    this._title = title
+  }
 
-const columnSchema = new mongoose.Schema({
-  _id: ObjectId,
-  title: String,
-  tasks: [
-    {
-      _id: ObjectId,
-      title: String,
-      imageCoverId: Number,
-      comments: [{ _id: ObjectId }],
-      attachments: [{ _id: ObjectId }],
-      users: [{ _id: ObjectId }]
-    }
-  ]
-})
+  public get id() {
+    return this._id
+  }
 
-const dashboardSchema = new mongoose.Schema({
-  _id: ObjectId,
-  title: String,
-  description: String,
-  imageCoverUrl: String,
-  createdAt: Date,
-  status: {
-    type: String,
-    enum: Status
-  },
-  users: [
-    {
-      _id: ObjectId,
-      username: String,
-      avatarId: Number
-    }
-  ],
-  columns: [columnSchema]
-})
-const Dashboard = mongoose.model('Board', dashboardSchema)
-const DashboardColumn = mongoose.model('BoardColumn', columnSchema)
-export { Dashboard, DashboardColumn }
+  public get title() {
+    return this._title
+  }
+
+  // TODO:
+  // description: String,
+  // imageCoverId: String,
+  // attachments: [
+  // comments: [
+}

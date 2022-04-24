@@ -1,54 +1,51 @@
-import CreateDashboardCommand from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
+import { CreateDashboardCommand } from 'packages/shared/src/api/dto/CreateDashboardCommand.dto'
 import CreateTaskCommand from 'packages/shared/src/api/dto/CreateTaskCommand.dto'
 import mongoose from 'mongoose'
-import { Dashboard, DashboardColumn } from './dashboard.model'
+import { Dashboard as DashboardModel } from './dashboard.model'
 import { Task } from '../task/task'
+import { Dashboard } from './Dashboard'
 
 export class DashboardRepository {
-  private readonly dashboardModel = Dashboard
+  private readonly _dashboardModel
 
-  constructor(boardModel: any) {
-    this.dashboardModel = boardModel
+  constructor(dashboardModel: any) {
+    this._dashboardModel = dashboardModel
   }
 
-  async createDashboard(createDashboardCommand: CreateDashboardCommand) {
+  async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
     console.log('Creating new dashboard in DB')
-    const dashboardColumn = DashboardColumn.create({
-      _id: new mongoose.Types.ObjectId(),
-      title: 'first column'
-    })
-    const dashboard = await this.dashboardModel.create({
+    const dashboard = await this._dashboardModel.create({
       _id: new mongoose.Types.ObjectId(),
       title: createDashboardCommand.title,
       description: createDashboardCommand.description,
       imageCoverUrl: createDashboardCommand.coverImageUrl,
       createdAt: new Date(),
-      status: {
-        type: createDashboardCommand.status.type,
-        enum: createDashboardCommand.status.enum
-      },
+      status: createDashboardCommand.status,
       users: [],
-      columns: [dashboardColumn, dashboardColumn]
+      columns: []
     })
 
     await dashboard.save()
     return dashboard
   }
 
-  async getDashboards() {
-    const boards = await this.dashboardModel.find()
-    console.log(boards)
-    return boards
+  async getDashboards(): Promise<Dashboard[]> {
+    const dashboards: Dashboard[] = await this._dashboardModel.find()
+    console.log(dashboards)
+    return dashboards
   }
 
-  async getDashboard(_id: string) {
-    const dashboard = await this.dashboardModel.findById(_id)
+  async getDashboard(_id: string): Promise<Dashboard> {
+    const dashboard: Dashboard = await this._dashboardModel.findById(_id)
     console.log(dashboard)
     return dashboard
   }
 
-  async addNewTaskToDashboard(createTaskCommand: CreateTaskCommand, savedTask: Task) {
-    const dashboard = await this.dashboardModel.findById(createTaskCommand.idDashboard)
+  async addNewTaskToDashboard(
+    createTaskCommand: CreateTaskCommand,
+    savedTask: Task
+  ): Promise<Task> {
+    const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)
     const idCol = { idColumn: createTaskCommand.idColumn }
     const columnIndex = dashboard.columns.findIndex(
       (x: { _id: string }) => String(x._id) === idCol.idColumn
@@ -59,7 +56,8 @@ export class DashboardRepository {
     console.log(
       `Dashboard repository: task ${savedTask} added to idDashboard: ("${createTaskCommand.idDashboard}"), idColumn: ("${createTaskCommand.idColumn}")`
     )
+    return savedTask
   }
 }
-
-export default new DashboardRepository(Dashboard)
+const dashboardRepository = new DashboardRepository(DashboardModel)
+export { dashboardRepository }

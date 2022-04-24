@@ -1,13 +1,10 @@
-import { Status } from 'packages/backend/src/modules/dashboard/Status'
+import DashboardVisibility from '../DashboardVisibility'
 
-export interface CreateTaskCommand {
+export interface CreateDashboardCommand {
   title: string
   description: string
   coverImageUrl: string
-  status: {
-    type: string
-    enum: Status
-  }
+  status: DashboardVisibility
 }
 
-export default CreateTaskCommand
+export default CreateDashboardCommand
