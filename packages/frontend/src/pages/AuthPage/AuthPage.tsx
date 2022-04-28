@@ -15,9 +15,6 @@ const AuthPage = () => {
     navigate('../dashboards', { replace: true })
   }, [token, navigate])
 
-  // const loginTroughOAuth = () => {
-  // }
-
   return (
     <main className={classes.container}>
       <h1>Wait while you&apos;re redirected to the site</h1>

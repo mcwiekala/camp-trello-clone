@@ -5,11 +5,11 @@ import 'dotenv/config'
 
 import User from '../../modules/user/User'
 
-const { SESSION_SECRET = '' } = process.env
+const { API_SECRET = '' } = process.env
 
 const strategyConfig = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: SESSION_SECRET
+  secretOrKey: API_SECRET
 }
 
 export interface userDataType {
@@ -43,7 +43,7 @@ export const encodeData = (userData: userDataType) => {
       id: userData._id,
       email: userData.email
     },
-    SESSION_SECRET
+    API_SECRET
   )
 
   return token

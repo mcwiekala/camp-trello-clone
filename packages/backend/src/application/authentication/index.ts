@@ -5,9 +5,16 @@ import type express from 'express'
 import { Profile, Strategy, VerifyCallback } from 'passport-google-oauth20'
 import User from '../../modules/user/User'
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID ?? ''
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET ?? ''
-const CALLBACK_URL = process.env.CALLBACK_URL ?? ''
+export const googleCallbackURL = '/auth/google/callback'
+
+if (process.env.GOOGLE_CLIENT_ID === undefined) {
+  throw new Error('GOOGLE_CLIENT_ID not specified in .env')
+}
+if (process.env.GOOGLE_CLIENT_SECRET === undefined) {
+  throw new Error('GOOGLE_CLIENT_SECRET not specified in .env')
+}
+
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env
 
 type verifyFuncParams = [
   req: express.Request,
@@ -17,9 +24,8 @@ type verifyFuncParams = [
   done: VerifyCallback
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const strat = async (...[req, accessToken, refreshToken, profile, cb]: verifyFuncParams) => {
-  console.log('req', req, 'access', accessToken, 'refresh', refreshToken)
-  console.log('User:', profile)
   const userFromDatabase = await User.findOne({ googleId: profile.id }).exec()
 
   if (userFromDatabase) {
@@ -43,7 +49,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: CALLBACK_URL,
+      callbackURL: `v1/${googleCallbackURL}`,
       passReqToCallback: true
     },
     strat
@@ -51,11 +57,9 @@ passport.use(
 )
 
 passport.serializeUser((user, done) => {
-  console.log('Serialize User:', user)
   done(null, user)
 })
 
 passport.deserializeUser((user, done) => {
-  console.log('Deserialize User:', user)
   done(null, user as typeof User)
 })

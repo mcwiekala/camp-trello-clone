@@ -1,6 +1,7 @@
 import express, { Request } from 'express'
 import passport from 'passport'
 import 'dotenv/config'
+import { googleCallbackURL } from '../../../application/authentication'
 import { encodeData, userDataType } from '../../../application/authentication/jwt.strategy'
 
 const { FRONT_PORT } = process.env
@@ -20,7 +21,7 @@ function instanceOfUserDataType(data: Partial<userDataType>): data is userDataTy
 }
 
 router.get(
-  '/auth/google/callback',
+  googleCallbackURL,
   passport.authenticate('google', {
     failureRedirect: '/login'
   }),
