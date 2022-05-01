@@ -1,9 +1,9 @@
-export interface UpdateTaskCommand {
+export interface UpdateTaskCommandDTO {
   title: string
-  description: string
-  imageCoverId: string
+  description?: string
+  imageCoverId?: string
   idDashboard: string
   idColumn: string
 }
 
-export default UpdateTaskCommand
+export default UpdateTaskCommandDTO

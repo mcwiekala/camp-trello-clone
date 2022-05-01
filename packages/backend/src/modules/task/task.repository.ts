@@ -1,4 +1,4 @@
-import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
+import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommandDTO } from 'shared'
 import TaskModel from './task.model'
 import { Repository } from '../../application/Repository'
 import { Task } from './task'
@@ -26,8 +26,8 @@ export class TaskRepository implements Repository<TaskDTO> {
     return task
   }
 
-  async updateById(updateTaskCommand: UpdateTaskCommand, id: string): Promise<Task> {
-    const updateById: Task = this._taskModel.updateOne(
+  async updateById(updateTaskCommand: UpdateTaskCommandDTO, id: string): Promise<Task> {
+    const updatedTask: Task = this._taskModel.updateOne(
       { _id: id },
       {
         $set: {
@@ -37,8 +37,8 @@ export class TaskRepository implements Repository<TaskDTO> {
         }
       }
     )
-    console.log(`Updated task in DB: ${updateById}`)
-    return updateById
+    console.log(`Updated task in DB: ${updatedTask}`)
+    return updatedTask
   }
 }
 
