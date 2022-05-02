@@ -1,6 +1,6 @@
 import express from 'express'
-import passport from 'passport'
 import { CommonRoutesConfig } from './common.routes.config'
+import JwtGuard from '../../../application/authentication/jwt.guard'
 import taskController from '../../../modules/task/task.controller'
 
 const V1 = '/v1'
@@ -20,12 +20,12 @@ export class TaskRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/tasks`)
-      .get(passport.authenticate('jwt', { session: false }), (req, res) => taskController.findAll(req, res))
-      .post(passport.authenticate('jwt', { session: false }), (req, res) => taskController.createTask(req, res))
+      .get(JwtGuard, (req, res) => taskController.findAll(req, res))
+      .post(JwtGuard, (req, res) => taskController.createTask(req, res))
 
     this.app
       .route(`${V1}/tasks/:taskId`)
-      .get(passport.authenticate('jwt', { session: false }), (req, res) => taskController.findById(req, res))
+      .get(JwtGuard, (req, res) => taskController.findById(req, res))
 
     return this.app
   }
