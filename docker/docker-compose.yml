@@ -5,7 +5,7 @@ services:
     image: mongo:latest
     container_name: mongo
     ports:
-      - ${DB_PORT}:27017
+      - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${ROOT_PASSWORD}
@@ -20,7 +20,7 @@ services:
   mongo-express:
     image: mongo-express:latest
     ports:
-      - ${MONGO_EXPRESS_PORT}:8081
+      - 8099:8081
     depends_on:
       - mongo
     environment:
