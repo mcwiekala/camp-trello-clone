@@ -31,12 +31,14 @@ class AttachmentsController {
     return res.status(200).json(dto)
   }
 
-  async deleteById(req: express.Request, res: express.Response): Promise<void> {
-    const deletedAttachment: Attachment = await this._attachmentService.deleteById(
+  async deleteById(req: express.Request, res: express.Response) {
+    const deletedAttachment: Attachment | null = await this._attachmentService.deleteById(
       req.params.attachmentId
     )
-    const dto: AttachmentDTO = this._attachmentMapper.mapToDto(deletedAttachment)
-    res.status(200).json(dto)
+    if (!deletedAttachment) {
+      return res.status(404).send('Attachment not found')
+    }
+    return res.status(200).send('Attachment has been successfully deleted')
   }
 }
 

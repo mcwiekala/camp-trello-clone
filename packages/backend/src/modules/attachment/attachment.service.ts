@@ -39,7 +39,7 @@ export class AttachmentService {
     return this._attachmentRepository.findById(_id)
   }
 
-  async deleteById(_id: string): Promise<Attachment> {
+  async deleteById(_id: string): Promise<Attachment | null> {
     return this._attachmentRepository.deleteById(_id)
   }
 }

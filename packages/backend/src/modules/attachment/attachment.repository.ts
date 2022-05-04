@@ -25,8 +25,11 @@ export class AttachmentRepository {
     return attachment
   }
 
-  async deleteById(id: string): Promise<Attachment> {
+  async deleteById(id: string): Promise<Attachment | null> {
     const file = await this._attachmentModel.findById(id)
+    if (!file) {
+      return null
+    }
     await fsPromises.unlink(`uploads/${file.fileNameHash}`)
     const deletedAttachment = await this._attachmentModel.findByIdAndDelete(id)
     return deletedAttachment
