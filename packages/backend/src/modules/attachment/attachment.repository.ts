@@ -1,34 +1,31 @@
 import fsPromises from 'fs/promises'
-import { CreateAttachmentDTO, AttachmentDTO } from 'shared'
-import { Attachment } from './Attachment'
-import { fileNameHash } from '../../helpers/fileNameHash'
-import { Repository } from '../../application/Repository'
-import AttachmentModel from './attachments.model'
+import { CreateAttachmentDTO } from 'shared'
+import { Attachment } from './attachment'
+import AttachmentModel from './attachment.model'
 
-export class AttachmentRepository implements Repository<AttachmentDTO> {
+export class AttachmentRepository {
   private readonly _attachmentModel
 
   constructor(attachmentModel: any) {
     this._attachmentModel = attachmentModel
   }
 
-  async create(dto: CreateAttachmentDTO): Promise<Attachment> {
-    const { originalname } = dto
-    const attachment = {
-      fileName: originalname,
-      addedDate: new Date(),
-      fileNameHash: fileNameHash(originalname)
-    }
-    const newAttachment = await this._attachmentModel.create(attachment)
-    return newAttachment
+  async createAttachment(createAttachment: CreateAttachmentDTO): Promise<Attachment> {
+    const savedAttachment = await this._attachmentModel.create({
+      taskId: createAttachment.taskId,
+      fileName: createAttachment.file.originalname,
+      fileNameHash: createAttachment.file.filename,
+      addedDate: new Date()
+    })
+    return savedAttachment
   }
 
-  async getOne(id: string): Promise<Attachment> {
+  async findById(id: string): Promise<Attachment> {
     const attachment: Attachment = await this._attachmentModel.findById(id)
     return attachment
   }
 
-  async delete(id: string): Promise<Attachment> {
+  async deleteById(id: string): Promise<Attachment> {
     const file = await this._attachmentModel.findById(id)
     await fsPromises.unlink(`uploads/${file.fileNameHash}`)
     const deletedAttachment = await this._attachmentModel.findByIdAndDelete(id)

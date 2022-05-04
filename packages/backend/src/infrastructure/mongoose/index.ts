@@ -5,10 +5,7 @@ export const connectToDatabase = async () => {
   const dbURL = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:27017/trello-clone`
 
   try {
-    await mongoose.connect(dbURL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    } as ConnectOptions)
+    await mongoose.connect(dbURL)
     console.log('Connected to database')
   } catch (error: unknown) {
     console.log('Error connecting to database: ', error)

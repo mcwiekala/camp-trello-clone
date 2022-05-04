@@ -1,8 +1,6 @@
 interface CreateAttachmentDTO {
-  fileName: string
-  fileNameHash: string
-  addedDate: Date
-  originalname: string
+  taskId: string
+  file: File
 }
 
 export default CreateAttachmentDTO

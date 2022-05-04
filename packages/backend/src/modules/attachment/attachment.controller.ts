@@ -1,6 +1,6 @@
 import express from 'express'
-import { AttachmentDTO } from 'shared'
-import { Attachment } from './Attachment'
+import { AttachmentDTO, CreateAttachmentDTO } from 'shared'
+import { Attachment } from './attachment'
 import { AttachmentService, attachmentService } from './attachment.service'
 import { AttachmentMapper, attachmentMapper } from './attachment.mapper'
 
@@ -13,22 +13,26 @@ class AttachmentsController {
     this._attachmentService = attachmentService
   }
 
-  async create(req: any, res: express.Response) {
-    const createdAttachment: Attachment = await this._attachmentService.create(req.file)
-    const dto = this._attachmentMapper.mapToDto(createdAttachment)
-    return res.status(201).json(dto)
+  async createAttachment(req: express.Request, res: express.Response) {
+    const createdAttachment: CreateAttachmentDTO = { taskId: req.body.taskId, file: req.file }
+
+    const savedAttachment: Attachment = await this._attachmentService.createAttachment(
+      createdAttachment
+    )
+    const savedAttachmentDto: AttachmentDTO = this._attachmentMapper.mapToDto(savedAttachment)
+    return res.status(201).json(savedAttachmentDto)
   }
 
-  async getOne(req: express.Request, res: express.Response) {
-    const singleAttachment: Attachment = await this._attachmentService.getOne(
+  async findById(req: express.Request, res: express.Response) {
+    const singleAttachment: Attachment = await this._attachmentService.findById(
       req.params.attachmentId
     )
     const dto: AttachmentDTO = this._attachmentMapper.mapToDto(singleAttachment)
     return res.status(200).json(dto)
   }
 
-  async delete(req: express.Request, res: express.Response): Promise<void> {
-    const deletedAttachment: Attachment = await this._attachmentService.delete(
+  async deleteById(req: express.Request, res: express.Response): Promise<void> {
+    const deletedAttachment: Attachment = await this._attachmentService.deleteById(
       req.params.attachmentId
     )
     const dto: AttachmentDTO = this._attachmentMapper.mapToDto(deletedAttachment)

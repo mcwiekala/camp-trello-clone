@@ -1,7 +1,7 @@
 import express from 'express'
-import { upload } from '../../../helpers/attachmentsHelper'
+import { upload } from '../../../modules/attachment/attachment.service'
 import { CommonRoutesConfig } from './common.routes.config'
-import attachmentController from '../../../modules/attachment/attachments.controller'
+import attachmentController from '../../../modules/attachment/attachment.controller'
 
 const V1 = '/v1'
 
@@ -15,12 +15,12 @@ export class AttachmentsRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/attachments`)
-      .post(upload.single('file'), (req, res) => attachmentController.create(req, res))
+      .post(upload.single('file'), (req, res) => attachmentController.createAttachment(req, res))
 
     this.app
       .route(`${V1}/attachments/:attachmentId`)
-      .get((req, res) => attachmentController.getOne(req, res))
-      .delete((req, res) => attachmentController.delete(req, res))
+      .get((req, res) => attachmentController.findById(req, res))
+      .delete((req, res) => attachmentController.deleteById(req, res))
 
     return this.app
   }
