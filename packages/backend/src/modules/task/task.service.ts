@@ -32,8 +32,8 @@ export class TaskService {
     return this._taskRepository.findById(_id)
   }
 
-  findByIdAndRemove(_id: string): Promise<Task> {
-    return this._taskRepository.findByIdAndRemove(_id)
+  removeById(taskId: string): Promise<Task> {
+    return this._taskRepository.removeById(taskId)
   }
 }
 
