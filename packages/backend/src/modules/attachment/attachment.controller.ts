@@ -14,10 +14,10 @@ class AttachmentsController {
   }
 
   async createAttachment(req: express.Request, res: express.Response) {
-    const createdAttachment: CreateAttachmentDTO = { taskId: req.body.taskId, file: req.file }
+    const createdAttachmentDto: CreateAttachmentDTO = { taskId: req.body.taskId, file: req.file }
 
     const savedAttachment: Attachment = await this._attachmentService.createAttachment(
-      createdAttachment
+      createdAttachmentDto
     )
     const savedAttachmentDto: AttachmentDTO = this._attachmentMapper.mapToDto(savedAttachment)
     return res.status(201).json(savedAttachmentDto)
