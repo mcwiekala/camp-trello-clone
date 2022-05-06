@@ -1,5 +1,5 @@
 import express from 'express'
-import { AttachmentDTO, CreateAttachmentDTO } from 'shared'
+import { AttachmentDTO, CreateAttachmentCommand } from 'shared'
 import { Attachment } from './attachment'
 import { AttachmentService, attachmentService } from './attachment.service'
 import { AttachmentMapper, attachmentMapper } from './attachment.mapper'
@@ -14,7 +14,8 @@ class AttachmentsController {
   }
 
   async createAttachment(req: express.Request, res: express.Response) {
-    const createdAttachmentDto: CreateAttachmentDTO = { taskId: req.body.taskId, file: req.file }
+    const { taskId } = req.body
+    const createdAttachmentDto: CreateAttachmentCommand = { taskId, file: req.file }
 
     const savedAttachment: Attachment = await this._attachmentService.createAttachment(
       createdAttachmentDto

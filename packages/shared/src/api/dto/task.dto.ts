@@ -1,4 +1,4 @@
-import AttachmentDTO from './attachment/attachment.dto'
+import AttachmentDTO from './attachment.dto'
 import UserDTO from './user.dto'
 
 interface TaskDTO {
