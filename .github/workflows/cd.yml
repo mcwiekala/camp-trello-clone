@@ -17,5 +17,9 @@ jobs:
           node-version: 16
       - name: 📦 Install dependencies
         run: yarn
+      - name: 🛠️ Build lib
+        run: yarn libbuild
+      - name: 💄 Run lint
+        run: yarn lint
       - name: 🚀 Deploy
         run: yarn deploy
