@@ -1,9 +1,10 @@
 import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import TaskModel from './task.model'
-import { Repository } from '../../application/Repository'
+// import { Repository } from '../../application/Repository'
 import { Task } from './task'
 
-export class TaskRepository implements Repository<TaskDTO> {
+// export class TaskRepository implements Repository<TaskDTO> {
+export class TaskRepository {
   private readonly _taskModel
 
   constructor(taskModel: any) {
@@ -12,6 +13,7 @@ export class TaskRepository implements Repository<TaskDTO> {
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
     const savedTask: Task = await this._taskModel.create({ title: createTaskCommand.title })
+    // eslint-disable-next-line no-console
     console.log(`Create new task in DB: ${savedTask}`)
     return savedTask
   }

@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   userIconList: {
     display: 'flex',
     alignItems: 'center',
