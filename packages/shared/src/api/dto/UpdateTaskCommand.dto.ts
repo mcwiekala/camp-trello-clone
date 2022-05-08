@@ -1,5 +1,5 @@
 export interface UpdateTaskCommandDTO {
-  title: string
+  title?: string
   description?: string
   imageCoverId?: string
   idDashboard: string

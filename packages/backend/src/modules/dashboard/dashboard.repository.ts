@@ -6,12 +6,11 @@ import { Task } from '../task/task'
 export class DashboardRepository {
   private readonly _dashboardModel = DashboardModel
 
-  // findIndexInDatabase is looking for index by id in an Array of Objects
   private findIndexOfDocument(id: string, array: { _id: ObjectId }[]): number {
-    const columnOrTaskIndex = array.findIndex(
+    const documentIndex = array.findIndex(
       (columnOrTaskID: { _id: ObjectId }) => String(columnOrTaskID._id) === id
     )
-    return columnOrTaskIndex
+    return documentIndex
   }
 
   constructor(boardModel: any) {
@@ -30,11 +29,11 @@ export class DashboardRepository {
     )
   }
 
-  async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommandDTO, id: string) {
+  async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommandDTO, taskId: string) {
     const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
     const idCol = updateTaskCommand.idColumn
     const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)
-    const taskIndex = this.findIndexOfDocument(id, dashboard.columns[columnIndex].tasks)
+    const taskIndex = this.findIndexOfDocument(taskId, dashboard.columns[columnIndex].tasks)
     const task = dashboard.columns[columnIndex].tasks[taskIndex]
     if (task.title !== updateTaskCommand.title) {
       task.title = updateTaskCommand.title
@@ -43,7 +42,7 @@ export class DashboardRepository {
       task.imageCoverId = updateTaskCommand.imageCoverId
     }
     await dashboard.save()
-    console.log(`Dashboard repository: task id: ("${id}") updated on dashboard`)
+    console.log(`Dashboard repository: task id: ("${taskId}") updated on dashboard`)
   }
 }
 

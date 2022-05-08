@@ -5,19 +5,19 @@ import dashboardRepository, { DashboardRepository } from '../dashboard/dashboard
 
 export class TaskService {
   private readonly _taskRepository: TaskRepository
-  private readonly _boardRepository: DashboardRepository
+  private readonly _dashboardRepository: DashboardRepository
 
   constructor(taskRepository: TaskRepository, boardRepository: DashboardRepository) {
     console.log('TaskService constructor')
     this._taskRepository = taskRepository
-    this._boardRepository = boardRepository
+    this._dashboardRepository = boardRepository
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
     console.log('Handling new task')
     const savedTask: Task = await this._taskRepository.createTask(createTaskCommand)
     console.log(`Service returns: ${savedTask}`)
-    this._boardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
+    this._dashboardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
     return savedTask
   }
 
@@ -29,9 +29,9 @@ export class TaskService {
     return this._taskRepository.findById(_id)
   }
 
-  async updateById(updateTaskCommand: UpdateTaskCommandDTO, id: string): Promise<Task> {
-    const updatedTask: Task = await this._taskRepository.updateById(updateTaskCommand, id)
-    this._boardRepository.updateTaskOnDashboard(updateTaskCommand, id)
+  async updateById(updateTaskCommand: UpdateTaskCommandDTO, taskId: string): Promise<Task> {
+    const updatedTask: Task = await this._taskRepository.updateById(updateTaskCommand, taskId)
+    this._dashboardRepository.updateTaskOnDashboard(updateTaskCommand, taskId)
     return updatedTask
   }
 }

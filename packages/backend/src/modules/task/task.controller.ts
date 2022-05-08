@@ -40,7 +40,7 @@ class TaskController {
       req.params.taskId
     )
     const updatedTaskDto: TaskDTO = this._taskMapper.mapToDto(updatedTask)
-    return res.status(201).send(updatedTaskDto)
+    return res.status(200).send(updatedTaskDto)
   }
 }
 
