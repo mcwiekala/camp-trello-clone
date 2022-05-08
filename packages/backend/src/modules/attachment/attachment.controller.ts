@@ -25,21 +25,24 @@ class AttachmentsController {
   }
 
   async findById(req: express.Request, res: express.Response) {
-    const singleAttachment: Attachment = await this._attachmentService.findById(
-      req.params.attachmentId
-    )
-    const dto: AttachmentDTO = this._attachmentMapper.mapToDto(singleAttachment)
-    return res.status(200).json(dto)
+    try {
+      const singleAttachment: Attachment = await this._attachmentService.findById(
+        req.params.attachmentId
+      )
+      const dto: AttachmentDTO = this._attachmentMapper.mapToDto(singleAttachment)
+      return res.status(200).json(dto)
+    } catch {
+      return res.status(404).send('Attachment with this id not found')
+    }
   }
 
   async deleteById(req: express.Request, res: express.Response) {
-    const deletedAttachment: Attachment | null = await this._attachmentService.deleteById(
-      req.params.attachmentId
-    )
-    if (!deletedAttachment) {
+    try {
+      await this._attachmentService.deleteById(req.params.attachmentId)
+      return res.status(200).send('Attachment has been successfully deleted')
+    } catch {
       return res.status(404).send('Attachment not found')
     }
-    return res.status(200).send('Attachment has been successfully deleted')
   }
 }
 

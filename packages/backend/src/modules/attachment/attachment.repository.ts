@@ -2,9 +2,8 @@ import fsPromises from 'fs/promises'
 import { CreateAttachmentCommand } from 'shared'
 import { Attachment } from './attachment'
 import AttachmentModel from './attachment.model'
-import { Repository } from '../../application/Repository'
 
-export class AttachmentRepository implements Repository<Attachment> {
+export class AttachmentRepository {
   private readonly _attachmentModel
 
   constructor(attachmentModel: any) {
@@ -32,10 +31,6 @@ export class AttachmentRepository implements Repository<Attachment> {
 
   async deleteById(id: string): Promise<Attachment> {
     const file = await this._attachmentModel.findById(id)
-    // TODO: this method shouldn't return null
-    // if (!file) {
-    //   return null
-    // }
     await fsPromises.unlink(`uploads/${file.fileNameHash}`)
     const deletedAttachment = await this._attachmentModel.findByIdAndDelete(id)
     return deletedAttachment
