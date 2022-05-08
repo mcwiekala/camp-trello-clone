@@ -2,6 +2,7 @@ import React from 'react'
 import GenerateBoard from '../logic/generateBoard'
 import GenerateImage from '../logic/generateImage'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IDashboardsContext = [any[], (dashboards: any[]) => void]
 
 const board1 = GenerateBoard
