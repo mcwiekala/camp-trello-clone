@@ -8,14 +8,17 @@ export class TaskService {
   private readonly _dashboardRepository: DashboardRepository
 
   constructor(taskRepository: TaskRepository, boardRepository: DashboardRepository) {
+    // eslint-disable-next-line no-console
     console.log('TaskService constructor')
     this._taskRepository = taskRepository
     this._dashboardRepository = boardRepository
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
+    // eslint-disable-next-line no-console
     console.log('Handling new task')
     const savedTask: Task = await this._taskRepository.createTask(createTaskCommand)
+    // eslint-disable-next-line no-console
     console.log(`Service returns: ${savedTask}`)
     this._dashboardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
     return savedTask

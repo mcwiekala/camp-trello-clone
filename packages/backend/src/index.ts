@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import http from 'http'
 import Task from './modules/task/task.model'
 import Dashboard from './modules/dashboard/Dashboard'
@@ -9,8 +9,6 @@ import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
 import { TaskRoutes } from './infrastructure/express/router/task.routes'
-
-dotenv.config()
 
 const { PORT } = process.env
 
@@ -22,11 +20,11 @@ const startServer = async () => {
 
     const tasks = await Task.find()
     const dashboard = await Dashboard.find()
-    console.log(`Founded: ${tasks.length} tasks!`)
+    console.log(`Found: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${dashboard.length} boards!`)
+    console.log(`Found: ${dashboard.length} boards!`)
     dashboard.forEach((t) => {
       console.log(`${t.toString()}`)
     })
