@@ -3,7 +3,7 @@ import 'dotenv/config'
 import passport from 'passport'
 import type express from 'express'
 import { Profile, Strategy, VerifyCallback } from 'passport-google-oauth20'
-import User from '../../modules/user/User'
+import User from '../../modules/user/user.model'
 
 export const googleCallbackURL = '/auth/google/callback'
 
