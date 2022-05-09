@@ -1,27 +1,27 @@
 /* eslint-disable no-underscore-dangle */
 export class User {
-  private _id: string
+  private _id
 
-  private _username: string
+  private _username
 
-  private _passwordHash: string
+  private _passwordHash
 
-  private _avatarId: number
+  private _avatarId
 
-  private _dashboards: unknown[]
+  private _memberOfDashboards
 
   constructor(
     id: string,
     username: string,
     passwordHash: string,
     avatarId: number,
-    dashboards: unknown[]
+    memberOfDashboards: string[]
   ) {
     this._id = id
     this._username = username
     this._passwordHash = passwordHash
     this._avatarId = avatarId
-    this._dashboards = dashboards
+    this._memberOfDashboards = memberOfDashboards
   }
 
   public get id() {
@@ -52,11 +52,11 @@ export class User {
     this._avatarId = avatarId
   }
 
-  public get dashboards() {
-    return this._dashboards
+  public get memberOfDashboards() {
+    return this._memberOfDashboards
   }
 
-  public set dashboards(dashboards: unknown[]) {
-    this._dashboards = dashboards
+  public set memberOfDashboards(memberOfDashboards: string[]) {
+    this._memberOfDashboards = memberOfDashboards
   }
 }

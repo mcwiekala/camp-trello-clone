@@ -24,7 +24,7 @@
           "response": []
         },
         {
-          "name": "Get user",
+          "name": "Get user by id",
           "request": {
             "method": "GET",
             "header": [],
@@ -63,13 +63,13 @@
           "response": []
         },
         {
-          "name": "Patch user",
+          "name": "Update user by id",
           "request": {
             "method": "PATCH",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"avatarId\": \"420\",\r\n    \"dashboards\": [\r\n        {\r\n            \"_id\": \"6230ef67edfb0cbac5e5a246\",\r\n            \"imageCoverId\": \"photo-1640622842924-fb0017b9d786\",\r\n            \"title\": \"Patched board 1\",\r\n            \"role\": \"ADMIN\",\r\n            \"users\": [\r\n                {\r\n                    \"_id\": \"6230ef6cd3594bb0cc6ed836\",\r\n                    \"avatarId\": 23\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"role\": \"NO_ACCESS\",\r\n            \"_id\": \"6230ef70b0df36f40ca5c7fa\",\r\n            \"imageCoverId\": \"photo-1640622842924-fb0017b9d788\",\r\n            \"title\": \"Patched board 2\",\r\n            \"users\": []\r\n        }\r\n    ]\r\n}",
+              "raw": "{\r\n    \"avatarId\": \"420\",\r\n    \"dashboards\": [\r\n        \"6230ef67edfb0cbac5e5a246\",\r\n        \"6230ef70b0df36f40ca5c7fa\"\r\n    ]\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -87,7 +87,7 @@
           "response": []
         },
         {
-          "name": "Delete user",
+          "name": "Delete user by id",
           "request": {
             "method": "DELETE",
             "header": [],

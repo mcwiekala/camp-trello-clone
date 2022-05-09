@@ -1,6 +1,6 @@
-export interface PatchUserDto {
+export interface UpdateUserDto {
   username?: string
   passwordHash?: string
   avatarId?: number
-  dashboards?: unknown[]
+  memberOfDashboards?: string[]
 }

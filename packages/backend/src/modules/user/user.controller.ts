@@ -1,38 +1,46 @@
 /* eslint-disable class-methods-use-this */
 import express from 'express'
-import userService from './user.service'
-import userMapper from './user.mapper'
+import userService, { UserService } from './user.service'
+import userMapper, { UserMapper } from './user.mapper'
 
-class UserController {
-  async create(req: express.Request, res: express.Response): Promise<void> {
-    const createdUser = await userService.create(req.body)
-    const dto = userMapper.mapToDto(createdUser)
+export class UserController {
+  private readonly _service
+  private readonly _mapper
+
+  constructor(mapper: UserMapper, service: UserService) {
+    this._mapper = mapper
+    this._service = service
+  }
+
+  async create(req: express.Request, res: express.Response) {
+    const createdUser = await this._service.create(req.body)
+    const dto = this._mapper.mapToDto(createdUser)
     res.status(201).json(dto)
   }
 
-  async patch(req: express.Request, res: express.Response): Promise<void> {
-    const patchedUser = await userService.patch(req.params.userId, req.body)
-    const dto = userMapper.mapToDto(patchedUser)
+  async updateOneById(req: express.Request, res: express.Response) {
+    const updatedUser = await this._service.updateOneById(req.params.userId, req.body)
+    const dto = this._mapper.mapToDto(updatedUser)
     res.status(200).json(dto)
   }
 
-  async delete(req: express.Request, res: express.Response): Promise<void> {
-    const deletedUser = await userService.delete(req.params.userId)
-    const dto = userMapper.mapToDto(deletedUser)
+  async deleteOneById(req: express.Request, res: express.Response) {
+    const deletedUser = await this._service.deleteOneById(req.params.userId)
+    const dto = this._mapper.mapToDto(deletedUser)
     res.status(200).json(dto)
   }
 
-  async getOne(req: express.Request, res: express.Response): Promise<void> {
-    const user = await userService.getOne(req.params.userId)
-    const dto = userMapper.mapToDto(user)
+  async getOneById(req: express.Request, res: express.Response) {
+    const user = await this._service.getOneById(req.params.userId)
+    const dto = this._mapper.mapToDto(user)
     res.status(200).json(dto)
   }
 
-  async getMany(req: express.Request, res: express.Response): Promise<void> {
-    const users = await userService.getMany()
-    const dtos = users.map((user) => userMapper.mapToDto(user))
+  async getAll(req: express.Request, res: express.Response) {
+    const users = await this._service.getAll()
+    const dtos = users.map((user) => this._mapper.mapToDto(user))
     res.status(200).json(dtos)
   }
 }
 
-export default new UserController()
+export default new UserController(userMapper, userService)

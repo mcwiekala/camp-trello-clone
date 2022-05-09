@@ -1,40 +1,49 @@
 /* eslint-disable no-underscore-dangle */
-import { CreateUserDto, PatchUserDto } from 'shared'
+import { CreateUserDto, UpdateUserDto } from 'shared'
+import mongoose from 'mongoose'
 import { User } from './user'
-import UserModel from './user.model'
-import UserMapper from './user.mapper'
+import userModel from './user.model'
 
-class UserRepository {
+export class UserRepository {
   private readonly _model
 
-  constructor() {
-    this._model = UserModel
+  constructor(model: mongoose.Model<User>) {
+    this._model = model
   }
 
   async create(dto: CreateUserDto): Promise<User> {
     const newUser = await this._model.create(dto)
-    return UserMapper.mapToDomain(newUser)
+    return newUser
   }
 
-  async patch(id: string, dto: PatchUserDto): Promise<User> {
+  async updateOneById(id: string, dto: UpdateUserDto): Promise<User> {
     const patchedUser = await this._model.findByIdAndUpdate(id, dto, { new: true })
-    return UserMapper.mapToDomain(patchedUser)
+    if (patchedUser === null) {
+      throw new Error()
+    }
+    return patchedUser
   }
 
-  async getOne(id: string): Promise<User> {
+  async getOneById(id: string): Promise<User> {
     const user = await this._model.findById(id)
-    return UserMapper.mapToDomain(user)
+    if (user === null) {
+      throw new Error()
+    }
+    return user
   }
 
-  async getMany(): Promise<User[]> {
+  async getAll(): Promise<User[]> {
     const users = await this._model.find({})
-    return users.map((user) => UserMapper.mapToDomain(user))
+    return users
   }
 
-  async delete(id: string): Promise<User> {
+  async deleteOneById(id: string): Promise<User> {
     const deletedUser = await this._model.findByIdAndDelete(id)
-    return UserMapper.mapToDomain(deletedUser)
+    if (deletedUser === null) {
+      throw new Error()
+    }
+    return deletedUser
   }
 }
 
-export default new UserRepository()
+export default new UserRepository(userModel)

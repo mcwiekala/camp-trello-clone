@@ -3,5 +3,5 @@ export interface UserDto {
   username: string
   passwordHash: string
   avatarId: number
-  dashboards: unknown[]
+  memberOfDashboards: string[]
 }

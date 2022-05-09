@@ -4,9 +4,9 @@ import { UserDto } from 'shared'
 
 import { User } from './user'
 
-class UserMapper {
+export class UserMapper {
   public mapToDomain(raw: any): User {
-    return new User(raw._id, raw.username, raw.passwordHash, raw.avatarId, raw.dashboards)
+    return new User(raw._id, raw.username, raw.passwordHash, raw.avatarId, raw.memberOfDashboards)
   }
 
   public mapToPersistance(user: User): any {
@@ -15,7 +15,7 @@ class UserMapper {
       username: user.username,
       passwordHash: user.passwordHash,
       avatarId: user.avatarId,
-      dashboards: user.dashboards
+      memberOfDashboards: user.memberOfDashboards
     }
   }
 
@@ -25,7 +25,7 @@ class UserMapper {
       username: user.username,
       passwordHash: user.passwordHash,
       avatarId: user.avatarId,
-      dashboards: user.dashboards
+      memberOfDashboards: user.memberOfDashboards
     }
   }
 }
