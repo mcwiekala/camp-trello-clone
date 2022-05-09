@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import { AttachmentDTO, CreateAttachmentCommand } from 'shared'
 import { Attachment } from './attachment'
 import { AttachmentService, attachmentService } from './attachment.service'
@@ -31,6 +32,20 @@ class AttachmentsController {
       )
       const dto: AttachmentDTO = this._attachmentMapper.mapToDto(singleAttachment)
       return res.status(200).json(dto)
+    } catch {
+      return res.status(404).send('Attachment with this id not found')
+    }
+  }
+
+  async downloadFile(req: express.Request, res: express.Response) {
+    const url = path.join('uploads/')
+    try {
+      const singleAttachment: Attachment = await this._attachmentService.findById(
+        req.params.attachmentId
+      )
+      return res
+        .status(200)
+        .download(url + singleAttachment.fileNameHash, singleAttachment.fileName)
     } catch {
       return res.status(404).send('Attachment with this id not found')
     }

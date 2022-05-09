@@ -22,6 +22,10 @@ export class AttachmentsRoutes extends CommonRoutesConfig {
       .get((req, res) => attachmentController.findById(req, res))
       .delete((req, res) => attachmentController.deleteById(req, res))
 
+    this.app
+      .route(`${V1}/attachments/download/:attachmentId`)
+      .get((req, res) => attachmentController.downloadFile(req, res))
+
     return this.app
   }
 }

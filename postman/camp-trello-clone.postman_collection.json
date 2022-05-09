@@ -1,185 +1,279 @@
 {
-  "info": {
-    "_postman_id": "ae8d9ba5-1ed8-4da6-8196-268c6168b855",
-    "name": "camp-trello-clone",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Attachment",
-      "item": [
-        {
-          "name": "Create attachment",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "file",
-                  "type": "file",
-                  "src": []
-                },
-                {
-                  "key": "taskId",
-                  "value": "",
-                  "type": "text"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:{{PORT}}/v1/attachments",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "{{PORT}}",
-              "path": ["v1", "attachments"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get specific attachment",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:{{PORT}}/v1/attachments/:id",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "{{PORT}}",
-              "path": ["v1", "attachments", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete specific attachment",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:{{PORT}}/v1/attachments/:id",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "{{PORT}}",
-              "path": ["v1", "attachments", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Hello world",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:{{PORT}}/v1/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "{{PORT}}",
-          "path": ["v1", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get all tasks",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:{{PORT}}/v1/tasks/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "{{PORT}}",
-          "path": ["v1", "tasks", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get specific task",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:{{PORT}}/v1/tasks/625fe5214c282e0ce372032f",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "{{PORT}}",
-          "path": ["v1", "tasks", "625fe5214c282e0ce372032f"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Post task column 1",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:{{PORT}}/v1/tasks/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "{{PORT}}",
-          "path": ["v1", "tasks", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Post task column 2",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:{{PORT}}/v1/tasks/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "{{PORT}}",
-          "path": ["v1", "tasks", ""]
-        }
-      },
-      "response": []
-    }
-  ],
-  "variable": [
-    {
-      "key": "PORT",
-      "value": "8085"
-    }
-  ]
+	"info": {
+		"_postman_id": "ae8d9ba5-1ed8-4da6-8196-268c6168b855",
+		"name": "camp-trello-clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "Create attachment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "test.jpg"
+								},
+								{
+									"key": "taskId",
+									"value": "kanapka",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/download/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								"download",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete specific attachment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hello world",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"tasks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/625fe5214c282e0ce372032f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"tasks",
+						"625fe5214c282e0ce372032f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post task column 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"tasks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post task column 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{PORT}}/v1/tasks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"v1",
+						"tasks",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PORT",
+			"value": "8800"
+		}
+	]
 }
