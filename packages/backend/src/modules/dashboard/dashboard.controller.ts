@@ -30,9 +30,14 @@ class DashboardController {
   }
 
   async getDashboardById(req: express.Request, res: express.Response) {
-    const dashboard: Dashboard = await dashboardService.getDashboard(req.params.id)
-    const dashboardDTO: DashboardDTO = this.dashboardMapper.mapToDto(dashboard)
-    return res.status(200).json(dashboardDTO)
+    try {
+      const dashboard: Dashboard = await dashboardService.getDashboard(req.params.id)
+      const dashboardDTO: DashboardDTO = this.dashboardMapper.mapToDto(dashboard)
+      return res.status(200).json(dashboardDTO)
+    } catch (e) {
+      console.log(e)
+      return res.status(400).send()
+    }
   }
 }
 

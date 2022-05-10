@@ -11,8 +11,6 @@ import { CommonRoutesConfig } from './infrastructure/express/router/common.route
 import { TaskRoutes } from './infrastructure/express/router/task.routes'
 import { DashboardRoutes } from './infrastructure/express/router/dashboard.routes'
 
-dotenv.config()
-
 const { PORT } = process.env
 
 const startServer = async () => {

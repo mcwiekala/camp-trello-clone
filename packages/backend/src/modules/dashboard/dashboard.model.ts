@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import { DashboardVisibility } from 'shared'
-import { Dashboard as DashboardB } from './dashboard'
 
 const { ObjectId } = mongoose.Types
 
