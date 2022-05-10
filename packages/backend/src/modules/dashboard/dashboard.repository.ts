@@ -57,6 +57,7 @@ export class DashboardRepository {
 
     dashboard.columns[columnIndex].tasks.push(savedTask)
     await dashboard.save()
+    // eslint-disable-next-line no-console
     console.log(
       `Dashboard repository: task ${savedTask} added to idDashboard: ("${createTaskCommand.idDashboard}"), idColumn: ("${createTaskCommand.idColumn}")`
     )

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import http from 'http'
 import { Dashboard } from './modules/dashboard/dashboard.model'
 import Task from './modules/task/task.model'
@@ -22,13 +22,13 @@ const startServer = async () => {
     console.log('Print data in DB')
 
     const tasks = await Task.find()
-    const dashboards = await Dashboard.find()
+    const dashboard = await Dashboard.find()
     console.log(`Founded: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)
     })
-    console.log(`Founded: ${dashboards.length} boards!`)
-    dashboards.forEach((t) => {
+    console.log(`Founded: ${dashboard.length} boards!`)
+    dashboard.forEach((t) => {
       console.log(`${t.toString()}`)
     })
 
