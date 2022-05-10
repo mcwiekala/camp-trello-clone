@@ -1,9 +1,12 @@
+import DashboardVisibility from '../DashboardVisibility'
+
 interface DashboardDTO {
-  _id?: string
+  id: string
   title: string
   description?: string
   imageCoverUrl?: string
   createdAt?: Date
+  status: DashboardVisibility
 }
 
 export default DashboardDTO
