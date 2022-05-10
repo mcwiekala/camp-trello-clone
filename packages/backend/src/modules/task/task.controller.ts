@@ -1,5 +1,4 @@
-import { CreateTaskCommandDTO } from 'packages/shared/src/api/dto/CreateTaskCommand.dto'
-import TaskDTO from 'packages/shared/src/api/dto/task.dto'
+import { CreateTaskCommandDTO, TaskDTO } from 'shared'
 import express from 'express'
 import { Task } from './task'
 import { taskMapper, TaskMapper } from './task.mapper'

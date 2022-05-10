@@ -8,6 +8,7 @@ import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
 import Attachment from './modules/attachment/Attachment'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
+import { TaskRoutes } from './infrastructure/express/router/task.routes'
 import { DashboardRoutes } from './infrastructure/express/router/dashboard.routes'
 
 dotenv.config()
@@ -49,6 +50,7 @@ const startServer = async () => {
   const server: http.Server = http.createServer(app)
   const routes: Array<CommonRoutesConfig> = []
 
+  routes.push(new TaskRoutes(app))
   routes.push(new DashboardRoutes(app))
 
   console.log(`Listening to port: ${PORT}`)

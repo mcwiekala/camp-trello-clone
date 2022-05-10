@@ -2,7 +2,7 @@ import { CreateTaskCommandDTO, CreateDashboardCommand } from 'shared'
 import mongoose from 'mongoose'
 import { Dashboard as DashboardModel } from './dashboard.model'
 import { Task } from '../task/task'
-import { Dashboard } from './Dashboard'
+import { Dashboard } from './dashboard'
 
 export class DashboardRepository {
   private readonly _dashboardModel
@@ -17,7 +17,7 @@ export class DashboardRepository {
       _id: new mongoose.Types.ObjectId(),
       title: createDashboardCommand.title,
       description: createDashboardCommand.description,
-      imageCoverUrl: createDashboardCommand.coverImageUrl,
+      imageCoverUrl: createDashboardCommand.imageCoverUrl,
       createdAt: new Date(),
       status: createDashboardCommand.status,
       users: [],
@@ -35,7 +35,10 @@ export class DashboardRepository {
   }
 
   async getDashboard(_id: string): Promise<Dashboard> {
-    const dashboard: Dashboard = await this._dashboardModel.findById(_id)
+    const dashboard: Dashboard | null = await this._dashboardModel.findById(_id)
+    if (dashboard === null) {
+      throw new Error(`No dashboard found with id ${_id}`)
+    }
     console.log(dashboard)
     return dashboard
   }
@@ -45,9 +48,11 @@ export class DashboardRepository {
     savedTask: Task
   ): Promise<Task> {
     const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)
-    const idCol = { idColumn: createTaskCommand.idColumn }
+    if (dashboard === null) {
+      throw new Error(`No dashboard found with id ${createTaskCommand.idDashboard}`)
+    }
     const columnIndex = dashboard.columns.findIndex(
-      (x: { _id: string }) => String(x._id) === idCol.idColumn
+      (x: { _id: string }) => String(x._id) === createTaskCommand.idColumn
     )
 
     dashboard.columns[columnIndex].tasks.push(savedTask)

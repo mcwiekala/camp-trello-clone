@@ -2,6 +2,7 @@ import express from 'express'
 import { CommonRoutesConfig } from './common.routes.config'
 import dashboardController from '../../../modules/dashboard/dashboard.controller'
 
+// TODO change to value from config
 const V1 = '/v1'
 
 export class DashboardRoutes extends CommonRoutesConfig {
@@ -18,7 +19,7 @@ export class DashboardRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/dashboards/:id`)
-      .get((req, res) => dashboardController.getDashboard(req, res))
+      .get((req, res) => dashboardController.getDashboardById(req, res))
 
     return this.app
   }

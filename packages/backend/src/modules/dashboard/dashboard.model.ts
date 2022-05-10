@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import { DashboardVisibility } from 'shared'
+import { Dashboard as DashboardB } from './dashboard'
 
 const { ObjectId } = mongoose.Types
 
@@ -25,8 +26,9 @@ const dashboardSchema = new mongoose.Schema({
   imageCoverUrl: String,
   createdAt: Date,
   status: {
-    type: String,
-    enum: DashboardVisibility
+    type: Object,
+    enum: DashboardVisibility,
+    default: DashboardVisibility.PUBLIC
   },
   users: [
     {

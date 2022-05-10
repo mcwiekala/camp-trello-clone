@@ -1,6 +1,6 @@
 import { CreateDashboardCommand } from 'shared'
 import { dashboardRepository, DashboardRepository } from './dashboard.repository'
-import { Dashboard } from './Dashboard'
+import { Dashboard } from './dashboard'
 
 export class DashboardService {
   private readonly dashboardRepository: DashboardRepository
