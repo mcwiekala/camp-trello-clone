@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongoose'
-import { CreateTaskCommandDTO, UpdateTaskCommandDTO } from 'shared'
+import { CreateTaskCommandDTO, UpdateTaskCommand } from 'shared'
 import DashboardModel from './Dashboard'
 import { Task } from '../task/task'
 
@@ -30,7 +30,7 @@ export class DashboardRepository {
     )
   }
 
-  async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommandDTO, taskId: string) {
+  async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommand, taskId: string) {
     const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
     const idCol = updateTaskCommand.idColumn
     const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)

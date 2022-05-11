@@ -1,4 +1,4 @@
-import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommandDTO } from 'shared'
+import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
 import { Task } from './task'
 import { taskRepository, TaskRepository } from './task.repository'
 import dashboardRepository, { DashboardRepository } from '../dashboard/dashboard.repository'
@@ -36,7 +36,7 @@ export class TaskService {
     return this._taskRepository.removeById(taskId)
   }
 
-  async updateById(updateTaskCommand: UpdateTaskCommandDTO, taskId: string): Promise<Task> {
+  async updateById(updateTaskCommand: UpdateTaskCommand, taskId: string): Promise<Task> {
     const updatedTask: Task = await this._taskRepository.updateById(updateTaskCommand, taskId)
     this._dashboardRepository.updateTaskOnDashboard(updateTaskCommand, taskId)
     return updatedTask

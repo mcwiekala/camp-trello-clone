@@ -1,4 +1,4 @@
-import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommandDTO } from 'shared'
+import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
 import express from 'express'
 import { Task } from './task'
 import { taskMapper, TaskMapper } from './task.mapper'
@@ -42,7 +42,7 @@ class TaskController {
   }
 
   async updateById(req: express.Request, res: express.Response) {
-    const updateTaskCommand: UpdateTaskCommandDTO = req.body
+    const updateTaskCommand: UpdateTaskCommand = req.body
     const updatedTask: Task = await this._taskService.updateById(
       updateTaskCommand,
       req.params.taskId
