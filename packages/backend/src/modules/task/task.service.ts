@@ -32,6 +32,10 @@ export class TaskService {
     return this._taskRepository.findById(_id)
   }
 
+  removeById(taskId: string): Promise<Task> {
+    return this._taskRepository.removeById(taskId)
+  }
+
   async updateById(updateTaskCommand: UpdateTaskCommandDTO, taskId: string): Promise<Task> {
     const updatedTask: Task = await this._taskRepository.updateById(updateTaskCommand, taskId)
     this._dashboardRepository.updateTaskOnDashboard(updateTaskCommand, taskId)

@@ -28,6 +28,11 @@ export class TaskRepository {
     return task
   }
 
+  async removeById(taskId: string): Promise<Task> {
+    const task: Task = await this._taskModel.findByIdAndRemove(taskId)
+    return task
+  }
+
   async updateById(updateTaskCommand: UpdateTaskCommandDTO, id: string): Promise<Task> {
     const updatedTask: Task = this._taskModel.updateOne(
       { _id: id },

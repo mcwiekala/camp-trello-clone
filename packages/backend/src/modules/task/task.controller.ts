@@ -33,6 +33,14 @@ class TaskController {
     return res.status(201).send(taskDto)
   }
 
+  async removeById(req: express.Request, res: express.Response) {
+    const task: Task | null = await this._taskService.removeById(req.params.taskId)
+    if (!task) {
+      return res.status(404).send('Task not found.')
+    }
+    return res.status(200).send('Task has been successfully removed.')
+  }
+
   async updateById(req: express.Request, res: express.Response) {
     const updateTaskCommand: UpdateTaskCommandDTO = req.body
     const updatedTask: Task = await this._taskService.updateById(

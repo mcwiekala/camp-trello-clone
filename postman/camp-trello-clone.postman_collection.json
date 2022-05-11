@@ -1,10 +1,132 @@
 {
 	"info": {
-		"_postman_id": "bb8b5086-c075-49bb-a525-5676e68009d5",
+		"_postman_id": "ae8d9ba5-1ed8-4da6-8196-268c6168b855",
 		"name": "camp-trello-clone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "Create attachment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "test.jpg"
+								},
+								{
+									"key": "taskId",
+									"value": "kanapka",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/download/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								"download",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete specific attachment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Hello world",
 			"request": {
@@ -74,7 +196,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idBoard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,7 +226,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idBoard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
+					"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -127,11 +249,11 @@
 			},
 			"response": []
 		},
-		{
+        {
 			"name": "Update task",
 			"request": {
-				"method": "PATCH",
 				"header": [],
+				"method": "PATCH",
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"title\": \"updatedTask\",\n\t\"description\": \"new description, board\",\n    \"imageCoverId\": \"2\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
@@ -145,17 +267,44 @@
 					"raw": "http://localhost:{{PORT}}/v1/tasks/62630a7109a15fcd6ffa7a44",
 					"protocol": "http",
 					"host": [
-						"localhost"
 					],
+						"localhost"
 					"port": "{{PORT}}",
 					"path": [
-						"v1",
 						"tasks",
+						"v1",
 						"62630a7109a15fcd6ffa7a44"
 					]
-				}
+			    }
 			},
 			"response": []
 		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PORT",
+			"value": "8800"
+		}
 	]
+		
 }
