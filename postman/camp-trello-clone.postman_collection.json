@@ -1,12 +1,295 @@
 {
 	"info": {
-		"_postman_id": "294b5d5b-01ba-4d97-a312-6e0dc9614904",
+		"_postman_id": "1815acef-4098-4289-bc99-c83dc8134ecf",
 		"name": "camp-trello-clone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "dashboard",
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "Create attachment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "test.jpg"
+								},
+								{
+									"key": "taskId",
+									"value": "kanapka",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download specific attachment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/download/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								"download",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete specific attachment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/attachments/:attachmentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"attachments",
+								":attachmentId"
+							],
+							"variable": [
+								{
+									"key": "attachmentId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Post task column 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post task column 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/tasks/:taskId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"tasks",
+								":taskId"
+							],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post task",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"dashboard\",\n\t\"description\": \"some description\",\n    \"imageCoverUrl\": \"https://picsum.photos/seed/12600cf1-c154-40db-b3af-e29d3f49944c/300/200\",\n    \"createdAt\": \"2022-04-12T19:24:41.578+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/dashboards/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"dashboards",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
 			"item": [
 				{
 					"name": "Get dashboard by id",
@@ -105,101 +388,32 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "task",
-			"item": [
-				{
-					"name": "Get all tasks",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{PORT}}/v1/tasks/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"v1",
-								"tasks",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get specific task",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{PORT}}/v1/tasks/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"v1",
-								"tasks",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Post task",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"dashboard\",\n\t\"description\": \"some description\",\n    \"imageCoverUrl\": \"https://picsum.photos/seed/12600cf1-c154-40db-b3af-e29d3f49944c/300/200\",\n    \"createdAt\": \"2022-04-12T19:24:41.578+00:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{PORT}}/v1/dashboards/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"v1",
-								"dashboards",
-								""
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PORT",
+			"value": "8800"
 		}
 	]
 }
