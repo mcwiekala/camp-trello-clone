@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { Status } from './Status'
+import { DashboardVisibility } from 'shared'
 
 const { ObjectId } = mongoose.Types
 
@@ -22,10 +22,12 @@ const dashboardSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
   description: String,
+  imageCoverUrl: String,
   createdAt: Date,
   status: {
-    type: String,
-    enum: Status
+    type: Object,
+    enum: DashboardVisibility,
+    default: DashboardVisibility.PUBLIC
   },
   users: [
     {
@@ -37,4 +39,5 @@ const dashboardSchema = new mongoose.Schema({
   columns: [columnSchema]
 })
 const Dashboard = mongoose.model('Dashboard', dashboardSchema)
-export default Dashboard
+const DashboardColumn = mongoose.model('DashboardColumn', columnSchema)
+export { Dashboard, DashboardColumn }

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import 'dotenv/config'
 import http from 'http'
+import { Dashboard } from './modules/dashboard/dashboard.model'
 import Task from './modules/task/task.model'
-import Dashboard from './modules/dashboard/Dashboard'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/User'
@@ -10,6 +10,7 @@ import Attachment from './modules/attachment/attachment.model'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
 import { TaskRoutes } from './infrastructure/express/router/task.routes'
 import { AttachmentsRoutes } from './infrastructure/express/router/attachment.routes'
+import { DashboardRoutes } from './infrastructure/express/router/dashboard.routes'
 
 const { PORT } = process.env
 
@@ -50,6 +51,7 @@ const startServer = async () => {
 
   routes.push(new TaskRoutes(app))
   routes.push(new AttachmentsRoutes(app))
+  routes.push(new DashboardRoutes(app))
 
   console.log(`Listening to port: ${PORT}`)
   server.listen(PORT, () => {
