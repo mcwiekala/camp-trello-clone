@@ -1,5 +1,5 @@
 import AttachmentDTO from './attachment.dto'
-import { UserDto } from './user/user.dto'
+import { UserDto } from './user.dto'
 
 interface TaskDTO {
   id: string

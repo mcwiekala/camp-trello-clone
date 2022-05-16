@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { CreateUserDto, UpdateUserDto } from 'shared'
+import { CreateUserCommand, UpdateUserCommand } from 'shared'
 import { User } from './user'
 import userRepository, { UserRepository } from './user.repository'
 
@@ -10,11 +10,11 @@ export class UserService {
     this._repository = repository
   }
 
-  async create(dto: CreateUserDto): Promise<User> {
+  async create(dto: CreateUserCommand): Promise<User> {
     return this._repository.create(dto)
   }
 
-  async updateOneById(id: string, dto: UpdateUserDto): Promise<User> {
+  async updateOneById(id: string, dto: UpdateUserCommand): Promise<User> {
     return this._repository.updateOneById(id, dto)
   }
 

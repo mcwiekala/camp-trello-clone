@@ -1,4 +1,4 @@
-import { UserDto } from './user/user.dto'
+import { UserDto } from './user.dto'
 
 // TODO: create CommentSchema as emmbeded document in Task Model
 interface CommentTypeDTO {

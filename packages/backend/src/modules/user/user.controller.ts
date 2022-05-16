@@ -1,11 +1,14 @@
+/* eslint-disable no-console */
 /* eslint-disable class-methods-use-this */
 import express from 'express'
+import { UserDto, CreateUserCommand, UpdateUserCommand } from 'shared'
 import userService, { UserService } from './user.service'
 import userMapper, { UserMapper } from './user.mapper'
+import { User } from './user'
 
 export class UserController {
-  private readonly _service
-  private readonly _mapper
+  private readonly _service: UserService
+  private readonly _mapper: UserMapper
 
   constructor(mapper: UserMapper, service: UserService) {
     this._mapper = mapper
@@ -13,32 +16,67 @@ export class UserController {
   }
 
   async create(req: express.Request, res: express.Response) {
-    const createdUser = await this._service.create(req.body)
-    const dto = this._mapper.mapToDto(createdUser)
-    res.status(201).json(dto)
+    try {
+      const createUserCommand: CreateUserCommand = req.body
+      const createdUser: User = await this._service.create(createUserCommand)
+      const dto: UserDto = this._mapper.mapToDto(createdUser)
+      res.status(201).json(dto)
+    } catch (e) {
+      if (e instanceof Error) console.log(`UserController: error creating user: ${e.message}`)
+      res.status(400)
+    }
   }
 
   async updateOneById(req: express.Request, res: express.Response) {
-    const updatedUser = await this._service.updateOneById(req.params.userId, req.body)
-    const dto = this._mapper.mapToDto(updatedUser)
-    res.status(200).json(dto)
+    try {
+      const updateUserCommand: UpdateUserCommand = req.body
+      const updatedUser: User = await this._service.updateOneById(
+        req.params.userId,
+        updateUserCommand
+      )
+      const dto: UserDto = this._mapper.mapToDto(updatedUser)
+      res.status(200).json(dto)
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(
+          `UserController: error updating user with id ${req.params.userId}: ${e.message}`
+        )
+      }
+      res.status(400)
+    }
   }
 
   async deleteOneById(req: express.Request, res: express.Response) {
-    const deletedUser = await this._service.deleteOneById(req.params.userId)
-    const dto = this._mapper.mapToDto(deletedUser)
-    res.status(200).json(dto)
+    try {
+      const deletedUser: User = await this._service.deleteOneById(req.params.userId)
+      const dto: UserDto = this._mapper.mapToDto(deletedUser)
+      res.status(200).json(dto)
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(
+          `UserController: error deleting user with id ${req.params.userId}: ${e.message}`
+        )
+      }
+      res.status(400)
+    }
   }
 
   async getOneById(req: express.Request, res: express.Response) {
-    const user = await this._service.getOneById(req.params.userId)
-    const dto = this._mapper.mapToDto(user)
-    res.status(200).json(dto)
+    try {
+      const user: User = await this._service.getOneById(req.params.userId)
+      const dto: UserDto = this._mapper.mapToDto(user)
+      res.status(200).json(dto)
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(`UserController: error getting user with id ${req.params.userId}: ${e.message}`)
+      }
+      res.status(404)
+    }
   }
 
   async getAll(req: express.Request, res: express.Response) {
-    const users = await this._service.getAll()
-    const dtos = users.map((user) => this._mapper.mapToDto(user))
+    const users: User[] = await this._service.getAll()
+    const dtos: UserDto[] = users.map((user) => this._mapper.mapToDto(user))
     res.status(200).json(dtos)
   }
 }

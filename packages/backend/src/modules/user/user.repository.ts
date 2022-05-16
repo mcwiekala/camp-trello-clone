@@ -1,23 +1,23 @@
 /* eslint-disable no-underscore-dangle */
-import { CreateUserDto, UpdateUserDto } from 'shared'
+import { CreateUserCommand, UpdateUserCommand } from 'shared'
 import mongoose from 'mongoose'
 import { User } from './user'
 import userModel from './user.model'
 
 export class UserRepository {
-  private readonly _model
+  private readonly _model: mongoose.Model<User>
 
   constructor(model: mongoose.Model<User>) {
     this._model = model
   }
 
-  async create(dto: CreateUserDto): Promise<User> {
-    const newUser = await this._model.create(dto)
+  async create(dto: CreateUserCommand): Promise<User> {
+    const newUser: User = await this._model.create(dto)
     return newUser
   }
 
-  async updateOneById(id: string, dto: UpdateUserDto): Promise<User> {
-    const patchedUser = await this._model.findByIdAndUpdate(id, dto, { new: true })
+  async updateOneById(id: string, dto: UpdateUserCommand): Promise<User> {
+    const patchedUser: User | null = await this._model.findByIdAndUpdate(id, dto, { new: true })
     if (patchedUser === null) {
       throw new Error()
     }
@@ -25,7 +25,7 @@ export class UserRepository {
   }
 
   async getOneById(id: string): Promise<User> {
-    const user = await this._model.findById(id)
+    const user: User | null = await this._model.findById(id)
     if (user === null) {
       throw new Error()
     }
@@ -33,12 +33,12 @@ export class UserRepository {
   }
 
   async getAll(): Promise<User[]> {
-    const users = await this._model.find({})
+    const users: User[] = await this._model.find({})
     return users
   }
 
   async deleteOneById(id: string): Promise<User> {
-    const deletedUser = await this._model.findByIdAndDelete(id)
+    const deletedUser: User | null = await this._model.findByIdAndDelete(id)
     if (deletedUser === null) {
       throw new Error()
     }

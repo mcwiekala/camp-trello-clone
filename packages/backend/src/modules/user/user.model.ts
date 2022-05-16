@@ -1,11 +1,28 @@
 import mongoose from 'mongoose'
+import { Role } from './role'
 
 const userSchema = new mongoose.Schema({
   username: String,
-  passwordHash: String,
-  avatarId: Number,
-  memberOfDashboards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dashboard' }]
+  googleId: String,
+  avatarUrl: String,
+  email: String,
+  dashboards: [
+    {
+      imageCoverId: String,
+      title: String,
+      role: {
+        type: String,
+        enum: Role,
+        default: Role.NO_ACCESS
+      },
+      users: [
+        {
+          avatarId: Number
+        }
+      ]
+    }
+  ]
 })
 
-const UserModel = mongoose.model('User', userSchema)
-export default UserModel
+const User = mongoose.model('User', userSchema)
+export default User

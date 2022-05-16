@@ -4,24 +4,18 @@ export class User {
 
   private _username
 
-  private _passwordHash
+  private _googleId
 
-  private _avatarId
+  private _avatarUrl
 
-  private _memberOfDashboards
+  private _email
 
-  constructor(
-    id: string,
-    username: string,
-    passwordHash: string,
-    avatarId: number,
-    memberOfDashboards: string[]
-  ) {
+  constructor(id: string, username: string, googleId: string, avatarUrl: string, email: string) {
     this._id = id
     this._username = username
-    this._passwordHash = passwordHash
-    this._avatarId = avatarId
-    this._memberOfDashboards = memberOfDashboards
+    this._googleId = googleId
+    this._avatarUrl = avatarUrl
+    this._email = email
   }
 
   public get id() {
@@ -36,27 +30,27 @@ export class User {
     this._username = username
   }
 
-  public get passwordHash() {
-    return this._passwordHash
+  public get googleId() {
+    return this._googleId
   }
 
-  public set passwordHash(passwordHash: string) {
-    this._passwordHash = passwordHash
+  public set googleId(googleId: string) {
+    this._googleId = googleId
   }
 
-  public get avatarId() {
-    return this._avatarId
+  public get avatarUrl() {
+    return this._avatarUrl
   }
 
-  public set avatarId(avatarId: number) {
-    this._avatarId = avatarId
+  public set avatarUrl(avatarUrl: string) {
+    this._avatarUrl = avatarUrl
   }
 
-  public get memberOfDashboards() {
-    return this._memberOfDashboards
+  public get email() {
+    return this._email
   }
 
-  public set memberOfDashboards(memberOfDashboards: string[]) {
-    this._memberOfDashboards = memberOfDashboards
+  public set email(email: string) {
+    this._email = email
   }
 }
