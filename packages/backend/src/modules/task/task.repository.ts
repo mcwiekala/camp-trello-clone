@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
 import TaskModel from './task.model'
 // import { Repository } from '../../application/Repository'
@@ -7,7 +8,7 @@ import { Task } from './task'
 export class TaskRepository {
   private readonly _taskModel
 
-  constructor(taskModel: any) {
+  constructor(taskModel: mongoose.Model<Task>) {
     this._taskModel = taskModel
   }
 
