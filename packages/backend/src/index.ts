@@ -6,10 +6,11 @@ import Dashboard from './modules/dashboard/Dashboard'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
 import User from './modules/user/user.model'
-import Attachment from './modules/attachment/Attachment'
+import Attachment from './modules/attachment/attachment.model'
 import { CommonRoutesConfig } from './infrastructure/express/router/common.routes.config'
 import { TaskRoutes } from './infrastructure/express/router/task.routes'
 import { UserRoutes } from './infrastructure/express/router/user.routes'
+import { AttachmentsRoutes } from './infrastructure/express/router/attachment.routes'
 
 const { PORT } = process.env
 
@@ -50,6 +51,7 @@ const startServer = async () => {
 
   routes.push(new TaskRoutes(app))
   routes.push(new UserRoutes(app))
+  routes.push(new AttachmentsRoutes(app))
 
   console.log(`Listening to port: ${PORT}`)
   server.listen(PORT, () => {

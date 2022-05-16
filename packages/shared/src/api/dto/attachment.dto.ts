@@ -1,8 +1,9 @@
 interface AttachmentDTO {
-  id?: string
-  fileName?: string
-  itemUrl?: string
-  date?: Date
+  id: string
+  taskId: string
+  fileName: string
+  fileNameHash: string
+  addedDate: Date
 }
 
 export default AttachmentDTO
