@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "ae8d9ba5-1ed8-4da6-8196-268c6168b855",
+    "_postman_id": "f45f3eca-50c1-4bd0-b6ea-36895888b7bb",
     "name": "camp-trello-clone",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -45,7 +45,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\": \"juano_pablo\",\r\n    \"passwordHash\": \"1234567890\",\r\n    \"avatarId\": \"2137\"\r\n}",
+              "raw": "{\r\n    \"username\": \"juano_pablo\",\r\n    \"googleId\": \"2137\",\r\n    \"avatarUrl\": \"https://www.wykop.pl/cdn/c3201142/comment_R65WinWZUSqiDQIKhICZHFJyotYMDpRw.jpg\",\r\n    \"email\": \"juano@pablo.com\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -69,7 +69,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"avatarId\": \"420\",\r\n    \"dashboards\": [\r\n        \"6230ef67edfb0cbac5e5a246\",\r\n        \"6230ef70b0df36f40ca5c7fa\"\r\n    ]\r\n}",
+              "raw": "{\r\n    \"googleId\": \"420\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
