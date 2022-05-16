@@ -23,7 +23,7 @@ export class UserController {
       res.status(201).json(dto)
     } catch (e) {
       if (e instanceof Error) console.log(`UserController: error creating user: ${e.message}`)
-      res.status(400)
+      res.status(400).send('Error creating user')
     }
   }
 
@@ -42,7 +42,7 @@ export class UserController {
           `UserController: error updating user with id ${req.params.userId}: ${e.message}`
         )
       }
-      res.status(400)
+      res.status(400).send('Error updating user')
     }
   }
 
@@ -57,7 +57,7 @@ export class UserController {
           `UserController: error deleting user with id ${req.params.userId}: ${e.message}`
         )
       }
-      res.status(400)
+      res.status(400).send('Error deleting user')
     }
   }
 
@@ -70,7 +70,7 @@ export class UserController {
       if (e instanceof Error) {
         console.log(`UserController: error getting user with id ${req.params.userId}: ${e.message}`)
       }
-      res.status(404)
+      res.status(404).send('Error getting user')
     }
   }
 
