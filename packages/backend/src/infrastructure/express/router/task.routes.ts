@@ -20,14 +20,14 @@ export class TaskRoutes extends CommonRoutesConfig {
 
     this.app
       .route(`${V1}/tasks`)
-      .get(JwtGuard, (req, res) => taskController.findAll(req, res))
-      .post(JwtGuard, (req, res) => taskController.createTask(req, res))
+      .get((req, res) => taskController.findAll(req, res))
+      .post((req, res) => taskController.createTask(req, res))
 
     this.app
       .route(`${V1}/tasks/:taskId`)
-      .get(JwtGuard, (req, res) => taskController.findById(req, res))
-      .delete(JwtGuard, (req, res) => taskController.removeById(req, res))
-      .patch(JwtGuard, (req, res) => taskController.updateById(req, res))
+      .get((req, res) => taskController.findById(req, res))
+      .delete((req, res) => taskController.removeById(req, res))
+      .patch((req, res) => taskController.updateById(req, res))
     return this.app
   }
 }

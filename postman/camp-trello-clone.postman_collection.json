@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae8d9ba5-1ed8-4da6-8196-268c6168b855",
+		"_postman_id": "355b95a3-a327-4f0a-bb90-5ad9be9dd363",
 		"name": "camp-trello-clone",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -174,7 +174,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:{{PORT}}/v1/tasks/625fe5214c282e0ce372032f",
+					"raw": "http://localhost:{{PORT}}/v1/tasks/626309bb99095a42ba5049cb",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -183,7 +183,7 @@
 					"path": [
 						"v1",
 						"tasks",
-						"625fe5214c282e0ce372032f"
+						"626309bb99095a42ba5049cb"
 					]
 				}
 			},
@@ -249,14 +249,14 @@
 			},
 			"response": []
 		},
-        {
+		{
 			"name": "Update task",
 			"request": {
-				"header": [],
 				"method": "PATCH",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"updatedTask\",\n\t\"description\": \"new description, board\",\n    \"imageCoverId\": \"2\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
+					"raw": "{\n\t\"title\": \"updatedTask2\",\n\t\"description\": \"new description, board2\",\n    \"imageCoverId\": \"2\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625ef718d0751c58dc343cc8\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -267,15 +267,15 @@
 					"raw": "http://localhost:{{PORT}}/v1/tasks/62630a7109a15fcd6ffa7a44",
 					"protocol": "http",
 					"host": [
-					],
 						"localhost"
+					],
 					"port": "{{PORT}}",
 					"path": [
-						"tasks",
 						"v1",
+						"tasks",
 						"62630a7109a15fcd6ffa7a44"
 					]
-			    }
+				}
 			},
 			"response": []
 		}
@@ -306,5 +306,4 @@
 			"value": "8800"
 		}
 	]
-		
 }
