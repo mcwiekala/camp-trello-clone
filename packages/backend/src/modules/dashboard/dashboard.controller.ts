@@ -39,6 +39,16 @@ class DashboardController {
       return res.status(400).send()
     }
   }
+
+  async removeDashboardById(req: express.Request, res: express.Response) {
+    const dashboard: Dashboard | null = await this.dashboardService.removeDashboardById(
+      req.params.id
+    )
+    if (!dashboard) {
+      return res.status(404).send('Dashboard not found.')
+    }
+    return res.status(200).send('Dashboard has been successfully removed.')
+  }
 }
 
 export default new DashboardController(dashboardService, dashboardMapper)

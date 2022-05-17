@@ -22,6 +22,10 @@ export class DashboardService {
   getDashboard(_id: string): Promise<Dashboard> {
     return dashboardRepository.getDashboard(_id)
   }
+
+  removeDashboardById(dashboardId: string): Promise<Dashboard> {
+    return this.dashboardRepository.removeDashboardById(dashboardId)
+  }
 }
 
 const dashboardService = new DashboardService(dashboardRepository)

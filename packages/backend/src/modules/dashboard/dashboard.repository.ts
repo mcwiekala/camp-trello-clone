@@ -85,6 +85,11 @@ export class DashboardRepository {
     await dashboard.save()
     console.log(`Dashboard repository: task id: ("${taskId}") updated on dashboard`)
   }
+
+  async removeDashboardById(dashboardId: string): Promise<Dashboard> {
+    const dashboard: Dashboard = await this._dashboardModel.findByIdAndRemove(dashboardId)
+    return dashboard
+  }
 }
 const dashboardRepository = new DashboardRepository(DashboardModel)
 export { dashboardRepository }

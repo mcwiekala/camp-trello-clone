@@ -20,6 +20,7 @@ export class DashboardRoutes extends CommonRoutesConfig {
     this.app
       .route(`${V1}/dashboards/:id`)
       .get((req, res) => dashboardController.getDashboardById(req, res))
+      .delete((req, res) => dashboardController.removeDashboardById(req, res))
 
     return this.app
   }
