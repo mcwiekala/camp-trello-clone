@@ -1,7 +1,7 @@
 import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
 import { Task } from './task'
 import { taskRepository, TaskRepository } from './task.repository'
-import dashboardRepository, { DashboardRepository } from '../dashboard/dashboard.repository'
+import { dashboardRepository, DashboardRepository } from '../dashboard/dashboard.repository'
 
 export class TaskService {
   private readonly _taskRepository: TaskRepository

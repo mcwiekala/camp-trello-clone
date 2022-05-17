@@ -1,5 +1,4 @@
-export interface UserDto {
-  id: string
+export interface CreateUserCommand {
   username: string
   googleId: string
   avatarUrl: string
