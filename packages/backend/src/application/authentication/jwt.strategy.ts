@@ -3,7 +3,7 @@ import passport from 'passport'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
-import User from '../../modules/user/User'
+import User from '../../modules/user/user.model'
 
 const { API_SECRET = '' } = process.env
 

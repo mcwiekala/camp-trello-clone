@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
-import { Role } from './Role'
-
-// const { ObjectId } = mongoose.Types
+import { Role } from './role'
 
 const userSchema = new mongoose.Schema({
   username: String,
