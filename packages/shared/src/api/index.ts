@@ -9,3 +9,4 @@ export type { default as CreateTaskCommandDTO } from './dto/CreateTaskCommand.dt
 export { default as DashboardVisibility } from './DashboardVisibility'
 export type { default as AttachmentDTO } from './dto/attachment.dto'
 export type { default as CreateAttachmentCommand } from './command/createAttachment.command'
+export type { default as UpdateTaskCommand } from './command/UpdateTaskCommand.command'
