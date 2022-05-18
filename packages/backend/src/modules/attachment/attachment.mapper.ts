@@ -2,7 +2,7 @@ import { AttachmentDTO } from 'shared'
 import { Attachment } from './attachment'
 import { Mapper } from '../../application/Mapper'
 
-export class AttachmentMapper implements Mapper<Attachment, AttachmentDTO> {
+export class AttachmentMapper {
   public mapToDomain(raw: any): Attachment {
     return new Attachment(raw._id, raw.fileName, raw.addedDate, raw.fileNameHash, raw.taskId)
   }

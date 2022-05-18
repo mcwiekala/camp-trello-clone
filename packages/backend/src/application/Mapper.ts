@@ -1,5 +1,4 @@
-export interface Mapper<T, S> {
-  mapToDomain(raw: any): T
-  mapToPersistance(raw: T): any
-  mapToDto(raw: T): S
+export interface Mapper<T, P, D> {
+  mapToDomain(persistence: P): T
+  mapToDto(type: T): D
 }
