@@ -4,7 +4,7 @@ import { UserDto } from 'shared'
 import { Mapper } from '../../application/Mapper'
 import { User } from './user'
 
-export class UserMapper implements Mapper<User, UserDto> {
+export class UserMapper {
   public mapToDomain(raw: any): User {
     return new User(raw._id, raw.username, raw.googleId, raw.avatarUrl, raw.email)
   }

@@ -6,6 +6,7 @@ export class Dashboard {
   private _description: string
   private _imageCoverUrl: string
   private _status: DashboardVisibility
+  _columns: any
 
   constructor(
     id: string,

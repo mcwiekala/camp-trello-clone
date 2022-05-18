@@ -1,8 +1,13 @@
 import mongoose from 'mongoose'
+import { TaskBase } from 'shared'
 
 const { ObjectId } = mongoose.Types
 
-const taskSchema = new mongoose.Schema({
+export interface TaskDocument extends TaskBase, mongoose.Document {}
+
+export interface TaskModel extends mongoose.Model<TaskDocument> {}
+
+const taskSchema: mongoose.Schema<TaskDocument> = new mongoose.Schema<TaskDocument, TaskModel>({
   title: String,
   description: String,
   imageCoverId: String,
@@ -24,5 +29,5 @@ const taskSchema = new mongoose.Schema({
     }
   ]
 })
-const TaskModel = mongoose.model('Task', taskSchema)
-export default TaskModel
+
+export default mongoose.model<TaskDocument, TaskModel>('Task', taskSchema)

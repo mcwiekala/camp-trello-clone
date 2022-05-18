@@ -1,14 +1,7 @@
-import AttachmentDTO from './attachment.dto'
-import { UserDto } from './user.dto'
+import TaskBase from '../../models/taskBase'
 
-interface TaskDTO {
+interface TaskDTO extends TaskBase {
   id: string
-  imageCoverId?: string
-  title: string
-  description?: string
-  attachments?: AttachmentDTO[]
-  // TODO: add to TaskModel
-  assignees?: UserDto[]
 }
 
 export default TaskDTO
