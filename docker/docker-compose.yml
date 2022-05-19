@@ -39,6 +39,9 @@ services:
 networks:
   mongo-compose-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.57.0/24
 
 volumes:
   TC_mongo_data:
