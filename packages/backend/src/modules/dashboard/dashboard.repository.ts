@@ -1,5 +1,10 @@
 import mongoose, { ObjectId } from 'mongoose'
-import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
+import {
+  CreateTaskCommandDTO,
+  UpdateTaskCommand,
+  CreateDashboardCommand,
+  UpdateDashboardCommand
+} from 'shared'
 import { Dashboard as DashboardModel } from './dashboard.model'
 import { Task } from '../task/task'
 import { Dashboard } from './dashboard'
@@ -89,6 +94,26 @@ export class DashboardRepository {
   async removeDashboardById(dashboardId: string): Promise<Dashboard> {
     const dashboard: Dashboard = await this._dashboardModel.findByIdAndRemove(dashboardId)
     return dashboard
+  }
+
+  async updateDashboardById(
+    updateDashboardCommand: UpdateDashboardCommand,
+    id: string
+  ): Promise<Dashboard> {
+    const updatedDashboard: Dashboard = this._dashboardModel.updateOne(
+      { _id: id },
+      {
+        $set: {
+          title: updateDashboardCommand.title,
+          description: updateDashboardCommand.description,
+          imageCoverUrl: updateDashboardCommand.imageCoverUrl,
+          status: updateDashboardCommand.status,
+          columns: updateDashboardCommand.columns
+        }
+      }
+    )
+    console.log(`Updated dashboard in DB: ${updatedDashboard}`)
+    return updatedDashboard
   }
 }
 const dashboardRepository = new DashboardRepository(DashboardModel)

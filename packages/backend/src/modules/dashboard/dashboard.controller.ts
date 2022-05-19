@@ -1,4 +1,4 @@
-import { CreateDashboardCommand } from 'shared'
+import { CreateDashboardCommand, UpdateDashboardCommand } from 'shared'
 import express from 'express'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { dashboardService, DashboardService } from './dashboard.service'
@@ -48,6 +48,16 @@ class DashboardController {
       return res.status(404).send('Dashboard not found.')
     }
     return res.status(200).send('Dashboard has been successfully removed.')
+  }
+
+  async updateDashboardById(req: express.Request, res: express.Response) {
+    const updateDashboardCommand: UpdateDashboardCommand = req.body
+    const updatedDashboard: Dashboard = await this.dashboardService.updateDashboardById(
+      updateDashboardCommand,
+      req.params.id
+    )
+    const updatedDashboardDto: DashboardDTO = this.dashboardMapper.mapToDto(updatedDashboard)
+    return res.status(200).send(updatedDashboardDto)
   }
 }
 
