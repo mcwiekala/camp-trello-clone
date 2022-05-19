@@ -1,4 +1,5 @@
-import { CreateDashboardCommand, UpdateDashboardCommand } from 'shared'
+import { CreateDashboardCommand } from 'shared'
+import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { dashboardRepository, DashboardRepository } from './dashboard.repository'
 import { Dashboard } from './dashboard'
 
@@ -27,10 +28,7 @@ export class DashboardService {
     return this.dashboardRepository.removeDashboardById(dashboardId)
   }
 
-  updateDashboardById(
-    updateDashboardCommand: UpdateDashboardCommand,
-    _id: string
-  ): Promise<Dashboard> {
+  updateDashboardById(updateDashboardCommand: DashboardDTO, _id: string): Promise<Dashboard> {
     return this.dashboardRepository.updateDashboardById(updateDashboardCommand, _id)
   }
 }

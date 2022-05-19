@@ -1,4 +1,4 @@
-import { CreateDashboardCommand, UpdateDashboardCommand } from 'shared'
+import { CreateDashboardCommand } from 'shared'
 import express from 'express'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { dashboardService, DashboardService } from './dashboard.service'
@@ -51,7 +51,7 @@ class DashboardController {
   }
 
   async updateDashboardById(req: express.Request, res: express.Response) {
-    const updateDashboardCommand: UpdateDashboardCommand = req.body
+    const updateDashboardCommand: DashboardDTO = req.body
     const updatedDashboard: Dashboard = await this.dashboardService.updateDashboardById(
       updateDashboardCommand,
       req.params.id

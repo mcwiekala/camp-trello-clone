@@ -1,10 +1,6 @@
 import mongoose, { ObjectId } from 'mongoose'
-import {
-  CreateTaskCommandDTO,
-  UpdateTaskCommand,
-  CreateDashboardCommand,
-  UpdateDashboardCommand
-} from 'shared'
+import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
+import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { Dashboard as DashboardModel } from './dashboard.model'
 import { Task } from '../task/task'
 import { Dashboard } from './dashboard'
@@ -96,10 +92,7 @@ export class DashboardRepository {
     return dashboard
   }
 
-  async updateDashboardById(
-    updateDashboardCommand: UpdateDashboardCommand,
-    id: string
-  ): Promise<Dashboard> {
+  async updateDashboardById(updateDashboardCommand: DashboardDTO, id: string): Promise<Dashboard> {
     const updatedDashboard: Dashboard = this._dashboardModel.updateOne(
       { _id: id },
       {

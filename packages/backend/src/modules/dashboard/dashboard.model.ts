@@ -6,6 +6,7 @@ const { ObjectId } = mongoose.Types
 const columnSchema = new mongoose.Schema({
   _id: ObjectId,
   title: String,
+  order: Number,
   tasks: [
     {
       _id: ObjectId,
