@@ -1,7 +1,7 @@
 import {
   CannotUpdateDocumentError,
   CreateTaskCommandDTO,
-  DocumentNotFoundError,
+  CannotFindDocumentError,
   UpdateTaskCommand
 } from 'shared'
 import TaskMongooseModel, { TaskModel, TaskDocument } from './task.model'
@@ -31,7 +31,7 @@ export class TaskRepository {
   async findById(taskId: string): Promise<Task> {
     const taskDocument: TaskDocument | null = await this._taskModel.findById(taskId).exec()
     if (taskDocument === null) {
-      throw new DocumentNotFoundError(`Cannot find Task Document with id: [${taskId}]`)
+      throw new CannotFindDocumentError('Task', taskId)
     }
     return taskMapper.mapToDomain(taskDocument)
   }
@@ -39,7 +39,7 @@ export class TaskRepository {
   async removeById(taskId: string): Promise<Task> {
     const taskDocument: TaskDocument | null = await this._taskModel.findByIdAndRemove(taskId).exec()
     if (taskDocument === null) {
-      throw new DocumentNotFoundError(`Task with id: [${taskId}] not exists!`)
+      throw new CannotFindDocumentError('Task', taskId)
     }
     return taskMapper.mapToDomain(taskDocument)
   }
@@ -57,7 +57,7 @@ export class TaskRepository {
         }
       )
       .catch(() => {
-        throw new CannotUpdateDocumentError(`Unable to update a task with id: [${taskId}]!`)
+        throw new CannotUpdateDocumentError('Task', taskId, updateTaskCommand)
       })
       .then()
     console.log(`Updated task with id: [${taskId}]`)

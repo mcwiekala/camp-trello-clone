@@ -1,4 +1,4 @@
-import { CreateTaskCommandDTO, DocumentNotFoundError, TaskDTO, UpdateTaskCommand } from 'shared'
+import { CreateTaskCommandDTO, CannotFindDocumentError, TaskDTO, UpdateTaskCommand } from 'shared'
 import express from 'express'
 import { taskMapper, TaskMapper } from './task.mapper'
 import { taskService, TaskService } from './task.service'
@@ -37,7 +37,7 @@ class TaskController {
       const taskDto: TaskDTO = this._taskMapper.mapToDto(task)
       return res.status(201).send(taskDto)
     } catch (error) {
-      if (error instanceof DocumentNotFoundError) {
+      if (error instanceof CannotFindDocumentError) {
         return res.status(404).send('Task not found')
       }
       return res.status(400).send('Bad Request')
@@ -62,7 +62,7 @@ class TaskController {
       const updatedTaskDto: TaskDTO = this._taskMapper.mapToDto(updatedTask)
       return res.status(200).send(updatedTaskDto)
     } catch (error) {
-      if (error instanceof DocumentNotFoundError) {
+      if (error instanceof CannotFindDocumentError) {
         return res.status(404).send('Task not found')
       }
       return res.status(400).send('Bad Request')
