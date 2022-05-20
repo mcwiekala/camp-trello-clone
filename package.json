@@ -41,6 +41,7 @@
     "prepare": "husky install",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d packages/frontend/build",
-    "libbuild": "lerna run libbuild --stream"
+    "libbuild": "lerna run libbuild --stream",
+    "docker": "cd ./docker && docker-compose up -d && cd .."
   }
 }

@@ -1,13 +1,15 @@
-import { type ReactElement, useEffect } from 'react'
+import { type ReactElement, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AppContext } from '../../contexts/AppStateContext'
 
 export type ProtectedRouteProps = {
-  token: string
   children: ReactElement
 }
 
-const ProtectedRoute = ({ token, children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate()
+  const [{ token }] = useContext(AppContext)
+
   useEffect(() => {
     if (!token) {
       navigate('../login', { replace: true })
