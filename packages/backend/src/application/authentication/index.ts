@@ -29,7 +29,13 @@ export const strat = async (...[req, accessToken, refreshToken, profile, cb]: ve
   const userFromDatabase = await User.findOne({ googleId: profile.id }).exec()
 
   if (userFromDatabase) {
-    cb(null, JSON.stringify(userFromDatabase))
+    cb(null, userFromDatabase)
+
+    return
+  }
+
+  if (profile.emails === undefined || profile.emails[0].value === undefined) {
+    cb('This user has no email!')
 
     return
   }
@@ -37,11 +43,12 @@ export const strat = async (...[req, accessToken, refreshToken, profile, cb]: ve
   const usr = new User({
     username: profile.displayName,
     googleId: profile.id,
-    avatarUrl: profile.photos ? profile.photos[0].value : ''
+    avatarUrl: profile.photos ? profile.photos[0].value : '',
+    email: profile.emails[0].value
   })
   const newUser = await usr.save()
 
-  cb(null, JSON.stringify(newUser))
+  cb(null, newUser)
 }
 
 passport.use(
@@ -49,7 +56,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: `../v1${googleCallbackURL}`,
+      callbackURL: `/../v1${googleCallbackURL}`,
       passReqToCallback: true
     },
     strat

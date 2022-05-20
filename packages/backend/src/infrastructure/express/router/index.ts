@@ -17,7 +17,7 @@ interface Req extends Request {
 }
 
 function instanceOfUserDataType(data: Partial<userDataType>): data is userDataType {
-  return 'email' in data && '_id' in data
+  return data.email !== undefined && data._id !== undefined
 }
 
 router.get(
