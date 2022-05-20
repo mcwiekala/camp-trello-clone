@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AttachmentDTO } from 'shared'
 import { Attachment } from './attachment'
 import { Mapper } from '../../application/Mapper'
 
-export class AttachmentMapper {
+export class AttachmentMapper implements Mapper<Attachment, any, AttachmentDTO> {
   public mapToDomain(raw: any): Attachment {
     return new Attachment(raw._id, raw.fileName, raw.addedDate, raw.fileNameHash, raw.taskId)
   }
