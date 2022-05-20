@@ -7,7 +7,7 @@ export class AttachmentMapper {
     return new Attachment(raw._id, raw.fileName, raw.addedDate, raw.fileNameHash, raw.taskId)
   }
 
-  public mapToPersistance(attachment: Attachment): any {
+  public mapToPersistence(attachment: Attachment): any {
     return {
       _id: attachment.id,
       fileName: attachment.fileName,

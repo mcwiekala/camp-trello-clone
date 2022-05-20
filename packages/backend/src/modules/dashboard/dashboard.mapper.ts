@@ -7,7 +7,7 @@ export class DashboardMapper {
     return new Dashboard(raw._id, raw.title, raw.description, raw.imageCoverUrl, raw.status)
   }
 
-  public mapToPersistance(dashboard: Dashboard): any {
+  public mapToPersistence(dashboard: Dashboard): any {
     return { _id: dashboard.id, title: dashboard.title }
   }
 

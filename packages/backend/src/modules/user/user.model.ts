@@ -1,28 +1,32 @@
 import mongoose from 'mongoose'
-import { Role } from './role'
+import { UserBase } from 'packages/shared/lib'
+// import { Role } from './role'
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  googleId: String,
-  avatarUrl: String,
-  email: String,
-  dashboards: [
-    {
-      imageCoverId: String,
-      title: String,
-      role: {
-        type: String,
-        enum: Role,
-        default: Role.NO_ACCESS
-      },
-      users: [
-        {
-          avatarId: Number
-        }
-      ]
-    }
-  ]
+export interface UserDocument extends UserBase, mongoose.Document {}
+
+export interface UserModel extends mongoose.Model<UserDocument> {}
+
+const userSchema: mongoose.Schema<UserDocument> = new mongoose.Schema<UserDocument, UserModel>({
+  username: { type: String, required: true },
+  googleId: { type: String, required: true },
+  avatarUrl: { type: String, required: true },
+  email: { type: String, required: true }
+  // dashboards: [
+  //   {
+  //     imageCoverId: String,
+  //     title: String,
+  //     role: {
+  //       type: String,
+  //       enum: Role,
+  //       default: Role.NO_ACCESS
+  //     },
+  //     users: [
+  //       {
+  //         avatarId: Number
+  //       }
+  //     ]
+  //   }
+  // ]
 })
 
-const User = mongoose.model('User', userSchema)
-export default User
+export default mongoose.model<UserDocument, UserModel>('User', userSchema)
