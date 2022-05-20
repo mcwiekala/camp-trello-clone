@@ -1,26 +1,22 @@
-import { CreateTaskCommandDTO } from 'shared'
-import { Task } from './task'
+import { CreateTaskCommandDTO, UpdateTaskCommand } from 'shared'
+import Task from './task'
 import { taskRepository, TaskRepository } from './task.repository'
 import { dashboardRepository, DashboardRepository } from '../dashboard/dashboard.repository'
 
 export class TaskService {
   private readonly _taskRepository: TaskRepository
-  private readonly _boardRepository: DashboardRepository
+  private readonly _dashboardRepository: DashboardRepository
 
   constructor(taskRepository: TaskRepository, boardRepository: DashboardRepository) {
-    // eslint-disable-next-line no-console
-    console.log('TaskService constructor')
     this._taskRepository = taskRepository
-    this._boardRepository = boardRepository
+    this._dashboardRepository = boardRepository
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
-    // eslint-disable-next-line no-console
     console.log('Handling new task')
     const savedTask: Task = await this._taskRepository.createTask(createTaskCommand)
-    // eslint-disable-next-line no-console
     console.log(`Service returns: ${savedTask}`)
-    this._boardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
+    await this._dashboardRepository.addNewTaskToDashboard(createTaskCommand, savedTask)
     return savedTask
   }
 
@@ -34,6 +30,12 @@ export class TaskService {
 
   removeById(taskId: string): Promise<Task> {
     return this._taskRepository.removeById(taskId)
+  }
+
+  async updateById(updateTaskCommand: UpdateTaskCommand, taskId: string): Promise<Task> {
+    const updatedTask: Task = await this._taskRepository.updateById(updateTaskCommand, taskId)
+    await this._dashboardRepository.updateTaskOnDashboard(updateTaskCommand, taskId)
+    return updatedTask
   }
 }
 

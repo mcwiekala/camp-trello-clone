@@ -1,14 +1,11 @@
 import { TaskDTO } from 'shared'
-import { Task } from './task'
 import { Mapper } from '../../application/Mapper'
+import { TaskDocument } from './task.model'
+import Task from './task'
 
-export class TaskMapper implements Mapper<Task, TaskDTO> {
-  public mapToDomain(raw: any): Task {
-    return new Task(raw._id, raw.title)
-  }
-
-  public mapToPersistance(task: Task): any {
-    return { _id: task.id, title: task.title }
+export class TaskMapper implements Mapper<Task, TaskDocument, TaskDTO> {
+  public mapToDomain(taskDocument: TaskDocument): Task {
+    return { id: taskDocument.id, title: taskDocument.title, description: taskDocument.description }
   }
 
   public mapToDto(task: Task): TaskDTO {

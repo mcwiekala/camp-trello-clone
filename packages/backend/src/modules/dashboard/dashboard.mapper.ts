@@ -2,7 +2,7 @@ import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { Dashboard } from './dashboard'
 import { Mapper } from '../../application/Mapper'
 
-export class DashboardMapper implements Mapper<Dashboard, DashboardDTO> {
+export class DashboardMapper {
   public mapToDomain(raw: any): Dashboard {
     return new Dashboard(raw._id, raw.title, raw.description, raw.imageCoverUrl, raw.status)
   }
