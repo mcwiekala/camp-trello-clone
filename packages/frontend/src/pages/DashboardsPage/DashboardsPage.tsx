@@ -2,7 +2,8 @@ import { useState, useContext } from 'react'
 import { Text, Button } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { DashboardDTO, UserDto } from 'shared'
+import { CreateDashboardCommand, DashboardDTO, UserDto } from 'shared'
+import faker from '@faker-js/faker'
 import DashboardModal from '../../components/DashboardModal/DashboardModal'
 import { Dashboard } from '../../components/Dashboard/Dashboard'
 import { DashboardsContext } from '../../contexts/DashboardsContext'
@@ -35,13 +36,19 @@ const DashboardsPage = () => {
     users.push(currentUser)
     const newDashboard: DashboardDTO = {
       // TODO: id from backend?
-      id: title,
+      id: faker.datatype.uuid(),
       title,
       users,
       imageCoverUrl,
+      createdAt: new Date(),
       status
     }
-    httpService.createDashboard(newDashboard)
+    const command: CreateDashboardCommand = {
+      title,
+      imageCoverUrl,
+      status
+    }
+    httpService.createDashboard(command)
     setDashboards([...dashboards, newDashboard])
   }
 

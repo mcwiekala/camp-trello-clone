@@ -19,7 +19,6 @@ export class DashboardRepository {
   }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
-    console.log('Creating new dashboard in DB')
     const dashboard = await this._dashboardModel.create({
       _id: new mongoose.Types.ObjectId(),
       title: createDashboardCommand.title,

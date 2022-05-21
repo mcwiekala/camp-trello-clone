@@ -1,4 +1,4 @@
-import { DashboardDTO, TASK } from 'shared'
+import { CreateDashboardCommand, DashboardDTO, TASK } from 'shared'
 
 import Fetch from './fetchInstance'
 
@@ -23,7 +23,8 @@ class HttpService {
 
   // TODO change from any to Task type
   getTask = (taskId: string): Promise<any> => this.http.get(`${TASK}/${taskId}`)
-  createDashboard = (newDashboard: DashboardDTO): Promise<any> => this.http.post('v1/dashboards/')
+  createDashboard = (command: CreateDashboardCommand): Promise<any> =>
+    this.http.post('dashboards', { body: JSON.stringify(command) })
 }
 
 export default new HttpService()

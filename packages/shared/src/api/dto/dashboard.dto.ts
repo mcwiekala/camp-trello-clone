@@ -3,12 +3,12 @@ import { UserDto } from './user.dto'
 
 interface DashboardDTO {
   id?: string
-  title?: string
+  title: string
   description?: string
-  imageCoverUrl?: string
+  imageCoverUrl: string
   users?: UserDto[]
   createdAt?: Date
-  status?: DashboardVisibility
+  status: DashboardVisibility
 }
 
 export default DashboardDTO

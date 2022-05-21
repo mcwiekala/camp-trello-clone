@@ -1,9 +1,9 @@
-const BASE_URL = 'http://localhost:8800/v1'
+const BASE_URL = 'http://localhost:8800/v1/'
 
 class Fetch {
   static token: string
 
-  static baseHeaders(): Headers {
+  static baseHeaders(): HeadersInit {
     const headers = new Headers()
 
     headers.append('Content-Type', 'application/json')
@@ -30,10 +30,16 @@ class Fetch {
     path: string,
     { body, headers }: Omit<RequestInit, 'method'>
   ): Promise<Response> {
+    const headers2 = { ...Fetch.baseHeaders, ...headers }
+    console.log('headers2')
+    console.log(headers2)
+    console.log(Fetch.baseHeaders)
+    console.log(headers)
+    console.log({ ...Fetch.baseHeaders })
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'POST',
-      headers: { ...Fetch.baseHeaders, ...headers },
-      body: JSON.stringify(body)
+      headers: Fetch.baseHeaders(),
+      body
     })
 
     return response.json()
@@ -45,7 +51,7 @@ class Fetch {
   ): Promise<Response> {
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'PATCH',
-      headers: { ...Fetch.baseHeaders, ...headers },
+      headers: Fetch.baseHeaders(),
       body: JSON.stringify(body)
     })
 
