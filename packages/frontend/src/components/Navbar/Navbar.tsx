@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import UserType from '../../types/user'
 import { routes } from '../../routes/RoutesDashboards'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
-import SearchBar from '../SearchBar/SearchBar'
 import useStyles from './styles'
 import thulloLogo from '../../images/thullo_logo.png'
+import LoginGoogleButton from '../LoginGoogleButton/LoginGoogleButton'
 
 export type NavbarProps = {
   loggedUser: UserType
@@ -36,27 +36,29 @@ const Navbar = ({ boardTitle, loggedUser }: NavbarProps) => {
         </div>
       )}
       <div className={classes.navbar__options}>
-        <SearchBar
-          onKeywordChangeHandler={() => {}}
-          size="sm"
-          actionType="button"
-          wrapperProps={{ width: '300px' }}
-        />
-        <Select
-          classNames={{
-            wrapper: classes.navbar__options__select__wrapper,
-            input: classes.navbar__options__select__input,
-            icon: classes.navbar__options__select__icon,
-            rightSection: classes.navbar__options__select__rightSection
-          }}
-          placeholder={loggedUser.username}
-          data={[
-            { value: 'react', label: 'Option1' },
-            { value: 'vue', label: 'Option2' }
-          ]}
-          icon={<img src={loggedUser.profilePictureURL} alt="user avatar" />}
-          rightSection={<AiFillCaretDown />}
-        />
+        {loggedUser ? (
+          <Select
+            classNames={{
+              wrapper: classes.navbar__options__select__wrapper,
+              input: classes.navbar__options__select__input,
+              icon: classes.navbar__options__select__icon,
+              rightSection: classes.navbar__options__select__rightSection
+            }}
+            placeholder={loggedUser.username}
+            data={[
+              { value: 'react', label: 'Option1' },
+              { value: 'vue', label: 'Option2' }
+            ]}
+            icon={<img src={loggedUser.profilePictureURL} alt="user avatar" />}
+            rightSection={<AiFillCaretDown />}
+          />
+        ) : (
+          <LoginGoogleButton
+            onClick={() => window.location.assign('http://localhost:8800/v1/auth/google')}
+          >
+            Login with Google
+          </LoginGoogleButton>
+        )}
       </div>
     </nav>
   )

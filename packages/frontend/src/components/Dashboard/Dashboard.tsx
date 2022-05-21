@@ -1,5 +1,5 @@
 import { Image, Text } from '@mantine/core'
-import { UserDto } from 'shared'
+import { UserDTO } from 'shared'
 import UserIconList from '../UserIconList/UserIconList'
 import UserType from '../../types/user'
 import useStyles from './style'
@@ -7,7 +7,7 @@ import useStyles from './style'
 type DashboardProps = {
   title: string
   imageCoverUrl: string
-  users: UserDto[]
+  users: UserDTO[]
   onClickHandler: () => void
 }
 

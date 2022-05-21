@@ -1,25 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-underscore-dangle, class-methods-use-this */
-import { UserDto } from 'shared'
+import { UserDTO } from 'shared'
 import { Mapper } from '../../application/Mapper'
 import { User } from './user'
+import { UserDocument } from './user.model'
 
-export class UserMapper {
-  public mapToDomain(raw: any): User {
-    return new User(raw._id, raw.username, raw.googleId, raw.avatarUrl, raw.email)
+export class UserMapper implements Mapper<User, UserDocument, UserDTO> {
+  public mapToDomain(document: UserDocument): User {
+    return new User(
+      document._id,
+      document.username,
+      document.googleId,
+      document.avatarUrl,
+      document.email
+    )
   }
 
-  public mapToPersistance(user: User): any {
-    return {
-      _id: user.id,
-      username: user.username,
-      googleId: user.googleId,
-      avatarUrl: user.avatarUrl,
-      email: user.email
-    }
-  }
-
-  public mapToDto(user: User): UserDto {
+  public mapToDto(user: User): UserDTO {
     return {
       id: user.id,
       username: user.username,

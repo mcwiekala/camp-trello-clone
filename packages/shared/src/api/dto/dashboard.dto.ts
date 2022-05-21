@@ -1,5 +1,5 @@
 import DashboardVisibility from '../DashboardVisibility'
-import { UserDto } from './user.dto'
+import UserDto from './user.dto'
 
 interface DashboardDTO {
   id?: string

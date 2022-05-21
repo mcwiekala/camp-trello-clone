@@ -14,7 +14,7 @@ class HttpService {
   http: BaseHttpService
 
   constructor() {
-    this.http = Fetch
+    this.http = new Fetch()
   }
 
   setToken = (token: string) => {

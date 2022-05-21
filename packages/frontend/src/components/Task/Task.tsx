@@ -2,7 +2,7 @@ import { Button, Image, Input, Text } from '@mantine/core'
 import { BsPaperclip } from 'react-icons/bs'
 import { MdAdd, MdMessage } from 'react-icons/md'
 import { useState } from 'react'
-import { UserDto } from 'shared'
+import { UserDTO } from 'shared'
 import UserType from '../../types/user'
 import UserIconList from '../UserIconList/UserIconList'
 import useStyles from './style'
@@ -14,7 +14,7 @@ type TaskProps = {
   onCreateTaskHandler: (taskId: string, columnId: string) => void
   id: string
   imageCover: string | undefined
-  assignedUsers: UserDto[]
+  assignedUsers: UserDTO[]
   numberOfComments: number
   numberOfAttachments: number
 }
