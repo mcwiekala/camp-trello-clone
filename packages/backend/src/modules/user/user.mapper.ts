@@ -16,16 +16,6 @@ export class UserMapper implements Mapper<User, UserDocument, UserDTO> {
     )
   }
 
-  // public mapToPersistence(user: User): any {
-  //   return {
-  //     _id: user.id,
-  //     username: user.username,
-  //     googleId: user.googleId,
-  //     avatarUrl: user.avatarUrl,
-  //     email: user.email
-  //   }
-  // }
-
   public mapToDto(user: User): UserDTO {
     return {
       id: user.id,

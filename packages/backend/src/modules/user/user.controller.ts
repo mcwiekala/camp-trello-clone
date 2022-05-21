@@ -7,7 +7,8 @@ import {
   UpdateUserCommand,
   CannotCreateDocumentError,
   CannotFindDocumentError,
-  CannotDeleteDocumentError
+  CannotDeleteDocumentError,
+  CannotUpdateDocumentError
 } from 'shared'
 import userService, { UserService } from './user.service'
 import userMapper, { UserMapper } from './user.mapper'
@@ -56,7 +57,7 @@ export class UserController {
         res.status(404).send('User not found')
         return
       }
-      if (e instanceof CannotCreateDocumentError) {
+      if (e instanceof CannotUpdateDocumentError) {
         console.error(`UserController.updateOneById: ${e.message}`)
         console.error(e)
         res.status(400).send('Bad request')
