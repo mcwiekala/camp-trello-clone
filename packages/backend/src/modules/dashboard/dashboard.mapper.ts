@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { Dashboard } from './dashboard'
 import { Mapper } from '../../application/Mapper'
 
-export class DashboardMapper {
+export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
   public mapToDomain(raw: any): Dashboard {
     return new Dashboard(raw._id, raw.title, raw.description, raw.imageCoverUrl, raw.status)
   }
 
-  public mapToPersistance(dashboard: Dashboard): any {
+  public mapToPersistence(dashboard: Dashboard): any {
     return { _id: dashboard.id, title: dashboard.title }
   }
 
