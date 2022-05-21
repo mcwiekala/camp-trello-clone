@@ -1,4 +1,5 @@
 import { Image, Text } from '@mantine/core'
+import { UserDto } from 'shared'
 import UserIconList from '../UserIconList/UserIconList'
 import UserType from '../../types/user'
 import useStyles from './style'
@@ -6,7 +7,7 @@ import useStyles from './style'
 type DashboardProps = {
   title: string
   imageCoverUrl: string
-  users: UserType[]
+  users: UserDto[]
   onClickHandler: () => void
 }
 
@@ -25,7 +26,7 @@ export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }: Dashb
       role="button"
       tabIndex={0}
     >
-      <Image src={imageCoverUrl} alt="cover" fit="cover" radius="md" />
+      <Image src={imageCoverUrl} width={300} height={200} alt="cover" fit="cover" radius="md" />
       <Text className={classes.title}>{title}</Text>
       <div className={classes.userList}>
         <UserIconList listOfUsers={users} isAppendable={false} iconLimit={3} displayNumberOfUsers />

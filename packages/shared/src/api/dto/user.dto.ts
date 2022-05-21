@@ -1,7 +1,7 @@
 export interface UserDto {
-  id: string
+  id?: string
   username: string
-  googleId: string
-  avatarUrl: string
-  email: string
+  googleId?: string
+  avatarUrl?: string
+  email?: string
 }

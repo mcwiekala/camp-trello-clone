@@ -1,11 +1,12 @@
 import { ActionIcon, Text } from '@mantine/core'
 import { MdAdd } from 'react-icons/md'
+import { UserDto } from 'shared'
 import UserIcon from '../UserIcon/UserIcon'
 import UserType from '../../types/user'
 import useStyles from './style'
 
 type UserIconListProps = {
-  listOfUsers: UserType[]
+  listOfUsers: UserDto[]
   isAppendable: boolean
   onAppendHandler?: () => void
   iconLimit: number
@@ -26,7 +27,7 @@ const UserIconList = ({
   return (
     <div className={classes.userIconList}>
       {listOfUsers.slice(0, iconLimit).map((user) => (
-        <UserIcon key={user.id} username={user.username} imgUrl={user.profilePictureURL} />
+        <UserIcon key={user.id} username={user.username} imgUrl={user.avatarUrl} />
       ))}
       {displayNumberOfUsers && isAboveLimit ? (
         <Text size="sm" color="gray">{`+ ${numberAboveLimit} others`}</Text>

@@ -1,23 +1,13 @@
-/* eslint-disable no-console */
 import { useState, useContext } from 'react'
 import { Text, Button } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
-
-// Components
 import { AiOutlinePlus } from 'react-icons/ai'
+import { DashboardDTO, UserDto } from 'shared'
 import DashboardModal from '../../components/DashboardModal/DashboardModal'
 import { Dashboard } from '../../components/Dashboard/Dashboard'
-
-// Contexts & routes
 import { DashboardsContext } from '../../contexts/DashboardsContext'
-
-// Logic
-import RandomUser from '../../logic/randomUser'
-import GenerateTask from '../../logic/generateTask'
-
-// Misc
-import UserType from '../../types/user'
 import useStyles from './style'
+import httpService from '../../infrastructure/HttpService/HttpService'
 
 type DashboardProps = {
   id: string
@@ -38,33 +28,20 @@ const DashboardsPage = () => {
     setIsOpen((prevStateIsOpen) => !prevStateIsOpen)
   }
 
-  const addNewDashboard = ({ id, imageCoverUrl, title, status }: DashboardProps) => {
-    const currentUser = new RandomUser().userData
-    currentUser.role = 'Admin'
-    const createdAt = new Date()
-    const users: UserType[] = []
+  const addNewDashboard = ({ imageCoverUrl, title, status }: DashboardDTO) => {
+    console.log('Create new Dashboard!')
+    const users: UserDto[] = []
+    const currentUser: UserDto = { username: 'Michal' }
     users.push(currentUser)
-    const newDashboard = {
-      id,
-      description: '',
-      imageCoverUrl,
+    const newDashboard: DashboardDTO = {
+      // TODO: id from backend?
+      id: title,
       title,
-      createdAt,
       users,
-      status,
-      admin: 'userId',
-      columns: [
-        {
-          id: '2',
-          title: 'New column',
-          tasks: [new GenerateTask(users)]
-        },
-        {
-          id: '3',
-          tasks: []
-        }
-      ]
+      imageCoverUrl,
+      status
     }
+    httpService.createDashboard(newDashboard)
     setDashboards([...dashboards, newDashboard])
   }
 
@@ -73,7 +50,7 @@ const DashboardsPage = () => {
       <header className={classes.boardsHeader}>
         <Text className={classes.title}>All Boards</Text>
         <Button onClick={openDashboardModal} leftIcon={<AiOutlinePlus />}>
-          Add
+          Add Dashboard
         </Button>
       </header>
       <section className={classes.dashboards}>

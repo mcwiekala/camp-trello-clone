@@ -9,7 +9,7 @@ export class TaskMapper implements Mapper<Task, TaskDocument, TaskDTO> {
   }
 
   public mapToDto(task: Task): TaskDTO {
-    return { id: task.id, title: task.title }
+    return { id: task.id, title: task.title, attachments: [] }
   }
 }
 

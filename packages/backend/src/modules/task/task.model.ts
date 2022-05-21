@@ -3,7 +3,9 @@ import { TaskBase } from 'shared'
 
 const { ObjectId } = mongoose.Types
 
-export interface TaskDocument extends TaskBase, mongoose.Document {}
+export interface TaskDocument extends TaskBase, mongoose.Document {
+  attachments: any[]
+}
 
 export interface TaskModel extends mongoose.Model<TaskDocument> {}
 
