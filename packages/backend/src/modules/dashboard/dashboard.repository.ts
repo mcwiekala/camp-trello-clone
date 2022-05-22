@@ -101,7 +101,7 @@ export class DashboardRepository {
           description: updateDashboardCommand.description,
           imageCoverUrl: updateDashboardCommand.imageCoverUrl,
           status: updateDashboardCommand.status,
-          columns: updateDashboardCommand.columns
+          columns: updateDashboardCommand.column
         }
       }
     )
