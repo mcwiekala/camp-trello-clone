@@ -37,7 +37,7 @@ export class DashboardMapper implements Mapper<Dashboard, DashboardDTO> {
       imageCoverUrl: dashboard.imageCoverUrl,
       createdAt: dashboard.createdAt,
       status: dashboard.status,
-      column: dashboard.column
+      columns: dashboard.columns
       // column: dashboard.column.map((column: ColumnDTO) => ({
       //   title: column.title,
       //   order: column.order,
