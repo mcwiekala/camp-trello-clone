@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import DashboardPage from '../pages/DashboardPage/DashboardPage'
-import DashboardsPage from '../pages/DashboardsPage/DashboardsPage'
+import DashboardGalleryPage from '../pages/DashboardGalleryPage/DashboardGalleryPage'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 
 export const routes = {
@@ -22,7 +22,7 @@ const RoutesDashboards = () => (
       path={routes.dashboards}
       element={
         <ProtectedRoute>
-          <DashboardsPage />
+          <DashboardGalleryPage />
         </ProtectedRoute>
       }
     />

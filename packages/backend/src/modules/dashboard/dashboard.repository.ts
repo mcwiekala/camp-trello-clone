@@ -26,11 +26,12 @@ export class DashboardRepository {
       imageCoverUrl: createDashboardCommand.imageCoverUrl,
       createdAt: new Date(),
       status: createDashboardCommand.status,
-      users: [],
+      users: createDashboardCommand.users,
       columns: []
     })
 
     await dashboard.save()
+    console.log(dashboard)
     return dashboard
   }
 

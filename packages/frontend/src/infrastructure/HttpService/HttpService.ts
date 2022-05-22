@@ -23,7 +23,7 @@ class HttpService {
 
   // TODO change from any to Task type
   getTask = (taskId: string): Promise<any> => this.http.get(`${TASK}/${taskId}`)
-  createDashboard = (command: CreateDashboardCommand): Promise<any> =>
+  createDashboard = (command: CreateDashboardCommand): Promise<DashboardDTO> =>
     this.http.post('dashboards', { body: JSON.stringify(command) })
 }
 

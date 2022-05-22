@@ -14,12 +14,14 @@ class DashboardController {
     this.dashboardService = dashboardService
   }
   async createDashboard(req: express.Request, res: express.Response) {
+    console.log(req.body)
     console.log(
       `DashboardController.createDashboard: Received new dashboard with title: ${req.body.title}`
     )
     const createDashboardCommand: CreateDashboardCommand = req.body
     const dashboard: Dashboard = await dashboardService.createDashboard(createDashboardCommand)
     const dashboardDTO: DashboardDTO = this.dashboardMapper.mapToDto(dashboard)
+    console.log(dashboardDTO)
     return res.status(201).send(dashboardDTO)
   }
 

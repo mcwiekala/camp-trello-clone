@@ -5,7 +5,7 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { CreateDashboardCommand, DashboardDTO, UserDTO } from 'shared'
 import faker from '@faker-js/faker'
 import DashboardModal from '../../components/DashboardModal/DashboardModal'
-import { Dashboard } from '../../components/Dashboard/Dashboard'
+import { DashboardGalleryPreview } from '../../components/DashboardGalleryPreview/DashboardGalleryPreview'
 import { DashboardsContext } from '../../contexts/DashboardsContext'
 import useStyles from './style'
 import httpService from '../../infrastructure/HttpService/HttpService'
@@ -17,7 +17,7 @@ type DashboardProps = {
   status: string
 }
 
-const DashboardsPage = () => {
+const DashboardGalleryPage = () => {
   const { classes } = useStyles()
 
   const navigate = useNavigate()
@@ -29,32 +29,28 @@ const DashboardsPage = () => {
     setIsOpen((prevStateIsOpen) => !prevStateIsOpen)
   }
 
-  const addNewDashboard = ({ imageCoverUrl, title, status }: DashboardDTO) => {
+  const addNewDashboard = async ({ imageCoverUrl, title, status }: DashboardDTO) => {
     console.log('Create new Dashboard!')
     const users: UserDTO[] = []
     const currentUser: UserDTO = {
       username: 'Michal',
-      id: '',
-      googleId: '',
-      avatarUrl: '',
-      email: ''
+      id: '111',
+      googleId: '111',
+      avatarUrl: 'wwww',
+      email: 'a@o2.pl'
     }
     users.push(currentUser)
-    const newDashboard: DashboardDTO = {
+    const command: CreateDashboardCommand = {
       // TODO: id from backend?
-      id: faker.datatype.uuid(),
+      // id: faker.datatype.uuid(),
       title,
       users,
       imageCoverUrl,
       createdAt: new Date(),
       status
     }
-    const command: CreateDashboardCommand = {
-      title,
-      imageCoverUrl,
-      status
-    }
-    httpService.createDashboard(command)
+    const resultPromise: Promise<DashboardDTO> = httpService.createDashboard(command)
+    const newDashboard: DashboardDTO = await Promise.resolve(resultPromise)
     setDashboards([...dashboards, newDashboard])
   }
 
@@ -68,7 +64,7 @@ const DashboardsPage = () => {
       </header>
       <section className={classes.dashboards}>
         {dashboards.map(({ id, title, users, imageCoverUrl }) => (
-          <Dashboard
+          <DashboardGalleryPreview
             key={id}
             title={title}
             users={users}
@@ -86,4 +82,4 @@ const DashboardsPage = () => {
   )
 }
 
-export default DashboardsPage
+export default DashboardGalleryPage

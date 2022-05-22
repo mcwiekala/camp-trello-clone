@@ -1,17 +1,21 @@
 import { Image, Text } from '@mantine/core'
 import { UserDTO } from 'shared'
 import UserIconList from '../UserIconList/UserIconList'
-import UserType from '../../types/user'
 import useStyles from './style'
 
-type DashboardProps = {
+type DashboardGalleryPreviewProps = {
   title: string
   imageCoverUrl: string
   users: UserDTO[]
   onClickHandler: () => void
 }
 
-export const Dashboard = ({ title, imageCoverUrl, users, onClickHandler }: DashboardProps) => {
+export const DashboardGalleryPreview = ({
+  title,
+  imageCoverUrl,
+  users,
+  onClickHandler
+}: DashboardGalleryPreviewProps) => {
   const { classes } = useStyles()
 
   return (
