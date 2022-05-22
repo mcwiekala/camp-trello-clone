@@ -1,11 +1,11 @@
-import { Task } from '../task/task'
+import TaskBase from '../task/task'
 
 export class Column {
   private _title: string
   private _order: number
-  private _tasks: Task[]
+  private _tasks: TaskBase[]
 
-  constructor(title: string, order: number, tasks: Task[]) {
+  constructor(title: string, order: number, tasks: TaskBase[]) {
     this._title = title
     this._order = order
     this._tasks = tasks

@@ -2,7 +2,7 @@ import mongoose, { ObjectId } from 'mongoose'
 import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { Dashboard as DashboardModel } from './dashboard.model'
-import { Task } from '../task/task'
+import Task from '../task/task'
 import { Dashboard } from './dashboard'
 
 export class DashboardRepository {
@@ -57,7 +57,7 @@ export class DashboardRepository {
   ): Promise<Task> {
     const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)
     if (dashboard === null) {
-      throw new Error(`No dashboard found with id ${createTaskCommand.idDashboard}`)
+      throw new Error(`No dashboard found with id: [${createTaskCommand.idDashboard}]`)
     }
     const idCol = { idColumn: createTaskCommand.idColumn }
     const columnIndex = this.findIndexOfDocument(idCol.idColumn, dashboard.columns)

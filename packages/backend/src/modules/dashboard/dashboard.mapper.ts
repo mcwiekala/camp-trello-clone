@@ -1,10 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
-import ColumnDTO from 'packages/shared/lib/api/dto/column.dto'
 import { Dashboard } from './dashboard'
 import { Mapper } from '../../application/Mapper'
-import { Column } from './column'
 
-export class DashboardMapper implements Mapper<Dashboard, DashboardDTO> {
+export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
   public mapToDomain(raw: any): Dashboard {
     return new Dashboard(
       raw._id,
@@ -17,17 +16,9 @@ export class DashboardMapper implements Mapper<Dashboard, DashboardDTO> {
     )
   }
 
-  public mapToPersistance(dashboard: Dashboard): any {
+  public mapToPersistence(dashboard: Dashboard): any {
     return { _id: dashboard.id, title: dashboard.title }
   }
-
-  // public mapColumnToDto(column: Column): ColumnDTO {
-  //   return {
-  //     title: column.title,
-  //     order: column.order,
-  //     tasks: column.tasks
-  //   }
-  // }
 
   public mapToDto(dashboard: Dashboard): DashboardDTO {
     return {
@@ -38,11 +29,6 @@ export class DashboardMapper implements Mapper<Dashboard, DashboardDTO> {
       createdAt: dashboard.createdAt,
       status: dashboard.status,
       column: dashboard.column
-      // column: dashboard.column.map((column: ColumnDTO) => ({
-      //   title: column.title,
-      //   order: column.order,
-      //   tasks: column.tasks
-      // }))
     }
   }
 }

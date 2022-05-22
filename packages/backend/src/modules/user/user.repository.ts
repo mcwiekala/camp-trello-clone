@@ -1,49 +1,74 @@
 /* eslint-disable no-underscore-dangle */
-import { CreateUserCommand, UpdateUserCommand } from 'shared'
+import {
+  CannotCreateDocumentError,
+  CannotDeleteDocumentError,
+  CannotFindDocumentError,
+  CannotUpdateDocumentError,
+  CreateUserCommand,
+  UpdateUserCommand
+} from 'shared'
 import mongoose from 'mongoose'
 import { User } from './user'
-import userModel from './user.model'
+import userModel, { UserDocument, UserModel } from './user.model'
+import userMapper, { UserMapper } from './user.mapper'
 
 export class UserRepository {
-  private readonly _model: mongoose.Model<User>
+  private readonly _model: UserModel
+  private readonly _mapper: UserMapper
 
-  constructor(model: mongoose.Model<User>) {
+  constructor(model: UserModel, mapper: UserMapper) {
     this._model = model
+    this._mapper = mapper
   }
 
-  async create(dto: CreateUserCommand): Promise<User> {
-    const newUser: User = await this._model.create(dto)
-    return newUser
-  }
-
-  async updateOneById(id: string, dto: UpdateUserCommand): Promise<User> {
-    const patchedUser: User | null = await this._model.findByIdAndUpdate(id, dto, { new: true })
-    if (patchedUser === null) {
-      throw new Error()
+  async create(command: CreateUserCommand): Promise<User> {
+    try {
+      const newUser: UserDocument = await this._model.create(command)
+      return this._mapper.mapToDomain(newUser)
+    } catch (e) {
+      throw new CannotCreateDocumentError('User', command)
     }
-    return patchedUser
+  }
+
+  async updateOneById(id: string, command: UpdateUserCommand): Promise<User> {
+    try {
+      const patchedUser: UserDocument = await this._model
+        .findByIdAndUpdate(id, command, { new: true })
+        .orFail()
+      return this._mapper.mapToDomain(patchedUser)
+    } catch (e) {
+      if (e instanceof mongoose.Error.DocumentNotFoundError) {
+        throw new CannotFindDocumentError('User', id)
+      }
+      throw new CannotUpdateDocumentError('User', id, command)
+    }
   }
 
   async getOneById(id: string): Promise<User> {
-    const user: User | null = await this._model.findById(id)
-    if (user === null) {
-      throw new Error()
+    try {
+      const user: UserDocument = await this._model.findById(id).orFail()
+      return this._mapper.mapToDomain(user)
+    } catch (e) {
+      throw new CannotFindDocumentError('User', id)
     }
-    return user
   }
 
   async getAll(): Promise<User[]> {
-    const users: User[] = await this._model.find({})
-    return users
+    const users: UserDocument[] = await this._model.find({})
+    return users.map((user) => this._mapper.mapToDomain(user))
   }
 
   async deleteOneById(id: string): Promise<User> {
-    const deletedUser: User | null = await this._model.findByIdAndDelete(id)
-    if (deletedUser === null) {
-      throw new Error()
+    try {
+      const deletedUser: UserDocument = await this._model.findByIdAndDelete(id).orFail()
+      return this._mapper.mapToDomain(deletedUser)
+    } catch (e) {
+      if (e instanceof mongoose.Error.DocumentNotFoundError) {
+        throw new CannotFindDocumentError('User', id)
+      }
+      throw new CannotDeleteDocumentError('User', id)
     }
-    return deletedUser
   }
 }
 
-export default new UserRepository(userModel)
+export default new UserRepository(userModel, userMapper)

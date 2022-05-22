@@ -1,7 +1,7 @@
-export interface UserDto {
+import UserBase from '../../models/userBase'
+
+interface UserDTO extends UserBase {
   id: string
-  username: string
-  googleId: string
-  avatarUrl: string
-  email: string
 }
+
+export default UserDTO

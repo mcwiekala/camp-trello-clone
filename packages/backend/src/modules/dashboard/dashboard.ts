@@ -53,6 +53,6 @@ export class Dashboard {
   }
 
   public get column() {
-    return this._status
+    return this._column
   }
 }

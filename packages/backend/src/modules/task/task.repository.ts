@@ -1,21 +1,26 @@
-import { CreateTaskCommandDTO, TaskDTO, UpdateTaskCommand } from 'shared'
-import TaskModel from './task.model'
-// import { Repository } from '../../application/Repository'
-import { Task } from './task'
+import {
+  CannotUpdateDocumentError,
+  CreateTaskCommandDTO,
+  CannotFindDocumentError,
+  UpdateTaskCommand
+} from 'shared'
+import TaskMongooseModel, { TaskModel, TaskDocument } from './task.model'
+import Task from './task'
+import { taskMapper } from './task.mapper'
 
-// export class TaskRepository implements Repository<TaskDTO> {
 export class TaskRepository {
-  private readonly _taskModel
+  private readonly _taskModel: TaskModel
 
-  constructor(taskModel: any) {
+  constructor(taskModel: TaskModel) {
     this._taskModel = taskModel
   }
 
   async createTask(createTaskCommand: CreateTaskCommandDTO): Promise<Task> {
-    const savedTask: Task = await this._taskModel.create({ title: createTaskCommand.title })
-    // eslint-disable-next-line no-console
-    console.log(`Create new task in DB: ${savedTask}`)
-    return savedTask
+    const savedTaskDocument: TaskDocument = await this._taskModel.create({
+      title: createTaskCommand.title
+    })
+    console.log(`Create new task in DB: [${savedTaskDocument}]`)
+    return taskMapper.mapToDomain(savedTaskDocument)
   }
 
   async findAll(): Promise<Task[]> {
@@ -23,31 +28,42 @@ export class TaskRepository {
     return tasks
   }
 
-  async findById(id: string): Promise<Task> {
-    const task: Task = this._taskModel.findById(id)
-    return task
+  async findById(taskId: string): Promise<Task> {
+    const taskDocument: TaskDocument | null = await this._taskModel.findById(taskId).exec()
+    if (taskDocument === null) {
+      throw new CannotFindDocumentError('Task', taskId)
+    }
+    return taskMapper.mapToDomain(taskDocument)
   }
 
   async removeById(taskId: string): Promise<Task> {
-    const task: Task = await this._taskModel.findByIdAndRemove(taskId)
-    return task
+    const taskDocument: TaskDocument | null = await this._taskModel.findByIdAndRemove(taskId).exec()
+    if (taskDocument === null) {
+      throw new CannotFindDocumentError('Task', taskId)
+    }
+    return taskMapper.mapToDomain(taskDocument)
   }
 
-  async updateById(updateTaskCommand: UpdateTaskCommand, id: string): Promise<Task> {
-    const updatedTask: Task = this._taskModel.updateOne(
-      { _id: id },
-      {
-        $set: {
-          title: updateTaskCommand.title,
-          description: updateTaskCommand.description,
-          imageCoverId: updateTaskCommand.imageCoverId
+  async updateById(updateTaskCommand: UpdateTaskCommand, taskId: string): Promise<Task> {
+    const updatedTask: TaskDocument = await this._taskModel
+      .updateOne(
+        { _id: taskId },
+        {
+          $set: {
+            title: updateTaskCommand.title,
+            description: updateTaskCommand.description,
+            imageCoverId: updateTaskCommand.imageCoverId
+          }
         }
-      }
-    )
-    console.log(`Updated task in DB: ${updatedTask}`)
-    return updatedTask
+      )
+      .catch(() => {
+        throw new CannotUpdateDocumentError('Task', taskId, updateTaskCommand)
+      })
+      .then()
+    console.log(`Updated task with id: [${taskId}]`)
+    return taskMapper.mapToDomain(updatedTask)
   }
 }
 
-const taskRepository = new TaskRepository(TaskModel)
+const taskRepository = new TaskRepository(TaskMongooseModel)
 export { taskRepository }
