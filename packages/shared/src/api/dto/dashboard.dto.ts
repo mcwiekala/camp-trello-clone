@@ -8,7 +8,7 @@ interface DashboardDTO {
   imageCoverUrl?: string
   createdAt?: string
   status?: DashboardVisibility
-  column?: ColumnDTO[]
+  columns?: ColumnDTO[]
 }
 
 export default DashboardDTO
