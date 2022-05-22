@@ -4,13 +4,13 @@ import { Column } from './column'
 
 export class ColumnMapper implements Mapper<Column, any, ColumnDTO> {
   public mapToDomain(raw: any): Column {
-    return new Column(raw.title, raw.order, raw.tasks)
+    return new Column(raw.idCol, raw.title, raw.order, raw.tasks)
   }
   public mapToPersistance(column: Column): any {
-    return { title: column.title }
+    return { idCol: column.idCol, title: column.title }
   }
   public mapToDto(column: Column): ColumnDTO {
-    return { title: column.title, order: column.order, tasks: column.tasks }
+    return { idCol: column.idCol, title: column.title, order: column.order, tasks: column.tasks }
   }
 }
 

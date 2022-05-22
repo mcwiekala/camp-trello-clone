@@ -4,7 +4,7 @@ import { DashboardVisibility } from 'shared'
 const { ObjectId } = mongoose.Types
 
 const columnSchema = new mongoose.Schema({
-  _id: ObjectId,
+  idCol: ObjectId,
   title: String,
   order: Number,
   tasks: [

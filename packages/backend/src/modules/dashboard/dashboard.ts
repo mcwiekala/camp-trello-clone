@@ -8,7 +8,7 @@ export class Dashboard {
   private _imageCoverUrl: string
   private _createdAt: string
   private _status: DashboardVisibility
-  _columns: any
+  private _columns: Column[]
 
   constructor(
     id: string,
@@ -17,7 +17,7 @@ export class Dashboard {
     imageCoverUrl: string,
     createdAt: string,
     status: DashboardVisibility,
-    column: Column[]
+    columns: Column[]
   ) {
     this._id = id
     this._title = title
@@ -25,7 +25,7 @@ export class Dashboard {
     this._imageCoverUrl = imageCoverUrl
     this._createdAt = createdAt
     this._status = status
-    this._columns = column
+    this._columns = columns
   }
 
   public get id() {

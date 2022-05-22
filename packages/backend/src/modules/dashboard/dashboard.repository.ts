@@ -1,9 +1,12 @@
 import mongoose, { ObjectId } from 'mongoose'
 import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
+import ColumnDTO from 'packages/shared/src/api/dto/column.dto'
 import { Dashboard as DashboardModel } from './dashboard.model'
 import Task from '../task/task'
+import { Column } from './column'
 import { Dashboard } from './dashboard'
+import { columnMapper } from './column.mapper'
 
 export class DashboardRepository {
   private readonly _dashboardModel
@@ -105,6 +108,7 @@ export class DashboardRepository {
         }
       }
     )
+
     console.log(`Updated dashboard in DB: ${updatedDashboard}`)
     return updatedDashboard
   }
