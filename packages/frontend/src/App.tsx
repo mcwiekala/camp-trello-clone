@@ -1,18 +1,28 @@
 import { FC, useState, useMemo, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { DashboardDTO } from 'shared'
 import { ThemeProvider } from './contexts/ThemeContext'
-import {
-  DashboardsContext,
-  dashboardsDefaultValue,
-  IDashboardsContext
-} from './contexts/DashboardsContext'
+import { DashboardsContext, IDashboardsContext } from './contexts/DashboardsContext'
 import RoutesDashboards from './routes/RoutesDashboards'
 import Auth from './routes/auth'
 import { AppContext, AppState, IAppContext } from './contexts/AppStateContext'
+import httpService from './infrastructure/HttpService/HttpService'
 
 export const App: FC = () => {
-  const [dashboards, setDashboards] = useState(dashboardsDefaultValue)
+  const [isLoading, setIsLoading] = useState(true)
+  const [dashboards, setDashboards] = useState<DashboardDTO[]>()
   const [appState, setAppState] = useState({ token: '' })
+
+  const getData = () => {
+    httpService.getAllDashboards().then((result: DashboardDTO[]) => {
+      setDashboards(result)
+      setIsLoading(false)
+    })
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   const memoizedDashboardsContext = useMemo(
     () => [dashboards, setDashboards],

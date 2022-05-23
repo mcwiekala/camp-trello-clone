@@ -4,17 +4,13 @@ import { BsGlobe } from 'react-icons/bs'
 import { IoMdLock } from 'react-icons/io'
 import { MdImage } from 'react-icons/md'
 import { AiOutlinePlus } from 'react-icons/ai'
-
-// Components
+import { DashboardVisibility } from 'shared'
 import ImagePicker from '../ImagePicker/ImagePicker'
 import BlueButton from '../BlueButton/BlueButton'
 import GrayButton from '../GrayButton/GrayButton'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
-
-// Logic
 import GenerateId from '../../logic/generateId'
 import GenerateImage from '../../logic/generateImage'
-
 import useStyles from './style'
 
 type DashboardModalProps = {
@@ -24,7 +20,7 @@ type DashboardModalProps = {
     id: string
     imageCoverUrl: string
     title: string
-    status: string
+    status: DashboardVisibility
   }) => void
 }
 
@@ -44,7 +40,7 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
         id: boardId,
         imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,
-        status: isPrivate ? 'Private' : 'Public'
+        status: isPrivate ? DashboardVisibility.PRIVATE : DashboardVisibility.PUBLIC
       })
       setIsOpen()
     } else {

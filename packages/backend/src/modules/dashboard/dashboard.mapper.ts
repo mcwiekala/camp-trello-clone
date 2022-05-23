@@ -5,7 +5,14 @@ import { Mapper } from '../../application/Mapper'
 
 export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
   public mapToDomain(raw: any): Dashboard {
-    return new Dashboard(raw._id, raw.title, raw.description, raw.imageCoverUrl, raw.status)
+    return new Dashboard(
+      raw._id,
+      raw.title,
+      raw.description,
+      raw.imageCoverUrl,
+      raw.users,
+      raw.status
+    )
   }
 
   public mapToPersistence(dashboard: Dashboard): any {
@@ -18,6 +25,7 @@ export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
       title: dashboard.title,
       description: dashboard.description,
       imageCoverUrl: dashboard.imageCoverUrl,
+      users: dashboard.users,
       status: dashboard.status
     }
   }

@@ -1,5 +1,6 @@
 import { BsPlusLg } from 'react-icons/bs'
 import { Text } from '@mantine/core'
+import { TaskDTO } from 'shared'
 import { Draggable } from 'react-beautiful-dnd'
 import useStyles from './style'
 import Task from '../Task/Task'
@@ -11,7 +12,7 @@ type KanbanColumnProps = {
   title: string
   onTaskClickHandler: (taskId: string, columnId: string) => void
   onCreateTaskHandler: (taskId: string, columnId: string) => void
-  tasks: TaskType[]
+  tasks: TaskDTO[]
   onAddHandler: () => void
   onTaskInitializeHandler: (columnId: string) => void
 }
@@ -51,9 +52,17 @@ const KanbanColumn = ({
                 id={task.id}
                 columnId={columnId}
                 title={task.title}
-                imageCover={task.imageCoverURL}
-                assignedUsers={task.assigneeList}
-                numberOfAttachments={task.attachment.length}
+                imageCover={task.imageCoverId}
+                assignedUsers={[
+                  {
+                    id: '111',
+                    username: 'Janek',
+                    googleId: '123',
+                    avatarUrl: '123',
+                    email: 'a@a.pl'
+                  }
+                ]}
+                numberOfAttachments={task.attachments.length}
                 numberOfComments={1}
                 onTaskClickHandler={onTaskClickHandler}
                 onCreateTaskHandler={onCreateTaskHandler}

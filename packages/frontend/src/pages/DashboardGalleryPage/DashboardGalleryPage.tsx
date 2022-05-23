@@ -1,23 +1,14 @@
-/* eslint-disable no-console */
 import { useState, useContext } from 'react'
 import { Text, Button } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
-
-// Components
 import { AiOutlinePlus } from 'react-icons/ai'
+import { CreateDashboardCommand, DashboardDTO, UserDTO } from 'shared'
+import faker from '@faker-js/faker'
 import DashboardModal from '../../components/DashboardModal/DashboardModal'
-import { Dashboard } from '../../components/Dashboard/Dashboard'
-
-// Contexts & routes
+import { DashboardGalleryPreview } from '../../components/DashboardGalleryPreview/DashboardGalleryPreview'
 import { DashboardsContext } from '../../contexts/DashboardsContext'
-
-// Logic
-import RandomUser from '../../logic/randomUser'
-import GenerateTask from '../../logic/generateTask'
-
-// Misc
-import UserType from '../../types/user'
 import useStyles from './style'
+import httpService from '../../infrastructure/HttpService/HttpService'
 
 type DashboardProps = {
   id: string
@@ -26,7 +17,7 @@ type DashboardProps = {
   status: string
 }
 
-const DashboardsPage = () => {
+const DashboardGalleryPage = () => {
   const { classes } = useStyles()
 
   const navigate = useNavigate()
@@ -38,47 +29,45 @@ const DashboardsPage = () => {
     setIsOpen((prevStateIsOpen) => !prevStateIsOpen)
   }
 
-  const addNewDashboard = ({ id, imageCoverUrl, title, status }: DashboardProps) => {
-    const currentUser = new RandomUser().userData
-    currentUser.role = 'Admin'
-    const createdAt = new Date()
-    const users: UserType[] = []
-    users.push(currentUser)
-    const newDashboard = {
-      id,
-      description: '',
-      imageCoverUrl,
-      title,
-      createdAt,
-      users,
-      status,
-      admin: 'userId',
-      columns: [
-        {
-          id: '2',
-          title: 'New column',
-          tasks: [new GenerateTask(users)]
-        },
-        {
-          id: '3',
-          tasks: []
-        }
-      ]
+  const addNewDashboard = async ({ imageCoverUrl, title, status }: DashboardDTO) => {
+    console.log('Create new Dashboard!')
+    const users: UserDTO[] = []
+    const currentUser: UserDTO = {
+      username: 'Michal',
+      id: '111',
+      googleId: '111',
+      avatarUrl: 'wwww',
+      email: 'a@o2.pl'
     }
+    users.push(currentUser)
+    const command: CreateDashboardCommand = {
+      // TODO: id from backend?
+      // id: faker.datatype.uuid(),
+      title,
+      users,
+      imageCoverUrl,
+      createdAt: new Date(),
+      status
+    }
+    const resultPromise: Promise<DashboardDTO> = httpService.createDashboard(command)
+    const newDashboard: DashboardDTO = await Promise.resolve(resultPromise)
     setDashboards([...dashboards, newDashboard])
   }
 
+  if (!dashboards) {
+    return <div className="App">Loading...</div>
+  }
   return (
     <article className={classes.container}>
       <header className={classes.boardsHeader}>
         <Text className={classes.title}>All Boards</Text>
         <Button onClick={openDashboardModal} leftIcon={<AiOutlinePlus />}>
-          Add
+          Add Dashboard
         </Button>
       </header>
       <section className={classes.dashboards}>
         {dashboards.map(({ id, title, users, imageCoverUrl }) => (
-          <Dashboard
+          <DashboardGalleryPreview
             key={id}
             title={title}
             users={users}
@@ -96,4 +85,4 @@ const DashboardsPage = () => {
   )
 }
 
-export default DashboardsPage
+export default DashboardGalleryPage
