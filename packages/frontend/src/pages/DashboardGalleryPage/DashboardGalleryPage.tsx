@@ -54,6 +54,9 @@ const DashboardGalleryPage = () => {
     setDashboards([...dashboards, newDashboard])
   }
 
+  if (!dashboards) {
+    return <div className="App">Loading...</div>
+  }
   return (
     <article className={classes.container}>
       <header className={classes.boardsHeader}>

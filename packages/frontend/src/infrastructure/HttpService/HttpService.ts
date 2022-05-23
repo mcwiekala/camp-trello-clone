@@ -22,7 +22,8 @@ class HttpService {
   }
 
   // TODO change from any to Task type
-  getTask = (taskId: string): Promise<any> => this.http.get(`${TASK}/${taskId}`)
+  getTask = (taskId: string): Promise<any> => this.http.get(`tasks/${taskId}`)
+  getAllDashboards = (): Promise<DashboardDTO[]> => this.http.get('dashboards', {})
   createDashboard = (command: CreateDashboardCommand): Promise<DashboardDTO> =>
     this.http.post('dashboards', { body: JSON.stringify(command) })
 }
