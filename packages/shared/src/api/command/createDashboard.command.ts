@@ -11,12 +11,4 @@ export interface CreateDashboardCommand {
   status: DashboardVisibility
 }
 
-// id?: string
-// title: string
-// description?: string
-// imageCoverUrl: string
-// users?: UserDto[]
-// createdAt?: Date
-// status: DashboardVisibility
-
 export default CreateDashboardCommand
