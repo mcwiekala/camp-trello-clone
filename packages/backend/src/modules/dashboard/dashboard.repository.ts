@@ -77,7 +77,7 @@ export class DashboardRepository {
     const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
     const idCol = updateTaskCommand.idColumn
     if (!dashboard) {
-      return
+      throw new Error(`No dashboard found with id: [${updateTaskCommand.idDashboard}]`)
     }
     const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)
     const taskIndex = this.findIndexOfDocument(taskId, dashboard.columns[columnIndex].tasks)
