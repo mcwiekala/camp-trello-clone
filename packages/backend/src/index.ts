@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import 'dotenv/config'
 import http from 'http'
-import { Dashboard } from './modules/dashboard/dashboard.model'
+import { DashboardMongooseModel } from './modules/dashboard/dashboard.model'
 import Task from './modules/task/task.model'
 import app from './app'
 import { connectToDatabase } from './infrastructure/mongoose'
@@ -22,7 +22,7 @@ const startServer = async () => {
     console.log('Print data in DB')
 
     const tasks = await Task.find()
-    const dashboard = await Dashboard.find()
+    const dashboard = await DashboardMongooseModel.find()
     console.log(`Found: ${tasks.length} tasks!`)
     tasks.forEach((t) => {
       console.log(`${t.toString()}`)

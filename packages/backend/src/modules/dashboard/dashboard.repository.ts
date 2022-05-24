@@ -1,15 +1,21 @@
 import mongoose, { ObjectId } from 'mongoose'
-import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
+import {
+  CreateTaskCommandDTO,
+  UpdateTaskCommand,
+  CreateDashboardCommand,
+  CannotFindDocumentError,
+  CannotUpdateDocumentError
+} from 'shared'
+import { DashboardModel, DashboardMongooseModel, DashboardDocument } from './dashboard.model'
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
-import ColumnDTO from 'packages/shared/src/api/dto/column.dto'
-import { Dashboard as DashboardModel } from './dashboard.model'
 import Task from '../task/task'
 import { Column } from './column'
 import { Dashboard } from './dashboard'
-import { columnMapper } from './column.mapper'
+import { dashboardMapper, DashboardMapper } from './dashboard.mapper'
 
 export class DashboardRepository {
-  private readonly _dashboardModel
+  private readonly _dashboardModel: DashboardModel
+  private readonly _dashboardMapper: DashboardMapper
 
   private findIndexOfDocument(id: string, array: { _id: ObjectId }[]): number {
     const documentIndex = array.findIndex(
@@ -18,8 +24,9 @@ export class DashboardRepository {
     return documentIndex
   }
 
-  constructor(dashboardModel: any) {
+  constructor(dashboardModel: DashboardModel, dashboardMapper: DashboardMapper) {
     this._dashboardModel = dashboardModel
+    this._dashboardMapper = dashboardMapper
   }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
@@ -36,7 +43,7 @@ export class DashboardRepository {
 
     await dashboard.save()
     console.log(dashboard)
-    return dashboard
+    return this._dashboardMapper.mapToDomain(dashboard)
   }
 
   async getDashboards(): Promise<Dashboard[]> {
@@ -75,8 +82,13 @@ export class DashboardRepository {
   }
 
   async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommand, taskId: string) {
-    const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
+    const dashboard: DashboardDocument | null = await this._dashboardModel.findById(
+      updateTaskCommand.idDashboard
+    )
     const idCol = updateTaskCommand.idColumn
+    if (!dashboard) {
+      throw new Error(`No dashboard found with id: [${updateTaskCommand.idDashboard}]`)
+    }
     const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)
     const taskIndex = this.findIndexOfDocument(taskId, dashboard.columns[columnIndex].tasks)
     const task = dashboard.columns[columnIndex].tasks[taskIndex]
@@ -91,27 +103,39 @@ export class DashboardRepository {
   }
 
   async removeDashboardById(dashboardId: string): Promise<Dashboard> {
-    const dashboard: Dashboard = await this._dashboardModel.findByIdAndRemove(dashboardId)
-    return dashboard
+    const dashboardDocument: DashboardDocument | null = await this._dashboardModel
+      .findByIdAndRemove(dashboardId)
+      .exec()
+    if (dashboardDocument === null) {
+      throw new CannotFindDocumentError('Dashboard', dashboardId)
+    }
+    return dashboardMapper.mapToDomain(dashboardDocument)
   }
 
-  async updateDashboardById(updateDashboardCommand: DashboardDTO, id: string): Promise<Dashboard> {
-    const updatedDashboard: Dashboard = this._dashboardModel.updateOne(
-      { _id: id },
-      {
-        $set: {
-          title: updateDashboardCommand.title,
-          description: updateDashboardCommand.description,
-          imageCoverUrl: updateDashboardCommand.imageCoverUrl,
-          status: updateDashboardCommand.status,
-          columns: updateDashboardCommand.columns
+  async updateDashboardById(
+    updateDashboardCommand: DashboardDTO,
+    dashboardId: string
+  ): Promise<Dashboard> {
+    const updatedDashboard: DashboardDocument = await this._dashboardModel
+      .updateOne(
+        { _id: dashboardId },
+        {
+          $set: {
+            title: updateDashboardCommand.title,
+            description: updateDashboardCommand.description,
+            imageCoverUrl: updateDashboardCommand.imageCoverUrl,
+            status: updateDashboardCommand.status,
+            columns: updateDashboardCommand.columns
+          }
         }
-      }
-    )
-
+      )
+      .catch(() => {
+        throw new CannotUpdateDocumentError('Task', dashboardId, updatedDashboard)
+      })
+      .then()
     console.log(`Updated dashboard in DB: ${updatedDashboard}`)
-    return updatedDashboard
+    return dashboardMapper.mapToDomain(updatedDashboard)
   }
 }
-const dashboardRepository = new DashboardRepository(DashboardModel)
+const dashboardRepository = new DashboardRepository(DashboardMongooseModel, dashboardMapper)
 export { dashboardRepository }

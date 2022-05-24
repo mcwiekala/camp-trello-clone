@@ -1,10 +1,5 @@
-import TaskDTO from './task.dto'
+import ColumnBase from '../../models/columnBase'
 
-interface ColumnDTO {
-  id?: string
-  title?: string
-  order?: number
-  tasks?: TaskDTO[]
+export default interface DashboardDTO extends ColumnBase {
+  _id: string
 }
-
-export default ColumnDTO

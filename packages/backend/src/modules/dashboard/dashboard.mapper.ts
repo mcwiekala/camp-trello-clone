@@ -3,20 +3,21 @@ import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import ColumnDTO from 'shared/lib/api/dto/column.dto'
 import { Dashboard } from './dashboard'
 import { Mapper } from '../../application/Mapper'
+import { DashboardDocument } from './dashboard.model'
 import { columnMapper } from './column.mapper'
 import { Column } from './column'
 
-export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
-  public mapToDomain(raw: any): Dashboard {
-    return new Dashboard(
-      raw._id,
-      raw.title,
-      raw.description,
-      raw.imageCoverUrl,
-      raw.users,
-      raw.status,
-      raw.column
-    )
+export class DashboardMapper implements Mapper<Dashboard, DashboardDocument, DashboardDTO> {
+  public mapToDomain(dashboardDocument: DashboardDocument): Dashboard {
+    return {
+      id: dashboardDocument.id,
+      title: dashboardDocument.title,
+      description: dashboardDocument.description,
+      imageCoverUrl: dashboardDocument.imageCoverUrl,
+      status: dashboardDocument.status,
+      createdAt: dashboardDocument.createdAt,
+      columns: dashboardDocument.columns
+    }
   }
 
   public mapToPersistence(dashboard: Dashboard): any {
@@ -34,8 +35,9 @@ export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
       title: dashboard.title,
       description: dashboard.description,
       imageCoverUrl: dashboard.imageCoverUrl,
-      users: dashboard.users,
       status: dashboard.status,
+      createdAt: dashboard.createdAt,
+      users: []
       columns: columnArray
     }
   }
