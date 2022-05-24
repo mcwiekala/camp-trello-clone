@@ -1,7 +1,7 @@
 import TaskDTO from './task.dto'
 
 interface ColumnDTO {
-  idCol?: string
+  id?: string
   title?: string
   order?: number
   tasks?: TaskDTO[]

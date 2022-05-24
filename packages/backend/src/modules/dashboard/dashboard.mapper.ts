@@ -2,6 +2,7 @@
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import { Dashboard } from './dashboard'
 import { Mapper } from '../../application/Mapper'
+import { columnMapper } from './column.mapper'
 
 export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
   public mapToDomain(raw: any): Dashboard {
