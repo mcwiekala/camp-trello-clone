@@ -1,5 +1,7 @@
 import ColumnBase from '../../models/columnBase'
+import { TaskDTO } from '../index'
 
-export default interface DashboardDTO extends ColumnBase {
-  _id: string
+export default interface ColumnDTO extends ColumnBase {
+  id: string
+  tasks: TaskDTO[]
 }

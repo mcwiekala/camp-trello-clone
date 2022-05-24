@@ -1,5 +1,7 @@
 import { ColumnBase } from 'shared'
+import Task from '../task/task'
 
 export interface Column extends ColumnBase {
-  id: string
+  internalId: string
+  tasks: Task[]
 }

@@ -1,8 +1,5 @@
 import { DashboardVisibility } from '../api'
 
-// Nie da sie w tą stronę
-import Column from '../../../backend/src/modules/dashboard/column'
-
 export default interface DashboardBase {
   title: string
   description: string
@@ -12,5 +9,5 @@ export default interface DashboardBase {
     enum: DashboardVisibility
   }
   users?: unknown
-  columns: Column[]
+  columns: unknown
 }

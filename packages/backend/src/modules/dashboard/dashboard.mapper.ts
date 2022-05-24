@@ -31,13 +31,13 @@ export class DashboardMapper implements Mapper<Dashboard, DashboardDocument, Das
       columnArray.push(columnMapped)
     })
     return {
-      id: dashboard.id,
+      _id: dashboard.id,
       title: dashboard.title,
       description: dashboard.description,
       imageCoverUrl: dashboard.imageCoverUrl,
       status: dashboard.status,
       createdAt: dashboard.createdAt,
-      users: []
+      users: [],
       columns: columnArray
     }
   }

@@ -4,24 +4,32 @@ import {
   UpdateTaskCommand,
   CreateDashboardCommand,
   CannotFindDocumentError,
-  CannotUpdateDocumentError
+  CannotUpdateDocumentError,
+  DashboardDTO
 } from 'shared'
 import { DashboardModel, DashboardMongooseModel, DashboardDocument } from './dashboard.model'
-import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
 import Task from '../task/task'
 import { Column } from './column'
 import { Dashboard } from './dashboard'
 import { dashboardMapper, DashboardMapper } from './dashboard.mapper'
+import { TaskDocument } from '../task/task.model'
 
 export class DashboardRepository {
   private readonly _dashboardModel: DashboardModel
   private readonly _dashboardMapper: DashboardMapper
 
-  private findIndexOfDocument(id: string, array: { _id: ObjectId }[]): number {
-    const documentIndex = array.findIndex(
-      (columnOrTaskID: { _id: ObjectId }) => String(columnOrTaskID._id) === id
-    )
+  private findIndexOfTask(id: string, array: TaskDocument[]): number {
+    const documentIndex = array.findIndex((task: TaskDocument) => String(task._id) === id)
     return documentIndex
+  }
+
+  private findIndexOfTaskType(id: string, array: Task[]): number {
+    const documentIndex = array.findIndex((task: Task) => String(task._id) === id)
+    return documentIndex
+  }
+
+  private findIndexOfColumn(id: string, array: Column[]): number {
+    return array.findIndex((column: Column) => String(column.internalId) === id)
   }
 
   constructor(dashboardModel: DashboardModel, dashboardMapper: DashboardMapper) {
@@ -65,12 +73,15 @@ export class DashboardRepository {
     createTaskCommand: CreateTaskCommandDTO,
     savedTask: Task
   ): Promise<Task> {
-    const dashboard = await this._dashboardModel.findById(createTaskCommand.idDashboard)
+    const dashboard: DashboardDocument | null = await this._dashboardModel.findById(
+      createTaskCommand.idDashboard
+    )
     if (dashboard === null) {
       throw new Error(`No dashboard found with id: [${createTaskCommand.idDashboard}]`)
     }
     const idCol = { idColumn: createTaskCommand.idColumn }
-    const columnIndex = this.findIndexOfDocument(idCol.idColumn, dashboard.columns)
+    // const columnIndex = this.findIndexOfDocument(idCol.idColumn, dashboard.columns)
+    const columnIndex = this.findIndexOfColumn(idCol.idColumn, dashboard.columns)
 
     dashboard.columns[columnIndex].tasks.push(savedTask)
     await dashboard.save()
@@ -89,11 +100,11 @@ export class DashboardRepository {
     if (!dashboard) {
       throw new Error(`No dashboard found with id: [${updateTaskCommand.idDashboard}]`)
     }
-    const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)
-    const taskIndex = this.findIndexOfDocument(taskId, dashboard.columns[columnIndex].tasks)
+    const columnIndex = this.findIndexOfColumn(idCol, dashboard.columns)
+    const taskIndex = this.findIndexOfTaskType(taskId, dashboard.columns[columnIndex].tasks)
     const task = dashboard.columns[columnIndex].tasks[taskIndex]
     if (task.title !== updateTaskCommand.title) {
-      task.title = updateTaskCommand.title
+      task.title = updateTaskCommand.title!
     }
     if (task.imageCoverId !== updateTaskCommand.imageCoverId) {
       task.imageCoverId = updateTaskCommand.imageCoverId

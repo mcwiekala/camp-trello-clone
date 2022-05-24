@@ -1,17 +1,19 @@
 import mongoose from 'mongoose'
 import { DashboardBase, DashboardVisibility } from 'shared'
-import ColumnBase from 'packages/shared/src/models/columnBase'
+import { Column } from './column'
+import { User } from '../user/user'
 
 const { ObjectId } = mongoose.Types
 
 export interface DashboardDocument extends DashboardBase, mongoose.Document {
-  columns: ColumnBase[]
+  users: User[]
+  columns: Column[]
 }
 
 export interface DashboardModel extends mongoose.Model<DashboardDocument> {}
 
 const columnSchema = new mongoose.Schema({
-  idCol: ObjectId,
+  internalId: ObjectId,
   title: String,
   order: Number,
   tasks: [
