@@ -1,11 +1,13 @@
 import mongoose, { ObjectId } from 'mongoose'
 import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
-import { Dashboard as DashboardModel } from './dashboard.model'
+import { DashboardModel, Dashboard as DashboardMongooseModel } from './dashboard.model'
 import Task from '../task/task'
 import { Dashboard } from './dashboard'
+import { dashboardMapper, DashboardMapper } from './dashboard.mapper'
 
 export class DashboardRepository {
   private readonly _dashboardModel
+  private readonly _dashboardMapper
 
   private findIndexOfDocument(id: string, array: { _id: ObjectId }[]): number {
     const documentIndex = array.findIndex(
@@ -14,8 +16,9 @@ export class DashboardRepository {
     return documentIndex
   }
 
-  constructor(dashboardModel: any) {
+  constructor(dashboardModel: DashboardModel, dashboardMapper: DashboardMapper) {
     this._dashboardModel = dashboardModel
+    this._dashboardMapper = dashboardMapper
   }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
@@ -32,7 +35,7 @@ export class DashboardRepository {
 
     await dashboard.save()
     console.log(dashboard)
-    return dashboard
+    return this._dashboardMapper.mapToDomain(dashboard)
   }
 
   async getDashboards(): Promise<Dashboard[]> {
@@ -73,6 +76,9 @@ export class DashboardRepository {
   async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommand, taskId: string) {
     const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
     const idCol = updateTaskCommand.idColumn
+    if (!dashboard) {
+      return
+    }
     const columnIndex = this.findIndexOfDocument(idCol, dashboard.columns)
     const taskIndex = this.findIndexOfDocument(taskId, dashboard.columns[columnIndex].tasks)
     const task = dashboard.columns[columnIndex].tasks[taskIndex]
@@ -86,5 +92,5 @@ export class DashboardRepository {
     console.log(`Dashboard repository: task id: ("${taskId}") updated on dashboard`)
   }
 }
-const dashboardRepository = new DashboardRepository(DashboardModel)
+const dashboardRepository = new DashboardRepository(DashboardMongooseModel, dashboardMapper)
 export { dashboardRepository }

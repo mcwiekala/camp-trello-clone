@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 
 export const connectToDatabase = async () => {
   const { DB_USERNAME, DB_PASSWORD, DB_PORT } = process.env
-  const dbURL = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@localhost:${DB_PORT}/trello-clone`
+  const dbURL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@trello-clone.sidk4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
   /* eslint-disable no-console */
   try {
