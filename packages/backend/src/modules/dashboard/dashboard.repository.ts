@@ -1,10 +1,6 @@
 import mongoose, { ObjectId } from 'mongoose'
 import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
-import {
-  DashboardModel,
-  Dashboard as DashboardMongooseModel,
-  DashboardDocument
-} from './dashboard.model'
+import { DashboardModel, DashboardMongooseModel, DashboardDocument } from './dashboard.model'
 import Task from '../task/task'
 import { Dashboard } from './dashboard'
 import { dashboardMapper, DashboardMapper } from './dashboard.mapper'

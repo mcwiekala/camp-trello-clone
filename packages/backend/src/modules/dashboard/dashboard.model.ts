@@ -44,6 +44,8 @@ const dashboardSchema = new mongoose.Schema<DashboardDocument, DashboardModel>({
   ],
   columns: [columnSchema]
 })
-const Dashboard = mongoose.model<DashboardDocument, DashboardModel>('Dashboard', dashboardSchema)
-const DashboardColumn = mongoose.model('DashboardColumn', columnSchema)
-export { Dashboard, DashboardColumn }
+const DashboardMongooseModel = mongoose.model<DashboardDocument, DashboardModel>(
+  'Dashboard',
+  dashboardSchema
+)
+export { DashboardMongooseModel }
