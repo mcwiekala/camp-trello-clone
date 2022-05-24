@@ -23,7 +23,8 @@ export class AttachmentMapper implements Mapper<Attachment, any, AttachmentDTO> 
       id: attachment.id,
       fileName: attachment.fileName,
       addedDate: attachment.addedDate,
-      fileNameHash: attachment.fileNameHash,
+      // fileNameHash should not be int DTO
+      // fileNameHash: attachment.fileNameHash,
       taskId: attachment.taskId
     }
   }

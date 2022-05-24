@@ -4,7 +4,7 @@ import { BsGlobe } from 'react-icons/bs'
 import { IoMdLock } from 'react-icons/io'
 import { MdImage } from 'react-icons/md'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { DashboardVisibility } from 'shared'
+import { DashboardDTO, DashboardVisibility, UserDTO } from 'shared'
 import ImagePicker from '../ImagePicker/ImagePicker'
 import BlueButton from '../BlueButton/BlueButton'
 import GrayButton from '../GrayButton/GrayButton'
@@ -12,16 +12,12 @@ import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 import GenerateId from '../../logic/generateId'
 import GenerateImage from '../../logic/generateImage'
 import useStyles from './style'
+import initialColumns from "../../logic/initialColumns";
 
-type DashboardModalProps = {
+export type DashboardModalProps = {
   isOpen: boolean
   setIsOpen: () => void
-  onCloseHandler: (dashboard: {
-    id: string
-    imageCoverUrl: string
-    title: string
-    status: DashboardVisibility
-  }) => void
+  onCloseHandler: (dto: DashboardDTO) => void
 }
 
 const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalProps) => {
@@ -36,12 +32,26 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
 
   const onCreateBoardHandler = () => {
     if (currentTitle) {
-      onCloseHandler({
+      const users: UserDTO[] = []
+      const currentUser: UserDTO = {
+        username: 'Michal',
+        id: '111',
+        googleId: '111',
+        avatarUrl: 'wwww',
+        email: 'a@o2.pl'
+      }
+      users.push(currentUser)
+      const dto: DashboardDTO = {
         id: boardId,
+        description: '',
         imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,
+        users,
+        createdAt: new Date(),
+        columns: initialColumns,
         status: isPrivate ? DashboardVisibility.PRIVATE : DashboardVisibility.PUBLIC
-      })
+      }
+      onCloseHandler(dto)
       setIsOpen()
     } else {
       setTooltipOpened(true)

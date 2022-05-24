@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DroppableId, DropResult } from 'react-beautiful-dnd'
 import { useParams } from 'react-router-dom'
 import { Button } from '@mantine/core'
 import { FaEllipsisH } from 'react-icons/fa'
 import { nanoid } from 'nanoid'
-
+import { DashboardDTO, ColumnDTO, TaskDTO } from 'shared'
 import KanbanColumn from '../../components/KanbanColumn/KanbanColumn'
 import useStyles from './style'
 import UserIconList from '../../components/UserIconList/UserIconList'
@@ -16,38 +16,47 @@ import DashboardDrawer from '../../components/DashboardDrawer/DashboardDrawer'
 const DashboardPage = () => {
   const { id: dashboardId } = useParams()
   const [dashboards, setDashboards] = useContext(DashboardsContext)
-  const currentDashboard = dashboards.find(({ id }) => id === dashboardId)
+  const currentDashboard: DashboardDTO = dashboards.find(({ id }) => id === dashboardId)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDashboardDrawerOpen, setIsDashboardDrawerOpen] = useState(false)
   const { classes } = useStyles()
-  const [currentIssue, setCurrentIssue] = useState()
+  const [currentIssue, setCurrentIssue] = useState<TaskDTO>()
 
-  const onDragEnd = (result) => {
-    const newColumns = currentDashboard.columns
-    const findColumnSource = newColumns.find(({ id }) => id === result.source.droppableId)
-    const findIssueSource = findColumnSource.tasks.find(({ id }) => id === result.draggableId)
-    const issueSourceIndex = findColumnSource.tasks.findIndex(
-      (issue) => issue.id === result.draggableId
+  const onDragEnd = (result: DropResult) => {
+    const { columns } = currentDashboard
+    const findColumnSource: ColumnDTO = columns.find(
+      (c: ColumnDTO) => c.id === result.source.droppableId
+    )!
+
+    const findTaskSource: TaskDTO = findColumnSource!.tasks.find(
+      (t: TaskDTO) => t.id === result.draggableId
+    )!
+
+    const taskSourceIndex: number = findColumnSource.tasks.findIndex(
+      (task: TaskDTO) => task.id === result.draggableId
     )
-    const findColumnDestination = newColumns.find(({ id }) => id === result.destination.droppableId)
 
-    findColumnSource.tasks.splice(issueSourceIndex, 1)
-    findColumnDestination.tasks.splice(result.destination.index, 0, findIssueSource)
+    const findColumnDestination: ColumnDTO = columns.find(
+      (c: ColumnDTO) => c.id === result.destination!.droppableId
+    )!
+
+    findColumnSource.tasks.splice(taskSourceIndex, 1)
+    findColumnDestination.tasks.splice(result.destination!.index, 0, findTaskSource)
 
     setDashboards([
       ...dashboards.filter(({ id }) => id !== dashboardId),
       {
         ...currentDashboard,
-        columns: newColumns
+        columns
       }
     ])
   }
 
-  const onTaskModalCloseHandler = (updatedTask) => {
-    const columnToUpdate = currentDashboard.columns.filter(({ tasks }) =>
+  const onTaskModalCloseHandler = (updatedTask: TaskDTO) => {
+    const columnToUpdate: ColumnDTO = currentDashboard.columns.filter(({ tasks }) =>
       tasks.some(({ id }) => id === updatedTask.id)
     )[0]
-    const updatedColumn = {
+    const updatedColumn: ColumnDTO = {
       ...columnToUpdate,
       tasks: columnToUpdate.tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     }
@@ -68,15 +77,14 @@ const DashboardPage = () => {
     ])
   }
 
-  const onTaskEventHandler = (taskId, columnId) => {
-    const findColumn = currentDashboard.columns
-      .find(({ id }) => id === columnId)
-      .tasks.find(({ id }) => id === taskId)
-    setCurrentIssue(findColumn)
+  const onTaskEventHandler = (taskId: string, columnId: string) => {
+    const findColumn: ColumnDTO = currentDashboard.columns.find(({ id }) => id === columnId)!
+    const findTask: TaskDTO = findColumn.tasks.find(({ id }) => id === taskId)!
+    setCurrentIssue(findTask)
     setIsModalOpen(true)
   }
-  const onDescriptionSaveHandler = (descriptionText) => {
-    const updatedDashboard = { ...currentDashboard, description: descriptionText }
+  const onDescriptionSaveHandler = (descriptionText: string) => {
+    const updatedDashboard: DashboardDTO = { ...currentDashboard, description: descriptionText }
 
     setDashboards([
       ...dashboards.filter(({ id }) => id !== dashboardId),
@@ -85,8 +93,8 @@ const DashboardPage = () => {
       }
     ])
   }
-  const onUserRemoveHandler = (userId) => {
-    const updatedDashboard = {
+  const onUserRemoveHandler = (userId: string) => {
+    const updatedDashboard: DashboardDTO = {
       ...currentDashboard,
       users: currentDashboard.users.filter((user) => user.id !== userId)
     }
@@ -104,7 +112,7 @@ const DashboardPage = () => {
     ])
   }
 
-  const onTaskInitializeHandler = (columnId) => {
+  const onTaskInitializeHandler = (columnId: string) => {
     const newTask = {
       id: nanoid(),
       description: '',
@@ -131,11 +139,20 @@ const DashboardPage = () => {
     ])
   }
 
-  const onTaskAddHandler = (taskId, title) => {
-    const updatedTask = {
-      ...currentDashboard.columns
-        .find(({ tasks }) => tasks.some(({ id }) => id === taskId))
-        .tasks.find(({ id }) => id === taskId),
+  const onTaskAddHandler = (taskId: string, title: string) => {
+    const foundedColumn: ColumnDTO | undefined = currentDashboard.columns.find(({ tasks }) =>
+      tasks.some(({ id }) => id === taskId)
+    )
+    if (!foundedColumn) {
+      return
+    }
+    const foundedTask: TaskDTO | undefined = foundedColumn.tasks.find(({ id }) => id === taskId)
+    if (!foundedTask) {
+      return
+    }
+
+    const updatedTask: TaskDTO = {
+      ...foundedTask,
       title
     }
 
@@ -178,12 +195,13 @@ const DashboardPage = () => {
       </div>
       <div className={classes.columns}>
         <DragDropContext onDragEnd={onDragEnd}>
-          {currentDashboard.columns.map(({ id, title, tasks }, index) => (
-            <Droppable key={id} droppableId={id} index={index}>
+          {currentDashboard.columns.map(({ id, title, tasks }, index: number) => (
+            // <Droppable key={id} droppableId={id} index={index}>
+            <Droppable key={id} droppableId={id}>
               {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
                   <KanbanColumn
-                    ref={provided.innerRef}
+                    // ref={provided.innerRef}
                     {...provided.droppableProps}
                     columnId={id}
                     title={title}
@@ -206,7 +224,7 @@ const DashboardPage = () => {
           commentsList={[new GenerateComment().getComment]}
           membersList={currentDashboard.users}
           onCloseHandler={onTaskModalCloseHandler}
-          task={currentIssue}
+          task={currentIssue!}
         />
       ) : null}
       <DashboardDrawer

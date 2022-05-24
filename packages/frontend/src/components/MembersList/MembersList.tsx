@@ -1,4 +1,5 @@
 import { Text } from '@mantine/core'
+import { UserDTO } from 'shared'
 import { HiUsers } from 'react-icons/hi'
 import UserIcon from '../UserIcon/UserIcon'
 import RedButton from '../RedButton/RedButton'
@@ -7,17 +8,19 @@ import useStyles from './style'
 
 type MembersListProps = {
   title?: string
-  membersList: UserType[]
+  membersList: UserDTO[]
   onDeleteHandler: (id: string) => void
   isDeletable?: boolean
 }
+
+const ADMIN_ROLE = 'Admin'
 
 const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: MembersListProps) => {
   const { classes } = useStyles()
 
   const getRemoveButton = (role: string | undefined, id: string) => {
     if (isDeletable) {
-      if (role === 'Admin') {
+      if (role === ADMIN_ROLE) {
         return <Text className={classes.admin}>Admin</Text>
       }
       return <RedButton onClick={() => onDeleteHandler(id)}>Remove</RedButton>
@@ -32,11 +35,11 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: Membe
         <Text className={classes.title}>{title || 'Members'}</Text>
       </header>
       <section>
-        {membersList.map(({ username, id, profilePictureURL, role }) => (
+        {membersList.map(({ username, id, avatarUrl }) => (
           <section className={classes.memberSection} key={id}>
-            <UserIcon imgUrl={profilePictureURL} username={username} />
+            <UserIcon imgUrl={avatarUrl} username={username} />
             <Text className={classes.username}>{username}</Text>
-            {getRemoveButton(role, id)}
+            {getRemoveButton(ADMIN_ROLE, id)}
           </section>
         ))}
       </section>

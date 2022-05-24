@@ -1,7 +1,7 @@
 import { BsPlusLg } from 'react-icons/bs'
 import { Text } from '@mantine/core'
 import { TaskDTO } from 'shared'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, DraggableProvided } from 'react-beautiful-dnd'
 import useStyles from './style'
 import Task from '../Task/Task'
 import BlueButton from '../BlueButton/BlueButton'
@@ -40,7 +40,7 @@ const KanbanColumn = ({
       <Text className={classes.title}>{title}</Text>
       {tasks.map((task, index) => (
         <Draggable draggableId={task.id} key={task.id} index={index}>
-          {(provided) => (
+          {(provided: DraggableProvided) => (
             <div
               className={classes.task}
               {...provided.draggableProps}

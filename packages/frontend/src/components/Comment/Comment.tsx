@@ -27,7 +27,7 @@ const Comment = ({
   return (
     <Container>
       <div className={classes.divUserInfo}>
-        <Avatar radius="md" src={userData.profilePictureURL} />
+        <Avatar radius="md" src={userData.avatarUrl} />
 
         <div>
           <div className={classes.name}>{userData.username}</div>

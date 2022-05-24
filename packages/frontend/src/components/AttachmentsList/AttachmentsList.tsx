@@ -2,13 +2,14 @@ import { Text } from '@mantine/core'
 import { FC } from 'react'
 import { IoDocumentText } from 'react-icons/io5'
 import { MdAdd } from 'react-icons/md'
+import { AttachmentDTO } from 'shared'
 import Attachment from '../Attachment/Attachment'
 import GrayButton from '../GrayButton/GrayButton'
 import AttachmentType from '../../types/attachment'
 import useStyles from './style'
 
 export type AttachmentsListProps = {
-  attachments: AttachmentType[]
+  attachments: AttachmentDTO[]
   onAddHandler: (e?: React.MouseEvent<HTMLElement>) => void
   onDeleteHandler: (id: string) => void
 }
@@ -34,14 +35,15 @@ const AttachmentsList: FC<AttachmentsListProps> = ({
           Add
         </GrayButton>
       </header>
-      {attachments.map(({ fileName, date, itemUrl, id }) => (
+      {attachments.map(({ fileName, addedDate, id, taskId }) => (
         <section className={classes.attachmentSection} key={id}>
           <Attachment
             fileName={fileName}
-            date={date}
-            itemUrl={itemUrl}
+            addedDate={addedDate}
+            // itemUrl={itemUrl}
             id={id}
             onDeleteHandler={onDeleteHandler}
+            taskId={taskId}
           />
         </section>
       ))}

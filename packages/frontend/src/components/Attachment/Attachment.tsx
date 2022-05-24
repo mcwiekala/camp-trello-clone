@@ -1,23 +1,24 @@
 import { Image, Text } from '@mantine/core'
+import { AttachmentDTO } from 'shared'
 import GrayButton from '../GrayButton/GrayButton'
 import convertDate from '../../utils/convertDate'
 import AttachmentType from '../../types/attachment'
 import useStyles from './style'
 
-type AttachmentProps = AttachmentType & {
+type AttachmentProps = AttachmentDTO & {
   onDeleteHandler: (id: string) => void
 }
 
-const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: AttachmentProps) => {
+const Attachment = ({ addedDate, fileName, id, onDeleteHandler }: AttachmentProps) => {
   const { classes } = useStyles()
-  const attachmentDate = convertDate(date)
+  const attachmentDate = convertDate(addedDate)
 
   return (
     <div className={classes.divBody}>
       <div>
         <Image
           classNames={{ placeholder: classes.imagePlaceholder }}
-          src={itemUrl}
+          // src={itemUrl}
           alt="Date"
           width={80}
           height={55}
@@ -32,7 +33,7 @@ const Attachment = ({ itemUrl, date, fileName, id, onDeleteHandler }: Attachment
         <Text className={classes.title}>{fileName}</Text>
         <GrayButton
           component="a"
-          href={itemUrl}
+          // href={itemUrl}
           download
           target="_blank"
           className={classes.buttonDownload}

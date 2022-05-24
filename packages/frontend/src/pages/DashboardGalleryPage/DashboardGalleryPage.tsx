@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { CreateDashboardCommand, DashboardDTO, UserDTO } from 'shared'
 import faker from '@faker-js/faker'
-import DashboardModal from '../../components/DashboardModal/DashboardModal'
+import DashboardModal, { DashboardModalProps } from '../../components/DashboardModal/DashboardModal'
 import { DashboardGalleryPreview } from '../../components/DashboardGalleryPreview/DashboardGalleryPreview'
 import { DashboardsContext } from '../../contexts/DashboardsContext'
 import useStyles from './style'
@@ -29,17 +29,17 @@ const DashboardGalleryPage = () => {
     setIsOpen((prevStateIsOpen) => !prevStateIsOpen)
   }
 
-  const addNewDashboard = async ({ imageCoverUrl, title, status }: DashboardDTO) => {
+  const addNewDashboard = async ({ imageCoverUrl, title, status, users }: DashboardDTO) => {
     console.log('Create new Dashboard!')
-    const users: UserDTO[] = []
-    const currentUser: UserDTO = {
-      username: 'Michal',
-      id: '111',
-      googleId: '111',
-      avatarUrl: 'wwww',
-      email: 'a@o2.pl'
-    }
-    users.push(currentUser)
+    // const users: UserDTO[] = []
+    // const currentUser: UserDTO = {
+    //   username: 'Michal',
+    //   id: '111',
+    //   googleId: '111',
+    //   avatarUrl: 'wwww',
+    //   email: 'a@o2.pl'
+    // }
+    // users.push(currentUser)
     const command: CreateDashboardCommand = {
       // TODO: id from backend?
       // id: faker.datatype.uuid(),

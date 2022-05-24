@@ -7,6 +7,7 @@ export class Dashboard {
   private _description: string
   private _imageCoverUrl: string
   private _users: UserDto[]
+  private _createdAt: Date
   private _status: DashboardVisibility
   _columns: any
 
@@ -16,7 +17,8 @@ export class Dashboard {
     description: string,
     imageCoverUrl: string,
     status: DashboardVisibility,
-    _users: UserDto[]
+    _users: UserDto[],
+    createdAt: Date
   ) {
     this._id = id
     this._title = title
@@ -24,6 +26,7 @@ export class Dashboard {
     this._imageCoverUrl = imageCoverUrl
     this._status = status
     this._users = _users
+    this._createdAt = createdAt
   }
 
   public get id() {
@@ -48,5 +51,9 @@ export class Dashboard {
 
   public get users() {
     return this._users
+  }
+
+  public get createdAt() {
+    return this._createdAt
   }
 }

@@ -4,6 +4,7 @@ import { Select } from '@mantine/core'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { IoApps } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
+import { UserDTO } from 'shared'
 import UserType from '../../types/user'
 import { routes } from '../../routes/RoutesDashboards'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
@@ -12,7 +13,7 @@ import thulloLogo from '../../images/thullo_logo.png'
 import LoginGoogleButton from '../LoginGoogleButton/LoginGoogleButton'
 
 export type NavbarProps = {
-  loggedUser: UserType
+  loggedUser: UserDTO
   boardTitle?: string
 }
 
@@ -49,7 +50,7 @@ const Navbar = ({ boardTitle, loggedUser }: NavbarProps) => {
               { value: 'react', label: 'Option1' },
               { value: 'vue', label: 'Option2' }
             ]}
-            icon={<img src={loggedUser.profilePictureURL} alt="user avatar" />}
+            icon={<img src={loggedUser.avatarUrl} alt="user avatar" />}
             rightSection={<AiFillCaretDown />}
           />
         ) : (

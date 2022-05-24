@@ -1,4 +1,5 @@
 import faker from '@faker-js/faker'
+import { UserDTO } from 'shared'
 
 class RandomUser {
   private readonly id: string
@@ -16,12 +17,15 @@ class RandomUser {
     this.profilePictureURL = `https://avatars.dicebear.com/api/human/${this.id}.svg`
   }
 
-  get userData() {
+  get userData(): UserDTO {
     return {
       username: this.username,
       id: this.id,
-      role: this.role,
-      profilePictureURL: this.profilePictureURL
+      // role: this.role,
+      avatarUrl: this.profilePictureURL,
+      // TODO
+      googleId: '123',
+      email: 'a@o2.pl'
     }
   }
 

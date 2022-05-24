@@ -11,7 +11,8 @@ export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
       raw.description,
       raw.imageCoverUrl,
       raw.users,
-      raw.status
+      raw.status,
+      raw.createdAt
     )
   }
 
@@ -26,7 +27,9 @@ export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
       description: dashboard.description,
       imageCoverUrl: dashboard.imageCoverUrl,
       users: dashboard.users,
-      status: dashboard.status
+      status: dashboard.status,
+      columns: [],
+      createdAt: dashboard.createdAt
     }
   }
 }

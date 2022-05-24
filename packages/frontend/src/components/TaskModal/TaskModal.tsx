@@ -3,8 +3,7 @@ import { Popover, Modal, Text } from '@mantine/core'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { IoMdContact } from 'react-icons/io'
 import { MdImage } from 'react-icons/md'
-
-// Components
+import { UserDTO, TaskDTO, AttachmentDTO } from 'shared'
 import Description from '../Description/Description'
 import AttachmentsList from '../AttachmentsList/AttachmentsList'
 import Comment from '../Comment/Comment'
@@ -14,12 +13,8 @@ import MembersList from '../MembersList/MembersList'
 import MemberCardContainer from '../MemberCardContainer/MemberCardContainer'
 import BlueButton from '../BlueButton/BlueButton'
 import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
-
-// Logic
 import GenerateAttachment from '../../logic/generateAttachment'
 import GenerateComment from '../../logic/generateComment'
-
-// Misc
 import AttachmentType from '../../types/attachment'
 import CommentType from '../../types/comment'
 import TaskType from '../../types/task'
@@ -30,17 +25,17 @@ const MODAL_SIZE = 'clamp(1000px, 70%, 2000px)'
 
 type TaskModalProps = {
   isOpen: boolean
-  task: TaskType
-  membersList: UserType[]
+  task: TaskDTO
+  membersList: UserDTO[]
   commentsList: CommentType[]
-  onCloseHandler: (task: TaskType & { comments: CommentType[] }) => void
+  onCloseHandler: (task: TaskDTO & { comments: CommentType[] }) => void
 }
 
 const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: TaskModalProps) => {
   const { classes } = useStyles()
   const [currentDescription, setCurrentDescription] = useState(task.description)
-  const [currentAttachments, setCurrentAttachments] = useState(task.attachment)
-  const [currentCoverImageURL, setCurrentCoverImageURL] = useState(task.imageCoverURL)
+  const [currentAttachments, setCurrentAttachments] = useState(task.attachments)
+  const [currentCoverImageURL, setCurrentCoverImageURL] = useState(task.imageCoverId)
   const [currentAssigneesList, setCurrentAssigneesList] = useState(task.assigneeList)
   const [currentComments, setCurrentComments] = useState(commentsList)
   const [currentInputComment, setCurrentInputComment] = useState('')
@@ -49,8 +44,9 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
   const [currentMemberList, setCurrentMemberList] = useState(membersList)
 
   const attachmentOnAddHandler = () => {
-    const newAttachment: AttachmentType = new GenerateAttachment().getAttachment
-    setCurrentAttachments((prevState: AttachmentType[]) => [...prevState, newAttachment])
+    // TODO add attachement
+    // const newAttachment: AttachmentDTO = new GenerateAttachment().getAttachment
+    // setCurrentAttachments((prevState: AttachmentDTO[]) => [...prevState, newAttachment])
   }
 
   const attachmentOnDeleteHandler = (deleteId: string) => {
@@ -67,11 +63,11 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
 
   const onCloseModalWindowHandler = () => {
     onCloseHandler({
+      imageCoverId: task.imageCoverId,
       id: task.id,
-      imageCoverURL: currentCoverImageURL,
       title: task.title,
       description: currentDescription,
-      attachment: currentAttachments,
+      attachments: currentAttachments,
       assigneeList: currentAssigneesList,
       comments: currentComments
     })
@@ -106,7 +102,7 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
   const addUserHandler = (selectedUsersID: string[]) => {
     const newAssignees = selectedUsersID
       .map((selectedUserID) => currentMemberList.find(({ id }) => id === selectedUserID))
-      .filter((assignee) => assignee) as UserType[]
+      .filter((assignee) => assignee) as UserDTO[]
     setCurrentAssigneesList((prevState) => [...prevState, ...newAssignees])
     setCurrentMemberList((prevState) =>
       prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))

@@ -1,25 +1,27 @@
 import faker from '@faker-js/faker'
+import { AttachmentDTO } from 'shared'
 
 class GenerateAttachment {
   private fileName!: string
 
   private itemUrl!: string
 
-  private date: Date
+  private addedDate: Date
 
   private id: string
 
   constructor() {
     this.generateAttachment()
-    this.date = faker.date.past()
+    this.addedDate = faker.date.past()
     this.id = faker.datatype.uuid()
   }
 
-  get getAttachment() {
+  get getAttachment(): AttachmentDTO {
     return {
+      taskId: '123',
       fileName: this.fileName,
-      itemUrl: this.itemUrl,
-      date: this.date,
+      // itemUrl: this.itemUrl,
+      addedDate: this.addedDate,
       id: this.id
     }
   }

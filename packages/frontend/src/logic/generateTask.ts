@@ -1,4 +1,5 @@
 import faker from '@faker-js/faker'
+import { AttachmentDTO, TaskDTO, UserDTO } from 'shared'
 import GenerateAttachment from './generateAttachment'
 import GenerateId from './generateId'
 import GenerateImage from './generateImage'
@@ -8,26 +9,26 @@ import UserType from '../types/user'
 class GenerateTask {
   private id: string
 
-  private imageCoverURL: string | null
+  private imageCoverId: string
 
-  private listOfUsers: UserType[]
+  private listOfUsers: UserDTO[]
 
   private title: string
 
   private description: string
 
-  private attachment: AttachmentType[]
+  private attachments: AttachmentDTO[]
 
-  private assigneeList: UserType[]
+  private assigneeList: UserDTO[]
 
-  constructor(ListOfUsers: UserType[]) {
+  constructor(ListOfUsers: UserDTO[]) {
     this.id = new GenerateId().getId
     this.listOfUsers = ListOfUsers
     this.title = faker.lorem.sentence()
     this.description = faker.lorem.paragraph()
-    this.attachment = [new GenerateAttachment().getAttachment]
+    this.attachments = [new GenerateAttachment().getAttachment]
     this.assigneeList = this.getAssigneeList()
-    this.imageCoverURL = this.getImageCover()
+    this.imageCoverId = this.getImageCover()
   }
 
   private getAssigneeList() {
@@ -41,21 +42,21 @@ class GenerateTask {
   }
 
   private getImageCover() {
-    const isImageCover = Math.random() > 0.5
-    if (isImageCover) {
-      return new GenerateImage(this.id).getImage
-    }
-    return null
+    // const isImageCover = Math.random() > 0.5
+    // if (isImageCover) {
+    return new GenerateImage(this.id).getImage
+    // }
+    // return null
   }
 
-  get taskData() {
+  get taskData(): TaskDTO {
     return {
       id: this.id,
       title: this.title,
       description: this.description,
-      attachment: this.attachment,
+      attachments: this.attachments,
       assigneeList: this.assigneeList,
-      imageCoverURL: this.imageCoverURL
+      imageCoverId: this.imageCoverId
     }
   }
 }
