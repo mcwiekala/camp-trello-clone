@@ -1,5 +1,5 @@
+import { UserDTO } from 'shared'
 import AttachmentType from './attachment'
-import UserType from './user'
 
 // TODO: REMOVE IT USE DTO from: packages/shared/api/dto/*.dto.ts instead
 type TaskType = {
@@ -8,6 +8,6 @@ type TaskType = {
   title: string
   description: string
   attachment: AttachmentType[]
-  assigneeList: UserType[]
+  assigneeList: UserDTO[]
 }
 export default TaskType

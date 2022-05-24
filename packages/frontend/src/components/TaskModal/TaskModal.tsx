@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { UserDTO } from 'shared'
 import { Popover, Modal, Text } from '@mantine/core'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { IoMdContact } from 'react-icons/io'
@@ -23,7 +24,6 @@ import GenerateComment from '../../logic/generateComment'
 import AttachmentType from '../../types/attachment'
 import CommentType from '../../types/comment'
 import TaskType from '../../types/task'
-import UserType from '../../types/user'
 import useStyles from './style'
 
 const MODAL_SIZE = 'clamp(1000px, 70%, 2000px)'
@@ -31,7 +31,7 @@ const MODAL_SIZE = 'clamp(1000px, 70%, 2000px)'
 type TaskModalProps = {
   isOpen: boolean
   task: TaskType
-  membersList: UserType[]
+  membersList: UserDTO[]
   commentsList: CommentType[]
   onCloseHandler: (task: TaskType & { comments: CommentType[] }) => void
 }
@@ -106,7 +106,7 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
   const addUserHandler = (selectedUsersID: string[]) => {
     const newAssignees = selectedUsersID
       .map((selectedUserID) => currentMemberList.find(({ id }) => id === selectedUserID))
-      .filter((assignee) => assignee) as UserType[]
+      .filter((assignee) => assignee) as UserDTO[]
     setCurrentAssigneesList((prevState) => [...prevState, ...newAssignees])
     setCurrentMemberList((prevState) =>
       prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))

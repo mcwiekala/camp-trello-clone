@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     if (!token) {
-      navigate('../login', { replace: true })
+      navigate('../dashboards', { replace: true })
     }
   }, [token, navigate])
 

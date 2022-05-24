@@ -1,11 +1,11 @@
 import faker from '@faker-js/faker'
+import { UserDTO } from 'shared'
 import RandomUser from './randomUser'
-import UserType from '../types/user'
 
 class GenerateComment {
   private readonly id: string
 
-  private readonly userData: UserType
+  private readonly userData: any
 
   private readonly textContent: string
 

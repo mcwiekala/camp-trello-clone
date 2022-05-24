@@ -23,7 +23,7 @@ export class UserController {
     this._service = service
   }
 
-  async create(req: express.Request, res: express.Response) {
+  async createUser(req: express.Request, res: express.Response) {
     try {
       const createUserCommand: CreateUserCommand = req.body
       const createdUser: User = await this._service.create(createUserCommand)

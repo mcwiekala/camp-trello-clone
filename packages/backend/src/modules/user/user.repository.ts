@@ -21,7 +21,7 @@ export class UserRepository {
     this._mapper = mapper
   }
 
-  async create(command: CreateUserCommand): Promise<User> {
+  async createUser(command: CreateUserCommand): Promise<User> {
     try {
       const newUser: UserDocument = await this._model.create(command)
       return this._mapper.mapToDomain(newUser)
