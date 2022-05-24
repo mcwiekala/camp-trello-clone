@@ -1,6 +1,6 @@
 enum DashboardVisibility {
-  PUBLIC = 'public',
-  PRIVATE = 'private'
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE'
 }
 
 export default DashboardVisibility
