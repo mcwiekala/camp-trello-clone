@@ -1,26 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import DashboardDTO from 'packages/shared/src/api/dto/dashboard.dto'
-import { Dashboard } from './dashboard'
-import { Mapper } from '../../application/Mapper'
+import {Dashboard} from './dashboard'
+import {Mapper} from '../../application/Mapper'
+import {columnMapper} from "./column.mapper";
+import {Column} from "./column";
+import ColumnDTO from "shared/lib/api/dto/column.dto";
+import ColumnDTO from "shared/lib/api/dto/column.dto";
 
 export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
   public mapToDomain(raw: any): Dashboard {
     return new Dashboard(
-      raw._id,
-      raw.title,
-      raw.description,
-      raw.imageCoverUrl,
-      raw.users,
-      raw.status,
-      raw.column
+        raw._id,
+        raw.title,
+        raw.description,
+        raw.imageCoverUrl,
+        raw.users,
+        raw.status,
+        raw.column
     )
   }
 
   public mapToPersistence(dashboard: Dashboard): any {
-    return { _id: dashboard.id, title: dashboard.title }
+    return {_id: dashboard.id, title: dashboard.title}
   }
 
   public mapToDto(dashboard: Dashboard): DashboardDTO {
+    const columnArray: ColumnDTO[] = []
+    dashboard.columns.forEach((dto: Column) => {
+      const columnMapped: ColumnDTO = columnMapper.mapToDto(dto)
+      columnArray.push(columnMapped)
+    })
     return {
       id: dashboard.id,
       title: dashboard.title,
@@ -28,10 +37,10 @@ export class DashboardMapper implements Mapper<Dashboard, any, DashboardDTO> {
       imageCoverUrl: dashboard.imageCoverUrl,
       users: dashboard.users,
       status: dashboard.status,
-      columns: dashboard.column
+      columns: columnArray
     }
   }
 }
 
 const dashboardMapper = new DashboardMapper()
-export { dashboardMapper }
+export {dashboardMapper}
