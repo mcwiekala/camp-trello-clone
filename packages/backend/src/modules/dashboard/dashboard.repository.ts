@@ -1,13 +1,17 @@
 import mongoose, { ObjectId } from 'mongoose'
 import { CreateTaskCommandDTO, UpdateTaskCommand, CreateDashboardCommand } from 'shared'
-import { DashboardModel, Dashboard as DashboardMongooseModel } from './dashboard.model'
+import {
+  DashboardModel,
+  Dashboard as DashboardMongooseModel,
+  DashboardDocument
+} from './dashboard.model'
 import Task from '../task/task'
 import { Dashboard } from './dashboard'
 import { dashboardMapper, DashboardMapper } from './dashboard.mapper'
 
 export class DashboardRepository {
-  private readonly _dashboardModel
-  private readonly _dashboardMapper
+  private readonly _dashboardModel: DashboardModel
+  private readonly _dashboardMapper: DashboardMapper
 
   private findIndexOfDocument(id: string, array: { _id: ObjectId }[]): number {
     const documentIndex = array.findIndex(
@@ -74,7 +78,9 @@ export class DashboardRepository {
   }
 
   async updateTaskOnDashboard(updateTaskCommand: UpdateTaskCommand, taskId: string) {
-    const dashboard = await this._dashboardModel.findById(updateTaskCommand.idDashboard)
+    const dashboard: DashboardDocument | null = await this._dashboardModel.findById(
+      updateTaskCommand.idDashboard
+    )
     const idCol = updateTaskCommand.idColumn
     if (!dashboard) {
       throw new Error(`No dashboard found with id: [${updateTaskCommand.idDashboard}]`)
