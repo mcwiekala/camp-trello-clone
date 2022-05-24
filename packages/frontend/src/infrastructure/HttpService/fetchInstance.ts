@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8800/v1'
+const BASE_URL = 'http://localhost:8800/v1/'
 
 class Fetch {
   accessToken: string
@@ -35,7 +35,7 @@ class Fetch {
   ): Promise<Response> {
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'GET',
-      headers: { ...this.baseHeaders, ...headers },
+      headers: this.baseHeaders(),
       body
     })
 
@@ -48,8 +48,8 @@ class Fetch {
   ): Promise<Response> {
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'POST',
-      headers: { ...this.baseHeaders, ...headers },
-      body: JSON.stringify(body)
+      headers: this.baseHeaders(),
+      body
     })
 
     return response.json()

@@ -1,12 +1,12 @@
-import Task from '../task/task'
+import TaskDTO from 'shared/lib/api/dto/task.dto'
 
 export class Column {
   private _id: string
   private _title: string
   private _order: number
-  private _tasks: Task[]
+  private _tasks: TaskDTO[]
 
-  constructor(idCol: string, title: string, order: number, tasks: TaskBase[]) {
+  constructor(idCol: string, title: string, order: number, tasks: TaskDTO[]) {
     this._id = idCol
     this._title = title
     this._order = order

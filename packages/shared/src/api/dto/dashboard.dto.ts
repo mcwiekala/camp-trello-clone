@@ -1,13 +1,15 @@
 import DashboardVisibility from '../DashboardVisibility'
+import UserDto from './user.dto'
 import ColumnDTO from './column.dto'
 
 interface DashboardDTO {
   id?: string
-  title?: string
+  title: string
   description?: string
-  imageCoverUrl?: string
-  createdAt?: string
-  status?: DashboardVisibility
+  imageCoverUrl: string
+  users?: UserDto[]
+  createdAt?: Date
+  status: DashboardVisibility
   columns?: ColumnDTO[]
 }
 

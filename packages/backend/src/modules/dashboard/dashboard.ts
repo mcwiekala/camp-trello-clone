@@ -1,30 +1,31 @@
 import { DashboardVisibility } from 'shared'
-import { Column } from './column'
+import UserDto from 'shared/lib/api/dto/user.dto'
+import ColumnDTO from 'shared/lib/api/dto/column.dto'
 
 export class Dashboard {
   private _id: string
   private _title: string
   private _description: string
   private _imageCoverUrl: string
-  private _createdAt: string
+  private _users: UserDto[]
   private _status: DashboardVisibility
-  private _columns: Column[]
+  private _columns: ColumnDTO[]
 
   constructor(
     id: string,
     title: string,
     description: string,
     imageCoverUrl: string,
-    createdAt: string,
     status: DashboardVisibility,
-    columns: Column[]
+    _users: UserDto[],
+    columns: ColumnDTO[]
   ) {
     this._id = id
     this._title = title
     this._description = description
     this._imageCoverUrl = imageCoverUrl
-    this._createdAt = createdAt
     this._status = status
+    this._users = _users
     this._columns = columns
   }
 
@@ -44,12 +45,12 @@ export class Dashboard {
     return this._imageCoverUrl
   }
 
-  public get createdAt() {
-    return this._createdAt
-  }
-
   public get status() {
     return this._status
+  }
+
+  public get users() {
+    return this._users
   }
 
   public get column() {

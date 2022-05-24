@@ -1,7 +1,6 @@
 import ColumnDTO from 'packages/shared/lib/api/dto/column.dto'
 import { Mapper } from '../../application/Mapper'
 import { Column } from './column'
-import { taskMapper } from '../task/task.mapper'
 
 export class ColumnMapper implements Mapper<Column, any, ColumnDTO> {
   public mapToDomain(raw: any): Column {

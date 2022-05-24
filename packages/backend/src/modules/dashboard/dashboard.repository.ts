@@ -23,7 +23,6 @@ export class DashboardRepository {
   }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
-    console.log('Creating new dashboard in DB')
     const dashboard = await this._dashboardModel.create({
       _id: new mongoose.Types.ObjectId(),
       title: createDashboardCommand.title,
@@ -31,11 +30,12 @@ export class DashboardRepository {
       imageCoverUrl: createDashboardCommand.imageCoverUrl,
       createdAt: new Date(),
       status: createDashboardCommand.status,
-      users: [],
+      users: createDashboardCommand.users,
       columns: []
     })
 
     await dashboard.save()
+    console.log(dashboard)
     return dashboard
   }
 
