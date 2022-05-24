@@ -31,7 +31,7 @@ const dashboardSchema = new mongoose.Schema<DashboardDocument, DashboardModel>({
   imageCoverUrl: String,
   createdAt: Date,
   status: {
-    type: Number,
+    type: String,
     enum: DashboardVisibility,
     default: DashboardVisibility.PUBLIC
   },
