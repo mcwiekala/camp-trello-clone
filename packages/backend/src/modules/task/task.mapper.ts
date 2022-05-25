@@ -6,14 +6,14 @@ import Task from './task'
 export class TaskMapper implements Mapper<Task, TaskDocument, TaskDTO> {
   public mapToDomain(taskDocument: TaskDocument): Task {
     return {
-      _id: taskDocument._id,
+      id: taskDocument._id,
       title: taskDocument.title,
       description: taskDocument.description
     }
   }
 
   public mapToDto(task: Task): TaskDTO {
-    return { id: task._id, title: task.title, attachments: [] }
+    return { id: task.id, title: task.title, attachments: [] }
   }
 }
 

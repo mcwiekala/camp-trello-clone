@@ -1,11 +1,13 @@
-import mongoose, { ObjectId } from 'mongoose'
+import mongoose from 'mongoose'
 import {
   CreateTaskCommandDTO,
   UpdateTaskCommand,
   CreateDashboardCommand,
   CannotFindDocumentError,
   CannotUpdateDocumentError,
-  DashboardDTO
+  DashboardDTO,
+  CannotCreateDocumentError,
+  UserBase
 } from 'shared'
 import { DashboardModel, DashboardMongooseModel, DashboardDocument } from './dashboard.model'
 import Task from '../task/task'
@@ -24,7 +26,7 @@ export class DashboardRepository {
   }
 
   private findIndexOfTaskType(id: string, array: Task[]): number {
-    const documentIndex = array.findIndex((task: Task) => String(task._id) === id)
+    const documentIndex = array.findIndex((task: Task) => String(task.id) === id)
     return documentIndex
   }
 
@@ -38,20 +40,35 @@ export class DashboardRepository {
   }
 
   async createDashboard(createDashboardCommand: CreateDashboardCommand): Promise<Dashboard> {
-    const dashboard = await this._dashboardModel.create({
-      _id: new mongoose.Types.ObjectId(),
+    const userDTO = createDashboardCommand.users[0]
+    type Entity = { _id: mongoose.Types.ObjectId }
+    const userDocument: UserBase & Entity = {
+      _id: new mongoose.Types.ObjectId(userDTO._id),
+      username: userDTO.username,
+      googleId: userDTO.googleId,
+      avatarUrl: userDTO.avatarUrl,
+      email: userDTO.email
+    }
+    // console.log(userDocument)
+    const dashboardDocument: DashboardDocument = await this._dashboardModel.create({
+      _id: createDashboardCommand.id,
       title: createDashboardCommand.title,
       description: createDashboardCommand.description,
       imageCoverUrl: createDashboardCommand.imageCoverUrl,
-      createdAt: new Date(),
+      createdAt: createDashboardCommand.createdAt,
       status: createDashboardCommand.status,
-      users: createDashboardCommand.users,
-      columns: []
+      users: [userDocument],
+      columns: createDashboardCommand.columns
     })
-
-    await dashboard.save()
-    console.log(dashboard)
-    return this._dashboardMapper.mapToDomain(dashboard)
+    try {
+      await dashboardDocument.save()
+    } catch (err) {
+      console.log('dashboardDocument exception on save!')
+      throw new CannotCreateDocumentError('Dashboard', createDashboardCommand)
+    }
+    console.log('DashboardRepository.createDashboarddashboardDocument: ')
+    console.log(dashboardDocument)
+    return this._dashboardMapper.mapToDomain(dashboardDocument)
   }
 
   async getDashboards(): Promise<Dashboard[]> {

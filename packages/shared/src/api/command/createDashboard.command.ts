@@ -1,12 +1,13 @@
 import DashboardVisibility from '../DashboardVisibility'
-import { UserDTO } from '../index'
+import { ColumnDTO, UserDTO } from '../index'
 
 export interface CreateDashboardCommand {
-  // id?: string
+  id: string
   title: string
   description?: string
   imageCoverUrl: string
   users: UserDTO[]
+  columns: ColumnDTO[]
   createdAt?: Date
   status: DashboardVisibility
 }

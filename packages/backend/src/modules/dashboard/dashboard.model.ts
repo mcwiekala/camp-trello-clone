@@ -13,14 +13,14 @@ export interface DashboardDocument extends DashboardBase, mongoose.Document {
 export interface DashboardModel extends mongoose.Model<DashboardDocument> {}
 
 const columnSchema = new mongoose.Schema({
-  internalId: ObjectId,
+  internalId: String,
   title: String,
   order: Number,
   tasks: [
     {
       _id: ObjectId,
       title: String,
-      imageCoverId: Number,
+      imageCoverId: String,
       comments: [{ _id: ObjectId }],
       attachments: [{ _id: ObjectId }],
       users: [{ _id: ObjectId }]
