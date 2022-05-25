@@ -55,7 +55,7 @@ const KanbanColumn = ({
                 imageCover={task.imageCoverId}
                 assignedUsers={[
                   {
-                    id: '111',
+                    _id: '111',
                     username: 'Janek',
                     googleId: '123',
                     avatarUrl: '123',

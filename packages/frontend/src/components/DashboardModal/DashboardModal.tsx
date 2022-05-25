@@ -35,14 +35,14 @@ const DashboardModal = ({ isOpen, setIsOpen, onCloseHandler }: DashboardModalPro
       const users: UserDTO[] = []
       const currentUser: UserDTO = {
         username: 'Michal',
-        id: '111',
+        _id: '111',
         googleId: '111',
         avatarUrl: 'wwww',
         email: 'a@o2.pl'
       }
       users.push(currentUser)
       const dto: DashboardDTO = {
-        id: boardId,
+        _id: boardId,
         description: '',
         imageCoverUrl: currentCoverImageUrl,
         title: currentTitle,

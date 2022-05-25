@@ -27,7 +27,7 @@ const UserIconList = ({
   return (
     <div className={classes.userIconList}>
       {listOfUsers.slice(0, iconLimit).map((user) => (
-        <UserIcon key={user.id} username={user.username} imgUrl={user.avatarUrl} />
+        <UserIcon key={user._id} username={user.username} imgUrl={user.avatarUrl} />
       ))}
       {displayNumberOfUsers && isAboveLimit ? (
         <Text size="sm" color="gray">{`+ ${numberAboveLimit} others`}</Text>

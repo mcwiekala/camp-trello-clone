@@ -1,10 +1,9 @@
+import ColumnBase from '../../models/columnBase'
 import { TaskDTO } from '../index'
 
-interface ColumnDTO {
+export default interface ColumnDTO extends ColumnBase {
   id: string
   title: string
   order: number
   tasks: TaskDTO[]
 }
-
-export default ColumnDTO

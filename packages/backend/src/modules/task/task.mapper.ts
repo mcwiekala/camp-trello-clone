@@ -5,7 +5,11 @@ import Task from './task'
 
 export class TaskMapper implements Mapper<Task, TaskDocument, TaskDTO> {
   public mapToDomain(taskDocument: TaskDocument): Task {
-    return { id: taskDocument.id, title: taskDocument.title, description: taskDocument.description }
+    return {
+      id: taskDocument._id,
+      title: taskDocument.title,
+      description: taskDocument.description
+    }
   }
 
   public mapToDto(task: Task): TaskDTO {

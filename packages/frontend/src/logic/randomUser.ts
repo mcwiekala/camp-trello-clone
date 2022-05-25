@@ -20,7 +20,7 @@ class RandomUser {
   get userData(): UserDTO {
     return {
       username: this.username,
-      id: this.id,
+      _id: this.id,
       // role: this.role,
       avatarUrl: this.profilePictureURL,
       // TODO

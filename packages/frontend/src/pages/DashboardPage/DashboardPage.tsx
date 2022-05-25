@@ -16,7 +16,7 @@ import DashboardDrawer from '../../components/DashboardDrawer/DashboardDrawer'
 const DashboardPage = () => {
   const { id: dashboardId } = useParams()
   const [dashboards, setDashboards] = useContext<IDashboardsContext>(DashboardsContext)
-  const currentDashboard: DashboardDTO = dashboards.find(({ id }) => id === dashboardId)!
+  const currentDashboard: DashboardDTO = dashboards.find(({ _id }) => _id === dashboardId)!
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDashboardDrawerOpen, setIsDashboardDrawerOpen] = useState(false)
   const { classes } = useStyles()
@@ -46,7 +46,7 @@ const DashboardPage = () => {
     findColumnDestination.tasks.splice(result.destination!.index, 0, findTaskSource)
 
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
+      ...dashboards.filter(({ _id }) => _id !== dashboardId),
       {
         ...currentDashboard,
         columns
@@ -65,7 +65,7 @@ const DashboardPage = () => {
 
     setIsModalOpen(false)
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
+      ...dashboards.filter(({ _id }) => _id !== dashboardId),
       {
         ...currentDashboard,
         columns: currentDashboard.columns.map((column) => {
@@ -89,7 +89,7 @@ const DashboardPage = () => {
     const updatedDashboard: DashboardDTO = { ...currentDashboard, description: descriptionText }
 
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
+      ...dashboards.filter(({ _id }) => _id !== dashboardId),
       {
         ...updatedDashboard
       }
@@ -98,10 +98,10 @@ const DashboardPage = () => {
   const onUserRemoveHandler = (userId: string) => {
     const updatedDashboard: DashboardDTO = {
       ...currentDashboard,
-      users: currentDashboard.users.filter((user) => user.id !== userId)
+      users: currentDashboard.users.filter((user) => user._id !== userId)
     }
 
-    setDashboards([...dashboards.filter(({ id }) => id !== dashboardId), updatedDashboard])
+    setDashboards([...dashboards.filter(({ _id }) => _id !== dashboardId), updatedDashboard])
   }
 
   // TODO addIng new columns with title
@@ -111,10 +111,10 @@ const DashboardPage = () => {
       { id: '123', title: 'new Column', order: 0, tasks: [] }
     ]
     const d: DashboardDTO[] = { ...dashboards }
-    // const d:DashboardDTO = ...dashboards.filter(({ id }) => id !== dashboardId)
+    // const d:DashboardDTO = ...dashboards.filter(({ _id }) => _id !== dashboardId)
     const updatedDashboard: DashboardDTO = { ...currentDashboard, columns }
     setDashboards([
-      ...dashboards.filter((d: DashboardDTO) => d.id !== dashboardId),
+      ...dashboards.filter((d: DashboardDTO) => d._id !== dashboardId),
       updatedDashboard
     ])
   }
@@ -139,7 +139,7 @@ const DashboardPage = () => {
     })
 
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
+      ...dashboards.filter(({ _id }) => _id !== dashboardId),
       {
         ...currentDashboard,
         columns: newColumns
@@ -165,7 +165,7 @@ const DashboardPage = () => {
     }
 
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
+      ...dashboards.filter(({ _id }) => _id !== dashboardId),
       {
         ...currentDashboard,
         columns: currentDashboard.columns.map((column) => {

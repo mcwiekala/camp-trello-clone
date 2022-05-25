@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "f618b26d-2f1f-4fb2-8f02-656acfec34c3",
 		"name": "camp-trello-clone",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20612720"
 	},
 	"item": [
 		{
@@ -311,7 +312,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"625d5522271e2dc94617e4d1\",\n\t\"idColumn\": \"625d57de271e2dc94617e4d4\"\n}",
+							"raw": "{\n\t\"title\": \"newTask\",\n\t\"idDashboard\": \"6283f4c783c5fd59877270c5\",\n\t\"idColumn\": \"628a9b618c67027f1d18a8d1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -466,6 +467,57 @@
 									"value": "",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete specific dashboard",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/dashboards/6283f4c983c5fd59877270cb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"dashboards",
+								"6283f4c983c5fd59877270cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"updatedDashboard4\",\n    \"description\": \"updated dashboard description\",\n    \"columns\": [{\"title\": \"cos2\"}, {\"title\": \"cos3\"}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{PORT}}/v1/dashboards/6283f4c783c5fd59877270c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"v1",
+								"dashboards",
+								"6283f4c783c5fd59877270c5"
 							]
 						}
 					},

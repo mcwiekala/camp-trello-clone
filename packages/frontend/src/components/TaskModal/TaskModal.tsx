@@ -101,16 +101,16 @@ const TaskModal = ({ isOpen, task, commentsList, membersList, onCloseHandler }: 
 
   const addUserHandler = (selectedUsersID: string[]) => {
     const newAssignees = selectedUsersID
-      .map((selectedUserID) => currentMemberList.find(({ id }) => id === selectedUserID))
+      .map((selectedUserID) => currentMemberList.find(({ _id }) => _id === selectedUserID))
       .filter((assignee) => assignee) as UserDTO[]
     setCurrentAssigneesList((prevState) => [...prevState, ...newAssignees])
     setCurrentMemberList((prevState) =>
-      prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member.id))
+      prevState.filter((member) => !selectedUsersID.some((selectedId) => selectedId === member._id))
     )
   }
 
   const onAssigneesListDeleteHandler = (deletedID: string) => {
-    const editedCommentIndex = currentAssigneesList.findIndex(({ id }) => id === deletedID)
+    const editedCommentIndex = currentAssigneesList.findIndex(({ _id }) => _id === deletedID)
     if (editedCommentIndex !== -1) {
       const newAssigneesList = [...currentAssigneesList]
       newAssigneesList.splice(editedCommentIndex, 1)

@@ -35,11 +35,11 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: Membe
         <Text className={classes.title}>{title || 'Members'}</Text>
       </header>
       <section>
-        {membersList.map(({ username, id, avatarUrl }) => (
-          <section className={classes.memberSection} key={id}>
+        {membersList.map(({ username, _id, avatarUrl }) => (
+          <section className={classes.memberSection} key={_id}>
             <UserIcon imgUrl={avatarUrl} username={username} />
             <Text className={classes.username}>{username}</Text>
-            {getRemoveButton(ADMIN_ROLE, id)}
+            {getRemoveButton(ADMIN_ROLE, _id)}
           </section>
         ))}
       </section>

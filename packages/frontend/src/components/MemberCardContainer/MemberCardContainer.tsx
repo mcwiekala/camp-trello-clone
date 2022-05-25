@@ -53,15 +53,15 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         }
       />
       <section className={classes.usersContainer}>
-        {usersSearchResult.slice(0, 4).map(({ username, avatarUrl, id }) => (
+        {usersSearchResult.slice(0, 4).map(({ username, avatarUrl, _id }) => (
           <UnstyledButton
             className={
-              selectedUsers.indexOf(id) + 1
+              selectedUsers.indexOf(_id) + 1
                 ? `${classes.memberContainer} ${classes.selectedUser}`
                 : classes.memberContainer
             }
-            key={id}
-            onClick={() => handleMemberClick(id)}
+            key={_id}
+            onClick={() => handleMemberClick(_id)}
           >
             <UserIcon imgUrl={avatarUrl} username={username} />
             <Text className={classes.user} weight={600}>

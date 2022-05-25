@@ -1,16 +1,9 @@
-import DashboardVisibility from '../DashboardVisibility'
 import UserDto from './user.dto'
+import DashboardBase from '../../models/dashboardBase'
 import ColumnDTO from './column.dto'
 
-interface DashboardDTO {
-  id: string
-  title: string
-  description: string
-  imageCoverUrl: string
+export default interface DashboardDTO extends DashboardBase {
+  _id: string
   users: UserDto[]
   columns: ColumnDTO[]
-  createdAt: Date
-  status: DashboardVisibility
 }
-
-export default DashboardDTO

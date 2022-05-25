@@ -9,6 +9,7 @@ import { DashboardGalleryPreview } from '../../components/DashboardGalleryPrevie
 import { DashboardsContext } from '../../contexts/DashboardsContext'
 import useStyles from './style'
 import httpService from '../../infrastructure/HttpService/HttpService'
+import initialColumns from '../../logic/initialColumns'
 
 type DashboardProps = {
   id: string
@@ -41,6 +42,8 @@ const DashboardGalleryPage = () => {
     // }
     // users.push(currentUser)
     const command: CreateDashboardCommand = {
+      id: faker.datatype.uuid(),
+      columns: initialColumns,
       // TODO: id from backend?
       // id: faker.datatype.uuid(),
       title,
@@ -66,13 +69,13 @@ const DashboardGalleryPage = () => {
         </Button>
       </header>
       <section className={classes.dashboards}>
-        {dashboards.map(({ id, title, users, imageCoverUrl }) => (
+        {dashboards.map(({ _id, title, users, imageCoverUrl }) => (
           <DashboardGalleryPreview
-            key={id}
+            key={_id}
             title={title}
             users={users}
             imageCoverUrl={imageCoverUrl}
-            onClickHandler={() => navigate(`${id}`)}
+            onClickHandler={() => navigate(`${_id}`)}
           />
         ))}
       </section>
