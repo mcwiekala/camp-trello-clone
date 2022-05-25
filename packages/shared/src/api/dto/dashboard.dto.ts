@@ -3,7 +3,7 @@ import UserDto from './user.dto'
 import ColumnDTO from './column.dto'
 
 interface DashboardDTO {
-  id?: string
+  id: string
   title: string
   description: string
   imageCoverUrl: string

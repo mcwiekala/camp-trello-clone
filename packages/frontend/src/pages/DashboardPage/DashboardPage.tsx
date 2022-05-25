@@ -9,18 +9,20 @@ import KanbanColumn from '../../components/KanbanColumn/KanbanColumn'
 import useStyles from './style'
 import UserIconList from '../../components/UserIconList/UserIconList'
 import TaskModal from '../../components/TaskModal/TaskModal'
-import { DashboardsContext } from '../../contexts/DashboardsContext'
+import { DashboardsContext, IDashboardsContext } from '../../contexts/DashboardsContext'
 import GenerateComment from '../../logic/generateComment'
 import DashboardDrawer from '../../components/DashboardDrawer/DashboardDrawer'
 
 const DashboardPage = () => {
   const { id: dashboardId } = useParams()
-  const [dashboards, setDashboards] = useContext(DashboardsContext)
-  const currentDashboard: DashboardDTO = dashboards.find(({ id }) => id === dashboardId)
+  const [dashboards, setDashboards] = useContext<IDashboardsContext>(DashboardsContext)
+  const currentDashboard: DashboardDTO = dashboards.find(({ id }) => id === dashboardId)!
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDashboardDrawerOpen, setIsDashboardDrawerOpen] = useState(false)
   const { classes } = useStyles()
   const [currentIssue, setCurrentIssue] = useState<TaskDTO>()
+
+  // const value = useContext(Context)
 
   const onDragEnd = (result: DropResult) => {
     const { columns } = currentDashboard
@@ -104,11 +106,16 @@ const DashboardPage = () => {
 
   // TODO addIng new columns with title
   const onAddColumnHandler = () => {
-    const columns = [...currentDashboard.columns, { id: nanoid(), tasks: [] }]
-
+    const columns: ColumnDTO[] = [
+      ...currentDashboard.columns,
+      { id: '123', title: 'new Column', order: 0, tasks: [] }
+    ]
+    const d: DashboardDTO[] = { ...dashboards }
+    // const d:DashboardDTO = ...dashboards.filter(({ id }) => id !== dashboardId)
+    const updatedDashboard: DashboardDTO = { ...currentDashboard, columns }
     setDashboards([
-      ...dashboards.filter(({ id }) => id !== dashboardId),
-      { ...currentDashboard, columns }
+      ...dashboards.filter((d: DashboardDTO) => d.id !== dashboardId),
+      updatedDashboard
     ])
   }
 
@@ -120,12 +127,13 @@ const DashboardPage = () => {
       comments: [],
       attachment: []
     }
-    const newColumns = currentDashboard.columns.map((column) => {
+    const newColumns: ColumnDTO[] = currentDashboard.columns.map((column) => {
       if (column.id === columnId) {
-        return {
-          ...column,
-          tasks: [...column.tasks, newTask]
-        }
+        return { id: '123', title: 'new Column', order: 0, tasks: [] }
+        // {
+        //   ...column,
+        //   tasks: [...column.tasks, newTask]
+        // }
       }
       return column
     })

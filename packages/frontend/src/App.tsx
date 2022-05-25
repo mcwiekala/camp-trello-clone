@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, useEffect } from 'react'
+import React, { FC, useState, useMemo, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { DashboardDTO } from 'shared'
 import { ThemeProvider } from './contexts/ThemeContext'
@@ -8,9 +8,15 @@ import Auth from './routes/auth'
 import { AppContext, AppState, IAppContext } from './contexts/AppStateContext'
 import httpService from './infrastructure/HttpService/HttpService'
 
+// export const DashboardsContext2 = React.createContext<IDashboardsContext>([
+//   dashboards,
+//   // eslint-disable-next-line @typescript-eslint/no-empty-function
+//   () => {}
+// ])
+
 export const App: FC = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const [dashboards, setDashboards] = useState<DashboardDTO[]>()
+  const [dashboards, setDashboards] = useState<DashboardDTO[]>([])
   const [appState, setAppState] = useState({ token: '' })
 
   const getData = () => {

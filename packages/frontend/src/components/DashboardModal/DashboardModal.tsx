@@ -12,7 +12,7 @@ import GrayButtonFilled from '../GrayButtonFilled/GrayButtonFilled'
 import GenerateId from '../../logic/generateId'
 import GenerateImage from '../../logic/generateImage'
 import useStyles from './style'
-import initialColumns from "../../logic/initialColumns";
+import initialColumns from '../../logic/initialColumns'
 
 export type DashboardModalProps = {
   isOpen: boolean
