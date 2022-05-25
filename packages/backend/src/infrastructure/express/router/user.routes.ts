@@ -15,7 +15,7 @@ export class UserRoutes extends CommonRoutesConfig {
     this.app
       .route(`${apiVersionPrefix}/users`)
       .get((req, res) => userController.getAll(req, res))
-      .post((req, res) => userController.create(req, res))
+      .post((req, res) => userController.createUser(req, res))
 
     this.app
       .route(`${apiVersionPrefix}/users/:userId`)

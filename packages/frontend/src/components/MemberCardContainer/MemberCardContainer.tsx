@@ -1,12 +1,12 @@
 import { useState } from 'react'
+import { UserDTO } from 'shared'
 import { Button, Input, Text, ActionIcon, Center, UnstyledButton } from '@mantine/core'
 import { AiOutlineSearch } from 'react-icons/ai'
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
-import UserType from '../../types/user'
 
 type MemberCardContainerProps = {
-  membersList: UserType[]
+  membersList: UserDTO[]
   addUserHandler: (selectedUsers: string[]) => void
 }
 
@@ -53,7 +53,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
         }
       />
       <section className={classes.usersContainer}>
-        {usersSearchResult.slice(0, 4).map(({ username, profilePictureURL, id }) => (
+        {usersSearchResult.slice(0, 4).map(({ username, avatarUrl, id }) => (
           <UnstyledButton
             className={
               selectedUsers.indexOf(id) + 1
@@ -63,7 +63,7 @@ const MemberCardContainer = ({ membersList, addUserHandler }: MemberCardContaine
             key={id}
             onClick={() => handleMemberClick(id)}
           >
-            <UserIcon imgUrl={profilePictureURL} username={username} />
+            <UserIcon imgUrl={avatarUrl} username={username} />
             <Text className={classes.user} weight={600}>
               {username}
             </Text>

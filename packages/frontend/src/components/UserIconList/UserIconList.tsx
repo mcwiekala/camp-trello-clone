@@ -2,7 +2,6 @@ import { ActionIcon, Text } from '@mantine/core'
 import { MdAdd } from 'react-icons/md'
 import { UserDTO } from 'shared'
 import UserIcon from '../UserIcon/UserIcon'
-import UserType from '../../types/user'
 import useStyles from './style'
 
 type UserIconListProps = {

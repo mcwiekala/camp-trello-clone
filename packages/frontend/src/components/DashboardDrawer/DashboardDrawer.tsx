@@ -1,5 +1,6 @@
 import { Drawer, Divider, Text, ScrollArea } from '@mantine/core'
 import { FaUser } from 'react-icons/fa'
+import { UserDTO } from 'shared'
 
 // Components
 import Description from '../Description/Description'
@@ -9,7 +10,7 @@ import MembersList from '../MembersList/MembersList'
 import convertDate from '../../utils/convertDate'
 
 // Misc
-import UserType from '../../types/user'
+
 import useStyles from './style'
 import UserIcon from '../UserIcon/UserIcon'
 
@@ -17,7 +18,7 @@ type DashboardDrawerProps = {
   title: string
   description: string
   creationDate: Date
-  membersList: UserType[]
+  membersList: UserDTO[]
   isAdmin: boolean
   isOpen: boolean
   setIsOpen: () => void
@@ -37,7 +38,10 @@ const DashboardDrawer = ({
   onUserRemoveHandler
 }: DashboardDrawerProps) => {
   const { classes } = useStyles()
-  const dashboardAuthor = membersList.filter((member) => member.role === 'Admin')[0]
+  // We have no roles for user
+
+  // const dashboardAuthor = membersList.filter((member) => member.role === 'Admin')[0]
+
   const parsedDate = convertDate(creationDate)
 
   return (
@@ -58,6 +62,9 @@ const DashboardDrawer = ({
         </header>
 
         <section className={classes.authorSection}>
+          {/*
+          // We have no roles for user
+          
           <UserIcon
             username={dashboardAuthor.username}
             imgUrl={dashboardAuthor.profilePictureURL}
@@ -65,7 +72,7 @@ const DashboardDrawer = ({
           <div className={classes.authorInfo}>
             {dashboardAuthor.username}
             <p className={classes.date}>{`on ${parsedDate}`}</p>
-          </div>
+          </div> */}
         </section>
 
         <Description

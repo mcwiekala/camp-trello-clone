@@ -1,4 +1,4 @@
-import { CreateDashboardCommand, DashboardDTO, TASK } from 'shared'
+import { CreateDashboardCommand, DashboardDTO, UserDTO, CreateUserCommand } from 'shared'
 
 import Fetch from './fetchInstance'
 
@@ -22,6 +22,8 @@ class HttpService {
   }
 
   // TODO change from any to Task type
+  createUser = (command: CreateUserCommand): Promise<UserDTO> =>
+    this.http.post('users', { body: JSON.stringify(command) })
   getTask = (taskId: string): Promise<any> => this.http.get(`tasks/${taskId}`)
   getAllDashboards = (): Promise<DashboardDTO[]> => this.http.get('dashboards', {})
   createDashboard = (command: CreateDashboardCommand): Promise<DashboardDTO> =>

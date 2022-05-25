@@ -1,16 +1,16 @@
 import faker from '@faker-js/faker'
+import { UserDTO } from 'shared'
 import GenerateAttachment from './generateAttachment'
 import GenerateId from './generateId'
 import GenerateImage from './generateImage'
 import AttachmentType from '../types/attachment'
-import UserType from '../types/user'
 
 class GenerateTask {
   private id: string
 
   private imageCoverURL: string | null
 
-  private listOfUsers: UserType[]
+  private listOfUsers: UserDTO[]
 
   private title: string
 
@@ -18,9 +18,9 @@ class GenerateTask {
 
   private attachment: AttachmentType[]
 
-  private assigneeList: UserType[]
+  private assigneeList: UserDTO[]
 
-  constructor(ListOfUsers: UserType[]) {
+  constructor(ListOfUsers: UserDTO[]) {
     this.id = new GenerateId().getId
     this.listOfUsers = ListOfUsers
     this.title = faker.lorem.sentence()

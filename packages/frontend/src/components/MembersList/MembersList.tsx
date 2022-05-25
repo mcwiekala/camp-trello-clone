@@ -1,13 +1,13 @@
 import { Text } from '@mantine/core'
 import { HiUsers } from 'react-icons/hi'
+import { UserDTO } from 'shared'
 import UserIcon from '../UserIcon/UserIcon'
 import RedButton from '../RedButton/RedButton'
-import UserType from '../../types/user'
 import useStyles from './style'
 
 type MembersListProps = {
   title?: string
-  membersList: UserType[]
+  membersList: UserDTO[]
   onDeleteHandler: (id: string) => void
   isDeletable?: boolean
 }
@@ -15,15 +15,16 @@ type MembersListProps = {
 const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: MembersListProps) => {
   const { classes } = useStyles()
 
-  const getRemoveButton = (role: string | undefined, id: string) => {
-    if (isDeletable) {
-      if (role === 'Admin') {
-        return <Text className={classes.admin}>Admin</Text>
-      }
-      return <RedButton onClick={() => onDeleteHandler(id)}>Remove</RedButton>
-    }
-    return undefined
-  }
+  // No roles in users
+  // const getRemoveButton = (id: string) => {
+  //   if (isDeletable) {
+  //     if (role === 'Admin') {
+  //       return <Text className={classes.admin}>Admin</Text>
+  //     }
+  //     return <RedButton onClick={() => onDeleteHandler(id)}>Remove</RedButton>
+  //   }
+  //   return undefined
+  // }
 
   return (
     <div>
@@ -32,11 +33,13 @@ const MembersList = ({ membersList, onDeleteHandler, isDeletable, title }: Membe
         <Text className={classes.title}>{title || 'Members'}</Text>
       </header>
       <section>
-        {membersList.map(({ username, id, profilePictureURL, role }) => (
+        {membersList.map(({ username, id, avatarUrl, email }) => (
           <section className={classes.memberSection} key={id}>
-            <UserIcon imgUrl={profilePictureURL} username={username} />
+            <UserIcon imgUrl={avatarUrl} username={username} />
             <Text className={classes.username}>{username}</Text>
-            {getRemoveButton(role, id)}
+            {/* 
+            No roles in users
+            {getRemoveButton(id)} */}
           </section>
         ))}
       </section>

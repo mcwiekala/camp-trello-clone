@@ -11,7 +11,7 @@ export class UserService {
   }
 
   async create(dto: CreateUserCommand): Promise<User> {
-    return this._repository.create(dto)
+    return this._repository.createUser(dto)
   }
 
   async updateOneById(id: string, dto: UpdateUserCommand): Promise<User> {
