@@ -9,4 +9,5 @@ export default interface DashboardBase {
     enum: DashboardVisibility
   }
   users?: unknown
+  columns: unknown
 }

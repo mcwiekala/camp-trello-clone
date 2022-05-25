@@ -18,7 +18,7 @@ export class UserMapper implements Mapper<User, UserDocument, UserDTO> {
 
   public mapToDto(user: User): UserDTO {
     return {
-      id: user.id,
+      _id: user._id,
       username: user.username,
       googleId: user.googleId,
       avatarUrl: user.avatarUrl,

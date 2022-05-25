@@ -1,7 +1,7 @@
 import UserBase from '../../models/userBase'
 
 interface UserDTO extends UserBase {
-  id: string
+  _id: string
 }
 
 export default UserDTO

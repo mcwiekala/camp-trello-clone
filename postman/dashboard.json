@@ -1,0 +1,42 @@
+{
+  "title": "dashboard",
+  "description": "some description",
+  "imageCoverUrl": "https://picsum.photos/seed/12600cf1-c154-40db-b3af-e29d3f49944c/300/200",
+  "status": "PUBLIC",
+  "createdAt": "2022-04-12T19:24:41.578+00:00",
+  "users": [
+    {
+      "id": "622e5e29374b7eba8ad3e3b1",
+      "username": "Marek Kowalski",
+      "avatarId": 352
+    }
+  ],
+  "columns": [
+    {
+      "id": "622e5e2e33be16d50107c586",
+      "title": "Kolumna Pierwsza",
+      "tasks": [
+        {
+          "id": "622e5e334c9037251082f475",
+          "title": "Tytuł 2",
+          "imageCoverId": "photo-1646388023469-18941b7e3bc5",
+          "comments": [
+            {
+              "id": "622e5e3b5c6c03a627181d0b"
+            }
+          ],
+          "attachments": [
+            {
+              "id": "622e5e40c510ef7ff2521a30"
+            }
+          ],
+          "users": [
+            {
+              "id": "622e5e464a3da0350eed5e6f"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
